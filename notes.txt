@@ -29,4 +29,6 @@ Future:
 - diminishing returns on how effective each game is per week?
 - randomly generated map image
 - text writing about each game, and a place for that text to be prominently displayed
-- lock in a particular army 
+- lock in a particular army
+- scenarios can have categories of VPs in them to break it down
+- admin can write a narrative for the campaign
