@@ -1,0 +1,32 @@
+Goals:
+- encourage people to play and log their games through gamification
+- can't force playing a particular player
+
+
+Basic:
+- login
+- log a game against another user
+- input number of VPs scored
+- date played
+- which faction each player is playing for
+- admin creates a grouping
+	- determines number of factions available and their names
+
+
+Stats:
+- races played
+- size of game
+- number of dice for each player
+- scenario
+	- drop down list for known scenarios
+	- free input for others
+		- input of "where you got it"
+
+
+Future:
+- tournaments, with specific people needing to be played
+- XP system
+- diminishing returns on how effective each game is per week?
+- randomly generated map image
+- text writing about each game, and a place for that text to be prominently displayed
+- lock in a particular army 
