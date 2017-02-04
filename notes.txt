@@ -1,3 +1,9 @@
+Todo:
+- UI
+- don't allow multiple people with same username
+- dont' allow "refresh" after adding user to add again to the database (could be same as above)
+- better text messages/translation support
+
 Goals:
 - encourage people to play and log their games through gamification
 - can't force playing a particular player
@@ -32,3 +38,6 @@ Future:
 - lock in a particular army
 - scenarios can have categories of VPs in them to break it down
 - admin can write a narrative for the campaign
+- map campaign -- can only attack nearby
+    - or "support from neighbouring territories"
+    

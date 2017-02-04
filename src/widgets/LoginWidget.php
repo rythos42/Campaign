@@ -1,10 +1,7 @@
 <?php
 class LoginWidget extends Widget {
 	public function canRender() {
-		$render = $this->getRequest("Render");
-		return 
-			!User::isLoggedIn()
-			|| $render == "Login" || $render = "Register";
+		return true;
 	}
 	
 	public function render() {
@@ -60,14 +57,14 @@ class LoginWidget extends Widget {
 	
 	public function canHandleAction() {
 		$action = $this->getRequest("Action");
-		return $action == "Login" || $render = "Register"|| $render = "Logout";
+		return $action == "Login" || $action == "Register"|| $action == "Logout";
 	}
 	
 	public function handleAction() {
 		$action = $this->getRequest("Action");
 
 		if($action == "Login") {
-			if($this->isValid($_POST["Username"], $_POST["Password"])) {
+			if(UserMapper::validateLogin($_POST["Username"], $_POST["Password"])) {
 				User::setLoggedIn();
 			}
 			else {
@@ -75,19 +72,12 @@ class LoginWidget extends Widget {
 			}
 		}
 		else if($action == "Register") {
-			$this->addUserToDatabase($_POST["Username"], $_POST["Password"]);
+			UserMapper::insertUser($_POST["Username"], $_POST["Password"]);
 			echo "User added to database.";
 		}
 		else if($action == "Logout") {
-			User::Logout();
+			User::logout();
 		}
-	}
-		
-	private function isValid($username, $password) {
-		return $username == "c" && $password = "c";
-	}
-	
-	private function addUserToDatabase($username, $password) {
 	}
 }
 ?>

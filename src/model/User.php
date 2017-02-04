@@ -11,7 +11,7 @@ class User {
 		return self::getSession("isLoggedIn");
 	}
 	
-	public static function Logout() {
+	public static function logout() {
 		$_SESSION["isLoggedIn"] = false;
 	}
 	
