@@ -12,7 +12,7 @@ class UserMapper {
     }
     
     public static function validateLogin($username, $password) {
-        $query = Database::prepare("SELECT PasswordHash FROM User WHERE Username = ?");
+        $query = Database::prepare("SELECT Id, PasswordHash FROM User WHERE Username = ?");
         
         $query->bind_param("s", $username);
         $query->execute();
@@ -21,7 +21,12 @@ class UserMapper {
         $user = $results->fetch_object();
 
         $query->close();
-        return password_verify($password, $user->PasswordHash);        
+        if(password_verify($password, $user->PasswordHash)) {
+			return new User($user->Id, $username);
+		}
+		else {
+			return null;
+		}
     }
 }
 ?>

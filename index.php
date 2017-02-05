@@ -1,32 +1,42 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+<?php include("src/Header.php"); ?>
 
-session_start();
+<html>
+	<head>
+		<title>Campaign</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-include("src/model/User.php");
-include("src/mappers/Database.php");
-include("src/mappers/UserMapper.php");
-include("src/widgets/IWidget.php");
-include("src/widgets/Widget.php");
-include("src/widgets/LoginWidget.php");
-include("src/widgets/CreateCampaignWidget.php");
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="js/model/Campaign.js"></script>
+		<script src="js/viewmodels/ApplicationViewModel.js"></script>
+		<script src="js/viewmodels/CreateCampaignViewModel.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var campaign = new Campaign();
+				var viewModel = new ApplicationViewModel(campaign);
+				ko.applyBindings(viewModel);
+			});
+		</script>
+		
+	</head>
+	<body>
+		<?php
 
-Database::connect();
+		$widgetNames = Widget::getWidgetClassNames();
 
-$widgetNames = Widget::getWidgetClassNames();
+		foreach($widgetNames as $widgetName) {
+			$widget = new $widgetName();
+			if($widget->canHandleAction()) {
+				$widget->handleAction();
+			}
 
-foreach($widgetNames as $widgetName) {
-    $widget = new $widgetName();
-    if($widget->canHandleAction()) {
-        $widget->handleAction();
-    }
+			if($widget->canRender()) {
+				$widget->render();
+			}
+		}
+		?>
+	</body>
+</html>
 
-    if($widget->canRender()) {
-        $widget->render();
-    }
-}
-
-Database::close();
-
-?>
+<?php include("src/Footer.php"); ?>

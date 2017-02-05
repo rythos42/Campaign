@@ -1,10 +1,24 @@
 <?php
 class User {
-	var $isLoggedIn;
-	var $name;
+	private $id;
+	private $name;
 	
-	public static function setLoggedIn() {
+	function __construct($id, $name) {
+		$this->id = $id;
+		$this->name = $name;
+	}
+	
+	public function getId() {
+		return $this->id;
+	}
+	
+	public static function setLoggedIn($user) {
 		$_SESSION["isLoggedIn"] = true;
+		$_SESSION["user"] = $user;
+	}
+	
+	public static function getUser() {
+		return $_SESSION["user"];
 	}
 	
 	public static function isLoggedIn() {

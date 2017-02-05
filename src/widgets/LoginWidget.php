@@ -64,8 +64,9 @@ class LoginWidget extends Widget {
 		$action = $this->getRequest("Action");
 
 		if($action == "Login") {
-			if(UserMapper::validateLogin($_POST["Username"], $_POST["Password"])) {
-				User::setLoggedIn();
+			$user = UserMapper::validateLogin($_POST["Username"], $_POST["Password"]);
+			if($user) {
+				User::setLoggedIn($user);
 			}
 			else {
 				echo "bad login";

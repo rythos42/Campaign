@@ -1,0 +1,11 @@
+Run SQL:
+	Database
+	User
+	Campaign
+	CampaignEntry
+	CampaignFaction
+	CampaignFactionEntry
+
+Install 
+
+	
