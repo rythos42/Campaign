@@ -19,8 +19,12 @@ class Database {
         return $prepared;
     }
     
-    public static function lastError() {
+    public static function getLastError() {
         return self::$conn->error;
     }
+	
+	public static function getLastInsertedId() {
+		return self::$conn->insert_id;
+	}
 }
 ?>

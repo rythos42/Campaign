@@ -11,8 +11,8 @@ $action = $_REQUEST["action"];
 switch($action) {
 	case "SaveCampaign":
 		$name = $_REQUEST["name"];
-		$numberOfFactions = $_REQUEST["numberOfFactions"];
-		CampaignMapper::insertCampaign($name, $numberOfFactions);
+		$factions = json_decode($_REQUEST["factions"]);
+		CampaignMapper::insertCampaign($name, $factions);
 		break;
 }
 

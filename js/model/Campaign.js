@@ -2,5 +2,5 @@ var Campaign = function() {
 	var self = this;
 	
 	self.name = ko.observable('');
-	self.numberOfFactions = ko.observable(2);
+	self.factions = ko.observableArray();
 }

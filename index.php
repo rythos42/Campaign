@@ -8,8 +8,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="js/model/Campaign.js"></script>
+		<script src="js/model/Faction.js"></script>
 		<script src="js/viewmodels/ApplicationViewModel.js"></script>
 		<script src="js/viewmodels/CreateCampaignViewModel.js"></script>
+		<script src="js/viewmodels/CampaignFactionListItemViewModel.js"></script>
 		
 		<script type="text/javascript">
 			$(document).ready(function() {
