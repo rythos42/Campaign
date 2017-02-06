@@ -3,7 +3,7 @@ class Database {
     private static $conn;
     
 	public static function connect() {
-        self::$conn = new mysqli('localhost:3306', 'root', 'root', 'Campaign');
+        self::$conn = new mysqli(Settings::getDatabaseServer(), Settings::getDatabaseUsername(), Settings::getDatabasePassword(), Settings::getDatabaseName());
         if (self::$conn->connect_error)
             echo "Connection failed: " . self::$conn->connect_error;
     }
