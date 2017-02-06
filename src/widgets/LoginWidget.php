@@ -1,9 +1,9 @@
 <?php
 class LoginWidget implements IWidget {
-	public function render() {
+    public function render() {
         ?>
         <!-- ko with: loginViewModel -->
-        <div data-bind="visible: !isLoggedIn()">
+        <div data-bind="visible: showLogin">
             <div>
                 <span>Username: </span>
                 <input type="text" id="Username" name="Username" data-bind="value: username" />
@@ -17,6 +17,6 @@ class LoginWidget implements IWidget {
         </div>
         <!-- /ko -->
         <?php
-	}
+    }
 }
 ?>

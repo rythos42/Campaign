@@ -9,6 +9,9 @@ class MainWidget implements IWidget {
         
         $createCampaignWidget = new CreateCampaignWidget();
         $createCampaignWidget->render();
+        
+        $createCampaignEntryWidget = new CreateCampaignEntryWidget();
+        $createCampaignEntryWidget->render();
     }
 }
 ?>

@@ -10,20 +10,23 @@
         <script src="js/model/Campaign.js"></script>
         <script src="js/model/Faction.js"></script>
         <script src="js/model/User.js"></script>
+        <script src="js/model/Navigation.js"></script>
         <script src="js/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/viewmodels/LoginViewModel.js"></script>
         <script src="js/viewmodels/LogoutViewModel.js"></script>
         <script src="js/viewmodels/CreateCampaignViewModel.js"></script>
+        <script src="js/viewmodels/CreateCampaignEntryViewModel.js"></script>
         <script src="js/viewmodels/CampaignFactionListItemViewModel.js"></script>
         
         <script type="text/javascript">
             $(document).ready(function() {
                 var campaign = new Campaign(),
-                    user = new User();
+                    user = new User(),
+                    navigation = new Navigation(user);
                     
                 user.isLoggedIn(<?php echo User::isLoggedIn() ? 'true' : 'false'; ?>);
                     
-                var viewModel = new ApplicationViewModel(user, campaign);
+                var viewModel = new ApplicationViewModel(user, campaign, navigation);
                 ko.applyBindings(viewModel);
             });
         </script>

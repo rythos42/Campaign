@@ -1,12 +1,19 @@
-var LoginViewModel = function(user) {
+var LoginViewModel = function(user, navigation) {
     var self = this;
     
     self.username = ko.observable('');
     self.password = ko.observable('');
     
-    self.isLoggedIn = ko.computed(function() {
-        return user.isLoggedIn();
+    self.showLogin = ko.computed(function() {
+        return navigation.showLogin();
     });
+    
+    function loginSuccess() {
+        user.isLoggedIn(true);
+        
+        self.username('');
+        self.password('');
+    }    
         
     self.login = function() {
         var params = { 
@@ -19,9 +26,7 @@ var LoginViewModel = function(user) {
             url: '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
-            success: function() {
-                user.isLoggedIn(true);
-            }
+            success: loginSuccess
         });
     };
     
@@ -36,9 +41,7 @@ var LoginViewModel = function(user) {
             url: '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
-            success: function() {
-                user.isLoggedIn(true);
-            }
+            success: loginSuccess
         });
     };
 };

@@ -1,13 +1,17 @@
-var CreateCampaignViewModel = function(user, campaign) {
+var CreateCampaignViewModel = function(campaign, navigation) {
     var self = this;
-    
+
     self.name = campaign.name;
     self.factionNameEntry = ko.observable('');
     
-    self.isLoggedIn = ko.computed(function() {
-        return user.isLoggedIn();
+    self.showCreateCampaign = ko.computed(function() {
+        return navigation.showCreateCampaign();
     });
-            
+    
+    self.showCreateCampaignButton = ko.computed(function() {
+        return navigation.showMain();
+    });
+         
     self.numberOfFactions = ko.computed(function() {
         return campaign.factions().length;
     });
@@ -28,7 +32,10 @@ var CreateCampaignViewModel = function(user, campaign) {
         $.ajax({
             url: '/src/webservices/CampaignService.php',
             method: 'POST',
-            data: params
+            data: params,
+            success: function() {
+                navigation.showMain(true);
+            }
         });
     };
     
@@ -36,4 +43,8 @@ var CreateCampaignViewModel = function(user, campaign) {
         var faction = new Faction(self.factionNameEntry());
         campaign.factions.push(faction);
     };
+    
+    self.requestCreateCampaign = function() {
+        navigation.showCreateCampaign(true);
+    }
 }

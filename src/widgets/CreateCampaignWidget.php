@@ -3,7 +3,8 @@ class CreateCampaignWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createCampaignViewModel-->
-        <div data-bind="visible: isLoggedIn">       
+        <input type="button" data-bind="click: requestCreateCampaign, visible: showCreateCampaignButton" value="Create Campaign" />
+        <div data-bind="visible: showCreateCampaign">       
             <label for="CampaignName">Name:</label>
             <input id="CampaignName" type="text" data-bind="value: name" />
             
