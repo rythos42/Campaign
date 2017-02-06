@@ -1,12 +1,15 @@
 Todo:
 - UI
 - don't allow multiple people with same username
+- can sign up with blank username/password
 - dont' allow "refresh" after adding user to add again to the database (could be same as above)
 - better text messages/translation support
+- secure password when sending to web service
 
 Goals:
 - encourage people to play and log their games through gamification
 - can't force playing a particular player
+- try to stay game agnostic for as long as possible
 
 
 Basic:
@@ -16,7 +19,7 @@ Basic:
 - date played
 - which faction each player is playing for
 - admin creates a grouping
-	- determines number of factions available and their names
+    - determines number of factions available and their names
 
 
 Stats:
@@ -24,9 +27,14 @@ Stats:
 - size of game
 - number of dice for each player
 - scenario
-	- drop down list for known scenarios
-	- free input for others
-		- input of "where you got it"
+    - drop down list for known scenarios
+    - free input for others
+        - input of "where you got it"
+        
+"The Game":
+- X games/month scheduled with another player, or forced to be near their map edge
+- up to X games/month allowed, attack anywhere on the map
+- think about Eclipse as a model of how such a meta-game might work
 
 
 Future:
