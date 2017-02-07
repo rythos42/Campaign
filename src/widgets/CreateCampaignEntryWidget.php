@@ -3,9 +3,12 @@ class CreateCampaignEntryWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createCampaignEntryViewModel-->
-        <input type="button" data-bind="click: requestCreateCampaignEntry, visible: showCreateCampaignEntryButton" value="Create Campaign Entry" />
         <div data-bind="visible: showCreateCampaignEntry">
-            <input type="button" data-bind="click: saveCampaignEntry" value="Save" />
+			<div data-bind="with: createCampaignFactionEntryViewModel">
+				<label for="FactionSelection">Faction:</label>
+				<select id="FactionSelection" data-bind="options: factions, optionsText: 'name', value: selectedFaction"></select>
+			</div>
+            <input type="button" data-bind="click: saveCampaignEntry" value="Save Campaign Entry" />
         </div>
         <!-- /ko -->
         <?php

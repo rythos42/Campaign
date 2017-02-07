@@ -1,7 +1,8 @@
-var CreateCampaignViewModel = function(campaign, navigation) {
-    var self = this;
+var CreateCampaignViewModel = function(navigation) {
+    var self = this,
+		entryCampaign = new Campaign();
 
-    self.name = campaign.name;
+    self.name = entryCampaign.name;
     self.factionNameEntry = ko.observable('');
     
     self.showCreateCampaign = ko.computed(function() {
@@ -13,11 +14,11 @@ var CreateCampaignViewModel = function(campaign, navigation) {
     });
          
     self.numberOfFactions = ko.computed(function() {
-        return campaign.factions().length;
+        return entryCampaign.factions().length;
     });
 
     self.factions = ko.computed(function() {
-        return $.map(campaign.factions(), function(faction) {
+        return $.map(entryCampaign.factions(), function(faction) {
             return new CampaignFactionListItemViewModel(faction);
         });
     });
@@ -25,8 +26,8 @@ var CreateCampaignViewModel = function(campaign, navigation) {
     self.saveCampaign = function() {
         var params = {
             action: 'SaveCampaign',
-            name: campaign.name(),
-            factions: ko.toJSON(campaign.factions)
+            name: entryCampaign.name(),
+            factions: ko.toJSON(entryCampaign.factions)
         };
         
         $.ajax({
@@ -41,7 +42,7 @@ var CreateCampaignViewModel = function(campaign, navigation) {
     
     self.addFaction = function() {
         var faction = new Faction(self.factionNameEntry());
-        campaign.factions.push(faction);
+        entryCampaign.factions.push(faction);
     };
     
     self.requestCreateCampaign = function() {

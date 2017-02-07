@@ -20,16 +20,23 @@ class CampaignMapper {
     }
     
     public static function getCampaignList() {
+        $campaignList = array();
+
         $getCampaignStatement = Database::prepare("SELECT * FROM Campaign");
         $getCampaignStatement->execute();
-        $results = $getCampaignStatement->get_result();
-        
-        $campaignList = array();
-        while($campaignRow = $results->fetch_object()) {
-           // echo json_encode($campaignRow);
-            //$campaign = new Campaign($campaignRow->Id, $campaignRow->Name);
-            array_push($campaignList, $campaignRow);
+        $getCampaignResults = $getCampaignStatement->get_result();
+        while($campaignRow = $getCampaignResults->fetch_object()) {
+			$campaignList[$campaignRow->Id] = $campaignRow;
         }
+		
+		$getCampaignFactionStatement = Database::prepare("SELECT * FROM CampaignFaction");
+        $getCampaignFactionStatement->execute();
+        $getCampaignFactionResults = $getCampaignFactionStatement->get_result();
+		while($campaignFactionRow = $getCampaignFactionResults->fetch_object()) {
+			$campaign = $campaignList[$campaignFactionRow->CampaignId];
+			$campaign->Factions[] = $campaignFactionRow;
+		}
+		
         return $campaignList;
     }
 }

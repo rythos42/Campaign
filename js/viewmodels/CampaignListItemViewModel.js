@@ -1,5 +1,10 @@
-var CampaignListItemViewModel = function(campaign) {
+var CampaignListItemViewModel = function(campaign, navigation) {
     var self = this;
     
+	self.id = campaign.id;
     self.name = campaign.name;
+	
+	self.createCampaignEntry = function() {
+		navigation.showCreateCampaignEntry(campaign);
+	};
 };

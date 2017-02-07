@@ -17,7 +17,7 @@ var CampaignListViewModel = function(navigation) {
             dataType: 'JSON',
             success: function(campaignList) {
                 self.campaignList($.map(campaignList, function(campaign) {
-                    return new CampaignListItemViewModel(new Campaign(campaign));
+                    return new CampaignListItemViewModel(new Campaign(campaign), navigation);
                 }));
                 
             }

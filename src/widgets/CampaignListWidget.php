@@ -5,9 +5,11 @@ class CampaignListWidget implements IWidget {
         <!-- ko with: campaignListViewModel -->
         <table data-bind="visible: showCampaignList">
             <tbody data-bind="foreach: campaignList">
-                <td>
-                    <tr data-bind="text: name" />
-                </td>
+                <tr>
+                    <td>
+						<button data-bind="text: name, click: createCampaignEntry" />
+					</td>
+                </tr>
             </tbody>
         </table>
         <!-- /ko -->
