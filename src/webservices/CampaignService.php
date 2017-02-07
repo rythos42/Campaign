@@ -14,6 +14,10 @@ switch($action) {
         $factions = json_decode($_REQUEST["factions"]);
         CampaignMapper::insertCampaign($name, $factions);
         break;
+        
+    case "GetCampaignList":
+        echo json_encode(CampaignMapper::getCampaignList());
+        break;
 }
 
 include("../Footer.php");

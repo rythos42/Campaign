@@ -18,5 +18,19 @@ class CampaignMapper {
 
         $insertCampaignFactionsSql->close();
     }
+    
+    public static function getCampaignList() {
+        $getCampaignStatement = Database::prepare("SELECT * FROM Campaign");
+        $getCampaignStatement->execute();
+        $results = $getCampaignStatement->get_result();
+        
+        $campaignList = array();
+        while($campaignRow = $results->fetch_object()) {
+           // echo json_encode($campaignRow);
+            //$campaign = new Campaign($campaignRow->Id, $campaignRow->Name);
+            array_push($campaignList, $campaignRow);
+        }
+        return $campaignList;
+    }
 }
 ?>

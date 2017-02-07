@@ -16,6 +16,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/LoginWidget.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/LogoutWidget.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CreateCampaignWidget.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CreateCampaignEntryWidget.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CampaignListWidget.php");
 
 session_start();
 Database::connect();

@@ -17,6 +17,8 @@
         <script src="js/viewmodels/CreateCampaignViewModel.js"></script>
         <script src="js/viewmodels/CreateCampaignEntryViewModel.js"></script>
         <script src="js/viewmodels/CampaignFactionListItemViewModel.js"></script>
+        <script src="js/viewmodels/CampaignListViewModel.js"></script>
+        <script src="js/viewmodels/CampaignListItemViewModel.js"></script>
         
         <script type="text/javascript">
             $(document).ready(function() {
