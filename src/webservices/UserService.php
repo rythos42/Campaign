@@ -25,6 +25,10 @@ switch($action) {
     
         User::logout();
         break;
+        
+    case "GetUsersByFilter":
+        echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
+        break;
 }
 
 include("../Footer.php");
