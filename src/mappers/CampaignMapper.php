@@ -26,18 +26,37 @@ class CampaignMapper {
         $getCampaignStatement->execute();
         $getCampaignResults = $getCampaignStatement->get_result();
         while($campaignRow = $getCampaignResults->fetch_object()) {
-			$campaignList[$campaignRow->Id] = $campaignRow;
+            $campaignList[$campaignRow->Id] = $campaignRow;
         }
-		
-		$getCampaignFactionStatement = Database::prepare("SELECT * FROM CampaignFaction");
+        
+        $getCampaignFactionStatement = Database::prepare("SELECT * FROM CampaignFaction");
         $getCampaignFactionStatement->execute();
         $getCampaignFactionResults = $getCampaignFactionStatement->get_result();
-		while($campaignFactionRow = $getCampaignFactionResults->fetch_object()) {
-			$campaign = $campaignList[$campaignFactionRow->CampaignId];
-			$campaign->Factions[] = $campaignFactionRow;
-		}
-		
+        while($campaignFactionRow = $getCampaignFactionResults->fetch_object()) {
+            $campaign = $campaignList[$campaignFactionRow->CampaignId];
+            $campaign->Factions[] = $campaignFactionRow;
+        }
+        
         return $campaignList;
+    }
+    
+    public static function insertCampaignEntry($campaignEntry) {
+        $insertCampaignEntryStatement = Database::prepare("INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?)");
+        
+        $createdByUserId = User::getUser()->getId();
+        $today = date('Y-m-d H:i:s');
+        $insertCampaignEntryStatement->bind_param("iis", $campaignEntry->campaignId, $createdByUserId, $today);
+        $insertCampaignEntryStatement->execute();
+        
+        $insertCampaignFactionEntrySql = Database::prepare("INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)");
+        $campaignEntryId = Database::getLastInsertedId();
+        
+        foreach($campaignEntry->factionEntries as $factionEntry) {
+            $insertCampaignFactionEntrySql->bind_param("iiii", $campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints);
+            $insertCampaignFactionEntrySql->execute();
+        }
+
+        $insertCampaignFactionEntrySql->close();      
     }
 }
 ?>

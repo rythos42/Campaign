@@ -1,4 +1,4 @@
-var CreateCampaignFactionEntryViewModel = function(campaignObs, campaignEntry) {
+var CreateCampaignFactionEntryViewModel = function(campaignObs, currentCampaignEntry) {
     var self = this,
         campaignFactionEntry = new CampaignFactionEntry();
     
@@ -12,7 +12,13 @@ var CreateCampaignFactionEntryViewModel = function(campaignObs, campaignEntry) {
     });
     
     self.addFaction = function() {
-        campaignEntry.factionEntries.push($.extend({}, campaignFactionEntry));
+        currentCampaignEntry.factionEntries.push(campaignFactionEntry.clone());
+    };
+    
+    self.clearEntry = function() {
+        self.selectedFaction(undefined);
+        self.selectedUser(undefined);
+        self.victoryPoints(undefined);
     };
     
     self.getUsers = function(term, responseCallback) {

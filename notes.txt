@@ -1,26 +1,18 @@
 Todo:
 - UI
 - don't allow multiple people with same username
-- can sign up with blank username/password
-- dont' allow "refresh" after adding user to add again to the database (could be same as above)
-- better text messages/translation support
+- don't allow sign up with blank username/password
+- better text/translation support
 - secure password when sending to web service
+- page campaign list
+- search campaign list
+    - by created by username or campaign name
+- can I add stats for a particular game and stay game-system agnostic?
 
 Goals:
 - encourage people to play and log their games through gamification
 - can't force playing a particular player
 - try to stay game agnostic for as long as possible
-
-
-Basic:
-- login
-- log a game against another user
-- input number of VPs scored
-- date played
-- which faction each player is playing for
-- admin creates a grouping
-    - determines number of factions available and their names
-
 
 Stats:
 - races played
@@ -35,7 +27,6 @@ Stats:
 - X games/month scheduled with another player, or forced to be near their map edge
 - up to X games/month allowed, attack anywhere on the map
 - think about Eclipse as a model of how such a meta-game might work
-
 
 Future:
 - tournaments, with specific people needing to be played

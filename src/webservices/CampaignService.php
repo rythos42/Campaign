@@ -5,7 +5,6 @@ include("../Header.php");
 if(!User::isLoggedIn())
     die("You must be logged in to use this service.");
 
-
 $action = $_REQUEST["action"];
         
 switch($action) {
@@ -17,6 +16,11 @@ switch($action) {
         
     case "GetCampaignList":
         echo json_encode(CampaignMapper::getCampaignList());
+        break;
+        
+    case "SaveCampaignEntry":
+        $campaignEntry = json_decode($_REQUEST["campaignEntry"]);
+        CampaignMapper::insertCampaignEntry($campaignEntry);
         break;
 }
 
