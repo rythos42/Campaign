@@ -3,6 +3,7 @@ var CreateCampaignFactionEntryViewModel = function(campaignObs) {
     
     self.selectedFaction = ko.observable();
     self.selectedUser = ko.observable();
+    self.victoryPoints = ko.observable();
     
     self.factions = ko.computed(function() {
         var campaignObj = campaignObs();
