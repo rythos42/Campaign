@@ -14,4 +14,23 @@ var CreateCampaignFactionEntryViewModel = function(campaignObs, campaignEntry) {
     self.addFaction = function() {
         campaignEntry.factionEntries.push($.extend({}, campaignFactionEntry));
     };
+    
+    self.getUsers = function(term, responseCallback) {
+        $.ajax({
+            url: '/src/webservices/UserService.php',
+            dataType: 'JSON',
+            data: {
+                action: 'GetUsersByFilter',
+                term: term
+            },
+            success: function(results) {
+                responseCallback($.map(results, function(serverUser) {
+                    return {
+                        label: serverUser.Username,
+                        object: new User(serverUser.Id, serverUser.Username)
+                    }
+                }));
+            }
+        });
+    };
 };

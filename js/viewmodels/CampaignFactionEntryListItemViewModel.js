@@ -2,9 +2,14 @@ var CampaignFactionEntryListItemViewModel = function(factionEntry) {
     var self = this;
     
     self.factionName = ko.computed(function() {
-        return factionEntry.faction().name();
+        var faction = factionEntry.faction();
+        return faction ? faction.name() : '';
     });
     
-    self.user = factionEntry.user;
+    self.username = ko.computed(function() {
+        var user = factionEntry.user();
+        return user ? user.username() : '';
+    });
+    
     self.victoryPoints = factionEntry.victoryPoints;
 };
