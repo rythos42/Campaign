@@ -1,8 +1,13 @@
 var LoginViewModel = function(user, navigation) {
     var self = this;
     
-    self.username = ko.observable('');
-    self.password = ko.observable('');
+    self.username = ko.observable('').extend({
+        required: { message: 'You\'ll want a username, trust me.' }
+    });
+    
+    self.password = ko.observable('').extend({
+        required: { message: 'You should use the easiest password possible, but you\'ll need one to keep your friends out of your account.' }
+    });
     
     self.showLogin = ko.computed(function() {
         return navigation.showLogin();
@@ -13,9 +18,19 @@ var LoginViewModel = function(user, navigation) {
         
         self.username('');
         self.password('');
-    }    
+    }
+    
+    var validatedViewModel = ko.validatedObservable([
+        self.username,
+        self.password
+    ]);
         
     self.login = function() {
+        if(!validatedViewModel.isValid()) {
+            validatedViewModel.errors.showAllMessages();
+            return;
+        }
+        
         var params = { 
             action: 'Login',
             username: self.username(),
@@ -31,6 +46,11 @@ var LoginViewModel = function(user, navigation) {
     };
     
     self.register = function() {
+        if(!validatedViewModel.isValid()) {
+            validatedViewModel.errors.showAllMessages();
+            return;
+        }
+        
         var params = { 
             action: 'RegisterAndLogin',
             username: self.username(),

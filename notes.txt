@@ -3,7 +3,6 @@ Todo:
     - better error handling
         - better way of telling people their username has been taken
         
-- don't allow sign up with blank username/password
 - better text/translation support
 - secure password when sending to web service
 - page campaign list
