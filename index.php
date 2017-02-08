@@ -13,6 +13,8 @@
         <script src="js/model/Faction.js"></script>
         <script src="js/model/User.js"></script>
         <script src="js/model/Navigation.js"></script>
+        <script src="js/model/CampaignEntry.js"></script>
+        <script src="js/model/CampaignFactionEntry.js"></script>
         <script src="js/custombinders/AutoCompleteCustomBinder.js"></script>
         <script src="js/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/viewmodels/LoginViewModel.js"></script>
@@ -23,6 +25,7 @@
         <script src="js/viewmodels/CreateCampaignFactionEntryViewModel.js"></script>
         <script src="js/viewmodels/CampaignListViewModel.js"></script>
         <script src="js/viewmodels/CampaignListItemViewModel.js"></script>
+        <script src="js/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         
         <script type="text/javascript">
             (function() {

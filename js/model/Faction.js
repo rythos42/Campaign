@@ -10,5 +10,4 @@ var Faction = function(factionName) {
 	} else {
 		self.name(factionName);
 	}
-	
 };
