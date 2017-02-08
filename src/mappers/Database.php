@@ -2,7 +2,7 @@
 class Database {
     private static $conn;
     
-	public static function connect() {
+    public static function connect() {
         self::$conn = new mysqli(Settings::getDatabaseServer(), Settings::getDatabaseUsername(), Settings::getDatabasePassword(), Settings::getDatabaseName());
         if (self::$conn->connect_error)
             echo "Connection failed: " . self::$conn->connect_error;
@@ -22,9 +22,17 @@ class Database {
     public static function getLastError() {
         return self::$conn->error;
     }
-	
-	public static function getLastInsertedId() {
-		return self::$conn->insert_id;
-	}
+    
+    public static function getLastInsertedId() {
+        return self::$conn->insert_id;
+    }
+    
+    public static function scalarObjectQuery($query, $paramTypes, ...$params) {
+        $query = Database::prepare($query);
+        $query->bind_param($paramTypes, ...$params);
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_object();
+    }
 }
 ?>

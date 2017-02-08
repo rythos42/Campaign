@@ -1,27 +1,21 @@
 Todo:
 - UI
-- don't allow multiple people with same username
+    - better error handling
+        - better way of telling people their username has been taken
+        
 - don't allow sign up with blank username/password
 - better text/translation support
 - secure password when sending to web service
 - page campaign list
 - search campaign list
     - by created by username or campaign name
-- can I add stats for a particular game and stay game-system agnostic?
+- view all previous entries for a campaign
+
 
 Goals:
 - encourage people to play and log their games through gamification
 - can't force playing a particular player
 - try to stay game agnostic for as long as possible
-
-Stats:
-- races played
-- size of game
-- number of dice for each player
-- scenario
-    - drop down list for known scenarios
-    - free input for others
-        - input of "where you got it"
         
 "The Game":
 - X games/month scheduled with another player, or forced to be near their map edge
@@ -39,4 +33,16 @@ Future:
 - admin can write a narrative for the campaign
 - map campaign -- can only attack nearby
     - or "support from neighbouring territories"
+- allow users to interact on the system in some way - perhaps allow comments on campaign entries
     
+    
+Far future:
+    Stats:
+    - these would have to be game specific, is why they are far-future
+    - races played
+    - size of game
+    - number of dice for each player
+    - scenario
+        - drop down list for known scenarios
+        - free input for others
+            - input of "where you got it"

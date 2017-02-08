@@ -1,14 +1,18 @@
 <?php 
 class UserMapper {
     public static function insertUser($username, $password) {
-        $query = Database::prepare("INSERT INTO User (Username, PasswordHash, CreatedOnDate) VALUES (?, ?, ?)");
+        $user = Database::scalarObjectQuery("SELECT Id FROM User WHERE Username = ?", "s", $username);
+        if($user !== null)
+            throw new Exception("That username has been taken."); 
+        
+        $insertUserStatement = Database::prepare("INSERT INTO User (Username, PasswordHash, CreatedOnDate) VALUES (?, ?, ?)");
         
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $today = date('Y-m-d H:i:s');
-        $query->bind_param("sss", $username, $passwordHash, $today);
+        $insertUserStatement->bind_param("sss", $username, $passwordHash, $today);
         
-        $query->execute();        
-        $query->close();
+        $insertUserStatement->execute();        
+        $insertUserStatement->close();
     }
     
     public static function validateLogin($username, $password) {

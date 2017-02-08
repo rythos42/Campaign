@@ -9,6 +9,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="js/infrastructure/ExceptionCodes.js"></script>
         <script src="js/model/Campaign.js"></script>
         <script src="js/model/Faction.js"></script>
         <script src="js/model/User.js"></script>
@@ -28,30 +29,11 @@
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <script type="text/javascript">
-            (function() {
-              var existing = ko.bindingProvider.instance;
-
-                ko.bindingProvider.instance = {
-                    nodeHasBindings: existing.nodeHasBindings,
-                    getBindings: function(node, bindingContext) {
-                        var bindings;
-                        try {
-                           bindings = existing.getBindings(node, bindingContext);
-                        }
-                        catch (ex) {
-                           if (window.console && console.log) {
-                               console.log("binding error", ex.message, node, bindingContext);
-                           }
-                        }
-
-                        return bindings;
-                    }
-                };
-
-            })();
-        
+            (function() {var existing = ko.bindingProvider.instance;ko.bindingProvider.instance = {nodeHasBindings: existing.nodeHasBindings,getBindings: function(node, bindingContext) {var bindings;try {bindings = existing.getBindings(node, bindingContext);}catch (ex) {if (window.console && console.log) {console.log("binding error", ex.message, node, bindingContext);}}return bindings;}};})();
         
             $(document).ready(function() {
+                ExceptionCodes.setCodes(<?php echo json_encode(ExceptionCodes::getAllCodes()); ?>);
+
                 var user = new User(),
                     navigation = new Navigation(user);
                     
@@ -70,5 +52,4 @@
         ?>
     </body>
 </html>
-
 <?php include("src/Footer.php"); ?>

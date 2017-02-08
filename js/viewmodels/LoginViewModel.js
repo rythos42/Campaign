@@ -41,7 +41,12 @@ var LoginViewModel = function(user, navigation) {
             url: '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
-            success: loginSuccess
+            success: loginSuccess,
+            error: function(xhr) {
+                if(xhr.responseText === ExceptionCodes.UsernameExists) {
+                    alert("That username is already taken, please try another!");
+                }
+            }
         });
     };
 };
