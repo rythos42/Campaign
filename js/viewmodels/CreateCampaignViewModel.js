@@ -40,6 +40,10 @@ var CreateCampaignViewModel = function(navigation) {
         });
     };
     
+    self.back = function() {
+        navigation.showMain(true);
+    };
+    
     self.addFaction = function() {
         var faction = new Faction(self.factionNameEntry());
         entryCampaign.factions.push(faction);
@@ -48,4 +52,10 @@ var CreateCampaignViewModel = function(navigation) {
     self.requestCreateCampaign = function() {
         navigation.showCreateCampaign(true);
     }
+    
+    navigation.showCreateCampaign.subscribe(function(show) {
+        self.name('');
+        self.factionNameEntry('');
+        entryCampaign.factions.removeAll();
+    });
 }

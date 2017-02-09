@@ -40,4 +40,8 @@ var CreateCampaignEntryViewModel = function(navigation) {
             }
         });
     };
+    
+    self.back = function() {
+        navigation.showMain(true);
+    };
 };

@@ -23,6 +23,7 @@ class CreateCampaignEntryWidget implements IWidget {
                 </tbody>
             </table>
             <input type="button" data-bind="click: saveCampaignEntry" value="Save Campaign Entry" />
+            <input type="button" data-bind="click: back" value="Back" />
         </div>
         <!-- /ko -->
         <?php

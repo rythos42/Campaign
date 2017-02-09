@@ -1,6 +1,5 @@
 Todo:
 - UI
-- back buttons on Create Campaign Entry and Create Campaign        
 - better text/translation support
 - page campaign list
 - search campaign list
