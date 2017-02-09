@@ -3,15 +3,31 @@ var CreateCampaignFactionEntryViewModel = function(campaignObs, currentCampaignE
         campaignFactionEntry = new CampaignFactionEntry();
     
     self.selectedFaction = campaignFactionEntry.faction;
-    self.selectedUser = campaignFactionEntry.user;
-    self.victoryPoints = campaignFactionEntry.victoryPoints;
+
+    self.selectedUser = campaignFactionEntry.user.extend({
+        required: { message: 'Who played this faction in this game?' }
+    });
+    
+    self.victoryPoints = campaignFactionEntry.victoryPoints.extend({
+        required: { message: 'At least put a 0 if this guy didn\'t score anything!' }
+    });
     
     self.availableFactions = ko.computed(function() {
         var campaignObj = campaignObs();
         return campaignObj ? campaignObj.factions() : null;
     });
     
+    var validatedViewModel = ko.validatedObservable([
+        self.selectedUser,
+        self.victoryPoints
+    ]);
+    
     self.addFaction = function() {
+        if(!validatedViewModel.isValid()) {
+            validatedViewModel.errors.showAllMessages();
+            return;
+        }
+        
         currentCampaignEntry.factionEntries.push(campaignFactionEntry.clone());
     };
     

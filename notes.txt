@@ -1,9 +1,7 @@
 Todo:
+- show new campaign after creation
 - view all previous entries for a campaign
-- don't allow campaign name to be blank
-- don't allow faction name to be blank
-- don't allow user name in entry to be blank
-- don't allow VPs in entry to be blank- UI
+- UI
 - better text/translation support
 
 Near Future:

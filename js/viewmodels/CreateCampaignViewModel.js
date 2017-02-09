@@ -2,8 +2,13 @@ var CreateCampaignViewModel = function(navigation) {
     var self = this,
 		entryCampaign = new Campaign();
 
-    self.name = entryCampaign.name;
-    self.factionNameEntry = ko.observable('');
+    self.name = entryCampaign.name.extend({
+        required: { message: 'Your campaign needs a name.' }
+    });
+    
+    self.factionNameEntry = ko.observable('').extend({
+        required: { message: 'Each faction in your campaign needs a name.' }
+    });
     
     self.showCreateCampaign = ko.computed(function() {
         return navigation.showCreateCampaign();
@@ -24,6 +29,11 @@ var CreateCampaignViewModel = function(navigation) {
     });
     
     self.saveCampaign = function() {
+        if(!self.name.isValid()) {
+            self.name.isModified(true);
+            return;
+        }
+        
         var params = {
             action: 'SaveCampaign',
             name: entryCampaign.name(),
@@ -45,6 +55,11 @@ var CreateCampaignViewModel = function(navigation) {
     };
     
     self.addFaction = function() {
+        if(!self.factionNameEntry.isValid()) {
+            self.factionNameEntry.isModified(true);
+            return;
+        }
+        
         var faction = new Faction(self.factionNameEntry());
         entryCampaign.factions.push(faction);
     };
