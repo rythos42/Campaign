@@ -1,10 +1,21 @@
 var CampaignListViewModel = function(navigation) {
-    var self = this;
+    var self = this,
+        internalCampaignList = ko.observableArray();
     
-    self.campaignList = ko.observableArray();
+    self.campaignListFilter = ko.observable();
     
     self.showCampaignList = ko.computed(function() {
         return navigation.showMain();
+    });
+    
+    self.campaignList = ko.computed(function() {
+        var filter = self.campaignListFilter();
+        if(!filter)
+            return internalCampaignList();
+        
+        return $.grep(internalCampaignList(), function(campaign) {
+            return campaign.name().indexOf(filter) !== -1;
+        });
     });
     
     self.getCampaignList = function() {
@@ -15,11 +26,10 @@ var CampaignListViewModel = function(navigation) {
             method: 'GET',
             data: params,
             dataType: 'JSON',
-            success: function(campaignList) {
-                self.campaignList($.map(campaignList, function(campaign) {
+            success: function(serverCampaignList) {
+                internalCampaignList($.map(serverCampaignList, function(campaign) {
                     return new CampaignListItemViewModel(new Campaign(campaign), navigation);
                 }));
-                
             }
         });
     };

@@ -1,14 +1,15 @@
 Todo:
-- UI
-- better text/translation support
-- page campaign list
-- search campaign list
-    - by created by username or campaign name
 - view all previous entries for a campaign
+- don't allow campaign name to be blank
+- don't allow faction name to be blank
+- don't allow user name in entry to be blank
+- don't allow VPs in entry to be blank- UI
+- better text/translation support
 
 Near Future:
+- page campaign list
 - make sure SSL works on geeksong with this
-- better way of telling people their username has been taken
+- better UI for telling people their username has been taken
 
 Goals:
 - encourage people to play and log their games through gamification
@@ -19,7 +20,6 @@ Goals:
 - X games/month scheduled with another player, or forced to be near their map edge
 - up to X games/month allowed, attack anywhere on the map
 - think about Eclipse as a model of how such a meta-game might work
-
 
 Future:
 - tournaments, with specific people needing to be played
@@ -33,8 +33,8 @@ Future:
 - map campaign -- can only attack nearby
     - or "support from neighbouring territories"
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
-    
-    
+- search campaigns by the user who created them
+        
 Far future:
     Stats:
     - these would have to be game specific, is why they are far-future
