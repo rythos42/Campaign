@@ -1,15 +1,15 @@
 Todo:
 - UI
-    - better error handling
-        - better way of telling people their username has been taken
-        
+- back buttons on Create Campaign Entry and Create Campaign        
 - better text/translation support
-- secure password when sending to web service
 - page campaign list
 - search campaign list
     - by created by username or campaign name
 - view all previous entries for a campaign
 
+Near Future:
+- make sure SSL works on geeksong with this
+- better way of telling people their username has been taken
 
 Goals:
 - encourage people to play and log their games through gamification
@@ -20,6 +20,7 @@ Goals:
 - X games/month scheduled with another player, or forced to be near their map edge
 - up to X games/month allowed, attack anywhere on the map
 - think about Eclipse as a model of how such a meta-game might work
+
 
 Future:
 - tournaments, with specific people needing to be played

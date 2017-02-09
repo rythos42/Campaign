@@ -4,6 +4,15 @@ ini_set('display_errors', 1);
 
 date_default_timezone_set("America/Vancouver");
 
+// Force HTTPS for security
+if($_SERVER["HTTPS"] != "on") {
+    header("Location: https://"
+        . ($_SERVER["SERVER_PORT"] != "80" 
+            ? $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"]
+            : $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]));
+    exit();
+}
+
 include($_SERVER['DOCUMENT_ROOT'] . "/settings.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/Settings.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/ExceptionCodes.php");
