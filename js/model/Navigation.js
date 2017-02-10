@@ -1,6 +1,8 @@
 var Navigation = function(user) {
     var self = this;
     
+    self.parameters = ko.observable();
+    
     self.showLogin = ko.observable(false);
     self.showMain = ko.observable(false);
     self.showCreateCampaign = ko.observable(false);

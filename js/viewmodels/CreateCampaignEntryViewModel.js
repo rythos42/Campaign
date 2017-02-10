@@ -16,13 +16,16 @@ var CreateCampaignEntryViewModel = function(navigation) {
     });
     
     navigation.showCreateCampaignEntry.subscribe(function(show) {
+        if(!show)
+            return;
+        
         currentCampaignEntry.clear();
         self.createCampaignFactionEntryViewModel.clearEntry();
 
-        if(typeof(show) === 'object') {
-            campaign(show);
-            currentCampaignEntry.campaignId(show.id());
-        }
+        var newCampaign = navigation.parameters();
+        navigation.parameters(null);
+        campaign(newCampaign);
+        currentCampaignEntry.campaignId(newCampaign.id());
     });
     
     self.saveCampaignEntry = function() {

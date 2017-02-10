@@ -9,13 +9,25 @@ var CampaignListViewModel = function(navigation) {
     });
     
     self.campaignList = ko.computed(function() {
-        var filter = self.campaignListFilter();
-        if(!filter)
-            return internalCampaignList();
-        
-        return $.grep(internalCampaignList(), function(campaign) {
-            return campaign.name().indexOf(filter) !== -1;
+        var filter = self.campaignListFilter()
+            campaignList = !filter
+                ? internalCampaignList()
+                : $.grep(internalCampaignList(), function(campaign) { return campaign.name().indexOf(filter) !== -1; });
+                
+        return $.map(campaignList, function(campaign) {
+            return new CampaignListItemViewModel(campaign, navigation);
         });
+    });
+    
+    navigation.showMain.subscribe(function(show) {
+        if(!show)
+            return;
+        
+        var newCampaign = navigation.parameters();
+        navigation.parameters(null);
+        
+        if(newCampaign instanceof Campaign)
+            internalCampaignList.push(newCampaign);
     });
     
     self.getCampaignList = function() {
@@ -27,8 +39,8 @@ var CampaignListViewModel = function(navigation) {
             data: params,
             dataType: 'JSON',
             success: function(serverCampaignList) {
-                internalCampaignList($.map(serverCampaignList, function(campaign) {
-                    return new CampaignListItemViewModel(new Campaign(campaign), navigation);
+                internalCampaignList($.map(serverCampaignList, function(serverCampaign) {
+                    return new Campaign(serverCampaign);
                 }));
             }
         });

@@ -45,6 +45,7 @@ var CreateCampaignViewModel = function(navigation) {
             method: 'POST',
             data: params,
             success: function() {
+                navigation.parameters(entryCampaign.clone());
                 navigation.showMain(true);
             }
         });
