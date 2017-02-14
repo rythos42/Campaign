@@ -16,6 +16,9 @@ class LoginWidget implements IWidget {
                 <input type="button" value="Login" data-bind="click: login" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" value="Sign up" data-bind="click: register" class="ui-button ui-widget ui-corner-all" />
             </div>
+            <div class="ui-widget ui-widget-content ui-corner-all paragraph">
+                Campaign is a simple <a href="https://github.com/rythos42/Campaign">open source</a> web app to help you manage gaming campaigns.
+            </div>
         </div>
         <!-- /ko -->
         <?php

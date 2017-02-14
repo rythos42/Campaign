@@ -1,11 +1,15 @@
 <?php
 class MainWidget implements IWidget {
     public function render() {
+        $headerWidget = new HeaderWidget();
+        $headerWidget->render();
+
+        ?>
+        <div id="Main">
+        <?php
+
         $loginWidget = new LoginWidget();
         $loginWidget->render();
-        
-        $logoutWidget = new LogoutWidget();
-        $logoutWidget->render();
         
         $createCampaignWidget = new CreateCampaignWidget();
         $createCampaignWidget->render();
@@ -15,6 +19,10 @@ class MainWidget implements IWidget {
         
         $campaignListWidget = new CampaignListWidget();
         $campaignListWidget->render();
+        
+        ?>
+        </div>
+        <?php
     }
 }
 ?>

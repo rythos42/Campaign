@@ -3,7 +3,6 @@ class CreateCampaignWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createCampaignViewModel-->
-        <input type="button" data-bind="click: requestCreateCampaign, visible: showCreateCampaignButton" value="Create Campaign" class="ui-button ui-widget ui-corner-all" />
         <div id="CreateCampaign" data-bind="visible: showCreateCampaign">
             <div class="entry-field in-list">
                 <label for="CampaignName">Campaign name:</label>

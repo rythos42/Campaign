@@ -38,8 +38,10 @@ class CreateCampaignEntryWidget implements IWidget {
                     </tr>
                 </tbody>
             </table>
-            <input type="button" data-bind="click: saveCampaignEntry" value="Save Entry" class="ui-button ui-widget ui-corner-all" />
-            <input type="button" data-bind="click: back" value="Back" class="ui-button ui-widget ui-corner-all" />
+            <div class="button-panel">
+                <input type="button" data-bind="click: saveCampaignEntry" value="Save Entry" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: back" value="Back" class="ui-button ui-widget ui-corner-all" />
+            </div>
         </div>
         <!-- /ko -->
         <?php

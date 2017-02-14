@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .entry-field label {
     text-align: right;
     display: inline-block;
@@ -39,24 +43,16 @@ td {
     padding: 4px;    
 }
 
+.paragraph {
+    padding: 5px;
+}
+
 #Login .button-panel.in-list {
     margin-left: 100px;
 }
 
-#CampaignList {
-    margin-top: 10px;
-}
-
-#CreateCampaign {
-    margin-top: 10px;
-}
-
 #CreateCampaign .button-panel.in-list {
     margin-left: 152px;
-}
-
-#CreateCampaignEntry {
-    margin-top: 10px;
 }
 
 #CreateCampaignEntry .button-panel.in-list {
@@ -66,4 +62,18 @@ td {
 #CreateCampaignEntry table {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#Main {
+    margin: 10px;
+}
+
+#Header {
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 3em;
+    padding: 4px 0 3px 10px;
+    border-bottom: solid black 2px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
