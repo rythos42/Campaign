@@ -28,6 +28,10 @@ var CreateCampaignViewModel = function(navigation) {
         });
     });
     
+    self.hasFactions = ko.computed(function() {
+        return self.factions().length > 0;
+    });
+    
     self.saveCampaign = function() {
         if(!self.name.isValid()) {
             self.name.isModified(true);

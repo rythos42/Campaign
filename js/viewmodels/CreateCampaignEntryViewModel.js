@@ -15,6 +15,10 @@ var CreateCampaignEntryViewModel = function(navigation) {
         });
     });
     
+    self.hasFactionEntries = ko.computed(function() {
+        return self.factionEntries().length > 0;
+    });
+    
     navigation.showCreateCampaignEntry.subscribe(function(show) {
         if(!show)
             return;

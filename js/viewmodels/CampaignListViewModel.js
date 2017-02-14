@@ -19,6 +19,10 @@ var CampaignListViewModel = function(navigation) {
         });
     });
     
+    self.hasCampaigns = ko.computed(function() {
+        return self.campaignList().length > 0;
+    });
+    
     navigation.showMain.subscribe(function(show) {
         if(!show)
             return;

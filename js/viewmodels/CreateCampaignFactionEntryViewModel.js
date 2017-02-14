@@ -9,7 +9,7 @@ var CreateCampaignFactionEntryViewModel = function(campaignObs, currentCampaignE
     });
     
     self.victoryPoints = campaignFactionEntry.victoryPoints.extend({
-        required: { message: 'At least put a 0 if this guy didn\'t score anything!' }
+        required: { message: 'At least put a 0 if there was no score!' }
     });
     
     self.availableFactions = ko.computed(function() {

@@ -1,0 +1,69 @@
+.entry-field label {
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.entry-field.in-list label {
+    width: 120px;
+}
+
+.link-button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+.button-panel.in-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.validationMessage {
+    display: block;
+    color: red;
+}
+
+.entry-field.in-list .validationMessage {
+    margin-left: 125px;
+}
+
+table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td {
+    padding: 4px;    
+}
+
+#Login .button-panel.in-list {
+    margin-left: 100px;
+}
+
+#CampaignList {
+    margin-top: 10px;
+}
+
+#CreateCampaign {
+    margin-top: 10px;
+}
+
+#CreateCampaign .button-panel.in-list {
+    margin-left: 152px;
+}
+
+#CreateCampaignEntry {
+    margin-top: 10px;
+}
+
+#CreateCampaignEntry .button-panel.in-list {
+    margin-left: 152px;
+}
+
+#CreateCampaignEntry table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

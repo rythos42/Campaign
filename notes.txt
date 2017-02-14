@@ -1,13 +1,21 @@
 Todo:
-- show new campaign after creation
 - view all previous entries for a campaign
-- UI
 - better text/translation support
+- should not be able to save a campaign entry with no factions in it
+- don't show logged in UI until login comes back true? Looks like CampaignService is being called before the user is logged in
+- title on login/sign-up page
+- "about" description somewhere
+- "none yet" message in campaign list and factions list
+- better UI for telling people their username has been taken
+- jq autocomplete validation message when invalid selection
+- clear faction entry after add faction
+- clear faction entry validation after back and return
+- make "header bar" that I can style differently
+    - include Create Campaign, Logout buttons on it
 
 Near Future:
 - page campaign list
 - make sure SSL works on geeksong with this
-- better UI for telling people their username has been taken
 
 Goals:
 - encourage people to play and log their games through gamification
@@ -32,6 +40,7 @@ Future:
     - or "support from neighbouring territories"
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
+- deadline for campaigns
         
 Far future:
     Stats:

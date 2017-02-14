@@ -3,14 +3,19 @@ class CampaignListWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: campaignListViewModel -->
-        <div data-bind="visible: showCampaignList">
-            <label for="CampaignListFilter">Filter:</label>
-            <input id="CampaignListFilter" type="text" data-bind="value: campaignListFilter, valueUpdate: 'keyup'" />
-            <table
+        <div id="CampaignList" data-bind="visible: showCampaignList">
+            <div class="entry-field">
+                <label for="CampaignListFilter">Filter:</label>
+                <input id="CampaignListFilter" type="text" data-bind="value: campaignListFilter, valueUpdate: 'keyup'" />
+            </div>
+            <table data-bind="visible: hasCampaigns" class="ui-widget ui-corners-all ui-widget-content">
+                <thead>
+                    <th><span class="ui-widget-title">Available Campaigns</span></th>
+                </thead>
                 <tbody data-bind="foreach: campaignList">
                     <tr>
                         <td>
-                            <button data-bind="text: name, click: createCampaignEntry" />
+                            <button data-bind="text: name, click: createCampaignEntry" class="link-button" />
                         </td>
                     </tr>
                 </tbody>
