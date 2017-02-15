@@ -7,15 +7,13 @@ Todo:
 - jq autocomplete validation message when invalid selection
 - clear faction entry after add faction
 - clear faction entry validation after back and return
-- "enter" on login page should try to login
-- cursor in username (check keyboard doesn't overlap about message) (Login)
-- cursor in campaign name (Campaign)
-- cursor in user name (Campaign Entry)
 
 Near Future:
 - page campaign list
 - make sure SSL works on geeksong with this
-
+- decide whether to take an e-mail address or disallow password reset, or make password reset trivial
+    - could take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    
 Goals:
 - encourage people to play and log their games through gamification
 - can't force playing a particular player

@@ -2,6 +2,8 @@ var LoginViewModel = function(user, navigation) {
     var self = this;
     
     self.usernameHasFocus = ko.observable(true);
+    self.showUsernamePasswordIncorrect = ko.observable(false);
+    self.showUsernameAlreadyTaken = ko.observable(false);
     
     self.username = ko.observable('').extend({
         required: { message: 'You\'ll want a username, trust me.' }
@@ -18,6 +20,9 @@ var LoginViewModel = function(user, navigation) {
     function loginSuccess() {
         user.isLoggedIn(true);
         
+        self.showUsernamePasswordIncorrect(false);
+        self.showUsernameAlreadyTaken(false);
+        
         self.username('');
         self.password('');
     }
@@ -26,7 +31,13 @@ var LoginViewModel = function(user, navigation) {
         self.username,
         self.password
     ]);
-        
+    
+    self.keyPressLogin = function(viewModel, event) {
+        if(event.keyCode === 13)
+            self.login();  
+        return true;
+    };
+    
     self.login = function() {
         if(!validatedViewModel.isValid()) {
             validatedViewModel.errors.showAllMessages();
@@ -43,7 +54,10 @@ var LoginViewModel = function(user, navigation) {
             url: '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
-            success: loginSuccess
+            success: loginSuccess,
+            error: function(xhr) {
+                self.showUsernamePasswordIncorrect(true);
+            }
         });
     };
     
@@ -65,15 +79,26 @@ var LoginViewModel = function(user, navigation) {
             data: params,
             success: loginSuccess,
             error: function(xhr) {
-                if(xhr.responseText === ExceptionCodes.UsernameExists) {
-                    alert("That username is already taken, please try another!");
-                }
+                if(xhr.responseText === ExceptionCodes.UsernameExists)
+                    self.showUsernameAlreadyTaken(true);
             }
         });
     };
     
     navigation.showLogin.subscribe(function(showLogin) {
-        if(showLogin)
+        if(showLogin) {
             self.usernameHasFocus(true);
+            self.username.isModified(false);
+            self.password.isModified(false);
+        }
+    });
+    
+    self.username.subscribe(function() {
+        self.showUsernameAlreadyTaken(false);
+        self.showUsernamePasswordIncorrect(false);
+    });
+    
+    self.password.subscribe(function() {
+        self.showUsernamePasswordIncorrect(false);
     });
 };

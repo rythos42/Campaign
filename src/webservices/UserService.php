@@ -22,7 +22,8 @@ switch($action) {
             echo 'true';
         }
         else {
-            echo 'false';
+            http_response_code(401);
+            echo ExceptionCodes::LoginFailure;
         }
         break;
         
@@ -34,6 +35,9 @@ switch($action) {
         break;
         
     case "GetUsersByFilter":
+        if(!User::isLoggedIn())
+            die("You must be logged in to use this service.");
+    
         echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
         break;
 }

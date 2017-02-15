@@ -25,7 +25,7 @@ class UserMapper {
         $user = $results->fetch_object();
 
         $query->close();
-        if(password_verify($password, $user->PasswordHash)) {
+        if($user && password_verify($password, $user->PasswordHash)) {
             return new User($user->Id, $username);
         }
         else {
