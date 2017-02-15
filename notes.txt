@@ -8,6 +8,9 @@ Todo:
 - clear faction entry after add faction
 - clear faction entry validation after back and return
 - "enter" on login page should try to login
+- cursor in username (check keyboard doesn't overlap about message) (Login)
+- cursor in campaign name (Campaign)
+- cursor in user name (Campaign Entry)
 
 Near Future:
 - page campaign list

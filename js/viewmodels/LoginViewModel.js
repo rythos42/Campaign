@@ -1,6 +1,8 @@
 var LoginViewModel = function(user, navigation) {
     var self = this;
     
+    self.usernameHasFocus = ko.observable(true);
+    
     self.username = ko.observable('').extend({
         required: { message: 'You\'ll want a username, trust me.' }
     });
@@ -69,4 +71,9 @@ var LoginViewModel = function(user, navigation) {
             }
         });
     };
+    
+    navigation.showLogin.subscribe(function(showLogin) {
+        if(showLogin)
+            self.usernameHasFocus(true);
+    });
 };

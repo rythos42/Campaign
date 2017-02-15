@@ -6,7 +6,7 @@ class LoginWidget implements IWidget {
         <div id="Login" data-bind="visible: showLogin">
             <div class="entry-field in-list">
                 <label>Username: </label>
-                <input type="text" id="Username" name="Username" data-bind="value: username" />
+                <input type="text" id="Username" name="Username" data-bind="value: username, hasFocus: usernameHasFocus" />
             </div>
             <div class="entry-field in-list">
                 <label>Password: </label>

@@ -4,23 +4,21 @@ class CreateCampaignEntryWidget implements IWidget {
         ?>
         <!-- ko with: createCampaignEntryViewModel-->
         <div id="CreateCampaignEntry" data-bind="visible: showCreateCampaignEntry">
-            <div data-bind="with: createCampaignFactionEntryViewModel">
-                <div class="entry-field in-list">
-                    <label for="FactionSelection">Faction:</label>
-                    <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction"></select>
-                </div>
-                <div class="entry-field in-list">
-                    <label for="UserSelection">User:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser"></select>
-                    <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
-                </div>
-                <div class="entry-field in-list">
-                    <label for="VictoryPoints">Points:</label>
-                    <input type="number" id="VictoryPoints" data-bind="value: victoryPoints" />
-                </div>
-                <div class="button-panel in-list">
-                    <input type="button" data-bind="click: addFaction" value="Add Faction" class="ui-button ui-widget ui-corner-all" />
-                </div>
+            <div class="entry-field in-list">
+                <label for="FactionSelection">Faction:</label>
+                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus"></select>
+            </div>
+            <div class="entry-field in-list">
+                <label for="UserSelection">User:</label>
+                <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser"></select>
+                <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
+            </div>
+            <div class="entry-field in-list">
+                <label for="VictoryPoints">Points:</label>
+                <input type="number" id="VictoryPoints" data-bind="value: victoryPoints" />
+            </div>
+            <div class="button-panel in-list">
+                <input type="button" data-bind="click: addFaction" value="Add Faction" class="ui-button ui-widget ui-corner-all" />
             </div>
             <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">
                 <thead>

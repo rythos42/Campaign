@@ -6,7 +6,7 @@ class CreateCampaignWidget implements IWidget {
         <div id="CreateCampaign" data-bind="visible: showCreateCampaign">
             <div class="entry-field in-list">
                 <label for="CampaignName">Campaign name:</label>
-                <input id="CampaignName" type="text" data-bind="value: name" />
+                <input id="CampaignName" type="text" data-bind="value: name, hasFocus: campaignNameHasFocus" />
             </div>
             <div class="entry-field in-list">
                 <label for="CampaignFactionNameEntry">Faction name:</label>

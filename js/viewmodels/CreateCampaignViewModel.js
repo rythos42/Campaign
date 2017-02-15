@@ -1,7 +1,7 @@
 var CreateCampaignViewModel = function(navigation) {
     var self = this,
-		entryCampaign = new Campaign();
-
+        entryCampaign = new Campaign();
+        
     self.name = entryCampaign.name.extend({
         required: { message: 'Your campaign needs a name.' }
     });
@@ -9,6 +9,8 @@ var CreateCampaignViewModel = function(navigation) {
     self.factionNameEntry = ko.observable('').extend({
         required: { message: 'Each faction in your campaign needs a name.' }
     });
+    
+    self.campaignNameHasFocus = ko.observable(false);
     
     self.showCreateCampaign = ko.computed(function() {
         return navigation.showCreateCampaign();
@@ -77,5 +79,7 @@ var CreateCampaignViewModel = function(navigation) {
         self.name('');
         self.factionNameEntry('');
         entryCampaign.factions.removeAll();
+        
+        self.campaignNameHasFocus(true);
     });
 }
