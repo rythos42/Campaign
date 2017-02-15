@@ -1,10 +1,8 @@
 Todo:
 - view all previous entries for a campaign
+- jq autocomplete validation message when invalid selection
 - better text/translation support
 - should not be able to save a campaign entry with no factions in it
-- don't show logged in UI until login comes back true? Looks like CampaignService is being called before the user is logged in
-- better UI for telling people their username has been taken
-- jq autocomplete validation message when invalid selection
 - clear faction entry after add faction
 - clear faction entry validation after back and return
 

@@ -1,4 +1,4 @@
-var CampaignListViewModel = function(navigation) {
+var CampaignListViewModel = function(user, navigation) {
     var self = this,
         internalCampaignList = ko.observableArray();
     
@@ -27,11 +27,14 @@ var CampaignListViewModel = function(navigation) {
         if(!show)
             return;
         
-        var newCampaign = navigation.parameters();
-        navigation.parameters(null);
+        self.getCampaignList();
+    });
+    
+    user.isLoggedIn.subscribe(function(isLoggedIn) {
+        if(!isLoggedIn)
+            return;
         
-        if(newCampaign instanceof Campaign)
-            internalCampaignList.push(newCampaign);
+        self.getCampaignList();
     });
     
     self.getCampaignList = function() {
@@ -49,6 +52,4 @@ var CampaignListViewModel = function(navigation) {
             }
         });
     };
-    
-    self.getCampaignList();
 };

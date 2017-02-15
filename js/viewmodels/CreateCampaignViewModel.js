@@ -28,15 +28,22 @@ var CreateCampaignViewModel = function(navigation) {
         return $.map(entryCampaign.factions(), function(faction) {
             return new CampaignFactionListItemViewModel(faction);
         });
+    }).extend({
+        minLength: { params: 1, message: 'You must add at least one faction to your campaign.' }
     });
     
     self.hasFactions = ko.computed(function() {
         return self.factions().length > 0;
     });
     
+    var validatedEntry = ko.validatedObservable([
+        self.name,
+        self.factions
+    ]);
+    
     self.saveCampaign = function() {
-        if(!self.name.isValid()) {
-            self.name.isModified(true);
+        if(!validatedEntry.isValid()) {
+            validatedEntry.errors.showAllMessages();
             return;
         }
         
@@ -51,7 +58,6 @@ var CreateCampaignViewModel = function(navigation) {
             method: 'POST',
             data: params,
             success: function() {
-                navigation.parameters(entryCampaign.clone());
                 navigation.showMain(true);
             }
         });
@@ -77,8 +83,11 @@ var CreateCampaignViewModel = function(navigation) {
     
     navigation.showCreateCampaign.subscribe(function(show) {
         self.name('');
+        self.name.isModified(false);
         self.factionNameEntry('');
+        self.factionNameEntry.isModified(false);
         entryCampaign.factions.removeAll();
+        self.factions.isModified(false);
         
         self.campaignNameHasFocus(true);
     });

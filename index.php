@@ -39,10 +39,10 @@
                 var user = new User(),
                     navigation = new Navigation(user);
                     
-                user.isLoggedIn(<?php echo User::isLoggedIn() ? 'true' : 'false'; ?>);
-                    
                 var viewModel = new ApplicationViewModel(user, navigation);
                 ko.applyBindings(viewModel);
+
+                user.isLoggedIn(<?php echo User::isLoggedIn() ? 'true' : 'false'; ?>);
             });
         </script>
         
