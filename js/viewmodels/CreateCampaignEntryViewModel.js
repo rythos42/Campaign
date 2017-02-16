@@ -5,7 +5,9 @@ var CreateCampaignEntryViewModel = function(navigation) {
         campaignFactionEntry = new CampaignFactionEntry();
         
     self.factionSelectionHasFocus = ko.observable(false);
-    self.selectedFaction = campaignFactionEntry.faction;
+    self.selectedFaction = campaignFactionEntry.faction.extend({
+        required: { message: 'Who were they playing for?' }
+    });
     
     self.selectedUser = campaignFactionEntry.user.extend({
         required: { message: 'Who played this faction in this game?' },
@@ -62,12 +64,16 @@ var CreateCampaignEntryViewModel = function(navigation) {
         }
         
         currentCampaignEntry.factionEntries.push(campaignFactionEntry.clone());
+        self.clearEntry();
     };
     
     self.clearEntry = function() {
         self.selectedFaction(undefined);
+        self.selectedFaction.isModified(false);
         self.selectedUser(undefined);
+        self.selectedUser.isModified(false);
         self.victoryPoints(undefined);
+        self.victoryPoints.isModified(false);
     };
     
     self.getUsers = function(term, responseCallback) {
@@ -105,6 +111,7 @@ var CreateCampaignEntryViewModel = function(navigation) {
     });
     
     var factionEntryValidationViewModel = ko.validatedObservable([
+        self.selectedFaction,
         self.selectedUser,
         self.victoryPoints
     ]);

@@ -2,8 +2,7 @@ Todo:
 - view all previous entries for a campaign
 - better text/translation support
 - should not be able to save a campaign entry with no factions in it
-- clear faction entry after add faction
-- clear faction entry validation after back and return
+
 
 Near Future:
 - page campaign list
@@ -35,6 +34,7 @@ Future:
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
 - deadline for campaigns
+- allow user to select languages if we have a list
         
 Far future:
     Stats:

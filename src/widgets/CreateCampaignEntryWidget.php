@@ -6,7 +6,7 @@ class CreateCampaignEntryWidget implements IWidget {
         <div id="CreateCampaignEntry" data-bind="visible: showCreateCampaignEntry">
             <div class="entry-field in-list">
                 <label for="FactionSelection">Faction:</label>
-                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus"></select>
+                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: 'Select a faction'"></select>
             </div>
             <div class="entry-field in-list">
                 <label for="UserSelection">User:</label>
