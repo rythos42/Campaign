@@ -13,6 +13,7 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script src="js/infrastructure/ExceptionCodes.js"></script>
+        <script src="js/infrastructure/RequireObjectValidator.js"></script>
         <script src="js/model/Campaign.js"></script>
         <script src="js/model/Faction.js"></script>
         <script src="js/model/User.js"></script>
@@ -39,6 +40,7 @@
                 var user = new User(),
                     navigation = new Navigation(user);
                     
+                ko.validation.registerExtenders();
                 var viewModel = new ApplicationViewModel(user, navigation);
                 ko.applyBindings(viewModel);
 

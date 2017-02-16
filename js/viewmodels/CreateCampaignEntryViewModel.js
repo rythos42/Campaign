@@ -8,7 +8,8 @@ var CreateCampaignEntryViewModel = function(navigation) {
     self.selectedFaction = campaignFactionEntry.faction;
     
     self.selectedUser = campaignFactionEntry.user.extend({
-        required: { message: 'Who played this faction in this game?' }
+        required: { message: 'Who played this faction in this game?' },
+        requireObject: { message: 'That person does\'t have an account here.' }
     });
     
     self.victoryPoints = campaignFactionEntry.victoryPoints.extend({

@@ -1,6 +1,5 @@
 Todo:
 - view all previous entries for a campaign
-- jq autocomplete validation message when invalid selection
 - better text/translation support
 - should not be able to save a campaign entry with no factions in it
 - clear faction entry after add faction
