@@ -9,6 +9,7 @@ Near Future:
 - make sure SSL works on geeksong with this
 - decide whether to take an e-mail address or disallow password reset, or make password reset trivial
     - could take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+- maximum size on tables, depending on break points
     
 Goals:
 - encourage people to play and log their games through gamification

@@ -16,6 +16,7 @@ class CreateCampaignEntryWidget implements IWidget {
             <div class="entry-field in-list">
                 <label for="VictoryPoints">Points:</label>
                 <input type="number" id="VictoryPoints" data-bind="value: victoryPoints" />
+                <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
             </div>
             <div class="button-panel in-list">
                 <input type="button" data-bind="click: addFaction" value="Add Faction" class="ui-button ui-widget ui-corner-all" />

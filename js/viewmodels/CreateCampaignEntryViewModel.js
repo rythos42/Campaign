@@ -26,6 +26,8 @@ var CreateCampaignEntryViewModel = function(navigation) {
         return $.map(currentCampaignEntry.factionEntries(), function(factionEntry) {
             return new CampaignFactionEntryListItemViewModel(factionEntry);
         });
+    }).extend({
+        minLength: { params: 1, message: 'You must add at least one faction to your entry.' }
     });
     
     self.hasFactionEntries = ko.computed(function() {
@@ -37,7 +39,16 @@ var CreateCampaignEntryViewModel = function(navigation) {
         return campaignObj ? campaignObj.factions() : null;
     });
     
+    var validatedEntry = ko.validatedObservable([
+        self.factionEntries
+    ]);
+    
     self.saveCampaignEntry = function() {
+        if(!validatedEntry.isValid()) {
+            validatedEntry.errors.showAllMessages();
+            return;
+        }
+        
         var params = {
             action: 'SaveCampaignEntry',
             campaignEntry: ko.toJSON(currentCampaignEntry)
@@ -74,6 +85,8 @@ var CreateCampaignEntryViewModel = function(navigation) {
         self.selectedUser.isModified(false);
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
+        
+        self.factionEntries.isModified(false);
     };
     
     self.getUsers = function(term, responseCallback) {
