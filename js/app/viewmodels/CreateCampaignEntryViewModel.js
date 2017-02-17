@@ -1,9 +1,12 @@
+/*exported CreateCampaignEntryViewModel */
+/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User */
 var CreateCampaignEntryViewModel = function(navigation) {
     var self = this,
         campaign = ko.observable(null),
         currentCampaignEntry = new CampaignEntry(),
         campaignFactionEntry = new CampaignFactionEntry(),
-        internalCampaignEntryList = ko.observableArray();
+        internalCampaignEntryList = ko.observableArray(),
+        factionEntryValidationViewModel;
         
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = campaignFactionEntry.faction.extend({
@@ -109,7 +112,7 @@ var CreateCampaignEntryViewModel = function(navigation) {
                     return {
                         label: serverUser.Username,
                         object: new User(serverUser.Id, serverUser.Username)
-                    }
+                    };
                 }));
             }
         });
@@ -147,7 +150,7 @@ var CreateCampaignEntryViewModel = function(navigation) {
         self.getCampaignEntryList();
     });
     
-    var factionEntryValidationViewModel = ko.validatedObservable([
+    factionEntryValidationViewModel = ko.validatedObservable([
         self.selectedFaction,
         self.selectedUser,
         self.victoryPoints

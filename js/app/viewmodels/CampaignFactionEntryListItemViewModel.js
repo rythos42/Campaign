@@ -1,3 +1,5 @@
+/*exported CampaignFactionEntryListItemViewModel */
+/*globals ko */
 var CampaignFactionEntryListItemViewModel = function(factionEntry) {
     var self = this;
     

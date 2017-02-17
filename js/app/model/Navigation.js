@@ -1,3 +1,5 @@
+/*exported Navigation */
+/*globals ko */
 var Navigation = function(user) {
     var self = this;
     

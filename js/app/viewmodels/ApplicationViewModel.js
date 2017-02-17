@@ -1,3 +1,5 @@
+/*exported ApplicationViewModel */
+/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, CreateCampaignEntryViewModel, CampaignListViewModel */
 var ApplicationViewModel = function(user, navigation) {
     var self = this;
 
@@ -6,4 +8,4 @@ var ApplicationViewModel = function(user, navigation) {
     self.createCampaignViewModel = new CreateCampaignViewModel(navigation);
     self.createCampaignEntryViewModel = new CreateCampaignEntryViewModel(navigation);
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
-}
+};

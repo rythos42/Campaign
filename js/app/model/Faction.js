@@ -1,3 +1,5 @@
+/*exported Faction */
+/*globals ko */
 var Faction = function(factionName) {
     var self = this;
     

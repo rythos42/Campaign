@@ -1,3 +1,5 @@
+/*exported CreateCampaignViewModel */
+/*globals ko, CampaignFactionListItemViewModel, Faction, Campaign */
 var CreateCampaignViewModel = function(navigation) {
     var self = this,
         entryCampaign = new Campaign();
@@ -79,9 +81,9 @@ var CreateCampaignViewModel = function(navigation) {
     
     self.requestCreateCampaign = function() {
         navigation.showCreateCampaign(true);
-    }
+    };
     
-    navigation.showCreateCampaign.subscribe(function(show) {
+    navigation.showCreateCampaign.subscribe(function() {
         self.name('');
         self.name.isModified(false);
         self.factionNameEntry('');
@@ -91,4 +93,4 @@ var CreateCampaignViewModel = function(navigation) {
         
         self.campaignNameHasFocus(true);
     });
-}
+};

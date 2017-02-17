@@ -1,3 +1,5 @@
+/*exported CampaignListViewModel */
+/*globals ko, CampaignListItemViewModel, Campaign */
 var CampaignListViewModel = function(user, navigation) {
     var self = this,
         internalCampaignList = ko.observableArray();
@@ -9,8 +11,8 @@ var CampaignListViewModel = function(user, navigation) {
     });
     
     self.campaignList = ko.computed(function() {
-        var filter = self.campaignListFilter()
-            campaignList = !filter
+        var filter = self.campaignListFilter();
+        var campaignList = !filter
                 ? internalCampaignList()
                 : $.grep(internalCampaignList(), function(campaign) { return campaign.name().indexOf(filter) !== -1; });
                 

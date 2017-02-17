@@ -1,3 +1,5 @@
+/*exported User */
+/*globals ko */
 var User = function(id, username) {
     var self = this;
     

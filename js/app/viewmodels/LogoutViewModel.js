@@ -1,3 +1,5 @@
+/*exported LogoutViewModel */
+/*globals ko */
 var LogoutViewModel = function(user) {
     var self = this;
     

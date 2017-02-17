@@ -1,3 +1,5 @@
+/*exported CampaignEntry */
+/*globals ko, Faction, User, CampaignFactionEntry */
 var CampaignEntry = function(campaignId, serverCampaignEntry) {
     var self = this;
     

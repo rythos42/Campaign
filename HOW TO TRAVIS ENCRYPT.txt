@@ -1,0 +1,8 @@
+travis encrypt FTP_USERNAME=<username> --add env.global -r <github username>/<github repo>
+
+travis encrypt FTP_PASSWORD=<password> --add env.global -r <github username>/<github repo>
+
+
+(like "rythos42/Campaign")
+
+

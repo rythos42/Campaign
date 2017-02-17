@@ -7,5 +7,18 @@ Run SQL:
 	CampaignFactionEntry
 
 Install 
+    Change settings.sample.php to settings.php
+    Update the values in settings.php to be correct for your server.
 
-	
+Build
+    Install NPM (instructions elsewhere)
+    Install Grunt globally 
+        npm install -g grunt-cli
+    Install Grunt in project
+        npm install grunt --save-dev
+        npm install grunt-contrib-jshint --save-dev
+        npm install grunt-ftp-deploy --save-dev
+    
+
+Test
+    "grunt test"

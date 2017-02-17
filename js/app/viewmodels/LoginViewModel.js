@@ -1,3 +1,5 @@
+/*exported LoginViewModel */
+/*globals ko, ExceptionCodes */
 var LoginViewModel = function(user, navigation) {
     var self = this;
     
@@ -55,7 +57,7 @@ var LoginViewModel = function(user, navigation) {
             method: 'POST',
             data: params,
             success: loginSuccess,
-            error: function(xhr) {
+            error: function() {
                 self.showUsernamePasswordIncorrect(true);
             }
         });

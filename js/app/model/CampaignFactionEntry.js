@@ -1,3 +1,5 @@
+/*exported CampaignFactionEntry */
+/*globals ko */
 var CampaignFactionEntry = function(faction, user, victoryPoints) {
     var self = this;
     

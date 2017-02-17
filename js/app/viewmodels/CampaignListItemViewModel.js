@@ -1,3 +1,4 @@
+/*exported CampaignListItemViewModel */
 var CampaignListItemViewModel = function(campaign, navigation) {
     var self = this;
     

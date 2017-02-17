@@ -1,3 +1,4 @@
+/*exported ExceptionCodes */
 var ExceptionCodes = {
     setCodes: function(jsonCodes) {
         $.each(jsonCodes, function(codeName, codeValue) {

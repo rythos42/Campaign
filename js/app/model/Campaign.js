@@ -1,3 +1,5 @@
+/*exported Campaign */
+/*globals ko, Faction */
 var Campaign = function(serverCampaign) {
     var self = this;
     
@@ -20,4 +22,4 @@ var Campaign = function(serverCampaign) {
         }));
         return newCampaign;
     };
-}
+};
