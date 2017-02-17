@@ -1,7 +1,3 @@
-Todo:
-- deployment
-
-
 Near Future:
 - page campaign list
 - make sure SSL works on geeksong with this
