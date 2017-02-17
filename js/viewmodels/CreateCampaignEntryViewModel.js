@@ -7,16 +7,16 @@ var CreateCampaignEntryViewModel = function(navigation) {
         
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = campaignFactionEntry.faction.extend({
-        required: { message: 'Who were they playing for?' }
+        required: { message: Translation.getString('factionEntryRequiredValidation') }
     });
     
     self.selectedUser = campaignFactionEntry.user.extend({
-        required: { message: 'Who played this faction in this game?' },
-        requireObject: { message: 'That person does\'t have an account here.' }
+        required: { message: Translation.getString('userEntryRequiredValidation') },
+        requireObject: { message: Translation.getString('userEntryInvalidAccountValidation') }
     });
     
     self.victoryPoints = campaignFactionEntry.victoryPoints.extend({
-        required: { message: 'At least put a 0 if there was no score!' }
+        required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
         
     self.showCreateCampaignEntry = ko.computed(function() {
@@ -28,7 +28,7 @@ var CreateCampaignEntryViewModel = function(navigation) {
             return new CampaignFactionEntryListItemViewModel(factionEntry);
         });
     }).extend({
-        minLength: { params: 1, message: 'You must add at least one faction to your entry.' }
+        minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }
     });
     
     self.campaignEntries = ko.computed(function() {

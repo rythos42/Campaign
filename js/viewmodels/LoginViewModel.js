@@ -6,11 +6,11 @@ var LoginViewModel = function(user, navigation) {
     self.showUsernameAlreadyTaken = ko.observable(false);
     
     self.username = ko.observable('').extend({
-        required: { message: 'You\'ll want a username, trust me.' }
+        required: { message: Translation.getString('usernameRequiredValidator') }
     });
     
     self.password = ko.observable('').extend({
-        required: { message: 'You should use the easiest password possible, but you\'ll need one to keep your friends out of your account.' }
+        required: { message: Translation.getString('passwordRequiredValidator') }
     });
     
     self.showLogin = ko.computed(function() {

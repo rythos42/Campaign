@@ -5,21 +5,21 @@ class LoginWidget implements IWidget {
         <!-- ko with: loginViewModel -->
         <div id="Login" data-bind="visible: showLogin">
             <div class="entry-field in-list">
-                <label>Username: </label>
+                <label><?php echo Translation::getString("username"); ?>:</label>
                 <input type="text" id="Username" name="Username" data-bind="textInput: username, hasFocus: usernameHasFocus, event: {keypress: keyPressLogin}" />
             </div>
             <div class="entry-field in-list">
-                <label>Password: </label>
+                <label><?php echo Translation::getString("password"); ?>:</label>
                 <input type="password" id="Password" name="Password" data-bind="textInput: password, event: {keypress: keyPressLogin}" />
-                <span data-bind="visible: showUsernamePasswordIncorrect" class="validationMessage">Either the username or password aren't correct.</span>
-                <span data-bind="visible: showUsernameAlreadyTaken" class="validationMessage">That username is already in use, sorry!</span>
+                <span data-bind="visible: showUsernamePasswordIncorrect" class="validationMessage"><?php echo Translation::getString("usernamePasswordNotCorrect"); ?></span>
+                <span data-bind="visible: showUsernameAlreadyTaken" class="validationMessage"><?php echo Translation::getString("usernameTaken"); ?></span>
             </div>
             <div class="button-panel in-list">
-                <input type="button" value="Login" data-bind="click: login" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" value="Sign up" data-bind="click: register" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" value="<?php echo Translation::getString("login"); ?>" data-bind="click: login" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" value="<?php echo Translation::getString("signup"); ?>" data-bind="click: register" class="ui-button ui-widget ui-corner-all" />
             </div>
             <div class="ui-widget ui-widget-content ui-corner-all paragraph">
-                Campaign is a simple <a href="https://github.com/rythos42/Campaign">open source</a> web app to help you manage gaming campaigns.
+                <?php echo Translation::getString("loginPageAbout"); ?>
             </div>
         </div>
         <!-- /ko -->

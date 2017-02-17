@@ -5,12 +5,12 @@ class CampaignListWidget implements IWidget {
         <!-- ko with: campaignListViewModel -->
         <div id="CampaignList" data-bind="visible: showCampaignList">
             <div class="entry-field">
-                <label for="CampaignListFilter">Filter:</label>
+                <label for="CampaignListFilter"><?php echo Translation::getString("filter"); ?></label>
                 <input id="CampaignListFilter" type="text" data-bind="value: campaignListFilter, valueUpdate: 'keyup'" />
             </div>
             <table data-bind="visible: hasCampaigns" class="ui-widget ui-corners-all ui-widget-content">
                 <thead>
-                    <th><span class="ui-widget-title">Available Campaigns</span></th>
+                    <th><span class="ui-widget-title"><?php echo Translation::getString("availableCampaigns"); ?></span></th>
                 </thead>
                 <tbody data-bind="foreach: campaignList">
                     <tr>
