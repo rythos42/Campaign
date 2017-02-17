@@ -45,11 +45,30 @@ class CreateCampaignEntryWidget implements IWidget {
                 <thead>
                     <tr>
                         <th>Created On</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody data-bind="foreach: campaignEntries">
                     <tr>
                         <td data-bind="text: createdOnDate" />
+                        <td>
+                            <table class="ui-widget ui-corners-all ui-widget-content">
+                                <thead>
+                                    <tr>
+                                        <th>Faction</th>
+                                        <th>User</th>
+                                        <th>VPs</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: factionEntries">
+                                    <tr>
+                                        <td data-bind="text: factionName" />
+                                        <td data-bind="text: username" />
+                                        <td data-bind="text: victoryPoints" />
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </tr>
                     </tr>
                 </tbody>
             </table>
