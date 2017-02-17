@@ -1,7 +1,6 @@
 Todo:
 - view all previous entries for a campaign
 - better text/translation support
-- should not be able to save a campaign entry with no factions in it
 
 
 Near Future:
@@ -23,6 +22,7 @@ Goals:
 
 Future:
 - tournaments, with specific people needing to be played
+    - generate match-ups and rankings after each round
 - XP system
 - diminishing returns on how effective each game is per week?
 - randomly generated map image

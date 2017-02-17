@@ -41,6 +41,18 @@ class CreateCampaignEntryWidget implements IWidget {
                 <input type="button" data-bind="click: saveCampaignEntry" value="Save Entry" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: back" value="Back" class="ui-button ui-widget ui-corner-all" />
             </div>
+            <table class="ui-widget ui-corners-all ui-widget-content">
+                <thead>
+                    <tr>
+                        <th>Created On</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: campaignEntries">
+                    <tr>
+                        <td data-bind="text: createdOnDate" />
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <!-- /ko -->
         <?php

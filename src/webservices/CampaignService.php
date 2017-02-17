@@ -22,6 +22,11 @@ switch($action) {
         $campaignEntry = json_decode($_REQUEST["campaignEntry"]);
         CampaignMapper::insertCampaignEntry($campaignEntry);
         break;
+    
+    case "GetCampaignEntryList":
+        $campaignId = $_REQUEST["campaignId"];
+        echo json_encode(CampaignMapper::getCampaignEntriesForCampaign($campaignId));
+        break;
 }
 
 include("../Footer.php");

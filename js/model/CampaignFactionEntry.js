@@ -1,9 +1,9 @@
-var CampaignFactionEntry = function() {
+var CampaignFactionEntry = function(faction, user, victoryPoints) {
     var self = this;
     
-    self.faction = ko.observable();
-    self.user = ko.observable();
-    self.victoryPoints = ko.observable();
+    self.faction = ko.observable(faction ? faction : undefined);
+    self.user = ko.observable(user ? user : undefined);
+    self.victoryPoints = ko.observable(victoryPoints ? victoryPoints : undefined);
     
     self.clone = function() {
         var campaignFactionEntry = new CampaignFactionEntry();

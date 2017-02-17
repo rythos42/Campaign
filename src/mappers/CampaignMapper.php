@@ -58,5 +58,31 @@ class CampaignMapper {
 
         $insertCampaignFactionEntrySql->close();      
     }
+    
+    public static function getCampaignEntriesForCampaign($campaignId) {
+        $getCampaignEntryStatement = Database::prepare("SELECT * FROM CampaignEntry WHERE CampaignId = ?");
+        $getCampaignEntryStatement->bind_param("i", $campaignId);
+        $getCampaignEntryStatement->execute();
+        $getCampaignEntryResults = $getCampaignEntryStatement->get_result();
+        
+        $campaignEntryList = array();
+        while($campaignEntryRow = $getCampaignEntryResults->fetch_object()) {
+            $campaignEntryList[] = $campaignEntryRow;
+
+            $getCampaignFactionEntryStatement = Database::prepare(
+                "SELECT CampaignFactionEntry.*, User.Username, CampaignFaction.Name as FactionName FROM CampaignFactionEntry 
+                    JOIN User on User.Id = CampaignFactionEntry.UserId
+                    JOIN CampaignFaction on CampaignFaction.Id = CampaignFactionEntry.CampaignFactionId
+                    WHERE CampaignEntryId = ?");
+            $getCampaignFactionEntryStatement->bind_param("i", $campaignEntryRow->Id);
+            $getCampaignFactionEntryStatement->execute();
+            $getCampaignFactionEntryResults = $getCampaignFactionEntryStatement->get_result();
+            while($campaignFactionEntryRow = $getCampaignFactionEntryResults->fetch_object()) {
+                $campaignEntryRow->CampaignFactionEntrys[] = $campaignFactionEntryRow;
+            }
+        }
+        
+        return $campaignEntryList;
+    }
 }
 ?>

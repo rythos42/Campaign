@@ -2,7 +2,8 @@ var CreateCampaignEntryViewModel = function(navigation) {
     var self = this,
         campaign = ko.observable(null),
         currentCampaignEntry = new CampaignEntry(),
-        campaignFactionEntry = new CampaignFactionEntry();
+        campaignFactionEntry = new CampaignFactionEntry(),
+        internalCampaignEntryList = ko.observableArray();
         
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = campaignFactionEntry.faction.extend({
@@ -28,6 +29,12 @@ var CreateCampaignEntryViewModel = function(navigation) {
         });
     }).extend({
         minLength: { params: 1, message: 'You must add at least one faction to your entry.' }
+    });
+    
+    self.campaignEntries = ko.computed(function() {
+        return $.map(internalCampaignEntryList(), function(campaignEntry) {
+            return new CampaignEntryListItemViewModel(campaignEntry);
+        });
     });
     
     self.hasFactionEntries = ko.computed(function() {
@@ -107,6 +114,22 @@ var CreateCampaignEntryViewModel = function(navigation) {
             }
         });
     };
+    
+    self.getCampaignEntryList = function() {
+        var params = { action: 'GetCampaignEntryList', campaignId: currentCampaignEntry.campaignId() };
+        
+        $.ajax({
+            url: '/src/webservices/CampaignService.php',
+            method: 'GET',
+            data: params,
+            dataType: 'JSON',
+            success: function(serverCampaignEntryList) {
+                internalCampaignEntryList($.map(serverCampaignEntryList, function(serverCampaignEntry) {
+                    return new CampaignEntry(currentCampaignEntry.campaignId(), serverCampaignEntry);
+                }));
+            }
+        });
+    };
             
     navigation.showCreateCampaignEntry.subscribe(function(show) {
         if(!show)
@@ -121,6 +144,7 @@ var CreateCampaignEntryViewModel = function(navigation) {
         currentCampaignEntry.campaignId(newCampaign.id());
         
         self.factionSelectionHasFocus(true);
+        self.getCampaignEntryList();
     });
     
     var factionEntryValidationViewModel = ko.validatedObservable([

@@ -28,6 +28,7 @@
         <script src="js/viewmodels/CampaignFactionListItemViewModel.js"></script>
         <script src="js/viewmodels/CampaignListViewModel.js"></script>
         <script src="js/viewmodels/CampaignListItemViewModel.js"></script>
+        <script src="js/viewmodels/CampaignEntryListItemViewModel.js"></script>
         <script src="js/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
