@@ -33,7 +33,7 @@
         <script src="js/app/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
-        <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer' . "/lang"); ?>
+        <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         
         <script type="text/javascript">
             (function() {var existing = ko.bindingProvider.instance;ko.bindingProvider.instance = {nodeHasBindings: existing.nodeHasBindings,getBindings: function(node, bindingContext) {var bindings;try {bindings = existing.getBindings(node, bindingContext);}catch (ex) {if (window.console && console.log) {console.log("binding error", ex.message, node, bindingContext);}}return bindings;}};})();
