@@ -1,5 +1,5 @@
 /*exported CreateCampaignEntryViewModel */
-/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User */
+/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
 var CreateCampaignEntryViewModel = function(navigation) {
     var self = this,
         campaign = ko.observable(null),

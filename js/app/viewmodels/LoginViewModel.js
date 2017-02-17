@@ -1,5 +1,5 @@
 /*exported LoginViewModel */
-/*globals ko, ExceptionCodes */
+/*globals ko, ExceptionCodes, Translation */
 var LoginViewModel = function(user, navigation) {
     var self = this;
     

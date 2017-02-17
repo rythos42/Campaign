@@ -1,3 +1,4 @@
+/*exported Translation */
 var Translation = {
     setTranslations: function(translationJson) {
         this.__strings = translationJson.strings;
