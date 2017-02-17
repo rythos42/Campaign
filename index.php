@@ -14,6 +14,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script src="js/app/infrastructure/ExceptionCodes.js"></script>
         <script src="js/app/infrastructure/RequireObjectValidator.js"></script>
+        <script src="js/app/infrastructure/Translation.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
@@ -32,11 +33,14 @@
         <script src="js/app/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
+        <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . "/lang"); ?>
+        
         <script type="text/javascript">
             (function() {var existing = ko.bindingProvider.instance;ko.bindingProvider.instance = {nodeHasBindings: existing.nodeHasBindings,getBindings: function(node, bindingContext) {var bindings;try {bindings = existing.getBindings(node, bindingContext);}catch (ex) {if (window.console && console.log) {console.log("binding error", ex.message, node, bindingContext);}}return bindings;}};})();
         
             $(document).ready(function() {
                 ExceptionCodes.setCodes(<?php echo json_encode(ExceptionCodes::getAllCodes()); ?>);
+                Translation.setTranslations(<?php echo Translation::getJson(); ?>);
 
                 var user = new User(),
                     navigation = new Navigation(user);

@@ -78,7 +78,7 @@ class CampaignMapper {
             $getCampaignFactionEntryStatement->execute();
             $getCampaignFactionEntryResults = $getCampaignFactionEntryStatement->get_result();
             while($campaignFactionEntryRow = $getCampaignFactionEntryResults->fetch_object()) {
-                $campaignEntryRow->CampaignFactionEntrys[] = $campaignFactionEntryRow;
+                $campaignEntryRow->CampaignFactionEntries[] = $campaignFactionEntryRow;
             }
         }
         

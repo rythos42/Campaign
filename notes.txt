@@ -1,6 +1,5 @@
 Todo:
-- view all previous entries for a campaign
-- better text/translation support
+- deployment
 
 
 Near Future:

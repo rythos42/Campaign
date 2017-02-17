@@ -8,7 +8,7 @@ var CampaignEntry = function(campaignId, serverCampaignEntry) {
     self.factionEntries = ko.observableArray();
     
     if(serverCampaignEntry) {
-        $.each(serverCampaignEntry.CampaignFactionEntrys, function(serverCampaignFactionEntry) {
+        $.each(serverCampaignEntry.CampaignFactionEntries, function(index, serverCampaignFactionEntry) {
             var faction = new Faction(serverCampaignFactionEntry.FactionName);
             var user = new User(serverCampaignFactionEntry.UserId, serverCampaignFactionEntry.Username);
             var factionEntry = new CampaignFactionEntry(faction, user, serverCampaignFactionEntry.VictoryPointsScored);

@@ -5,11 +5,11 @@ var CreateCampaignViewModel = function(navigation) {
         entryCampaign = new Campaign();
         
     self.name = entryCampaign.name.extend({
-        required: { message: 'Your campaign needs a name.' }
+        required: { message: Translation.getString('campaignNameRequiredValidation') }
     });
     
     self.factionNameEntry = ko.observable('').extend({
-        required: { message: 'Each faction in your campaign needs a name.' }
+        required: { message: Translation.getString('factionNameRequiredValidation') }
     });
     
     self.campaignNameHasFocus = ko.observable(false);
@@ -31,7 +31,7 @@ var CreateCampaignViewModel = function(navigation) {
             return new CampaignFactionListItemViewModel(faction);
         });
     }).extend({
-        minLength: { params: 1, message: 'You must add at least one faction to your campaign.' }
+        minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
     });
     
     self.hasFactions = ko.computed(function() {

@@ -14,8 +14,9 @@ if($_SERVER["HTTPS"] != "on") {
 }
 
 include($_SERVER['DOCUMENT_ROOT'] . "/settings.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/Settings.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/ExceptionCodes.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/Settings.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/ExceptionCodes.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/Translation.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/mappers/Database.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/src/mappers/UserMapper.php");
