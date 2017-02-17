@@ -1,6 +1,6 @@
 /*exported CreateCampaignViewModel */
 /*globals ko, CampaignFactionListItemViewModel, Faction, Campaign, Translation */
-var CreateCampaignViewModel = function(navigation, server) {
+var CreateCampaignViewModel = function(navigation) {
     var self = this,
         entryCampaign = new Campaign();
         
@@ -56,7 +56,7 @@ var CreateCampaignViewModel = function(navigation, server) {
         };
         
         $.ajax({
-            url: server.getInstallDirectory() + '/src/webservices/CampaignService.php',
+            url: 'src/webservices/CampaignService.php',
             method: 'POST',
             data: params,
             success: function() {

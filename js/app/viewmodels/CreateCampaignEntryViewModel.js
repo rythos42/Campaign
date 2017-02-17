@@ -1,6 +1,6 @@
 /*exported CreateCampaignEntryViewModel */
 /*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
-var CreateCampaignEntryViewModel = function(navigation, server) {
+var CreateCampaignEntryViewModel = function(navigation) {
     var self = this,
         campaign = ko.observable(null),
         currentCampaignEntry = new CampaignEntry(),
@@ -65,7 +65,7 @@ var CreateCampaignEntryViewModel = function(navigation, server) {
         };
         
         $.ajax({
-            url: server.getInstallDirectory() + '/src/webservices/CampaignService.php',
+            url: 'src/webservices/CampaignService.php',
             method: 'POST',
             data: params,
             success: function() {
@@ -101,7 +101,7 @@ var CreateCampaignEntryViewModel = function(navigation, server) {
     
     self.getUsers = function(term, responseCallback) {
         $.ajax({
-            url: server.getInstallDirectory() + '/src/webservices/UserService.php',
+            url: 'src/webservices/UserService.php',
             dataType: 'JSON',
             data: {
                 action: 'GetUsersByFilter',
@@ -122,7 +122,7 @@ var CreateCampaignEntryViewModel = function(navigation, server) {
         var params = { action: 'GetCampaignEntryList', campaignId: currentCampaignEntry.campaignId() };
         
         $.ajax({
-            url: server.getInstallDirectory() + '/src/webservices/CampaignService.php',
+            url: 'src/webservices/CampaignService.php',
             method: 'GET',
             data: params,
             dataType: 'JSON',

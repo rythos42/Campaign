@@ -21,7 +21,6 @@
         <script src="js/app/model/Navigation.js"></script>
         <script src="js/app/model/CampaignEntry.js"></script>
         <script src="js/app/model/CampaignFactionEntry.js"></script>
-        <script src="js/app/model/Server.js"></script>
         <script src="js/app/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/app/viewmodels/LoginViewModel.js"></script>
         <script src="js/app/viewmodels/LogoutViewModel.js"></script>
@@ -44,13 +43,10 @@
                 Translation.setTranslations(<?php echo Translation::getJson(); ?>);
 
                 var user = new User(),
-                    navigation = new Navigation(user),
-                    server = new Server();
-                    
-                server.setInstallDirectory('<?php echo $settings['installDirOnWebServer']; ?>');
+                    navigation = new Navigation(user);
                     
                 ko.validation.registerExtenders();
-                var viewModel = new ApplicationViewModel(user, navigation, server);
+                var viewModel = new ApplicationViewModel(user, navigation);
                 ko.applyBindings(viewModel);
 
                 user.isLoggedIn(<?php echo User::isLoggedIn() ? 'true' : 'false'; ?>);
