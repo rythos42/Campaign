@@ -1,6 +1,6 @@
 /*exported CampaignListViewModel */
 /*globals ko, CampaignListItemViewModel, Campaign */
-var CampaignListViewModel = function(user, navigation) {
+var CampaignListViewModel = function(user, navigation, server) {
     var self = this,
         internalCampaignList = ko.observableArray();
     
@@ -43,7 +43,7 @@ var CampaignListViewModel = function(user, navigation) {
         var params = { action: 'GetCampaignList' };
         
         $.ajax({
-            url: '/src/webservices/CampaignService.php',
+            url: server.getInstallDirectory() + '/src/webservices/CampaignService.php',
             method: 'GET',
             data: params,
             dataType: 'JSON',

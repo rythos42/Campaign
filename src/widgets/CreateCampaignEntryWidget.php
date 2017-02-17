@@ -25,7 +25,7 @@ class CreateCampaignEntryWidget implements IWidget {
                 <thead>
                     <tr>
                         <th><?php echo Translation::getString("factionName"); ?></th>
-                        <th><?php echo Translation::getString("userName"); ?></th>
+                        <th><?php echo Translation::getString("username"); ?></th>
                         <th><?php echo Translation::getString("victoryPoints"); ?></th>
                     </tr>
                 </thead>

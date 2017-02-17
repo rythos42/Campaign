@@ -1,6 +1,6 @@
 /*exported LogoutViewModel */
 /*globals ko */
-var LogoutViewModel = function(user) {
+var LogoutViewModel = function(user, server) {
     var self = this;
     
     self.showLogout = ko.computed(function() {
@@ -11,7 +11,7 @@ var LogoutViewModel = function(user) {
         var params = { action: 'Logout' };
         
         $.ajax({
-            url: '/src/webservices/UserService.php',
+            url: server.getInstallDirectory() + '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
             success: function() {

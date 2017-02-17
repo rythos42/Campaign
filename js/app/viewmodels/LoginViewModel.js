@@ -1,6 +1,6 @@
 /*exported LoginViewModel */
 /*globals ko, ExceptionCodes, Translation */
-var LoginViewModel = function(user, navigation) {
+var LoginViewModel = function(user, navigation, server) {
     var self = this;
     
     self.usernameHasFocus = ko.observable(true);
@@ -53,7 +53,7 @@ var LoginViewModel = function(user, navigation) {
         };
         
         $.ajax({
-            url: '/src/webservices/UserService.php',
+            url: server.getInstallDirectory() + '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
             success: loginSuccess,
@@ -76,7 +76,7 @@ var LoginViewModel = function(user, navigation) {
         };
         
         $.ajax({
-            url: '/src/webservices/UserService.php',
+            url: server.getInstallDirectory() + '/src/webservices/UserService.php',
             method: 'POST',
             data: params,
             success: loginSuccess,
