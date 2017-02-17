@@ -13,21 +13,24 @@ if($_SERVER["HTTPS"] != "on") {
     exit();
 }
 
-include($_SERVER['DOCUMENT_ROOT'] . "/settings.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/Settings.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/ExceptionCodes.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/infrastructure/Translation.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/mappers/Database.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/mappers/UserMapper.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/mappers/CampaignMapper.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/IWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/MainWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/HeaderWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/LoginWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CreateCampaignWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CreateCampaignEntryWidget.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/src/widgets/CampaignListWidget.php");
+
+include("settings.php");
+$installDirOnWebServer = $_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'];
+
+include($installDirOnWebServer . "/src/infrastructure/Settings.php");
+include($installDirOnWebServer . "/src/infrastructure/ExceptionCodes.php");
+include($installDirOnWebServer . "/src/infrastructure/Translation.php");
+include($installDirOnWebServer . "/src/model/User.php");
+include($installDirOnWebServer . "/src/mappers/Database.php");
+include($installDirOnWebServer . "/src/mappers/UserMapper.php");
+include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");
+include($installDirOnWebServer . "/src/widgets/IWidget.php");
+include($installDirOnWebServer . "/src/widgets/MainWidget.php");
+include($installDirOnWebServer . "/src/widgets/HeaderWidget.php");
+include($installDirOnWebServer . "/src/widgets/LoginWidget.php");
+include($installDirOnWebServer . "/src/widgets/CreateCampaignWidget.php");
+include($installDirOnWebServer . "/src/widgets/CreateCampaignEntryWidget.php");
+include($installDirOnWebServer . "/src/widgets/CampaignListWidget.php");
 
 session_start();
 Database::connect();

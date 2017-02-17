@@ -7,8 +7,8 @@ Run SQL:
 	CampaignFactionEntry
 
 Install 
-    Change settings.sample.php to settings.php
-    Update the values in settings.php to be correct for your server.
+    Change src/settings.sample.php to src/settings.php
+    Update the values in src/settings.php to be correct for your server.
 
 Build
     Install NPM (instructions elsewhere)
