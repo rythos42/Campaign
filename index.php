@@ -15,6 +15,7 @@
         <script src="js/app/infrastructure/ExceptionCodes.js"></script>
         <script src="js/app/infrastructure/RequireObjectValidator.js"></script>
         <script src="js/app/infrastructure/Translation.js"></script>
+        <script src="js/app/infrastructure/TabCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

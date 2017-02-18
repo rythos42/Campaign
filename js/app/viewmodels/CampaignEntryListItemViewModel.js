@@ -7,7 +7,7 @@ var CampaignEntryListItemViewModel = function(campaignEntry) {
     
     self.factionEntries = ko.computed(function() {
         return $.map(campaignEntry.factionEntries(), function(campaignFactionEntry) {
-            return new CampaignFactionEntryListItemViewModel(campaignFactionEntry);
+            return new CampaignFactionEntryListItemViewModel(campaignEntry, campaignFactionEntry);
         });
     });
 };
