@@ -61,4 +61,3 @@
         ?>
     </body>
 </html>
-<?php include("src/Footer.php"); ?>

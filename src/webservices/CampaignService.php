@@ -29,6 +29,4 @@ switch($action) {
         break;
 }
 
-include("../Footer.php");
-
 ?>

@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('log_errors', 1);
 
 date_default_timezone_set("America/Vancouver");
 
@@ -21,6 +22,9 @@ include($installDirOnWebServer . "/src/infrastructure/Settings.php");
 include($installDirOnWebServer . "/src/infrastructure/ExceptionCodes.php");
 include($installDirOnWebServer . "/src/infrastructure/Translation.php");
 include($installDirOnWebServer . "/src/model/User.php");
+include($installDirOnWebServer . "/src/model/Campaign.php");
+include($installDirOnWebServer . "/src/model/CampaignFaction.php");
+include($installDirOnWebServer . "/src/model/CampaignEntry.php");
 include($installDirOnWebServer . "/src/mappers/Database.php");
 include($installDirOnWebServer . "/src/mappers/UserMapper.php");
 include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");

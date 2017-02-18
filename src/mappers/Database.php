@@ -3,36 +3,39 @@ class Database {
     private static $conn;
     
     public static function connect() {
-        self::$conn = new mysqli(Settings::getDatabaseServer(), Settings::getDatabaseUsername(), Settings::getDatabasePassword(), Settings::getDatabaseName());
-        if (self::$conn->connect_error)
-            echo "Connection failed: " . self::$conn->connect_error;
+        $host = Settings::getDatabaseServer();
+        $databaseName = Settings::getDatabaseName();
+        $dsn = "mysql:host=$host;dbname=$databaseName;charset=utf8";
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
+        $username = Settings::getDatabaseUsername();
+        $password = Settings::getDatabasePassword();
+        self::$conn = new PDO($dsn, $username, $password, $options);
+    }
+
+    public static function execute($query, $params = null) {
+        $statement = self::$conn->prepare($query);
+        $statement->execute($params);
+        return $statement;
     }
     
-    public static function close() {
-        self::$conn->close();
+    public static function queryObject($query, $params = null) {
+        return Database::execute($query, $params)->fetch(PDO::FETCH_OBJ);
     }
     
-    public static function prepare($query) {
-        $prepared = self::$conn->prepare($query);
-        if(!$prepared)
-            echo "Prepare failed: (" . self::$conn->errno . ") " . self::$conn->error;
-        return $prepared;
+    public static function queryArray($query, $params = null) {
+        return Database::execute($query, $params)->fetchAll();
     }
     
-    public static function getLastError() {
-        return self::$conn->error;
+    public static function queryObjectList($query, $class, $params = null) {
+        return Database::execute($query, $params)->fetchAll(PDO::FETCH_CLASS, $class);
     }
-    
+
     public static function getLastInsertedId() {
-        return self::$conn->insert_id;
-    }
-    
-    public static function scalarObjectQuery($query, $paramTypes, ...$params) {
-        $query = Database::prepare($query);
-        $query->bind_param($paramTypes, ...$params);
-        $query->execute();
-        $results = $query->get_result();
-        return $results->fetch_object();
+        return self::$conn->lastInsertId();
     }
 }
 ?>
