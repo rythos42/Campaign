@@ -20,6 +20,13 @@ body {
     color: blue;
 }
 
+.icon-button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    height: 20px;
+}
+
 .button-panel.in-list {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -41,6 +48,10 @@ table {
 
 td {
     padding: 4px;    
+}
+
+select {
+    width: 165px;
 }
 
 .paragraph {

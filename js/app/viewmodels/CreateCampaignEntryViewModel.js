@@ -26,7 +26,7 @@ var CreateCampaignEntryViewModel = function(navigation, currentCampaign) {
     
     self.factionEntries = ko.computed(function() {
         return $.map(currentCampaignEntry.factionEntries(), function(factionEntry) {
-            return new CampaignFactionEntryListItemViewModel(factionEntry);
+            return new CampaignFactionEntryListItemViewModel(currentCampaignEntry, factionEntry);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }

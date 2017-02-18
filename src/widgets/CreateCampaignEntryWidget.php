@@ -27,6 +27,7 @@ class CreateCampaignEntryWidget implements IWidget {
                         <th><?php echo Translation::getString("factionName"); ?></th>
                         <th><?php echo Translation::getString("username"); ?></th>
                         <th><?php echo Translation::getString("victoryPoints"); ?></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody data-bind="foreach: factionEntries">
@@ -34,6 +35,7 @@ class CreateCampaignEntryWidget implements IWidget {
                         <td data-bind="text: factionName" />
                         <td data-bind="text: username" />
                         <td data-bind="text: victoryPoints" />
+                        <td><button class="icon-button" data-bind="click: removeFactionEntry"><span class="ui-icon ui-icon-trash"</span></button></td>
                     </tr>
                 </tbody>
             </table>

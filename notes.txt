@@ -1,16 +1,10 @@
-Done:
-
-
 Now:
-
 - show total points per campaign
-- maximum size on tables, depending on break points
 
 Near Future:
 - page campaign list
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
-- delete faction from Create Campaign
     
 Goals:
 - encourage people to play and log their games through gamification

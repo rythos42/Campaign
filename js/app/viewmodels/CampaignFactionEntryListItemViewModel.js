@@ -1,6 +1,6 @@
 /*exported CampaignFactionEntryListItemViewModel */
 /*globals ko */
-var CampaignFactionEntryListItemViewModel = function(factionEntry) {
+var CampaignFactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry) {
     var self = this;
     
     self.factionName = ko.computed(function() {
@@ -14,4 +14,12 @@ var CampaignFactionEntryListItemViewModel = function(factionEntry) {
     });
     
     self.victoryPoints = factionEntry.victoryPoints;
+    
+    self.removeFactionEntry = function() {
+        var factionEntries = currentCampaignEntry.factionEntries(),
+            factionEntryIndex = factionEntries.indexOf(factionEntry);
+            
+        if(factionEntryIndex != -1)
+            currentCampaignEntry.factionEntries.splice(factionEntryIndex, 1);
+    };
 };

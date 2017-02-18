@@ -20,10 +20,12 @@ class CreateCampaignWidget implements IWidget {
             <table data-bind="visible: hasFactions" class="ui-widget ui-corner-all ui-widget-content">
                 <thead>
                     <th><span class="ui-widget-title"><?php echo Translation::getString("campaignFactions"); ?></span></th>
+                    <th></th>
                 </thead>
                 <tbody data-bind="foreach: factions">
                     <tr>
                         <td data-bind="text: name" />
+                        <td><button class="icon-button" data-bind="click: removeFaction"><span class="ui-icon ui-icon-trash"</span></button></td>
                     </tr>
                 </tbody>
             </table>

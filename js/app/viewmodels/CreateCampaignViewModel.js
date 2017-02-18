@@ -29,7 +29,7 @@ var CreateCampaignViewModel = function(navigation) {
 
     self.factions = ko.computed(function() {
         return $.map(entryCampaign.factions(), function(faction) {
-            return new CampaignFactionListItemViewModel(faction);
+            return new CampaignFactionListItemViewModel(entryCampaign, faction);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
