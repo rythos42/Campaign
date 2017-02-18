@@ -88,3 +88,11 @@ select {
     margin-bottom: 10px;
     box-sizing: border-box;
 }
+
+.ui-tabs {
+    margin-top: 10px;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 3px;
+}

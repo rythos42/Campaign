@@ -1,6 +1,6 @@
 /*exported Faction */
 /*globals ko */
-var Faction = function(factionName) {
+var Faction = function(factionName, factionId) {
     var self = this;
     
     self.id = ko.observable();
@@ -10,6 +10,7 @@ var Faction = function(factionName) {
         self.id(factionName.Id);
         self.name(factionName.Name);
     } else {
+        self.id(factionId);
         self.name(factionName);
     }
     

@@ -14,6 +14,23 @@ var CampaignEntryListViewModel = function(navigation, currentCampaign) {
         });
     });
     
+    self.factionEntrySummaries = ko.computed(function() {
+        var factionEntrySummaries = {};
+        $.each(internalCampaignEntryList(), function(i, campaignEntry) {
+            $.each(campaignEntry.factionEntries(), function(j, factionEntry) {
+                var factionId = factionEntry.faction().id();
+                if(!factionEntrySummaries[factionId])
+                    factionEntrySummaries[factionId] = new FactionEntrySummaryViewModel(factionEntry);
+                
+                var factionSummary = factionEntrySummaries[factionId];
+                factionSummary.addVictoryPoints(factionEntry.victoryPoints());
+            });
+        });
+        return $.map(factionEntrySummaries, function(factionEntrySummary) {
+            return factionEntrySummary;
+        });
+    });
+    
     function getCampaignEntryList() {
         var params = { action: 'GetCampaignEntryList', campaignId: currentCampaign().id() };
         

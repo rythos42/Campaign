@@ -9,7 +9,7 @@ var CampaignEntry = function(campaignId, serverCampaignEntry) {
     
     if(serverCampaignEntry) {
         $.each(serverCampaignEntry.CampaignFactionEntries, function(index, serverCampaignFactionEntry) {
-            var faction = new Faction(serverCampaignFactionEntry.FactionName);
+            var faction = new Faction(serverCampaignFactionEntry.FactionName, serverCampaignFactionEntry.CampaignFactionId);
             var user = new User(serverCampaignFactionEntry.UserId, serverCampaignFactionEntry.Username);
             var factionEntry = new CampaignFactionEntry(faction, user, serverCampaignFactionEntry.VictoryPointsScored);
             self.factionEntries.push(factionEntry);

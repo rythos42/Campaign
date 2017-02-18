@@ -5,9 +5,26 @@ class CampaignEntryListWidget {
         <!-- ko with: campaignEntryListViewModel -->
         <div data-bind="tab: {}, visible: showCampaignEntryList">
             <ul>
-                <li><a href="#detailsTab">Details</a></li>
+                <li><a href="#SummaryTab">Summary</a></li>
+                <li><a href="#DetailsTab">Details</a></li>
             </ul>
-            <div id="detailsTab">
+            <div id="SummaryTab">
+                <table class="ui-widget ui-corners-all ui-widget-content">
+                    <thead>
+                        <tr>
+                            <th><?php echo Translation::getString("faction"); ?></th>
+                            <th><?php echo Translation::getString("victoryPoints"); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: factionEntrySummaries">
+                        <tr>
+                            <td data-bind="text: factionName" />
+                            <td data-bind="text: victoryPoints" />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="DetailsTab">
                 <table class="ui-widget ui-corners-all ui-widget-content">
                     <thead>
                         <tr>

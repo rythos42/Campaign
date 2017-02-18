@@ -34,6 +34,7 @@
         <script src="js/app/viewmodels/CampaignEntryListViewModel.js"></script>
         <script src="js/app/viewmodels/InProgressCampaignViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
+        <script src="js/app/viewmodels/FactionEntrySummaryViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
