@@ -1,5 +1,5 @@
 /*exported ApplicationViewModel */
-/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, CreateCampaignEntryViewModel, CampaignListViewModel */
+/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, CampaignEntryViewModel, CampaignListViewModel */
 var ApplicationViewModel = function(user, navigation) {
     var self = this;
 

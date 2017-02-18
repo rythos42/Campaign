@@ -1,5 +1,5 @@
 /*exported CreateCampaignEntryViewModel */
-/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
+/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
 var CreateCampaignEntryViewModel = function(navigation, currentCampaign) {
     var self = this,
         currentCampaignEntry = new CampaignEntry(),

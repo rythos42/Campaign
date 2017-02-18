@@ -1,4 +1,5 @@
 /*exported CampaignEntryViewModel */
+/*globals ko, CreateCampaignEntryViewModel, CampaignEntryListViewModel */
 var CampaignEntryViewModel = function(navigation) {
     var self = this,
         currentCampaign = ko.observable(null);
