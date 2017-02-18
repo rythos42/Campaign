@@ -1,3 +1,5 @@
+/*exported FactionEntrySummaryViewModel */
+/*globals ko */
 var FactionEntrySummaryViewModel = function(factionEntry) {
     var self = this;
     

@@ -1,5 +1,5 @@
 /*exported CampaignEntryListViewModel */
-/*globals ko, CampaignEntryListItemViewModel, CampaignEntry */
+/*globals ko, CampaignEntryListItemViewModel, CampaignEntry, FactionEntrySummaryViewModel */
 var CampaignEntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
         internalCampaignEntryList = ko.observableArray();
