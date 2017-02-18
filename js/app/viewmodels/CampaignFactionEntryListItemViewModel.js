@@ -19,7 +19,7 @@ var CampaignFactionEntryListItemViewModel = function(currentCampaignEntry, facti
         var factionEntries = currentCampaignEntry.factionEntries(),
             factionEntryIndex = factionEntries.indexOf(factionEntry);
             
-        if(factionEntryIndex != -1)
+        if(factionEntryIndex !== -1)
             currentCampaignEntry.factionEntries.splice(factionEntryIndex, 1);
     };
 };

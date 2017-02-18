@@ -8,7 +8,7 @@ var CampaignFactionListItemViewModel = function(entryCampaign, faction) {
         var factions = entryCampaign.factions(),
             factionIndex = factions.indexOf(faction);
             
-        if(factionIndex != -1)
+        if(factionIndex !== -1)
             entryCampaign.factions.splice(factionIndex, 1);
     };
 };
