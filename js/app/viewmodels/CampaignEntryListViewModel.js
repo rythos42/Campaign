@@ -4,8 +4,8 @@ var CampaignEntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
         internalCampaignEntryList = ko.observableArray();
 
-    self.showCampaignEntry = ko.computed(function() {
-        return navigation.showCampaignEntry();
+    self.showCampaignEntryList = ko.computed(function() {
+        return navigation.showCampaignEntry() && self.campaignEntries().length > 0;
     });        
         
     self.campaignEntries = ko.computed(function() {

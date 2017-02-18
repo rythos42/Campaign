@@ -1,8 +1,7 @@
+Done:
+
+
 Now:
-- hide "user name in use" if login fails
-- "enter" in Faction Name on CreateCampaign should add faction
-- after Add Faction on CreateCampaign, clear faction name
-- hide campaign entry list if no entries yet
 
 - show total points per campaign
 - maximum size on tables, depending on break points
@@ -11,6 +10,7 @@ Near Future:
 - page campaign list
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
+- delete faction from Create Campaign
     
 Goals:
 - encourage people to play and log their games through gamification

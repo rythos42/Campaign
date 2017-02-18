@@ -3,7 +3,7 @@ class CampaignEntryListWidget {
     public function render() {
         ?>
         <!-- ko with: campaignEntryListViewModel -->
-        <table data-bind="visible: showCampaignEntry" class="ui-widget ui-corners-all ui-widget-content">
+        <table data-bind="visible: showCampaignEntryList" class="ui-widget ui-corners-all ui-widget-content">
             <thead>
                 <tr>
                     <th><?php echo Translation::getString("createdOn"); ?></th>

@@ -13,6 +13,7 @@ var CreateCampaignViewModel = function(navigation) {
     });
     
     self.campaignNameHasFocus = ko.observable(false);
+    self.factionNameEntryHasFocus = ko.observable(false);
     
     self.showCreateCampaign = ko.computed(function() {
         return navigation.showCreateCampaign();
@@ -69,6 +70,12 @@ var CreateCampaignViewModel = function(navigation) {
         navigation.showMain(true);
     };
     
+    self.keyPressAddFaction = function(viewModel, event) {
+        if(event.keyCode === 13)
+            self.addFaction();  
+        return true;
+    };
+    
     self.addFaction = function() {
         if(!self.factionNameEntry.isValid()) {
             self.factionNameEntry.isModified(true);
@@ -77,6 +84,9 @@ var CreateCampaignViewModel = function(navigation) {
         
         var faction = new Faction(self.factionNameEntry());
         entryCampaign.factions.push(faction);
+        self.factionNameEntry('');
+        self.factionNameEntry.isModified(false);
+        self.factionNameEntryHasFocus(true);
     };
     
     self.requestCreateCampaign = function() {

@@ -10,7 +10,7 @@ class CreateCampaignWidget implements IWidget {
             </div>
             <div class="entry-field in-list">
                 <label for="CampaignFactionNameEntry"><?php echo Translation::getString("factionName"); ?>:</label>
-                <input id="CampaignFactionNameEntry" type="text" data-bind="value: factionNameEntry" />
+                <input id="CampaignFactionNameEntry" type="text" data-bind="textInput: factionNameEntry, event: {keypress: keyPressAddFaction}, hasFocus: factionNameEntryHasFocus" />
                 <span class="validationMessage" data-bind="validationMessage: factions"></span>
             </div>
             <div class="button-panel in-list">
