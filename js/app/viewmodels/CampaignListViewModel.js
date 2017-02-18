@@ -11,10 +11,14 @@ var CampaignListViewModel = function(user, navigation) {
     });
     
     self.campaignList = ko.computed(function() {
-        var filter = self.campaignListFilter();
-        var campaignList = !filter
-                ? internalCampaignList()
-                : $.grep(internalCampaignList(), function(campaign) { return campaign.name().indexOf(filter) !== -1; });
+        var filter = self.campaignListFilter(),
+            campaignList;
+        
+        campaignList = !filter
+            ? internalCampaignList()
+            : $.grep(internalCampaignList(), function(campaign) { 
+                return campaign.name().toLowerCase().indexOf(filter.toLowerCase()) !== -1; 
+            });
                 
         return $.map(campaignList, function(campaign) {
             return new CampaignListItemViewModel(campaign, navigation);
