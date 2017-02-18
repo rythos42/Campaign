@@ -59,6 +59,8 @@ var LoginViewModel = function(user, navigation) {
             success: loginSuccess,
             error: function() {
                 self.showUsernamePasswordIncorrect(true);
+                self.showUsernameAlreadyTaken(false);
+                self.usernameHasFocus(true);
             }
         });
     };
@@ -81,8 +83,11 @@ var LoginViewModel = function(user, navigation) {
             data: params,
             success: loginSuccess,
             error: function(xhr) {
-                if(xhr.responseText === ExceptionCodes.UsernameExists)
+                if(xhr.responseText === ExceptionCodes.UsernameExists) {
+                    self.showUsernamePasswordIncorrect(false);
                     self.showUsernameAlreadyTaken(true);
+                    self.usernameHasFocus(true);
+                }
             }
         });
     };
