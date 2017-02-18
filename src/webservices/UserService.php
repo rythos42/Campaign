@@ -16,12 +16,17 @@ switch($action) {
         // fall through
         
     case "Login":
-        $user = UserMapper::validateLogin($_REQUEST['username'], $_REQUEST['password']);
-        if($user) {
-            User::setLoggedIn($user);
-            echo 'true';
-        }
-        else {
+        try {
+            $user = UserMapper::validateLogin($_REQUEST['username'], $_REQUEST['password']);
+            if($user) {
+                User::setLoggedIn($user);
+                echo 'true';
+            }
+            else {
+                http_response_code(401);
+                echo ExceptionCodes::LoginFailure;
+            }
+        } catch(Exception $e) {
             http_response_code(401);
             echo ExceptionCodes::LoginFailure;
         }
