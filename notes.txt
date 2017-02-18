@@ -1,14 +1,16 @@
 Now:
 - show total points per campaign
 - maximum size on tables, depending on break points
-- make sure SSL works on geeksong with this
 - filter should be case insensitive
-
+- hide "user name in use" if login fails
+- "enter" in Faction Name on CreateCampaign should add faction
+- after Add Faction on CreateCampaign, clear faction name
+- hide campaign entry list if no entries yet
 
 Near Future:
 - page campaign list
-- decide whether to take an e-mail address or disallow password reset, or make password reset trivial
-    - could take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    - means building a user profile page
     
 Goals:
 - encourage people to play and log their games through gamification

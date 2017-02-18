@@ -7,3 +7,5 @@ CREATE TABLE User (
     CreatedOnDate datetime NOT NULL,
     PRIMARY KEY (Id)
 )
+
+ALTER TABLE User CHANGE COLUMN Username Username VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
