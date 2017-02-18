@@ -34,6 +34,8 @@ include($installDirOnWebServer . "/src/widgets/HeaderWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoginWidget.php");
 include($installDirOnWebServer . "/src/widgets/CreateCampaignWidget.php");
 include($installDirOnWebServer . "/src/widgets/CreateCampaignEntryWidget.php");
+include($installDirOnWebServer . "/src/widgets/CampaignEntryWidget.php");
+include($installDirOnWebServer . "/src/widgets/CampaignEntryListWidget.php");
 include($installDirOnWebServer . "/src/widgets/CampaignListWidget.php");
 
 session_start();

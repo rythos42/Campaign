@@ -8,7 +8,7 @@ var Navigation = function(user) {
     self.showLogin = ko.observable(false);
     self.showMain = ko.observable(false);
     self.showCreateCampaign = ko.observable(false);
-    self.showCreateCampaignEntry = ko.observable(false);
+    self.showCampaignEntry = ko.observable(false);
     self.showRegister = ko.observable(false);
     
     function showHideAllExcept(show, except) {
@@ -18,14 +18,14 @@ var Navigation = function(user) {
         if(except !== self.showLogin) self.showLogin(false);
         if(except !== self.showMain) self.showMain(false);
         if(except !== self.showCreateCampaign) self.showCreateCampaign(false);
-        if(except !== self.showCreateCampaignEntry) self.showCreateCampaignEntry(false);
+        if(except !== self.showCampaignEntry) self.showCampaignEntry(false);
         if(except !== self.showRegister) self.showRegister(false);
     }
     
     self.showRegister.subscribe(function(show) { showHideAllExcept(show, self.showRegister); });
     self.showLogin.subscribe(function(show) { showHideAllExcept(show, self.showLogin); });
     self.showCreateCampaign.subscribe(function(show) { showHideAllExcept(show, self.showCreateCampaign); });
-    self.showCreateCampaignEntry.subscribe(function(show) { showHideAllExcept(show, self.showCreateCampaignEntry); });
+    self.showCampaignEntry.subscribe(function(show) { showHideAllExcept(show, self.showCampaignEntry); });
     self.showMain.subscribe(function(show) { showHideAllExcept(show, self.showMain); });
     
     

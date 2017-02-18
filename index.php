@@ -30,6 +30,8 @@
         <script src="js/app/viewmodels/CampaignListViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignListItemViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignEntryListItemViewModel.js"></script>
+        <script src="js/app/viewmodels/CampaignEntryListViewModel.js"></script>
+        <script src="js/app/viewmodels/CampaignEntryViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         

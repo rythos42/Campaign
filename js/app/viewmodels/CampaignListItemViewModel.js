@@ -7,6 +7,6 @@ var CampaignListItemViewModel = function(campaign, navigation) {
     
     self.createCampaignEntry = function() {
         navigation.parameters(campaign);
-        navigation.showCreateCampaignEntry(true);
+        navigation.showCampaignEntry(true);
     };
 };

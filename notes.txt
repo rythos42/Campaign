@@ -6,6 +6,7 @@ Now:
 - "enter" in Faction Name on CreateCampaign should add faction
 - after Add Faction on CreateCampaign, clear faction name
 - hide campaign entry list if no entries yet
+- "CampaignEntryViewModel" should actually be "InProgressCampaignViewModel" (or similar)
 
 Near Future:
 - page campaign list
