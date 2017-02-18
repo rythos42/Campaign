@@ -1,9 +1,9 @@
 <?php
-class CampaignEntryWidget {
+class InProgressCampaignViewModel {
     public function render() {
         
         ?>
-        <!-- ko with: campaignEntryViewModel-->
+        <!-- ko with: inProgressCampaignViewModel-->
         <div>
         <?php
         

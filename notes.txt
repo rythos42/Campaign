@@ -1,12 +1,12 @@
 Now:
-- show total points per campaign
-- maximum size on tables, depending on break points
 - filter should be case insensitive
 - hide "user name in use" if login fails
 - "enter" in Faction Name on CreateCampaign should add faction
 - after Add Faction on CreateCampaign, clear faction name
 - hide campaign entry list if no entries yet
-- "CampaignEntryViewModel" should actually be "InProgressCampaignViewModel" (or similar)
+
+- show total points per campaign
+- maximum size on tables, depending on break points
 
 Near Future:
 - page campaign list
