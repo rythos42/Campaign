@@ -1,5 +1,5 @@
 /*globals ko */
-ko.validation.rules['areSame'] = {
+ko.validation.rules.areSame = {
     getValue: function (o) {
         return (typeof o === 'function' ? o() : o);
     },
