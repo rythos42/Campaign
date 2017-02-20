@@ -59,7 +59,8 @@ select {
 }
 
 #Login .button-panel.in-list {
-    margin-left: 100px;
+    text-align: right;
+    width: 290px;
 }
 
 #CreateCampaign .button-panel.in-list {
@@ -95,4 +96,8 @@ select {
 
 .ui-tabs .ui-tabs-panel {
     padding: 3px;
+}
+
+.conditional {
+    text-align: center;
 }

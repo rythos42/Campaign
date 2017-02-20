@@ -1,11 +1,10 @@
 Now:
-- Validates password even on failed login - should only show when clicking sign up
 - Allow a campaign to be a map campaign
 - Only show map-campaign option if user has correct flag in db
 - For a map campaign, generate a random map and save as file on the system with a given campaignId
 - Need then to be able to mark maps with overlay colour showing who owns
 - Factions are given colours
-- password verification field
+
 
 Near Future:
 - page campaign list

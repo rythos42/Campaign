@@ -16,6 +16,15 @@ class LoginWidget implements IWidget {
             </div>
             <div class="button-panel in-list">
                 <input type="button" value="<?php echo Translation::getString("login"); ?>" data-bind="click: login" class="ui-button ui-widget ui-corner-all" />
+            </div>
+            <div class="conditional">
+                <h2><?php echo Translation::getString("or"); ?></h2>
+            </div>
+            <div class="entry-field in-list">
+                <label><?php echo Translation::getString("verifyPassword"); ?>:</label>
+                <input type="password" id="VerifyPassword" name="VerifyPassword" data-bind="textInput: verifyPassword, event: {keypress: keyPressRegister}" />
+            </div>
+            <div class="button-panel in-list">
                 <input type="button" value="<?php echo Translation::getString("signup"); ?>" data-bind="click: register" class="ui-button ui-widget ui-corner-all" />
             </div>
             <div class="ui-widget ui-widget-content ui-corner-all paragraph">

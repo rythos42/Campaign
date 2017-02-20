@@ -15,6 +15,10 @@ var LoginViewModel = function(user, navigation) {
         required: { message: Translation.getString('passwordRequiredValidator') }
     });
     
+    self.verifyPassword = ko.observable('').extend({
+        areSame: { message: Translation.getString('passwordMatchValidator'), params: self.password }
+    });
+    
     self.showLogin = ko.computed(function() {
         return navigation.showLogin();
     });
@@ -27,25 +31,28 @@ var LoginViewModel = function(user, navigation) {
         
         self.username('');
         self.password('');
+        self.verifyPassword('');
     }
     
     var validatedViewModel = ko.validatedObservable([
         self.username,
-        self.password
+        self.password,
+        self.verifyPassword
     ]);
     
     self.keyPressLogin = function(viewModel, event) {
         if(event.keyCode === 13)
             self.login();  
         return true;
+    };  
+    
+    self.keyPressRegister = function(viewModel, event) {
+        if(event.keyCode === 13)
+            self.register();  
+        return true;
     };
     
     self.login = function() {
-        if(!validatedViewModel.isValid()) {
-            validatedViewModel.errors.showAllMessages();
-            return;
-        }
-        
         var params = { 
             action: 'Login',
             username: self.username(),
@@ -97,6 +104,7 @@ var LoginViewModel = function(user, navigation) {
             self.usernameHasFocus(true);
             self.username.isModified(false);
             self.password.isModified(false);
+            self.verifyPassword.isModified(false);
         }
     });
     

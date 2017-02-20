@@ -20,6 +20,7 @@
         <logout>Logout</logout>        
         <createCampaign>Create Campaign</createCampaign>        
         <password>Password</password>        
+        <verifyPassword>Verify password</verifyPassword>        
         <usernamePasswordNotCorrect>Either the username or password aren't correct.</usernamePasswordNotCorrect>        
         <usernameTaken>That username is already in use, sorry!</usernameTaken>        
         <login>Login</login>        
@@ -35,6 +36,8 @@
         <minimumOneFactionRequiredValidator>You must add at least one faction to your campaign.</minimumOneFactionRequiredValidator>
         <usernameRequiredValidator>You'll want a username, trust me.</usernameRequiredValidator>
         <passwordRequiredValidator>You should use the easiest password possible, but you'll need one to keep your friends out of your account.</passwordRequiredValidator>
+        <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
+        <or>OR</or>
     </strings>
     
 </translation>
