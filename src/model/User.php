@@ -1,15 +1,21 @@
 <?php
-class User {
+class User implements JsonSerializable {
     private $id;
     private $name;
+    private $permissions;
     
-    function __construct($id, $name) {
+    function __construct($id, $name, $permissions = null) {
         $this->id = $id;
         $this->name = $name;
+        $this->permissions = $permissions;
     }
     
     public function getId() {
         return $this->id;
+    }
+    
+    public function jsonSerialize() {
+        return array("Id" => $this->id, "Name" => $this->name, "Permissions" => $this->permissions);
     }
     
     public static function setLoggedIn($user) {

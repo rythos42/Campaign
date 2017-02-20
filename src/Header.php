@@ -25,6 +25,7 @@ include($installDirOnWebServer . "/src/model/User.php");
 include($installDirOnWebServer . "/src/model/Campaign.php");
 include($installDirOnWebServer . "/src/model/CampaignFaction.php");
 include($installDirOnWebServer . "/src/model/CampaignEntry.php");
+include($installDirOnWebServer . "/src/model/Permission.php");
 include($installDirOnWebServer . "/src/mappers/Database.php");
 include($installDirOnWebServer . "/src/mappers/UserMapper.php");
 include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");

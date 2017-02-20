@@ -6,7 +6,7 @@ $action = $_REQUEST['action'];
 switch($action) {
     case "RegisterAndLogin":
         try {
-            UserMapper::insertUser($_REQUEST["username"], $_REQUEST["password"]);
+            echo json_encode(UserMapper::insertUser($_REQUEST["username"], $_REQUEST["password"]));
         } catch(Exception $e) {
             http_response_code(403);
             echo ExceptionCodes::UsernameExists;
@@ -20,7 +20,7 @@ switch($action) {
             $user = UserMapper::validateLogin($_REQUEST['username'], $_REQUEST['password']);
             if($user) {
                 User::setLoggedIn($user);
-                echo 'true';
+                echo json_encode($user);
             }
             else {
                 http_response_code(401);

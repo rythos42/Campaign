@@ -8,12 +8,19 @@ class UserMapper {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $today = date('Y-m-d H:i:s');
         Database::execute("INSERT INTO User (Username, PasswordHash, CreatedOnDate) VALUES (?, ?, ?)", [$username, $passwordHash, $today]);
+        
+        return new User(Database::getLastInsertedId(), $username);
     }
     
     public static function validateLogin($username, $password) {
-        $user = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
-        if($user && password_verify($password, $user->PasswordHash)) {
-            return new User($user->Id, $username);
+        $dbUser = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
+        if($dbUser && password_verify($password, $dbUser->PasswordHash)) {
+            $permissions = Database::queryObjectList(
+                "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
+                "Permission",
+                [$dbUser->Id]);
+            
+            return new User($dbUser->Id, $username, $permissions);
         }
         else {
             return null;

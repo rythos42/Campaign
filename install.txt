@@ -1,10 +1,17 @@
 Run SQL:
-	Database
-	User
-	Campaign
-	CampaignEntry
-	CampaignFaction
-	CampaignFactionEntry
+    1:
+        Database
+        User
+        Campaign
+        CampaignEntry
+        CampaignFaction
+        CampaignFactionEntry
+    2:
+        Permission
+        PermissionGroup
+        AlterTable_User_Add_PermissionGroup
+        Insert_Permission_MapCampaign
+    
 
 Install 
     Change src/settings.sample.php to src/settings.php

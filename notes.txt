@@ -1,5 +1,11 @@
 Now:
-- show total points per campaign
+- Validates password even on failed login - should only show when clicking sign up
+- Allow a campaign to be a map campaign
+- Only show map-campaign option if user has correct flag in db
+- For a map campaign, generate a random map and save as file on the system with a given campaignId
+- Need then to be able to mark maps with overlay colour showing who owns
+- Factions are given colours
+- password verification field
 
 Near Future:
 - page campaign list
@@ -12,29 +18,40 @@ Goals:
 - try to stay game agnostic for as long as possible
         
 "The Game":
-- X games/month scheduled with another player, or forced to be near their map edge
-- up to X games/month allowed, attack anywhere on the map
 - points difference to take territory
-- 
-- think about Eclipse as a model of how such a meta-game might work
+- Tournament at end to determine final winner
+- 1 commitment game, 2 optional per month
+- "Currency" to spend on games to buy extra points
+- Currency is owned by players but can be spent by faction
+- Certain areas provide certain bonus, but not all.
+- Attack any space within limited distance.
+- Holding territory gives currency
+- Click on website - "challenge issued"
+ 
+Notes:
+    - TestUser/password
+    - rythos42/
+
 
 Future:
+
 - for buying: group buy, or individual buy?
 - tournaments, with specific people needing to be played
     - generate match-ups and rankings after each round
 - XP system
 - diminishing returns on how effective each game is per week?
-- randomly generated map image
 - text writing about each game, and a place for that text to be prominently displayed
 - lock in a particular army
 - scenarios can have categories of VPs in them to break it down
 - admin can write a narrative for the campaign
-- map campaign -- can only attack nearby
-    - or "support from neighbouring territories"
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
 - deadline for campaigns
 - allow user to select languages if we have a list
+- factions can choose colours
+
+Credit: 
+- https://github.com/sroze/PHP-Voronoi-algorithm
         
 Far future:
     Stats:
