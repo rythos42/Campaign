@@ -12,7 +12,9 @@ class InProgressCampaignViewModel {
         
         ?>
         
-        <img data-bind="visible: showMap, attr: { src: mapImageUrl }" />
+        <div id="MapPanel" data-bind="visible: showMap">
+            <img data-bind="attr: { src: mapImageUrl }" />
+        </div>
         
         <?php
         

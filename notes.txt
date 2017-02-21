@@ -1,8 +1,7 @@
 Now:
-- scale map to current page width
-- Need then to be able to mark maps with overlay colour showing who owns
 - Factions are given colours
     - need to store colours in database
+- Need then to be able to mark maps with overlay colour showing who owns
 - update geeksong database so this can be used
     
     
