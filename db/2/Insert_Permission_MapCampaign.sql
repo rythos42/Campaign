@@ -1,3 +1,3 @@
 USE Campaign;
 
-INSERT INTO Permission (Name) VALUES ('AccessMapCampaign');
+INSERT INTO Permission (Name) VALUES ('CreateMapCampaign');

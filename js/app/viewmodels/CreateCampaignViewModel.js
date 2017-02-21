@@ -1,6 +1,6 @@
 /*exported CreateCampaignViewModel */
 /*globals ko, CampaignFactionListItemViewModel, Faction, Campaign, Translation */
-var CreateCampaignViewModel = function(navigation) {
+var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
         entryCampaign = new Campaign();
         
@@ -37,6 +37,10 @@ var CreateCampaignViewModel = function(navigation) {
     
     self.hasFactions = ko.computed(function() {
         return self.factions().length > 0;
+    });
+    
+    self.canCreateMapCampaign = ko.computed(function() {
+        return user.hasPermission(1);
     });
     
     var validatedEntry = ko.validatedObservable([

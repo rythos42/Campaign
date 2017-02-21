@@ -8,6 +8,13 @@ class CreateCampaignWidget implements IWidget {
                 <label for="CampaignName"><?php echo Translation::getString("campaignName"); ?>:</label>
                 <input id="CampaignName" type="text" data-bind="value: name, hasFocus: campaignNameHasFocus" />
             </div>
+            <div class="entry-field in-list" data-bind="visible: canCreateMapCampaign">
+                <label for="CampaignType"><?php echo Translation::getString("campaignType"); ?>:</label>
+                <select id="CampaignType">
+                    <option value="0">Simple</option>
+                    <option value="1">Map</option>
+                </select>
+            </div>
             <div class="entry-field in-list">
                 <label for="CampaignFactionNameEntry"><?php echo Translation::getString("factionName"); ?>:</label>
                 <input id="CampaignFactionNameEntry" type="text" data-bind="textInput: factionNameEntry, event: {keypress: keyPressAddFaction}, hasFocus: factionNameEntryHasFocus" />

@@ -23,7 +23,7 @@ var LoginViewModel = function(user, navigation) {
         return navigation.showLogin();
     });
     
-    function loginSuccess() {
+    function loginSuccess(userJsonString) {
         user.isLoggedIn(true);
         
         self.showUsernamePasswordIncorrect(false);
@@ -32,6 +32,11 @@ var LoginViewModel = function(user, navigation) {
         self.username('');
         self.password('');
         self.verifyPassword('');
+        
+        var userJson = JSON.parse(userJsonString);
+        user.id(userJson.Id);
+        user.username(userJson.Name);
+        user.permissions($.map(userJson.Permissions, function(serverPermission) { return serverPermission.Id; }));
     }
     
     var validatedViewModel = ko.validatedObservable([

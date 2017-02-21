@@ -38,6 +38,7 @@
         <passwordRequiredValidator>You should use the easiest password possible, but you'll need one to keep your friends out of your account.</passwordRequiredValidator>
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
         <or>OR</or>
+        <campaignType>Campaign type</campaignType>
     </strings>
     
 </translation>

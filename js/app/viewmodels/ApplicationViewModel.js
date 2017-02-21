@@ -5,7 +5,7 @@ var ApplicationViewModel = function(user, navigation) {
 
     self.loginViewModel = new LoginViewModel(user, navigation);
     self.logoutViewModel = new LogoutViewModel(user);
-    self.createCampaignViewModel = new CreateCampaignViewModel(navigation);
+    self.createCampaignViewModel = new CreateCampaignViewModel(user, navigation);
     self.inProgressCampaignViewModel = new InProgressCampaignViewModel(navigation);
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
 };

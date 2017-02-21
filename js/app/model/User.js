@@ -6,6 +6,11 @@ var User = function(id, username) {
     self.id = ko.observable(id);
     self.username = ko.observable(username);
     self.isLoggedIn = ko.observable(false);
+    self.permissions = ko.observableArray();
+
+    self.hasPermission = function(permissionId) {
+        return $.inArray(permissionId, self.permissions()) > -1;
+    };
     
     self.clone = function() {
         var user = new User();

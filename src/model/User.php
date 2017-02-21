@@ -23,7 +23,7 @@ class User implements JsonSerializable {
         $_SESSION["user"] = $user;
     }
     
-    public static function getUser() {
+    public static function getCurrentUser() {
         return $_SESSION["user"];
     }
     

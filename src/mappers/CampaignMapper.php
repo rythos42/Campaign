@@ -1,7 +1,7 @@
 <?php 
 class CampaignMapper {
     public static function insertCampaign($name, $factions) {
-        $createdByUserId = User::getUser()->getId();
+        $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
         Database::execute("INSERT INTO Campaign (Name, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?)", [$name, $createdByUserId, $today]);
 
@@ -30,7 +30,7 @@ class CampaignMapper {
     }
     
     public static function insertCampaignEntry($campaignEntry) {
-        $createdByUserId = User::getUser()->getId();
+        $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
         Database::execute("INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?)", [$campaignEntry->campaignId, $createdByUserId, $today]);
         
