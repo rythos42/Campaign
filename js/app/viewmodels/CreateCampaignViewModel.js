@@ -1,5 +1,5 @@
 /*exported CreateCampaignViewModel */
-/*globals ko, CampaignFactionListItemViewModel, Faction, Campaign, Translation */
+/*globals ko, CreateCampaignFactionListItemViewModel, Faction, Campaign, Translation */
 var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
         entryCampaign = new Campaign();
@@ -29,7 +29,7 @@ var CreateCampaignViewModel = function(user, navigation) {
 
     self.factions = ko.computed(function() {
         return $.map(entryCampaign.factions(), function(faction) {
-            return new CampaignFactionListItemViewModel(entryCampaign, faction);
+            return new CreateCampaignFactionListItemViewModel(entryCampaign, faction);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
@@ -86,7 +86,7 @@ var CreateCampaignViewModel = function(user, navigation) {
             return;
         }
         
-        var faction = new Faction(self.factionNameEntry());
+        var faction = new Faction(self.factionNameEntry(), undefined, ColourHelper.generateNextRandom());
         entryCampaign.factions.push(faction);
         self.factionNameEntry('');
         self.factionNameEntry.isModified(false);

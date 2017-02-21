@@ -1,8 +1,11 @@
-/*exported CampaignFactionListItemViewModel */
-var CampaignFactionListItemViewModel = function(entryCampaign, faction) {
+/*exported CreateCampaignFactionListItemViewModel */
+var CreateCampaignFactionListItemViewModel = function(entryCampaign, faction) {
 	var self = this;
 	
 	self.name = faction.name;
+    self.colour = ko.computed(function() {
+        return ColourHelper.rgbToHex(faction.colour());
+    });
     
     self.removeFaction = function() {
         var factions = entryCampaign.factions(),
