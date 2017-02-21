@@ -1,4 +1,5 @@
 /*exported CreateCampaignFactionListItemViewModel */
+/*globals ko, ColourHelper */
 var CreateCampaignFactionListItemViewModel = function(entryCampaign, faction) {
 	var self = this;
 	

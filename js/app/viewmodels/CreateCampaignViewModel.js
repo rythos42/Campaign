@@ -1,5 +1,5 @@
 /*exported CreateCampaignViewModel */
-/*globals ko, CreateCampaignFactionListItemViewModel, Faction, Campaign, Translation */
+/*globals ko, CreateCampaignFactionListItemViewModel, Faction, Campaign, Translation, ColourHelper */
 var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
         entryCampaign = new Campaign();
