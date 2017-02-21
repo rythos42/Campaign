@@ -16,6 +16,7 @@ Run SQL:
 Install 
     Change src/settings.sample.php to src/settings.php
     Update the values in src/settings.php to be correct for your server.
+    May need to create a directory /img/maps
 
 Build
     Install NPM (instructions elsewhere)
