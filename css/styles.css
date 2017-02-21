@@ -101,3 +101,7 @@ select {
 .conditional {
     text-align: center;
 }
+
+img {
+    margin-top: 10px;
+}

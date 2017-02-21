@@ -16,11 +16,13 @@ if($_SERVER["HTTPS"] != "on") {
 
 
 include("settings.php");
+// Use Server.php instead to get this value. Can't get it here because we can't load Server without it.
 $installDirOnWebServer = $_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'];
 
 include($installDirOnWebServer . "/src/infrastructure/Settings.php");
 include($installDirOnWebServer . "/src/infrastructure/ExceptionCodes.php");
 include($installDirOnWebServer . "/src/infrastructure/Translation.php");
+include($installDirOnWebServer . "/src/infrastructure/Server.php");
 include($installDirOnWebServer . "/src/model/User.php");
 include($installDirOnWebServer . "/src/model/Campaign.php");
 include($installDirOnWebServer . "/src/model/CampaignFaction.php");

@@ -1,9 +1,11 @@
 Now:
-- show map on campaign entry page
-    - scale it to current page width
+- scale map to current page width
 - Need then to be able to mark maps with overlay colour showing who owns
 - Factions are given colours
     - need to store colours in database
+- update geeksong database so this can be used
+    
+    
 - campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
 - territories change hands if there are 3 (differential) wins against it
 - only 2 wins per person are counted for a full win per month, after that dimishing returns - 0.75 of total for each game

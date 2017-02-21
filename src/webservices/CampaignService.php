@@ -32,6 +32,17 @@ switch($action) {
         $campaignId = $_REQUEST["campaignId"];
         echo json_encode(CampaignMapper::getCampaignEntriesForCampaign($campaignId));
         break;
+        
+    case "GetMap":
+        $campaignId = $_REQUEST["campaignId"];
+        $mapFileName = MapMapper::getMapFileNameForCampaign($campaignId);
+        
+        header("Content-Type: image/jpeg");
+        header("Content-Length: " . (string) filesize($mapFileName));
+
+        $mapFile = fopen($mapFileName, 'rb');
+        fpassthru($mapFile);
+        break;
 }
 
 ?>

@@ -1,13 +1,14 @@
 <?php
-$installDirOnWebServer = $_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'];
-
-require_once $installDirOnWebServer . '/lib/Nurbs/Voronoi.php';
-require_once $installDirOnWebServer . '/lib/Nurbs/Point.php';
+require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
+require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
+    public static function getMapFileNameForCampaign($campaignId) {
+        $installDirOnWebServer = Server::getFullPath();
+        return "$installDirOnWebServer/img/maps/$campaignId.jpg";
+    }
+    
     public static function generateAndSaveMapForId($campaignId) {
-        global $installDirOnWebServer;
-        
         $bbox = new stdClass();
         $bbox->xl = 0;
         $bbox->xr = 1024;
@@ -29,7 +30,7 @@ class MapMapper {
 
         // Create image using GD
         $map = imagecreatetruecolor($bbox->xr, $bbox->yb);
-        $starmap = imagecreatefromjpeg("$installDirOnWebServer/img/stars_pink_light_galaxy_1471_1024x768.jpg");
+        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/stars_pink_light_galaxy_1471_1024x768.jpg");
         imagecopymerge($map, $starmap, 0, 0, 0, 0, $bbox->xr, $bbox->yb, 100);
 
         $background = imagecolorallocate($map, 255, 255, 255);
@@ -60,7 +61,7 @@ class MapMapper {
             $areaNumber++;
         }
 
-        imagejpeg($map, "$installDirOnWebServer/img/maps/$campaignId.jpg");
+        imagejpeg($map, MapMapper::getMapFileNameForCampaign($campaignId));
     }
     
     private static function getPolygonPoints($cell) {
