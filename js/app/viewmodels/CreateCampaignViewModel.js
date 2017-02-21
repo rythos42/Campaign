@@ -8,6 +8,8 @@ var CreateCampaignViewModel = function(user, navigation) {
         required: { message: Translation.getString('campaignNameRequiredValidation') }
     });
     
+    self.campaignType = entryCampaign.campaignType;
+    
     self.factionNameEntry = ko.observable('').extend({
         required: { message: Translation.getString('factionNameRequiredValidation') }
     });
@@ -57,6 +59,7 @@ var CreateCampaignViewModel = function(user, navigation) {
         var params = {
             action: 'SaveCampaign',
             name: entryCampaign.name(),
+            campaignType: entryCampaign.campaignType(),
             factions: ko.toJSON(entryCampaign.factions)
         };
         

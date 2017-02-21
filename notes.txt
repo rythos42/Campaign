@@ -1,11 +1,11 @@
 Now:
-- For a map campaign, generate a random map and save as file on the system with a given campaignId
+- show map on campaign entry page
+    - scale it to current page width
 - Need then to be able to mark maps with overlay colour showing who owns
 - Factions are given colours
     - need to store colours in database
 - campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
 - territories change hands if there are 3 (differential) wins against it
-- show map on campaign entry page
 - only 2 wins per person are counted for a full win per month, after that dimishing returns - 0.75 of total for each game
 
 
@@ -13,18 +13,16 @@ Near Future:
 - page campaign list
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
+- can anyone access a map campaign, and only certain people create them?
+
     
-Goals:
-- encourage people to play and log their games through gamification
-- can't force playing a particular player
-- try to stay game agnostic for as long as possible
-        
 "The Game":
 - Tournament at end to determine final winner
 - "Currency" to spend on games to buy extra points
 - Currency is owned by players but can be spent by faction
 - Certain areas provide certain bonus, but not all.
 - Holding territory gives currency
+ 
  
 Notes:
     Work:
@@ -34,12 +32,19 @@ Notes:
     - c/c                   (no map)
     - qwer/qwer             (yes map)
 
+        
+Goals:
+- encourage people to play and log their games through gamification
+- can't force playing a particular player
+- try to stay game agnostic for as long as possible
+
 
 Future:
 - create campaign customization
     - set height, width, number of sectors on map
     - set number of differential wins to take territory
     - distance players are able to attack from
+    - pick background image
 - for buying: group buy, or individual buy?
 - tournaments, with specific people needing to be played
     - generate match-ups and rankings after each round

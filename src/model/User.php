@@ -18,6 +18,15 @@ class User implements JsonSerializable {
         return array("Id" => $this->id, "Name" => $this->name, "Permissions" => $this->permissions);
     }
     
+    public function hasPermission($permissionId) {
+        foreach($this->permissions as $permission) {
+            if($permission->Id === $permissionId)
+                return true;
+        }
+        
+        return false;
+    }
+    
     public static function setLoggedIn($user) {
         $_SESSION["isLoggedIn"] = true;
         $_SESSION["user"] = $user;

@@ -19,7 +19,7 @@ class UserMapper {
                 "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
                 "Permission",
                 [$dbUser->Id]);
-            
+                           
             return new User($dbUser->Id, $username, $permissions);
         }
         else {

@@ -1,15 +1,17 @@
 <?php 
 class CampaignMapper {
-    public static function insertCampaign($name, $factions) {
+    public static function insertCampaign($name, $campaignType, $factions) {
         $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
-        Database::execute("INSERT INTO Campaign (Name, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?)", [$name, $createdByUserId, $today]);
+        Database::execute("INSERT INTO Campaign (Name, CampaignType, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?, ?)", [$name, $campaignType, $createdByUserId, $today]);
 
         $campaignId = Database::getLastInsertedId();
         
         foreach($factions as $faction) {
             Database::execute("INSERT INTO CampaignFaction (Name, CampaignId) VALUES (?, ?)", [$faction->name, $campaignId]);
         }
+        
+        return $campaignId;
     }
     
     public static function getCampaignList() {

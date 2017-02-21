@@ -10,10 +10,15 @@ $action = $_REQUEST["action"];
 switch($action) {
     case "SaveCampaign":
         $name = $_REQUEST["name"];
+        $campaignType = $_REQUEST["campaignType"];
         $factions = json_decode($_REQUEST["factions"]);
-        CampaignMapper::insertCampaign($name, $factions);
-        break;
+        $newCampaignId = CampaignMapper::insertCampaign($name, $campaignType, $factions);
         
+        if(CampaignType::Map === (int) $campaignType && User::getCurrentUser()->hasPermission(Permission::CreateMapCampaign))
+            MapMapper::generateAndSaveMapForId($newCampaignId);
+        
+        break;
+
     case "GetCampaignList":
         echo json_encode(CampaignMapper::getCampaignList());
         break;

@@ -10,7 +10,7 @@ class CreateCampaignWidget implements IWidget {
             </div>
             <div class="entry-field in-list" data-bind="visible: canCreateMapCampaign">
                 <label for="CampaignType"><?php echo Translation::getString("campaignType"); ?>:</label>
-                <select id="CampaignType">
+                <select id="CampaignType" data-bind="value: campaignType">
                     <option value="0">Simple</option>
                     <option value="1">Map</option>
                 </select>
