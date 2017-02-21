@@ -1,9 +1,11 @@
 Now:
-- Only show map-campaign option if user has correct flag in db
-    - need to correctly load permissions when loading user from cookie
 - For a map campaign, generate a random map and save as file on the system with a given campaignId
 - Need then to be able to mark maps with overlay colour showing who owns
 - Factions are given colours
+- campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
+- territories change hands if there are 3 (differential) wins against it
+- show map on campaign entry page
+- only 2 wins per person are counted for a full win per month, after that dimishing returns - 0.75 of total for each game
 
 
 Near Future:
@@ -17,35 +19,37 @@ Goals:
 - try to stay game agnostic for as long as possible
         
 "The Game":
-- points difference to take territory
 - Tournament at end to determine final winner
-- 1 commitment game, 2 optional per month
 - "Currency" to spend on games to buy extra points
 - Currency is owned by players but can be spent by faction
 - Certain areas provide certain bonus, but not all.
-- Attack any space within limited distance.
 - Holding territory gives currency
-- Click on website - "challenge issued"
  
 Notes:
-    - TestUser/password
-    - rythos42/
+    Work:
+    - TestUser/password     (no map)
+    - rythos42/             (yes map)
+    Home:
+    - c/c                   (no map)
+    - qwer/qwer             (yes map)
 
 
 Future:
-
+- create campaign customization
+    - set height, width, number of sectors on map
+    - set number of differential wins to take territory
+    - distance players are able to attack from
 - for buying: group buy, or individual buy?
 - tournaments, with specific people needing to be played
     - generate match-ups and rankings after each round
 - XP system
-- diminishing returns on how effective each game is per week?
 - text writing about each game, and a place for that text to be prominently displayed
 - lock in a particular army
 - scenarios can have categories of VPs in them to break it down
 - admin can write a narrative for the campaign
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
-- deadline for campaigns
+- deadline for campaign entries
 - allow user to select languages if we have a list
 - factions can choose colours
 
