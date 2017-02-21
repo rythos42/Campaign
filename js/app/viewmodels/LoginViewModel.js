@@ -33,10 +33,7 @@ var LoginViewModel = function(user, navigation) {
         self.password('');
         self.verifyPassword('');
         
-        var userJson = JSON.parse(userJsonString);
-        user.id(userJson.Id);
-        user.username(userJson.Name);
-        user.permissions($.map(userJson.Permissions, function(serverPermission) { return serverPermission.Id; }));
+        user.setFromJson(JSON.parse(userJsonString));
     }
     
     var validatedViewModel = ko.validatedObservable([

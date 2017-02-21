@@ -53,8 +53,11 @@
                 ko.validation.registerExtenders();
                 var viewModel = new ApplicationViewModel(user, navigation);
                 ko.applyBindings(viewModel);
-
-                user.isLoggedIn(<?php echo User::isLoggedIn() ? 'true' : 'false'; ?>);
+                
+                <?php if(User::isLoggedIn()) { ?>
+                user.setFromJson(<?php echo json_encode(User::getCurrentUser()); ?>);
+                user.isLoggedIn(true);
+                <?php } ?>
             });
         </script>
         

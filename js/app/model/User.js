@@ -19,4 +19,10 @@ var User = function(id, username) {
         user.isLoggedIn(self.isLoggedIn());
         return user;
     };
+    
+    self.setFromJson = function(jsonUser) {
+        self.id(jsonUser.Id);
+        self.username(jsonUser.Name);
+        self.permissions($.map(jsonUser.Permissions, function(serverPermission) { return serverPermission.Id; }));
+    };
 };
