@@ -35,13 +35,8 @@ switch($action) {
         
     case "GetMap":
         $campaignId = $_REQUEST["campaignId"];
-        $mapFileName = MapMapper::getMapFileNameForCampaign($campaignId);
-        
         header("Content-Type: image/jpeg");
-        header("Content-Length: " . (string) filesize($mapFileName));
-
-        $mapFile = fopen($mapFileName, 'rb');
-        fpassthru($mapFile);
+        MapMapper::outputMapForCampaign($campaignId);
         break;
 }
 

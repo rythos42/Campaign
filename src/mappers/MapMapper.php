@@ -3,6 +3,44 @@ require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
 require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
+    public static function outputMapForCampaign($campaignId) {
+        $installDirOnWebServer = Server::getFullPath();
+        $mapImage = imagecreatefromjpeg("$installDirOnWebServer/img/maps/$campaignId.jpg");
+        
+        $dbPolygonList = Database::queryArray(
+            "select IdOnMap, CampaignFaction.Colour, PolygonPoint.X, PolygonPoint.Y 
+            from Polygon 
+            join PolygonPoint on PolygonPoint.PolygonId = Polygon.Id
+            left join CampaignFaction on CampaignFaction.Id = Polygon.OwningFactionId
+            where Polygon.CampaignId=?", 
+            [$campaignId]);
+            
+        $polygonList = array();
+        foreach($dbPolygonList as $dbPolygon) {
+            // skip over unowned polygons
+            if(!$dbPolygon["Colour"])
+                continue;
+            
+            $polygonIdOnMap = $dbPolygon["IdOnMap"];
+            if(!array_key_exists($polygonIdOnMap, $polygonList)) {
+                $polygonList[$polygonIdOnMap] = array();
+                $polygonList[$polygonIdOnMap]["Colour"] = $dbPolygon["Colour"];
+                $polygonList[$polygonIdOnMap]["Points"] = array();
+            }
+            
+            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["X"];
+            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["Y"];
+        }
+               
+        foreach($polygonList as $polygon) {
+            list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
+            $colour = imagecolorallocatealpha($mapImage, $red, $green, $blue, 80);
+            imagefilledpolygon($mapImage, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
+        }
+        
+        imagepng($mapImage);
+    }
+    
     public static function getMapFileNameForCampaign($campaignId) {
         $installDirOnWebServer = Server::getFullPath();
         return "$installDirOnWebServer/img/maps/$campaignId.jpg";
