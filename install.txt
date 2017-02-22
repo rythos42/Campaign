@@ -10,6 +10,8 @@ Run SQL:
         Permission
         PermissionGroup
         AlterTable_User_Add_PermissionGroup
+        AlterTable_Campaign_Add_CampaignType
+        AlterTable_CampaignFaction_Add_Colour
         Insert_Permission_MapCampaign
     
 

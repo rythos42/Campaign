@@ -1,8 +1,7 @@
 Now:
-- Factions are given colours
-    - need to store colours in database
 - Need then to be able to mark maps with overlay colour showing who owns
 - update geeksong database so this can be used
+- last login date
     
     
 - campaign entries are logged against a particular location on the map, within 1 space of another that faction owns

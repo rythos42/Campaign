@@ -8,7 +8,7 @@ class CampaignMapper {
         $campaignId = Database::getLastInsertedId();
         
         foreach($factions as $faction) {
-            Database::execute("INSERT INTO CampaignFaction (Name, CampaignId) VALUES (?, ?)", [$faction->name, $campaignId]);
+            Database::execute("INSERT INTO CampaignFaction (Name, Colour, CampaignId) VALUES (?, ?, ?)", [$faction->name, $faction->colour, $campaignId]);
         }
         
         return $campaignId;

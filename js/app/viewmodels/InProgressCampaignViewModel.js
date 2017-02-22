@@ -21,7 +21,7 @@ var InProgressCampaignViewModel = function(navigation) {
         navigation.parameters(null);
         currentCampaign(newCampaign);
         
-        mapImageUrl = 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaign.id();
+        var mapImageUrl = 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaign.id();
         self.mapImageUrl(mapImageUrl);
     });
 };
