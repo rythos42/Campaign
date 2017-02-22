@@ -1,17 +1,12 @@
 Now:
-- Need then to be able to mark maps with overlay colour showing who owns
-    - Another table says which faction id owns a particular polygon in a particular campaign
-    - collect the faction colour from the faction id, collect the polygon points and colour it in.
-    
+- campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
+    [{"OwningFactionId":41,"Id":8,"IdOnMap":8},{"OwningFactionId":42,"Id":29,"IdOnMap":29},{"OwningFactionId":42,"Id":33,"IdOnMap":33},{"OwningFactionId":42,"Id":35,"IdOnMap":35},{"OwningFactionId":42,"Id":37,"IdOnMap":37},{"OwningFactionId":42,"Id":41,"IdOnMap":41},{"OwningFactionId":42,"Id":42,"IdOnMap":42},{"OwningFactionId":42,"Id":45,"IdOnMap":45}]
     
 - update geeksong database so this can be used
 - last login date
-    
-    
-- campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
-- territories change hands if there are 3 (differential) wins against it
-- only 2 wins per person are counted for a full win per month, after that dimishing returns - 0.75 of total for each game
+- layer background on get instead of on create -- will allow campaigns to change their background if they want
 
+    
 
 Near Future:
 - page campaign list
@@ -21,11 +16,18 @@ Near Future:
 
     
 "The Game":
-- Tournament at end to determine final winner
-- "Currency" to spend on games to buy extra points
-- Currency is owned by players but can be spent by faction
-- Certain areas provide certain bonus, but not all.
-- Holding territory gives currency
+There is a space map. Each faction starts with a single territory on the space map. Factions can attack any territory that is adjacent to a territory they already own.
+Each week, every player can make a single Attack. That Attack can be defended by any other player, including someone on their own faction.
+Winning an Attack against another faction changes the territory you attacked to be owned by your faction.
+Winning an Attack against your faction gives you 1 Money.
+Players may defend any number of times.
+At the end of the month, factions gain Money equal to the number of territories they own.
+Money may be spent by any player in the faction to give them {some bonus}.
+
+After {x} months there is a tournament to determine the final winner. Tournament rules to be determined.
+Certain territories will be designated to provide certain bonus' to a faction or player if they are owned. (to be determined)
+
+
  
  
 Notes:

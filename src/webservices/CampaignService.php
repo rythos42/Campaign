@@ -38,6 +38,12 @@ switch($action) {
         header("Content-Type: image/jpeg");
         MapMapper::outputMapForCampaign($campaignId);
         break;
+        
+    case "GetAdjacentTerritoriesForCampaign":
+        $campaignId = $_REQUEST["campaignId"];
+        echo json_encode(MapMapper::getAdjacentTerritoriesForCampaign($campaignId));
+        break;
+        
 }
 
 ?>

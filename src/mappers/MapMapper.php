@@ -3,6 +3,18 @@ require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
 require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
+    public static function getAdjacentTerritoriesForCampaign($campaignId) {
+        return Database::queryArray(
+            "select p1.OwningFactionId, p2.Id, p2.IdOnMap 
+            from Polygon p1
+            join PolygonPoint pp1 on pp1.PolygonId = p1.Id
+            join PolygonPoint pp2 on pp1.X = pp2.X and pp1.Y = pp2.Y and pp1.PolygonId <> pp2.PolygonId
+            join Polygon p2 on p2.Id = pp2.PolygonId
+            join CampaignFaction on CampaignFaction.Id = p1.OwningFactionId
+            where CampaignFaction.CampaignId=?
+            group by p1.IdOnMap, p2.IdOnMap", [$campaignId]);
+    }
+    
     public static function outputMapForCampaign($campaignId) {
         $installDirOnWebServer = Server::getFullPath();
         $mapImage = imagecreatefromjpeg("$installDirOnWebServer/img/maps/$campaignId.jpg");
