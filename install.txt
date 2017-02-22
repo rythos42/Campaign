@@ -9,6 +9,8 @@ Run SQL:
     2:
         Permission
         PermissionGroup
+        Polygon
+        PolygonPoint
         AlterTable_User_Add_PermissionGroup
         AlterTable_Campaign_Add_CampaignType
         AlterTable_CampaignFaction_Add_Colour

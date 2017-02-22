@@ -58,6 +58,12 @@ class MapMapper {
             imagettftext($map, $fontSize, 0, $center->x - ($textBoundingBox[0] / 2), $center->y - ($textBoundingBox[1] / 2), $lineShadow, 'arial.ttf', $areaNumber + 1);
             imagettftext($map, $fontSize - 2, 0, $center->x - ($textBoundingBox[0] / 2), $center->y - ($textBoundingBox[1] / 2), $lineColor, 'arial.ttf', $areaNumber + 1);
             
+            Database::execute("INSERT INTO Polygon (CampaignId, IdOnMap) VALUES (?, ?)", [$campaignId, $areaNumber + 1]);
+            $polygonId = Database::getLastInsertedId();
+            foreach($points->pointsForCenterCalculation as $pointToSave) {
+                Database::execute("INSERT INTO PolygonPoint (PolygonId, X, Y) VALUES (?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y]);
+            }
+            
             $areaNumber++;
         }
 

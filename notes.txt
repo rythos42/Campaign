@@ -1,5 +1,9 @@
 Now:
 - Need then to be able to mark maps with overlay colour showing who owns
+    - Another table says which faction id owns a particular polygon in a particular campaign
+    - collect the faction colour from the faction id, collect the polygon points and colour it in.
+    
+    
 - update geeksong database so this can be used
 - last login date
     
