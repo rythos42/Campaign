@@ -4,15 +4,49 @@ require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
     public static function getAdjacentTerritoriesForCampaign($campaignId) {
-        return Database::queryArray(
-            "select p1.OwningFactionId, p2.Id, p2.IdOnMap 
-            from Polygon p1
-            join PolygonPoint pp1 on pp1.PolygonId = p1.Id
-            join PolygonPoint pp2 on pp1.X = pp2.X and pp1.Y = pp2.Y and pp1.PolygonId <> pp2.PolygonId
-            join Polygon p2 on p2.Id = pp2.PolygonId
-            join CampaignFaction on CampaignFaction.Id = p1.OwningFactionId
-            where CampaignFaction.CampaignId=?
-            group by p1.IdOnMap, p2.IdOnMap", [$campaignId]);
+        // Get all polygon points, for all polygons that are adjacent to factions in the given campaign
+        $dbPolygonList = Database::queryArray(
+            "select ownedPolygon.OwningFactionId, 
+                adjacentPolygon.Id, adjacentPolygon.IdOnMap,
+                adjacentPoint.X, adjacentPoint.Y
+            from Polygon ownedPolygon
+            join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
+            join PolygonPoint adjacentPoint on 
+                ownedPoint.X = adjacentPoint.X 
+                and ownedPoint.Y = adjacentPoint.Y 
+                and ownedPoint.PolygonId <> adjacentPoint.PolygonId
+            join Polygon adjacentPolygon on adjacentPolygon.Id = adjacentPoint.PolygonId
+            join CampaignFaction on CampaignFaction.Id = ownedPolygon.OwningFactionId
+            where CampaignFaction.CampaignId=?", [$campaignId]);
+            
+        return self::getPolygonListFromDatabasePolygonList($dbPolygonList, false);
+    }
+    
+    private static function getPolygonListFromDatabasePolygonList($dbPolygonList, $forPhp) {
+        $polygonList = array();
+        foreach($dbPolygonList as $dbPolygon) {
+            $polygonIdOnMap = $dbPolygon["IdOnMap"];
+            if(!array_key_exists($polygonIdOnMap, $polygonList)) {
+                $polygonList[$polygonIdOnMap] = array();
+                
+                if(array_key_exists("Colour", $dbPolygon))
+                    $polygonList[$polygonIdOnMap]["Colour"] = $dbPolygon["Colour"];
+                
+                if(array_key_exists("OwningFactionId", $dbPolygon))
+                    $polygonList[$polygonIdOnMap]["OwningFactionId"] = $dbPolygon["OwningFactionId"];
+                
+                $polygonList[$polygonIdOnMap]["Points"] = array();
+            }
+            
+            if($forPhp) {
+                $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["X"];
+                $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["Y"];
+            } else {
+                $polygonList[$polygonIdOnMap]["Points"][] = array( "X" => $dbPolygon["X"], "Y" => $dbPolygon["Y"]);
+            }
+        }
+        
+        return $polygonList;
     }
     
     public static function outputMapForCampaign($campaignId) {
@@ -26,25 +60,12 @@ class MapMapper {
             left join CampaignFaction on CampaignFaction.Id = Polygon.OwningFactionId
             where Polygon.CampaignId=?", 
             [$campaignId]);
-            
-        $polygonList = array();
-        foreach($dbPolygonList as $dbPolygon) {
-            // skip over unowned polygons
-            if(!$dbPolygon["Colour"])
+               
+        foreach(self::getPolygonListFromDatabasePolygonList($dbPolygonList, true) as $polygon) {
+            // skip unwanted polygons
+            if(!array_key_exists("Colour", $polygon))
                 continue;
             
-            $polygonIdOnMap = $dbPolygon["IdOnMap"];
-            if(!array_key_exists($polygonIdOnMap, $polygonList)) {
-                $polygonList[$polygonIdOnMap] = array();
-                $polygonList[$polygonIdOnMap]["Colour"] = $dbPolygon["Colour"];
-                $polygonList[$polygonIdOnMap]["Points"] = array();
-            }
-            
-            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["X"];
-            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["Y"];
-        }
-               
-        foreach($polygonList as $polygon) {
             list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
             $colour = imagecolorallocatealpha($mapImage, $red, $green, $blue, 80);
             imagefilledpolygon($mapImage, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
