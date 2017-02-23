@@ -2,7 +2,7 @@
 class CampaignEntryListWidget {
     public function render() {
         ?>
-        <!-- ko with: campaignEntryListViewModel -->
+        <!-- ko with: entryListViewModel -->
         <div data-bind="tab: {}, visible: showCampaignEntryList">
             <ul>
                 <li><a href="#SummaryTab">Summary</a></li>

@@ -1,6 +1,6 @@
-/*exported CampaignFactionEntryListItemViewModel */
+/*exported FactionEntryListItemViewModel */
 /*globals ko */
-var CampaignFactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry) {
+var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry) {
     var self = this;
     
     self.factionName = ko.computed(function() {

@@ -1,6 +1,6 @@
-/*exported CampaignEntryListViewModel */
-/*globals ko, CampaignEntryListItemViewModel, CampaignEntry, FactionEntrySummaryViewModel */
-var CampaignEntryListViewModel = function(navigation, currentCampaign) {
+/*exported EntryListViewModel */
+/*globals ko, EntryListItemViewModel, CampaignEntry, FactionEntrySummaryViewModel */
+var EntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
         internalCampaignEntryList = ko.observableArray();
 
@@ -10,7 +10,7 @@ var CampaignEntryListViewModel = function(navigation, currentCampaign) {
         
     self.campaignEntries = ko.computed(function() {
         return $.map(internalCampaignEntryList(), function(campaignEntry) {
-            return new CampaignEntryListItemViewModel(campaignEntry);
+            return new EntryListItemViewModel(campaignEntry);
         });
     });
     

@@ -1,6 +1,6 @@
-/*exported CreateCampaignEntryViewModel */
-/*globals ko, CampaignFactionEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
-var CreateCampaignEntryViewModel = function(navigation, currentCampaign) {
+/*exported CreateEntryViewModel */
+/*globals ko, FactionEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
+var CreateEntryViewModel = function(navigation, currentCampaign) {
     var self = this,
         currentCampaignEntry = new CampaignEntry(),
         campaignFactionEntry = new CampaignFactionEntry(),
@@ -26,7 +26,7 @@ var CreateCampaignEntryViewModel = function(navigation, currentCampaign) {
     
     self.factionEntries = ko.computed(function() {
         return $.map(currentCampaignEntry.factionEntries(), function(factionEntry) {
-            return new CampaignFactionEntryListItemViewModel(currentCampaignEntry, factionEntry);
+            return new FactionEntryListItemViewModel(currentCampaignEntry, factionEntry);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }
