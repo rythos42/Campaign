@@ -24,8 +24,8 @@
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
         <script src="js/app/model/Navigation.js"></script>
-        <script src="js/app/model/CampaignEntry.js"></script>
-        <script src="js/app/model/CampaignFactionEntry.js"></script>
+        <script src="js/app/model/Entry.js"></script>
+        <script src="js/app/model/FactionEntry.js"></script>
         <script src="js/app/model/Colour.js"></script>
         <script src="js/app/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/app/viewmodels/LoginViewModel.js"></script>

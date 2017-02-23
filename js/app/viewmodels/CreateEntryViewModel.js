@@ -1,22 +1,22 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, CampaignEntry, CampaignFactionEntry, User, Translation */
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation */
 var CreateEntryViewModel = function(navigation, currentCampaign) {
     var self = this,
-        currentCampaignEntry = new CampaignEntry(),
-        campaignFactionEntry = new CampaignFactionEntry(),
+        currentEntry = new Entry(),
+        factionEntry = new FactionEntry(),
         factionEntryValidationViewModel;
         
     self.factionSelectionHasFocus = ko.observable(false);
-    self.selectedFaction = campaignFactionEntry.faction.extend({
+    self.selectedFaction = factionEntry.faction.extend({
         required: { message: Translation.getString('factionEntryRequiredValidation') }
     });
     
-    self.selectedUser = campaignFactionEntry.user.extend({
+    self.selectedUser = factionEntry.user.extend({
         required: { message: Translation.getString('userEntryRequiredValidation') },
         requireObject: { message: Translation.getString('userEntryInvalidAccountValidation') }
     });
     
-    self.victoryPoints = campaignFactionEntry.victoryPoints.extend({
+    self.victoryPoints = factionEntry.victoryPoints.extend({
         required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
         
@@ -25,8 +25,8 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
     });
     
     self.factionEntries = ko.computed(function() {
-        return $.map(currentCampaignEntry.factionEntries(), function(factionEntry) {
-            return new FactionEntryListItemViewModel(currentCampaignEntry, factionEntry);
+        return $.map(currentEntry.factionEntries(), function(factionEntry) {
+            return new FactionEntryListItemViewModel(currentEntry, factionEntry);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }
@@ -53,7 +53,7 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
         
         var params = {
             action: 'SaveCampaignEntry',
-            campaignEntry: ko.toJSON(currentCampaignEntry)
+            campaignEntry: ko.toJSON(currentEntry)
         };
         
         $.ajax({
@@ -76,11 +76,11 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
             return;
         }
         
-        var newFactionEntry = campaignFactionEntry.clone();
-        if(!currentCampaignEntry.usersFaction())
-            currentCampaignEntry.usersFaction(campaignFactionEntry.faction());
+        var newFactionEntry = factionEntry.clone();
+        if(!currentEntry.usersFaction())
+            currentEntry.usersFaction(factionEntry.faction());
         
-        currentCampaignEntry.factionEntries.push(newFactionEntry);
+        currentEntry.factionEntries.push(newFactionEntry);
         self.clearEntry();
     };
     
@@ -118,13 +118,13 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
         if(!show)
             return;
         
-        currentCampaignEntry.clear();        
+        currentEntry.clear();        
         self.clearEntry();
         self.factionSelectionHasFocus(true);
     });
     
     currentCampaign.subscribe(function(newCampaign) {
-        currentCampaignEntry.campaignId(newCampaign.id());
+        currentEntry.campaignId(newCampaign.id());
     });
     
     factionEntryValidationViewModel = ko.validatedObservable([

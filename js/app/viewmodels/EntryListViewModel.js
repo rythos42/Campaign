@@ -1,23 +1,23 @@
 /*exported EntryListViewModel */
-/*globals ko, EntryListItemViewModel, CampaignEntry, FactionEntrySummaryViewModel */
+/*globals ko, EntryListItemViewModel, Entry, FactionEntrySummaryViewModel */
 var EntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
-        internalCampaignEntryList = ko.observableArray();
+        internalEntryList = ko.observableArray();
 
     self.showCampaignEntryList = ko.computed(function() {
         return navigation.showCampaignEntry() && self.campaignEntries().length > 0;
     });        
         
     self.campaignEntries = ko.computed(function() {
-        return $.map(internalCampaignEntryList(), function(campaignEntry) {
-            return new EntryListItemViewModel(campaignEntry);
+        return $.map(internalEntryList(), function(entry) {
+            return new EntryListItemViewModel(entry);
         });
     });
     
     self.factionEntrySummaries = ko.computed(function() {
         var factionEntrySummaries = {};
-        $.each(internalCampaignEntryList(), function(i, campaignEntry) {
-            $.each(campaignEntry.factionEntries(), function(j, factionEntry) {
+        $.each(internalEntryList(), function(i, entry) {
+            $.each(entry.factionEntries(), function(j, factionEntry) {
                 var factionId = factionEntry.faction().id();
                 if(!factionEntrySummaries[factionId])
                     factionEntrySummaries[factionId] = new FactionEntrySummaryViewModel(factionEntry);
@@ -31,7 +31,7 @@ var EntryListViewModel = function(navigation, currentCampaign) {
         });
     });
     
-    function getCampaignEntryList() {
+    function getEntryList() {
         var params = { action: 'GetCampaignEntryList', campaignId: currentCampaign().id() };
         
         $.ajax({
@@ -39,15 +39,15 @@ var EntryListViewModel = function(navigation, currentCampaign) {
             method: 'GET',
             data: params,
             dataType: 'JSON',
-            success: function(serverCampaignEntryList) {
-                internalCampaignEntryList($.map(serverCampaignEntryList, function(serverCampaignEntry) {
-                    return new CampaignEntry(currentCampaign().id(), serverCampaignEntry);
+            success: function(serverEntryList) {
+                internalEntryList($.map(serverEntryList, function(serverEntry) {
+                    return new Entry(currentCampaign().id(), serverEntry);
                 }));
             }
         });
     }
     
     currentCampaign.subscribe(function() {
-        getCampaignEntryList();
+        getEntryList();
     });
 };

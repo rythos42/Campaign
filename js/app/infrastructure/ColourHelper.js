@@ -44,4 +44,8 @@ var ColourHelper = {
         
         return toHex(colour.getRed())+toHex(colour.getGreen())+toHex(colour.getBlue());
     },
+    hexToRgb: function(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? new Colour(parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)) : null;
+    }
 };

@@ -10,7 +10,7 @@ var Faction = function(factionName, factionId, factionColour) {
     if(typeof(factionName) === 'object') {
         self.id(factionName.Id);
         self.name(factionName.Name);
-        self.colour(factionName.Colour);
+        self.colour(ColourHelper.hexToRgb(factionName.Colour));
     } else {
         self.id(factionId);
         self.name(factionName);
