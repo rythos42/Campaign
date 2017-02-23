@@ -1,5 +1,5 @@
 <?php
-class CampaignEntryListWidget {
+class EntryListWidget {
     public function render() {
         ?>
         <!-- ko with: entryListViewModel -->

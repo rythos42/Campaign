@@ -1,5 +1,5 @@
 <?php
-class CreateCampaignEntryWidget implements IWidget {
+class CreateEntryWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createEntryViewModel-->

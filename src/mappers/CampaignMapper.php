@@ -22,7 +22,7 @@ class CampaignMapper {
             $campaignList[$campaign->Id] = $campaign;
         }
 
-        $dbCampaignFactionList = Database::queryObjectList("SELECT * FROM CampaignFaction", "CampaignFaction");
+        $dbCampaignFactionList = Database::queryObjectList("SELECT * FROM CampaignFaction", "Faction");
         foreach($dbCampaignFactionList as $campaignFaction) {
             $campaign = $campaignList[$campaignFaction->CampaignId];
             $campaign->Factions[] = $campaignFaction;
@@ -46,7 +46,7 @@ class CampaignMapper {
     public static function getCampaignEntriesForCampaign($campaignId) {
         $campaignEntryList = array();
 
-        $dbCampaignEntryList = Database::queryObjectList("SELECT * FROM CampaignEntry WHERE CampaignId = ?", "CampaignEntry", [$campaignId]);
+        $dbCampaignEntryList = Database::queryObjectList("SELECT * FROM CampaignEntry WHERE CampaignId = ?", "Entry", [$campaignId]);
        
         foreach($dbCampaignEntryList as $campaignEntry) {
             $campaignEntryList[] = $campaignEntry;

@@ -1,5 +1,5 @@
 <?php
-class CampaignFaction {
+class Faction {
     public $Id;
     public $Name;
     public $CampaignId;

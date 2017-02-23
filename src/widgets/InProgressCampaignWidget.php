@@ -7,14 +7,14 @@ class InProgressCampaignViewModel {
         <div>
         <?php
         
-        $createCampaignEntryWidget = new CreateCampaignEntryWidget();
-        $createCampaignEntryWidget->render();
+        $createEntryWidget = new CreateEntryWidget();
+        $createEntryWidget->render();
         
         $mapWidget = new MapWidget();
         $mapWidget->render();
         
-        $campaignEntryListWidget = new CampaignEntryListWidget();
-        $campaignEntryListWidget->render();
+        $entryListWidget = new EntryListWidget();
+        $entryListWidget->render();
         
         ?>
         </div>

@@ -1,5 +1,5 @@
 <?php
-class CampaignEntry {
+class Entry {
     public $Id;
     public $CampaignId;
     public $CreatedByUserId;

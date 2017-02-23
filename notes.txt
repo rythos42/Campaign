@@ -3,9 +3,6 @@ Now:
 
 - select the current users faction by clicking flag
 - tooltips on the icons so they are more usable
-- rename classes
-    - "campaignentry" is an "entry"
-    - "campaignfactionentry" is a "entry faction"
 - cursor back on faction in entry after add faction isn't working
 - enter in entry should try to Add Faction
 
@@ -16,12 +13,7 @@ Now:
         - my current view is that players could switch sides, but that breaks with OwningUserId
 - what would it mean if the player marked multiple factions as "my faction"?
     - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
-    
 
-Near Future:
-- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
-    - means building a user profile page
-- can anyone access a map campaign, and only certain people create them?
 - resize canvas based on browser:
         function resize_canvas(){
             canvas = document.getElementById("canvas");
@@ -30,7 +22,15 @@ Near Future:
         }
         <body onresize="resize_canvas()">
 - possible issue if you immediately click on a campaign you just created?
+- hide map panel on simple campaign
+    
+
+Near Future:
+- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    - means building a user profile page
+- can anyone access a map campaign, and only certain people create them?
 - update geeksong database so this can be used
+- regression test everything
          
 Notes:
     Work:
