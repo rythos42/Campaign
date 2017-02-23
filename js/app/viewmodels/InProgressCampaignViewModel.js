@@ -5,13 +5,8 @@ var InProgressCampaignViewModel = function(navigation) {
         currentCampaign = ko.observable(null);
     
     self.createCampaignEntryViewModel = new CreateCampaignEntryViewModel(navigation, currentCampaign);
+    self.mapViewModel = new MapViewModel(navigation, currentCampaign);
     self.campaignEntryListViewModel = new CampaignEntryListViewModel(navigation, currentCampaign);
-    
-    self.mapImageUrl = ko.observable();
-    
-    self.showMap = ko.computed(function() {
-        return navigation.showCampaignEntry();
-    });
     
     navigation.showCampaignEntry.subscribe(function(show) {
         if(!show)
@@ -20,8 +15,5 @@ var InProgressCampaignViewModel = function(navigation) {
         var newCampaign = navigation.parameters();
         navigation.parameters(null);
         currentCampaign(newCampaign);
-        
-        var mapImageUrl = 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaign.id();
-        self.mapImageUrl(mapImageUrl);
     });
 };

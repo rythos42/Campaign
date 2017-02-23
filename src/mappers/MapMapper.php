@@ -5,24 +5,37 @@ require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 class MapMapper {
     public static function getAdjacentTerritoriesForCampaign($campaignId) {
         // Get all polygon points, for all polygons that are adjacent to factions in the given campaign
-        $dbPolygonList = Database::queryArray(
-            "select ownedPolygon.OwningFactionId, 
-                adjacentPolygon.Id, adjacentPolygon.IdOnMap,
-                adjacentPoint.X, adjacentPoint.Y
-            from Polygon ownedPolygon
-            join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
-            join PolygonPoint adjacentPoint on 
-                ownedPoint.X = adjacentPoint.X 
-                and ownedPoint.Y = adjacentPoint.Y 
-                and ownedPoint.PolygonId <> adjacentPoint.PolygonId
-            join Polygon adjacentPolygon on adjacentPolygon.Id = adjacentPoint.PolygonId
-            join CampaignFaction on CampaignFaction.Id = ownedPolygon.OwningFactionId
-            where CampaignFaction.CampaignId=?", [$campaignId]);
+        $dbAdjacentPolygonList = self::getAdjacentPolygonsForCampaign($campaignId);
+        $dbPolygonList = array();
+        foreach($dbAdjacentPolygonList as $dbAdjacentPolygon) {
+            $dbPolygon = array();
+            $dbPolygon["OwningFactionId"] = $dbAdjacentPolygon["OwningFactionId"];
+            $dbPolygon["Id"] = $dbAdjacentPolygon["Id"];
+            $dbPolygon["IdOnMap"] = $dbAdjacentPolygon["IdOnMap"];
+            $dbPolygon["Points"] = Database::queryArray("select X, Y, PointNumber from PolygonPoint where PolygonId = ?", [$dbAdjacentPolygon["Id"]]);
+            $dbPolygonList[] = $dbPolygon;
+        }
             
-        return self::getPolygonListFromDatabasePolygonList($dbPolygonList, false);
+        return $dbPolygonList;
     }
     
-    private static function getPolygonListFromDatabasePolygonList($dbPolygonList, $forPhp) {
+    private static function getAdjacentPolygonsForCampaign($campaignId) {
+        // get all polygons adjacent (within -2 to +2 pixels) to factions in the given campaign
+        return Database::queryArray(
+            "select ownedPolygon.OwningFactionId, adjacentPolygon.Id, adjacentPolygon.IdOnMap
+                from Polygon ownedPolygon
+                join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
+                join PolygonPoint adjacentPoint on 
+                    (ownedPoint.X < adjacentPoint.X + 2 and ownedPoint.X > adjacentPoint.X - 2)
+                    and (ownedPoint.Y < adjacentPoint.Y + 2 and ownedPoint.Y > adjacentPoint.Y - 2)
+                    and ownedPoint.PolygonId <> adjacentPoint.PolygonId
+                join Polygon adjacentPolygon on adjacentPolygon.Id = adjacentPoint.PolygonId
+                join CampaignFaction on CampaignFaction.Id = ownedPolygon.OwningFactionId
+                where CampaignFaction.CampaignId=?
+                group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$campaignId]);
+    }
+    
+    private static function getPolygonListFromDatabasePolygonList($dbPolygonList) {
         $polygonList = array();
         foreach($dbPolygonList as $dbPolygon) {
             $polygonIdOnMap = $dbPolygon["IdOnMap"];
@@ -38,12 +51,8 @@ class MapMapper {
                 $polygonList[$polygonIdOnMap]["Points"] = array();
             }
             
-            if($forPhp) {
-                $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["X"];
-                $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["Y"];
-            } else {
-                $polygonList[$polygonIdOnMap]["Points"][] = array( "X" => $dbPolygon["X"], "Y" => $dbPolygon["Y"]);
-            }
+            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["X"];
+            $polygonList[$polygonIdOnMap]["Points"][] = $dbPolygon["Y"];
         }
         
         return $polygonList;
@@ -61,7 +70,7 @@ class MapMapper {
             where Polygon.CampaignId=?", 
             [$campaignId]);
                
-        foreach(self::getPolygonListFromDatabasePolygonList($dbPolygonList, true) as $polygon) {
+        foreach(self::getPolygonListFromDatabasePolygonList($dbPolygonList) as $polygon) {
             // skip unwanted polygons
             if(!array_key_exists("Colour", $polygon))
                 continue;
@@ -131,8 +140,10 @@ class MapMapper {
             
             Database::execute("INSERT INTO Polygon (CampaignId, IdOnMap) VALUES (?, ?)", [$campaignId, $areaNumber + 1]);
             $polygonId = Database::getLastInsertedId();
+            $pointNumber = 0;
             foreach($points->pointsForCenterCalculation as $pointToSave) {
-                Database::execute("INSERT INTO PolygonPoint (PolygonId, X, Y) VALUES (?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y]);
+                Database::execute("INSERT INTO PolygonPoint (PolygonId, X, Y, PointNumber) VALUES (?, ?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y, $pointNumber]);
+                $pointNumber++;
             }
             
             $areaNumber++;

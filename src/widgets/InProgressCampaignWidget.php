@@ -10,13 +10,8 @@ class InProgressCampaignViewModel {
         $createCampaignEntryWidget = new CreateCampaignEntryWidget();
         $createCampaignEntryWidget->render();
         
-        ?>
-        
-        <div id="MapPanel" data-bind="visible: showMap">
-            <img data-bind="attr: { src: mapImageUrl }" />
-        </div>
-        
-        <?php
+        $mapWidget = new MapWidget();
+        $mapWidget->render();
         
         $campaignEntryListWidget = new CampaignEntryListWidget();
         $campaignEntryListWidget->render();

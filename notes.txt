@@ -1,11 +1,9 @@
 Now:
-- campaign entries are logged against a particular location on the map, within 1 space of another that faction owns
-    [{"OwningFactionId":41,"Id":8,"IdOnMap":8},{"OwningFactionId":42,"Id":29,"IdOnMap":29},{"OwningFactionId":42,"Id":33,"IdOnMap":33},{"OwningFactionId":42,"Id":35,"IdOnMap":35},{"OwningFactionId":42,"Id":37,"IdOnMap":37},{"OwningFactionId":42,"Id":41,"IdOnMap":41},{"OwningFactionId":42,"Id":42,"IdOnMap":42},{"OwningFactionId":42,"Id":45,"IdOnMap":45}]
-    
-- update geeksong database so this can be used
+- allow user to click/press on a territory to select it
 - last login date
 - layer background on get instead of on create -- will allow campaigns to change their background if they want
-
+- get the jquery out of MapViewModel
+- update geeksong database so this can be used
     
 
 Near Future:
@@ -13,6 +11,15 @@ Near Future:
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
 - can anyone access a map campaign, and only certain people create them?
+- why is the map darker in browser than in the image?
+    - something in overlaying the territory markings is doing it
+- resize canvas based on browser:
+        function resize_canvas(){
+            canvas = document.getElementById("canvas");
+            if (canvas.width  < window.innerWidth) canvas.width  = window.innerWidth;
+            if (canvas.height < window.innerHeight) canvas.height = window.innerHeight;
+        }
+        <body onresize="resize_canvas()">
 
     
 "The Game":

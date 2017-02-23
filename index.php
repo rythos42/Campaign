@@ -18,6 +18,8 @@
         <script src="js/app/infrastructure/TabCustomBinder.js"></script>
         <script src="js/app/infrastructure/AreSameValidator.js"></script>
         <script src="js/app/infrastructure/ColourHelper.js"></script>
+        <script src="js/app/infrastructure/CanvasCustomBinder.js"></script>
+        <script src="js/app/infrastructure/DrawPolygonOnCanvasCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
@@ -38,6 +40,7 @@
         <script src="js/app/viewmodels/InProgressCampaignViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignFactionEntryListItemViewModel.js"></script>
         <script src="js/app/viewmodels/FactionEntrySummaryViewModel.js"></script>
+        <script src="js/app/viewmodels/MapViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
