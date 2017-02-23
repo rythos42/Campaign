@@ -1,13 +1,21 @@
 Now:
-- a campaign entry now has to be FOR someone, so the entry can be counted AGAINST someone (or some territory)
-    - if we do the player-owned territory, need to get all adjacent territories for the logged in player
+- if "my faction" won, then mark the territory as "owned by this player/faction"
+
+- select the current users faction by clicking flag
+- tooltips on the icons so they are more usable
+- rename classes
+    - "campaignentry" is an "entry"
+    - "campaignfactionentry" is a "entry faction"
+- cursor back on faction in entry after add faction isn't working
+- enter in entry should try to Add Faction
+
+        
+- if we do the player-owned territory, need to get all adjacent territories for the logged in player
     - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
     - store OwningUserId instead of (or as well as) OwningFactionId.
         - my current view is that players could switch sides, but that breaks with OwningUserId
-    - have to be able to mark a faction as "my faction" when entering an entry
-    - if "my faction" won, then mark the territory as "owned by this player/faction"
-        - what would it mean if the player marked multiple factions as "my faction"?
-        - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
+- what would it mean if the player marked multiple factions as "my faction"?
+    - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
     
 
 Near Future:

@@ -76,7 +76,11 @@ var CreateCampaignEntryViewModel = function(navigation, currentCampaign) {
             return;
         }
         
-        currentCampaignEntry.factionEntries.push(campaignFactionEntry.clone());
+        var newFactionEntry = campaignFactionEntry.clone();
+        if(!currentCampaignEntry.usersFaction())
+            currentCampaignEntry.usersFaction(campaignFactionEntry.faction());
+        
+        currentCampaignEntry.factionEntries.push(newFactionEntry);
         self.clearEntry();
     };
     

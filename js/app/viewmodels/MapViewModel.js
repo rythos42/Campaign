@@ -1,4 +1,5 @@
 /*exported MapViewModel */
+/*globals ko */
 var MapViewModel = function(navigation, currentCampaign) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
@@ -24,13 +25,14 @@ var MapViewModel = function(navigation, currentCampaign) {
                 adjacentTerritories(newAdjacentTerritories);
             }
         });
-    };
+    }
     
     self.drawTerritory = function(viewModel, event) {
         if(selectedTerritory())
             return;
-            
-        getCanvas().getContext('2d').putImageData(originalImageData, 0, 0);
+
+        if(originalImageData)   // conditional shouldn't be needed, but it kept throwing...
+            getCanvas().getContext('2d').putImageData(originalImageData, 0, 0);
         
         var actualPoint = getMousePositionInCanvas(event),
             foundTerritory = false;
@@ -49,7 +51,7 @@ var MapViewModel = function(navigation, currentCampaign) {
             self.drawingTerritory(null);
     };
     
-    self.selectTerritory = function(viewModel, event) {
+    self.selectTerritory = function() {
         // if there is a territory selected, unselect it
         if(selectedTerritory())
             selectedTerritory(null);
@@ -63,7 +65,7 @@ var MapViewModel = function(navigation, currentCampaign) {
     
     function getCanvas() {
         // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
-        return document.getElementById('MapCanvas')
+        return document.getElementById('MapCanvas');
     }
     
     function getMousePositionInCanvas(evt) {
@@ -76,14 +78,17 @@ var MapViewModel = function(navigation, currentCampaign) {
         return {
             x: (evt.clientX - rect.left) * scaleX,
             y: (evt.clientY - rect.top) * scaleY
-        }
+        };
     }
         
     function isPointInPolygon(p, polygon) {
         // http://stackoverflow.com/questions/16628184/add-onclick-and-onmouseover-to-canvas-element
         var isInside = false,
-            minX = polygon[0].X, maxX = polygon[0].X;
-            minY = polygon[0].Y, maxY = polygon[0].Y;
+            minX = polygon[0].X, 
+            maxX = polygon[0].X,
+            minY = polygon[0].Y, 
+            maxY = polygon[0].Y;
+            
         for (var n = 1; n < polygon.length; n++) {
             var q = polygon[n];
             minX = Math.min(q.X, minX);
@@ -97,7 +102,7 @@ var MapViewModel = function(navigation, currentCampaign) {
 
         var i = 0, j = polygon.length - 1;
         for (i, j; i < polygon.length; j = i++) {
-            if ( (polygon[i].Y > p.y) != (polygon[j].Y > p.y) &&
+            if ( (polygon[i].Y > p.y) !== (polygon[j].Y > p.y) &&
                     p.x < (polygon[j].X - polygon[i].X) * (p.y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) + polygon[i].X ) {
                 isInside = !isInside;
             }
@@ -115,7 +120,6 @@ var MapViewModel = function(navigation, currentCampaign) {
     };
     
     currentCampaign.subscribe(function(newCampaign) {
-        var campaignId = newCampaign.id();
         self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaign.id());
     });
 };

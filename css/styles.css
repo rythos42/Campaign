@@ -106,3 +106,6 @@ canvas {
     margin-top: 10px;
 }
 
+td.actions {
+    text-align: right;
+}

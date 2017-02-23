@@ -15,6 +15,10 @@ var CampaignFactionEntryListItemViewModel = function(currentCampaignEntry, facti
     
     self.victoryPoints = factionEntry.victoryPoints;
     
+    self.isUsersFaction = ko.computed(function() {
+        return currentCampaignEntry.usersFaction().id() === factionEntry.faction().id();
+    });
+    
     self.removeFactionEntry = function() {
         var factionEntries = currentCampaignEntry.factionEntries(),
             factionEntryIndex = factionEntries.indexOf(factionEntry);
