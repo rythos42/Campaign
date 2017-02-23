@@ -6,14 +6,14 @@ $action = $_REQUEST['action'];
 switch($action) {
     case "RegisterAndLogin":
         try {
-            echo json_encode(UserMapper::insertUser($_REQUEST["username"], $_REQUEST["password"]));
+            UserMapper::insertUser($_REQUEST["username"], $_REQUEST["password"]);
         } catch(Exception $e) {
             http_response_code(403);
             echo ExceptionCodes::UsernameExists;
             return;
         }
         
-        // fall through
+        // fall through to login
         
     case "Login":
         try {

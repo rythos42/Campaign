@@ -1,12 +1,13 @@
-/*globals ko */
+/*globals ko, Image */
 ko.bindingHandlers.canvas = {
     update: function(canvas, valueAccessor) {
         var params = ko.utils.unwrapObservable(valueAccessor());
         if(!params.url())
             return;
         
-        var context = canvas.getContext('2d');
-        image = new Image();
+        var context = canvas.getContext('2d'),
+            image = new Image();
+            
         image.src = params.url();
         image.onload = function() {
             canvas.width = image.width;

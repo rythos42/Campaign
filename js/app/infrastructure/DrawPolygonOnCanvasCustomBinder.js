@@ -6,7 +6,7 @@ ko.bindingHandlers.drawPolygonOnCanvas = {
             return;
         
         var context = canvas.getContext('2d');
-        context.fillStyle = "rgba(255, 255, 255, 0.5)";
+        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
         
         var points = polygon.Points;
         context.beginPath();
