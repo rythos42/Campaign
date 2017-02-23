@@ -10,9 +10,6 @@ class InProgressCampaignViewModel {
         $createEntryWidget = new CreateEntryWidget();
         $createEntryWidget->render();
         
-        $mapWidget = new MapWidget();
-        $mapWidget->render();
-        
         $entryListWidget = new EntryListWidget();
         $entryListWidget->render();
         

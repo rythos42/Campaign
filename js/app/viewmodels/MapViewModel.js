@@ -3,14 +3,18 @@
 var MapViewModel = function(navigation, currentCampaign) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
-        originalImageData,
-        selectedTerritory = ko.observable();
+        originalImageData;
     
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
+    self.selectedTerritory = ko.observable();
         
     self.showMap = ko.computed(function() {
-        return navigation.showCampaignEntry();
+        var campaign = currentCampaign();
+        if(!campaign)
+            return false;
+        
+        return campaign.campaignType() === 1 && navigation.showCampaignEntry();
     });
     
     function getAdjacentTerritoriesForCampaign(campaignId) {
@@ -28,7 +32,7 @@ var MapViewModel = function(navigation, currentCampaign) {
     }
     
     self.drawTerritory = function(viewModel, event) {
-        if(selectedTerritory())
+        if(self.selectedTerritory())
             return;
 
         if(originalImageData)   // conditional shouldn't be needed, but it kept throwing...
@@ -53,14 +57,21 @@ var MapViewModel = function(navigation, currentCampaign) {
     
     self.selectTerritory = function() {
         // if there is a territory selected, unselect it
-        if(selectedTerritory())
-            selectedTerritory(null);
+        if(self.selectedTerritory())
+            self.selectedTerritory(null);
 
         // if we're hovering over a territory, select it
         if(self.drawingTerritory()) {
-            selectedTerritory(self.drawingTerritory());
+            self.selectedTerritory(self.drawingTerritory());
             self.drawingTerritory(null);
         }
+    };
+    
+    self.clearMap = function() {
+        self.mapImageUrl(null);
+        self.drawingTerritory(null);
+        self.selectedTerritory(null);
+        originalImageData = null;
     };
     
     function getCanvas() {

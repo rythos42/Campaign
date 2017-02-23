@@ -6,16 +6,16 @@ class CreateEntryWidget implements IWidget {
         <div id="CreateCampaignEntry" data-bind="visible: showCampaignEntry">
             <div class="entry-field in-list">
                 <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
-                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: 'Select a faction'"></select>
+                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: 'Select a faction', event: {keypress: keyPressAddFaction}"></select>
             </div>
             <div class="entry-field in-list">
                 <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser"></select>
+                <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}"></select>
                 <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
             </div>
             <div class="entry-field in-list">
                 <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
-                <input type="number" id="VictoryPoints" data-bind="value: victoryPoints" />
+                <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddFaction}" />
                 <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
             </div>
             <div class="button-panel in-list">
@@ -36,8 +36,10 @@ class CreateEntryWidget implements IWidget {
                         <td data-bind="text: username" />
                         <td data-bind="text: victoryPoints" />
                         <td class="actions">
-                            <span data-bind="visible: isUsersFaction" class="ui-icon ui-icon-flag"></span>
-                            <button class="icon-button" data-bind="click: removeFactionEntry"><span class="ui-icon ui-icon-trash"</span></button>
+                            <span data-bind="visible: isUsersFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("yourFaction"); ?>"></span>
+                            <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
+                                <span class="ui-icon ui-icon-trash"</span>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -46,6 +48,11 @@ class CreateEntryWidget implements IWidget {
                 <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("saveEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
+            
+            <?php
+            $mapWidget = new MapWidget();
+            $mapWidget->render();
+            ?>
         </div>
         <!-- /ko -->
         <?php

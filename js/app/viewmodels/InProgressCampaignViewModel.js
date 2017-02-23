@@ -1,12 +1,11 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, CreateEntryViewModel, EntryListViewModel, MapViewModel */
-var InProgressCampaignViewModel = function(navigation) {
+/*globals ko, CreateEntryViewModel, EntryListViewModel */
+var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null);
     
-    self.createEntryViewModel = new CreateEntryViewModel(navigation, currentCampaign);
-    self.mapViewModel = new MapViewModel(navigation, currentCampaign);
-    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
+    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
+    self.entryListViewModel = new EntryListViewModel(user, navigation, currentCampaign);
     
     navigation.showCampaignEntry.subscribe(function(show) {
         if(!show)

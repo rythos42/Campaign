@@ -31,15 +31,32 @@ class CampaignMapper {
         return $campaignList;
     }
     
-    public static function insertCampaignEntry($campaignEntry) {
+    public static function insertCampaignEntry($campaignEntry, $territoryIdOnMap) {
         $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
-        Database::execute("INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?)", [$campaignEntry->campaignId, $createdByUserId, $today]);
+        Database::execute(
+            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, UsersFactionId) VALUES (?, ?, ?, ?)", 
+            [$campaignEntry->campaignId, $createdByUserId, $today, $campaignEntry->usersFaction->id]);
         
         $campaignEntryId = Database::getLastInsertedId();
-        
+
+        $winningFactionId = -1;
+        $winningVictoryPoints = -1;
         foreach($campaignEntry->factionEntries as $factionEntry) {
-            Database::execute("INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)", [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
+            Database::execute(
+                "INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)", 
+                [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
+                
+            if($factionEntry->victoryPoints > $winningVictoryPoints) {
+                $winningFactionId = $factionEntry->faction->id;
+                $winningVictoryPoints = $factionEntry->victoryPoints;
+            }
+        }
+
+        if($winningFactionId === $campaignEntry->usersFaction->id) {
+            Database::execute(
+                "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
+                [$winningFactionId, $campaignEntry->campaignId, $territoryIdOnMap]);
         }
     }
     

@@ -22,16 +22,17 @@ class MapMapper {
     private static function getAdjacentPolygonsForCampaign($campaignId) {
         // get all polygons adjacent (within -2 to +2 pixels) to factions in the given campaign
         return Database::queryArray(
-            "select ownedPolygon.OwningFactionId, adjacentPolygon.Id, adjacentPolygon.IdOnMap
+            "select ownedPolygon.OwningFactionId, adjacentPolygon.Id, adjacentPolygon.IdOnMap, adjacentPolygon.OwningFactionId
                 from Polygon ownedPolygon
                 join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
                 join PolygonPoint adjacentPoint on 
                     (ownedPoint.X < adjacentPoint.X + 2 and ownedPoint.X > adjacentPoint.X - 2)
                     and (ownedPoint.Y < adjacentPoint.Y + 2 and ownedPoint.Y > adjacentPoint.Y - 2)
                     and ownedPoint.PolygonId <> adjacentPoint.PolygonId
-                join Polygon adjacentPolygon on adjacentPolygon.Id = adjacentPoint.PolygonId
-                join CampaignFaction on CampaignFaction.Id = ownedPolygon.OwningFactionId
-                where CampaignFaction.CampaignId=?
+                join Polygon adjacentPolygon on 
+                    adjacentPolygon.Id = adjacentPoint.PolygonId 
+                    and ifnull(adjacentPolygon.OwningFactionId, -1) <> ifnull(ownedPolygon.OwningFactionId, -1)
+                where ownedPolygon.OwningFactionId is not null and ownedPolygon.CampaignId=?
                 group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$campaignId]);
     }
     

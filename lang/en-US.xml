@@ -39,6 +39,8 @@
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
         <or>OR</or>
         <campaignType>Campaign type</campaignType>
+        <yourFaction>Your faction</yourFaction>
+        <remove>Remove</remove>
     </strings>
     
 </translation>

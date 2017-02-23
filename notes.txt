@@ -1,19 +1,5 @@
 Now:
-- if "my faction" won, then mark the territory as "owned by this player/faction"
-
-- select the current users faction by clicking flag
-- tooltips on the icons so they are more usable
-- cursor back on faction in entry after add faction isn't working
-- enter in entry should try to Add Faction
-
-        
-- if we do the player-owned territory, need to get all adjacent territories for the logged in player
-    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
-    - store OwningUserId instead of (or as well as) OwningFactionId.
-        - my current view is that players could switch sides, but that breaks with OwningUserId
-- what would it mean if the player marked multiple factions as "my faction"?
-    - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
-
+- validate that user/his faction is in the entry
 - resize canvas based on browser:
         function resize_canvas(){
             canvas = document.getElementById("canvas");
@@ -21,16 +7,31 @@ Now:
             if (canvas.height < window.innerHeight) canvas.height = window.innerHeight;
         }
         <body onresize="resize_canvas()">
-- possible issue if you immediately click on a campaign you just created?
-- hide map panel on simple campaign
-    
+- map is hard to read at this size
+- maybe a custom binder to do "keypressACTION" instead of copying this code around
+- "get territories" function currently returns all territories adjacent to all factions
+    - maybe this should take a factionId? Would have to wait until user enters his faction for that. :(
+
+- if we do the player-owned territory, need to get all adjacent territories for the logged in player
+    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
+    - store OwningUserId instead of (or as well as) OwningFactionId.
+        - my current view is that players could switch sides, but that breaks with OwningUserId
+- what would it mean if the player marked multiple factions as "my faction"?
+    - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
 
 Near Future:
-- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
-    - means building a user profile page
-- can anyone access a map campaign, and only certain people create them?
+- "..." progress indicator while loading map
+- rename database stuff:
+    CampaignEntry -> Entry
+    CampaignFactionEntry -> FactionEntry
+    CampaignFaction -> Faction
+    Polygon -> Territory
+    PolygonPoints -> TerritoryPolygonPoints?
+- collate db changes for ease of future deployment
 - update geeksong database so this can be used
 - regression test everything
+- some way to place factions initially on campaign creation
+
          
 Notes:
     Work:
@@ -40,14 +41,10 @@ Notes:
     - c/c                   (no map)
     - qwer/qwer             (yes map)
 
-        
-Goals:
-- encourage people to play and log their games through gamification
-- can't force playing a particular player
-- try to stay game agnostic for as long as possible
-
-
 Future:
+- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    - means building a user profile page
+- can anyone access a map campaign, and only certain people create them?
 - page campaign list
 - create campaign customization
     - set height, width, number of sectors on map
@@ -65,6 +62,10 @@ Future:
 - deadline for campaign entries
 - allow user to select languages if we have a list
 - factions can choose colours
+
+Terms:
+    A Campaign is something created to be played in. A Campaign contains Factions.
+    An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
 
 Credit: 
 - https://github.com/sroze/PHP-Voronoi-algorithm

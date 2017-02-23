@@ -104,6 +104,7 @@ select {
 
 canvas {
     margin-top: 10px;
+    border: 3px solid black;
 }
 
 td.actions {

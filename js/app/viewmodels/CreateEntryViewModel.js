@@ -1,11 +1,13 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation */
-var CreateEntryViewModel = function(navigation, currentCampaign) {
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation, MapViewModel */
+var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
-        currentEntry = new Entry(),
+        currentEntry = new Entry(null, null, user),
         factionEntry = new FactionEntry(),
         factionEntryValidationViewModel;
         
+    self.mapViewModel = new MapViewModel(navigation, currentCampaign);
+    
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = factionEntry.faction.extend({
         required: { message: Translation.getString('factionEntryRequiredValidation') }
@@ -53,7 +55,8 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
         
         var params = {
             action: 'SaveCampaignEntry',
-            campaignEntry: ko.toJSON(currentEntry)
+            campaignEntry: ko.toJSON(currentEntry),
+            territoryIdOnMap: self.mapViewModel.selectedTerritory().IdOnMap
         };
         
         $.ajax({
@@ -62,6 +65,7 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
             data: params,
             success: function() {
                 navigation.showMain(true);
+                self.mapViewModel.clearMap();
             }
         });
     };
@@ -70,18 +74,22 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
         navigation.showMain(true);
     };
     
+    self.keyPressAddFaction = function(viewModel, event) {
+        if(event.keyCode === 13)
+            self.addFaction();  
+        return true;
+    };    
+    
     self.addFaction = function() {
         if(!factionEntryValidationViewModel.isValid()) {
             factionEntryValidationViewModel.errors.showAllMessages();
             return;
         }
         
-        var newFactionEntry = factionEntry.clone();
-        if(!currentEntry.usersFaction())
-            currentEntry.usersFaction(factionEntry.faction());
-        
-        currentEntry.factionEntries.push(newFactionEntry);
+        currentEntry.factionEntries.push(factionEntry.clone());
         self.clearEntry();
+        
+        self.factionSelectionHasFocus(true);
     };
     
     self.clearEntry = function() {
@@ -115,6 +123,8 @@ var CreateEntryViewModel = function(navigation, currentCampaign) {
     };
                
     navigation.showCampaignEntry.subscribe(function(show) {
+        self.mapViewModel.clearMap();
+        
         if(!show)
             return;
         
