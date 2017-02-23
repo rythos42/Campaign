@@ -32,7 +32,7 @@
         <script src="js/app/viewmodels/LogoutViewModel.js"></script>
         <script src="js/app/viewmodels/CreateCampaignViewModel.js"></script>
         <script src="js/app/viewmodels/CreateEntryViewModel.js"></script>
-        <script src="js/app/viewmodels/CreateCampaignFactionListItemViewModel.js"></script>
+        <script src="js/app/viewmodels/CreateFactionListItemViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignListViewModel.js"></script>
         <script src="js/app/viewmodels/CampaignListItemViewModel.js"></script>
         <script src="js/app/viewmodels/EntryListItemViewModel.js"></script>

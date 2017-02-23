@@ -1,5 +1,5 @@
 /*exported CreateCampaignViewModel */
-/*globals ko, CreateCampaignFactionListItemViewModel, Faction, Campaign, Translation, ColourHelper */
+/*globals ko, CreateFactionListItemViewModel, Faction, Campaign, Translation, ColourHelper */
 var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
         entryCampaign = new Campaign();
@@ -31,7 +31,7 @@ var CreateCampaignViewModel = function(user, navigation) {
 
     self.factions = ko.computed(function() {
         return $.map(entryCampaign.factions(), function(faction) {
-            return new CreateCampaignFactionListItemViewModel(entryCampaign, faction);
+            return new CreateFactionListItemViewModel(entryCampaign, faction);
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
