@@ -1,18 +1,19 @@
 Now:
-- allow user to click/press on a territory to select it
-- last login date
-- layer background on get instead of on create -- will allow campaigns to change their background if they want
-- get the jquery out of MapViewModel
-- update geeksong database so this can be used
+- a campaign entry now has to be FOR someone, so the entry can be counted AGAINST someone (or some territory)
+    - if we do the player-owned territory, need to get all adjacent territories for the logged in player
+    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
+    - store OwningUserId instead of (or as well as) OwningFactionId.
+        - my current view is that players could switch sides, but that breaks with OwningUserId
+    - have to be able to mark a faction as "my faction" when entering an entry
+    - if "my faction" won, then mark the territory as "owned by this player/faction"
+        - what would it mean if the player marked multiple factions as "my faction"?
+        - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
     
 
 Near Future:
-- page campaign list
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
 - can anyone access a map campaign, and only certain people create them?
-- why is the map darker in browser than in the image?
-    - something in overlaying the territory markings is doing it
 - resize canvas based on browser:
         function resize_canvas(){
             canvas = document.getElementById("canvas");
@@ -20,23 +21,9 @@ Near Future:
             if (canvas.height < window.innerHeight) canvas.height = window.innerHeight;
         }
         <body onresize="resize_canvas()">
-
-    
-"The Game":
-There is a space map of 30 territories. Each faction starts with a single territory on the space map (determined by Galactic Commissioner). Factions can attack any territory that is adjacent to a territory they already own.
-{Each week}, every player can make {1} Attack. That Attack can be defended by any other player, including someone on their own faction.
-{Attacker chooses how many points the game will be.}
-Winning an Attack against another faction changes the territory you attacked to be owned by your faction.
-Winning an Attack against your faction gives you 1 Money.
-Defending an Attack against your faction gives you 1 Money
-Players may defend any number of times.
-{If there is a conflict about who is attacking/defending, players dice off before the game with the high roll choosing.}
-At the end of the {week}, players gain Money equal to the number of territories their faction owns.
-Money may be spent to give players {some bonus}. It may be gifted to other players in your own faction.
-{Certain territories will be designated to provide certain bonus' to a faction or player if they are owned.{
-After {x} months there is a tournament to determine the final winner. Tournament rules to be determined, but definitely take in account the territory and Money bonus
- 
- 
+- possible issue if you immediately click on a campaign you just created?
+- update geeksong database so this can be used
+         
 Notes:
     Work:
     - TestUser/password     (no map)
@@ -53,10 +40,9 @@ Goals:
 
 
 Future:
+- page campaign list
 - create campaign customization
     - set height, width, number of sectors on map
-    - set number of differential wins to take territory
-    - distance players are able to attack from
     - pick background image
 - for buying: group buy, or individual buy?
 - tournaments, with specific people needing to be played

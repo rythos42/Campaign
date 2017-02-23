@@ -1,12 +1,13 @@
 /*exported MapViewModel */
 var MapViewModel = function(navigation, currentCampaign) {
     var self = this,
-        adjacentPolygons = ko.observableArray();
+        adjacentTerritories = ko.observableArray(),
+        originalImageData,
+        selectedTerritory = ko.observable();
     
     self.mapImageUrl = ko.observable();
-    self.drawingPolygon = ko.observable();
-    
-    
+    self.drawingTerritory = ko.observable();
+        
     self.showMap = ko.computed(function() {
         return navigation.showCampaignEntry();
     });
@@ -19,35 +20,56 @@ var MapViewModel = function(navigation, currentCampaign) {
                 action: 'GetAdjacentTerritoriesForCampaign',
                 campaignId: campaignId
             },
-            success: function(newAdjacentPolygons) {
-                adjacentPolygons(newAdjacentPolygons);
+            success: function(newAdjacentTerritories) {
+                adjacentTerritories(newAdjacentTerritories);
             }
         });
     };
     
-    var drawingSurfaceImageData;
-    
-    self.drawPolygon = function(viewModel, event) {
-        var canvas = $('canvas')[0],
-            context = canvas.getContext('2d');
-        if(drawingSurfaceImageData)
-            context.putImageData(drawingSurfaceImageData, 0, 0);
+    self.drawTerritory = function(viewModel, event) {
+        if(selectedTerritory())
+            return;
+            
+        getCanvas().getContext('2d').putImageData(originalImageData, 0, 0);
         
-        var actualPoint = getMousePositionInCanvas(canvas, event);
-        $.each(adjacentPolygons(), function(index, polygon) {
-            if(isPointInPolygon({x: actualPoint.x, y: actualPoint.y}, polygon.Points)) {
-                polygon.Points.sort(function(point1, point2){
+        var actualPoint = getMousePositionInCanvas(event),
+            foundTerritory = false;
+            
+        $.each(adjacentTerritories(), function(index, territory) {
+            if(isPointInPolygon({x: actualPoint.x, y: actualPoint.y}, territory.Points)) {
+                territory.Points.sort(function(point1, point2){
                     return point1.PointNumber > point2.PointNumber;
                 });
-                drawingSurfaceImageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                self.drawingPolygon(polygon);
+                self.drawingTerritory(territory);
+                foundTerritory = true;
             }
         });
+        
+        if(!foundTerritory)
+            self.drawingTerritory(null);
     };
     
-    function getMousePositionInCanvas(canvas, evt) {
+    self.selectTerritory = function(viewModel, event) {
+        // if there is a territory selected, unselect it
+        if(selectedTerritory())
+            selectedTerritory(null);
+
+        // if we're hovering over a territory, select it
+        if(self.drawingTerritory()) {
+            selectedTerritory(self.drawingTerritory());
+            self.drawingTerritory(null);
+        }
+    };
+    
+    function getCanvas() {
+        // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
+        return document.getElementById('MapCanvas')
+    }
+    
+    function getMousePositionInCanvas(evt) {
         // http://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
-        var rect = canvas.getBoundingClientRect(),
+        var canvas = getCanvas(),
+            rect = canvas.getBoundingClientRect(),
         scaleX = canvas.width / rect.width,
         scaleY = canvas.height / rect.height;
 
@@ -85,6 +107,10 @@ var MapViewModel = function(navigation, currentCampaign) {
     }
     
     self.updateImage = function() {
+        var canvas = getCanvas();
+        
+        originalImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+
         getAdjacentTerritoriesForCampaign(currentCampaign().id());
     };
     

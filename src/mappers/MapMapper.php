@@ -59,9 +59,18 @@ class MapMapper {
     }
     
     public static function outputMapForCampaign($campaignId) {
-        $installDirOnWebServer = Server::getFullPath();
-        $mapImage = imagecreatefromjpeg("$installDirOnWebServer/img/maps/$campaignId.jpg");
+        $width = 1024;
+        $height = 768;
+        $image = imagecreatetruecolor($width, $height);
+        imagealphablending($image, true);
+        imagesavealpha($image, true);
         
+        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/stars_pink_light_galaxy_1471_1024x768.jpg");
+        imagecopy($image, $starmap, 0, 0, 0, 0, $width, $height);
+                    
+        $sectorImage = imagecreatefrompng(MapMapper::getMapFileNameForCampaign($campaignId));
+        imagecopy($image, $sectorImage, 0, 0, 0, 0, $width, $height);
+               
         $dbPolygonList = Database::queryArray(
             "select IdOnMap, CampaignFaction.Colour, PolygonPoint.X, PolygonPoint.Y 
             from Polygon 
@@ -69,23 +78,23 @@ class MapMapper {
             left join CampaignFaction on CampaignFaction.Id = Polygon.OwningFactionId
             where Polygon.CampaignId=?", 
             [$campaignId]);
-               
+        
         foreach(self::getPolygonListFromDatabasePolygonList($dbPolygonList) as $polygon) {
             // skip unwanted polygons
-            if(!array_key_exists("Colour", $polygon))
+            if(!array_key_exists("Colour", $polygon) || $polygon["Colour"] === null)
                 continue;
-            
+
             list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
-            $colour = imagecolorallocatealpha($mapImage, $red, $green, $blue, 80);
-            imagefilledpolygon($mapImage, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
+            $colour = imagecolorallocatealpha($image, $red, $green, $blue, 80);
+            imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
         }
         
-        imagepng($mapImage);
+        imagepng($image);
     }
     
     public static function getMapFileNameForCampaign($campaignId) {
         $installDirOnWebServer = Server::getFullPath();
-        return "$installDirOnWebServer/img/maps/$campaignId.jpg";
+        return "$installDirOnWebServer/img/maps/$campaignId.png";
     }
     
     public static function generateAndSaveMapForId($campaignId) {
@@ -104,24 +113,17 @@ class MapMapper {
             $sites[] = new Nurbs_Point(rand($bbox->xl, $bbox->xr), rand($bbox->yt, $bbox->yb));
         }
 
-        // Compute the diagram
         $voronoi = new Voronoi();
         $diagram = $voronoi->compute($sites, $bbox);
 
-        // Create image using GD
         $map = imagecreatetruecolor($bbox->xr, $bbox->yb);
-        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/stars_pink_light_galaxy_1471_1024x768.jpg");
-        imagecopymerge($map, $starmap, 0, 0, 0, 0, $bbox->xr, $bbox->yb, 100);
+        imagesavealpha($map, true);
 
-        $background = imagecolorallocate($map, 255, 255, 255);
-        imagecolortransparent($map, $background);
+        $background = imagecolorallocatealpha($map, 255, 255, 255, 127);
+        imagefill($map, 0, 0, $background);
+
         $lineShadow = imagecolorallocate($map, 0, 0, 0);
         $lineColor = imagecolorallocate($map, 250, 250, 250);
-
-        // fill background and set to transparent
-        imagefill($map, 0, 0, $background);
-        imagerectangle($map, $bbox->xl - 1, $bbox->yt - 1, $bbox->xr - 1, $bbox->yb - 1, $background);
-
         $areaNumber = 0;
         foreach ($diagram['cells'] as $cell) {
             $points = MapMapper::getPolygonPoints($cell);
@@ -149,7 +151,7 @@ class MapMapper {
             $areaNumber++;
         }
 
-        imagejpeg($map, MapMapper::getMapFileNameForCampaign($campaignId));
+        imagepng($map, MapMapper::getMapFileNameForCampaign($campaignId));
     }
     
     private static function getPolygonPoints($cell) {
