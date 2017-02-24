@@ -6,7 +6,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         factionEntry = new FactionEntry(),
         factionEntryValidationViewModel;
         
-    self.mapViewModel = new MapViewModel(navigation, currentCampaign);
+    self.mapViewModel = new MapViewModel(navigation, currentCampaign, currentEntry);
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = factionEntry.faction.extend({

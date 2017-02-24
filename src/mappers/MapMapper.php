@@ -3,13 +3,12 @@ require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
 require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
-    public static function getAdjacentTerritoriesForCampaign($campaignId) {
+    public static function getAdjacentTerritoriesForFaction($factionId) {
         // Get all polygon points, for all polygons that are adjacent to factions in the given campaign
-        $dbAdjacentPolygonList = self::getAdjacentPolygonsForCampaign($campaignId);
+        $dbAdjacentPolygonList = self::getAdjacentPolygonsForFaction($factionId);
         $dbPolygonList = array();
         foreach($dbAdjacentPolygonList as $dbAdjacentPolygon) {
             $dbPolygon = array();
-            $dbPolygon["OwningFactionId"] = $dbAdjacentPolygon["OwningFactionId"];
             $dbPolygon["Id"] = $dbAdjacentPolygon["Id"];
             $dbPolygon["IdOnMap"] = $dbAdjacentPolygon["IdOnMap"];
             $dbPolygon["Points"] = Database::queryArray("select X, Y, PointNumber from PolygonPoint where PolygonId = ?", [$dbAdjacentPolygon["Id"]]);
@@ -19,10 +18,10 @@ class MapMapper {
         return $dbPolygonList;
     }
     
-    private static function getAdjacentPolygonsForCampaign($campaignId) {
-        // get all polygons adjacent (within -2 to +2 pixels) to factions in the given campaign
+    private static function getAdjacentPolygonsForFaction($factionId) {
+        // get all polygons adjacent (within -2 to +2 pixels) to the given faction
         return Database::queryArray(
-            "select ownedPolygon.OwningFactionId, adjacentPolygon.Id, adjacentPolygon.IdOnMap, adjacentPolygon.OwningFactionId
+            "select adjacentPolygon.Id, adjacentPolygon.IdOnMap
                 from Polygon ownedPolygon
                 join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
                 join PolygonPoint adjacentPoint on 
@@ -32,8 +31,8 @@ class MapMapper {
                 join Polygon adjacentPolygon on 
                     adjacentPolygon.Id = adjacentPoint.PolygonId 
                     and ifnull(adjacentPolygon.OwningFactionId, -1) <> ifnull(ownedPolygon.OwningFactionId, -1)
-                where ownedPolygon.OwningFactionId is not null and ownedPolygon.CampaignId=?
-                group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$campaignId]);
+                where ownedPolygon.OwningFactionId = ?
+                group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$factionId]);
     }
     
     private static function getPolygonListFromDatabasePolygonList($dbPolygonList) {

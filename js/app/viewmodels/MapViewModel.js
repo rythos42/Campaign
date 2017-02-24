@@ -1,6 +1,6 @@
 /*exported MapViewModel */
 /*globals ko */
-var MapViewModel = function(navigation, currentCampaign) {
+var MapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
         originalImageData;
@@ -17,19 +17,29 @@ var MapViewModel = function(navigation, currentCampaign) {
         return campaign.campaignType() === 1 && navigation.showCampaignEntry();
     });
     
-    function getAdjacentTerritoriesForCampaign(campaignId) {
+    function getAdjacentTerritoriesForFaction(factionId) {
         $.ajax({
             url: 'src/webservices/CampaignService.php',
             dataType: 'JSON',
             data: {
-                action: 'GetAdjacentTerritoriesForCampaign',
-                campaignId: campaignId
+                action: 'GetAdjacentTerritoriesForFaction',
+                factionId: factionId
             },
             success: function(newAdjacentTerritories) {
                 adjacentTerritories(newAdjacentTerritories);
             }
         });
     }
+    
+    currentEntry.attackingFaction.subscribe(function(attackingFaction) {
+        if(!attackingFaction) {
+            adjacentTerritories([]);
+            return;
+        }
+        
+        getAdjacentTerritoriesForFaction(attackingFaction.id());
+    });
+
     
     self.drawTerritory = function(viewModel, event) {
         if(self.selectedTerritory())
@@ -121,13 +131,10 @@ var MapViewModel = function(navigation, currentCampaign) {
 
         return isInside;
     }
-    
+
     self.updateImage = function() {
         var canvas = getCanvas();
-        
         originalImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-
-        getAdjacentTerritoriesForCampaign(currentCampaign().id());
     };
     
     currentCampaign.subscribe(function(newCampaign) {

@@ -40,9 +40,9 @@ switch($action) {
         MapMapper::outputMapForCampaign($campaignId);
         break;
         
-    case "GetAdjacentTerritoriesForCampaign":
-        $campaignId = $_REQUEST["campaignId"];
-        echo json_encode(MapMapper::getAdjacentTerritoriesForCampaign($campaignId));
+    case "GetAdjacentTerritoriesForFaction":
+        $factionId = $_REQUEST["factionId"];
+        echo json_encode(MapMapper::getAdjacentTerritoriesForFaction($factionId));
         break;
         
 }
