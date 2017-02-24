@@ -5,7 +5,7 @@ class MapWidget implements IWidget {
         <!-- ko with: mapViewModel -->
         <div data-bind="visible: showMap">
             <ul id="MapLegend" data-bind="foreach: factions">
-                <li style="width: 100px" data-bind="text: name, style: { 'background-color': colour }" />
+                <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
             <canvas id="MapCanvas" style="width: 500px" data-bind="canvas: { url: mapImageUrl, onLoad: updateImage }, drawPolygonOnCanvas: drawingTerritory, event: { mousemove: drawTerritory, click: selectTerritory }"></canvas>
         </div>

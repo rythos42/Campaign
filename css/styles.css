@@ -119,8 +119,10 @@ td.actions {
 }
 
 #MapLegend li {
+    color: #2779aa;
+    font-weight: bold;
+    border: 1px solid #aed0ea;
     min-width: 100px;
     padding: 5px 5px 5px 10px;
-    border-radius: 20px;
     display: inline-block;
 }
