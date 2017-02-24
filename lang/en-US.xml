@@ -41,6 +41,7 @@
         <campaignType>Campaign type</campaignType>
         <yourFaction>Your faction</yourFaction>
         <remove>Remove</remove>
+        <mustAddSelfToFactionEntryList>You have to add yourself in there.</mustAddSelfToFactionEntryList>
     </strings>
     
 </translation>

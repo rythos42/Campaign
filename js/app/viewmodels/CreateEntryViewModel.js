@@ -31,7 +31,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             return new FactionEntryListItemViewModel(currentEntry, factionEntry);
         });
     }).extend({
-        minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }
+        minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') },
+        mustContain: { params: { searchFor: user, objectProperty: 'user', comparisonProperty: 'id' }, message: Translation.getString('mustAddSelfToFactionEntryList') }
     });
     
     self.hasFactionEntries = ko.computed(function() {
