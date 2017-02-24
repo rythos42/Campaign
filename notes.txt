@@ -1,25 +1,19 @@
 Now:
+- maybe have user select "attacker" instead of requiring attacker to be the current user?
+    - "get territories" function currently returns all territories adjacent to all factions
+        - maybe this should take a factionId? 
+    - Would have to wait until user enters his faction for that. :(
+- needs a legend of what colours are what factions
 - validate that a territory has been selected
-- resize canvas based on browser:
-        function resize_canvas(){
-            canvas = document.getElementById("canvas");
-            if (canvas.width  < window.innerWidth) canvas.width  = window.innerWidth;
-            if (canvas.height < window.innerHeight) canvas.height = window.innerHeight;
-        }
-        <body onresize="resize_canvas()">
 - map is hard to read at this size
-- "get territories" function currently returns all territories adjacent to all factions
-    - maybe this should take a factionId? Would have to wait until user enters his faction for that. :(
+- some way to place factions initially on campaign creation
 
+Near Future:
 - if we do the player-owned territory, need to get all adjacent territories for the logged in player
     - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
     - store OwningUserId instead of (or as well as) OwningFactionId.
         - my current view is that players could switch sides, but that breaks with OwningUserId
-- what would it mean if the player marked multiple factions as "my faction"?
-    - likely that an enemy faction would suddenly have a territory in the middle of what was previously all "allied"?
-- some way to place factions initially on campaign creation
 
-Near Future:
 - install kdiff at home...
 - rename database stuff:
     CampaignEntry -> Entry
@@ -41,6 +35,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- resize canvas when window changes size?
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - "..." progress indicator while loading map
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
