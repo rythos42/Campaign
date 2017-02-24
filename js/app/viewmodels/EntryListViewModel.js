@@ -32,7 +32,7 @@ var EntryListViewModel = function(navigation, currentCampaign) {
     });
     
     function getEntryList() {
-        var params = { action: 'GetCampaignEntryList', campaignId: currentCampaign().id() };
+        var params = { action: 'GetEntryList', campaignId: currentCampaign().id() };
         
         $.ajax({
             url: 'src/webservices/CampaignService.php',

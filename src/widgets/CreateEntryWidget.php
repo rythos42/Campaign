@@ -48,15 +48,16 @@ class CreateEntryWidget implements IWidget {
                     </tr>
                 </tbody>
             </table>
-            <div class="button-panel">
-                <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("saveEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
-            </div>
             
             <?php
             $mapWidget = new MapWidget();
             $mapWidget->render();
             ?>
+            
+            <div class="button-panel">
+                <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("saveEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
+            </div>
         </div>
         <!-- /ko -->
         <?php

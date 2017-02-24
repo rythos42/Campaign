@@ -29,9 +29,9 @@ switch($action) {
         CampaignMapper::insertCampaignEntry($campaignEntry, $territoryIdOnMap);
         break;
     
-    case "GetCampaignEntryList":
+    case "GetEntryList":
         $campaignId = $_REQUEST["campaignId"];
-        echo json_encode(CampaignMapper::getCampaignEntriesForCampaign($campaignId));
+        echo json_encode(CampaignMapper::getEntriesForCampaign($campaignId));
         break;
         
     case "GetMap":

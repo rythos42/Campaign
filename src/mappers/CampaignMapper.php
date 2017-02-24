@@ -62,25 +62,25 @@ class CampaignMapper {
         }
     }
     
-    public static function getCampaignEntriesForCampaign($campaignId) {
-        $campaignEntryList = array();
+    public static function getEntriesForCampaign($campaignId) {
+        $entryList = array();
 
-        $dbCampaignEntryList = Database::queryObjectList("SELECT * FROM CampaignEntry WHERE CampaignId = ?", "Entry", [$campaignId]);
+        $dbEntryList = Database::queryObjectList("SELECT * FROM CampaignEntry WHERE CampaignId = ?", "Entry", [$campaignId]);
        
-        foreach($dbCampaignEntryList as $campaignEntry) {
-            $campaignEntryList[] = $campaignEntry;
+        foreach($dbEntryList as $entry) {
+            $entryList[] = $entry;
 
-            $dbCampaignFactionEntryRow = Database::queryArray(
+            $dbFactionEntryRow = Database::queryArray(
                 "SELECT CampaignFactionEntry.*, User.Username, CampaignFaction.Name as FactionName FROM CampaignFactionEntry 
                     JOIN User on User.Id = CampaignFactionEntry.UserId
                     JOIN CampaignFaction on CampaignFaction.Id = CampaignFactionEntry.CampaignFactionId
-                    WHERE CampaignEntryId = ?", [$campaignEntry->Id]);
-            foreach($dbCampaignFactionEntryRow as $campaignFactionEntryRow) {
-                $campaignEntry->CampaignFactionEntries[] = $campaignFactionEntryRow;
+                    WHERE CampaignEntryId = ?", [$entry->Id]);
+            foreach($dbFactionEntryRow as $factionEntryRow) {
+                $entry->FactionEntries[] = $factionEntryRow;
             }
         }
         
-        return $campaignEntryList;
+        return $entryList;
     }
 }
 ?>

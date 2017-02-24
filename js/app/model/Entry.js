@@ -15,7 +15,7 @@ var Entry = function(campaignId, serverEntry) {
     });
     
     if(serverEntry) {
-        $.each(serverEntry.CampaignFactionEntries, function(index, serverFactionEntry) {
+        $.each(serverEntry.FactionEntries, function(index, serverFactionEntry) {
             var faction = new Faction(serverFactionEntry.FactionName, serverFactionEntry.CampaignFactionId);
             var user = new User(serverFactionEntry.UserId, serverFactionEntry.Username);
             var factionEntry = new FactionEntry(faction, user, serverFactionEntry.VictoryPointsScored);

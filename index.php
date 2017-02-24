@@ -42,6 +42,7 @@
         <script src="js/app/viewmodels/FactionEntryListItemViewModel.js"></script>
         <script src="js/app/viewmodels/FactionEntrySummaryViewModel.js"></script>
         <script src="js/app/viewmodels/MapViewModel.js"></script>
+        <script src="js/app/viewmodels/MapLegendViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>

@@ -17,6 +17,16 @@ var MapViewModel = function(navigation, currentCampaign, currentEntry) {
         return campaign.campaignType() === 1 && navigation.showCampaignEntry();
     });
     
+    self.factions = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return null;
+
+        return $.map(campaign.factions(), function(faction) {
+            return new MapLegendViewModel(faction);
+        });
+    });
+    
     function getAdjacentTerritoriesForFaction(factionId) {
         $.ajax({
             url: 'src/webservices/CampaignService.php',

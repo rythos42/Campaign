@@ -1,6 +1,4 @@
 Now:
-- needs a legend of what colours are what factions
-- maybe move "save entry" and "back" below the map so it's clearer you need to select something    
 - "NaN" points summary if entering 0    
 - validate must contain attacking faction
     mustContain: { params: { searchFor: user, objectProperty: 'user', comparisonProperty: 'id' }, message: Translation.getString('mustAddSelfToFactionEntryList') }
