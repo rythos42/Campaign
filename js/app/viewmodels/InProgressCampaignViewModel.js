@@ -5,7 +5,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentCampaign = ko.observable(null);
     
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
-    self.entryListViewModel = new EntryListViewModel(user, navigation, currentCampaign);
+    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
     
     navigation.showCampaignEntry.subscribe(function(show) {
         if(!show)

@@ -1,9 +1,10 @@
 Now:
-- maybe have user select "attacker" instead of requiring attacker to be the current user?
-    - "get territories" function currently returns all territories adjacent to all factions
-        - maybe this should take a factionId? 
-    - Would have to wait until user enters his faction for that. :(
+- "get territories" should only return territories adjacent to attacker
 - needs a legend of what colours are what factions
+    
+- "NaN" points summary if entering 0    
+- validate must contain attacking faction
+    mustContain: { params: { searchFor: user, objectProperty: 'user', comparisonProperty: 'id' }, message: Translation.getString('mustAddSelfToFactionEntryList') }
 - validate that a territory has been selected
 - map is hard to read at this size
 - some way to place factions initially on campaign creation

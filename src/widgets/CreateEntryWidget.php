@@ -18,6 +18,10 @@ class CreateEntryWidget implements IWidget {
                 <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddFaction}" />
                 <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
             </div>
+            <div class="entry-field in-list">
+                <label for="IsAttackingFaction"><?php echo Translation::getString("attackingFaction"); ?>:</label>
+                <input type="checkbox" id="IsAttackingFaction" data-bind="checked: isAttackingFaction, event: {keypress: keyPressAddFaction}" />
+            </div>
             <div class="button-panel in-list">
                 <input type="button" data-bind="click: addFaction" value="<?php echo Translation::getString("addFaction"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
@@ -36,7 +40,7 @@ class CreateEntryWidget implements IWidget {
                         <td data-bind="text: username" />
                         <td data-bind="text: victoryPoints" />
                         <td class="actions">
-                            <span data-bind="visible: isUsersFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("yourFaction"); ?>"></span>
+                            <span data-bind="visible: isAttackingFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("attackingFaction"); ?>"></span>
                             <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
                                 <span class="ui-icon ui-icon-trash"</span>
                             </button>

@@ -1,17 +1,17 @@
 /*exported Entry */
 /*globals ko, Faction, User, FactionEntry */
-var Entry = function(campaignId, serverEntry, user) {
+var Entry = function(campaignId, serverEntry) {
     var self = this;
     
     self.createdOnDate = ko.observable(serverEntry ? serverEntry.CreatedOnDate : undefined);
     self.campaignId = ko.observable(campaignId ? campaignId : undefined);
     self.factionEntries = ko.observableArray();
     
-    self.usersFaction = ko.computed(function() {
-        var usersFactionEntryList = $.grep(self.factionEntries(), function(factionEntry) {
-            return factionEntry.user().id() === user.id();
+    self.attackingFaction = ko.computed(function() {
+        var attackingFactionEntryList = $.grep(self.factionEntries(), function(factionEntry) {
+            return factionEntry.isAttackingFaction();
         });
-        return (usersFactionEntryList.length > 0) ? usersFactionEntryList[0].faction() : null;            
+        return (attackingFactionEntryList.length > 0) ? attackingFactionEntryList[0].faction() : null;            
     });
     
     if(serverEntry) {

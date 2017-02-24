@@ -19,9 +19,8 @@ var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry)
     
     self.victoryPoints = factionEntry.victoryPoints;
     
-    self.isUsersFaction = ko.computed(function() {
-        var usersFaction = currentCampaignEntry.usersFaction();
-        return usersFaction ? (usersFaction.id() === factionEntry.faction().id()) : false;
+    self.isAttackingFaction = ko.computed(function() {
+        return factionEntry.isAttackingFaction();
     });
     
     self.removeFactionEntry = function() {

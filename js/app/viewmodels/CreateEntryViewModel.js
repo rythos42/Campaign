@@ -2,7 +2,7 @@
 /*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation, MapViewModel */
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
-        currentEntry = new Entry(null, null, user),
+        currentEntry = new Entry(),
         factionEntry = new FactionEntry(),
         factionEntryValidationViewModel;
         
@@ -21,6 +21,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.victoryPoints = factionEntry.victoryPoints.extend({
         required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
+    
+    self.isAttackingFaction = factionEntry.isAttackingFaction;
         
     self.showCampaignEntry = ko.computed(function() {
         return navigation.showCampaignEntry();
@@ -32,7 +34,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') },
-        mustContain: { params: { searchFor: user, objectProperty: 'user', comparisonProperty: 'id' }, message: Translation.getString('mustAddSelfToFactionEntryList') }
     });
     
     self.hasFactionEntries = ko.computed(function() {
@@ -100,6 +101,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.selectedUser.isModified(false);
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
+        self.isAttackingFaction(false);
         
         self.factionEntries.isModified(false);
     };

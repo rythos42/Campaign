@@ -1,6 +1,6 @@
 /*exported EntryListViewModel */
 /*globals ko, EntryListItemViewModel, Entry, FactionEntrySummaryViewModel */
-var EntryListViewModel = function(user, navigation, currentCampaign) {
+var EntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
         internalEntryList = ko.observableArray();
 
@@ -41,7 +41,7 @@ var EntryListViewModel = function(user, navigation, currentCampaign) {
             dataType: 'JSON',
             success: function(serverEntryList) {
                 internalEntryList($.map(serverEntryList, function(serverEntry) {
-                    return new Entry(currentCampaign().id(), serverEntry, user);
+                    return new Entry(currentCampaign().id(), serverEntry);
                 }));
             }
         });

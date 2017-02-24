@@ -35,8 +35,8 @@ class CampaignMapper {
         $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
         Database::execute(
-            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, UsersFactionId) VALUES (?, ?, ?, ?)", 
-            [$campaignEntry->campaignId, $createdByUserId, $today, $campaignEntry->usersFaction->id]);
+            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId) VALUES (?, ?, ?, ?)", 
+            [$campaignEntry->campaignId, $createdByUserId, $today, $campaignEntry->attackingFaction->id]);
         
         $campaignEntryId = Database::getLastInsertedId();
 
@@ -50,10 +50,12 @@ class CampaignMapper {
             if($factionEntry->victoryPoints > $winningVictoryPoints) {
                 $winningFactionId = $factionEntry->faction->id;
                 $winningVictoryPoints = $factionEntry->victoryPoints;
+            } else if($factionEntry->victoryPoints == $winningVictoryPoints) {
+                $winningFactionId = -1; // draw, no one is winning
             }
         }
 
-        if($winningFactionId === $campaignEntry->usersFaction->id) {
+        if($winningFactionId === $campaignEntry->attackingFaction->id) {
             Database::execute(
                 "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
                 [$winningFactionId, $campaignEntry->campaignId, $territoryIdOnMap]);
