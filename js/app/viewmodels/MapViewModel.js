@@ -7,7 +7,7 @@ var MapViewModel = function(navigation, currentCampaign, currentEntry) {
     
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
-    self.selectedTerritory = ko.observable();
+    self.selectedTerritory = ko.observable().extend({ required: { message: Translation.getString('territoryRequiredValidator') } });
         
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -87,10 +87,17 @@ var MapViewModel = function(navigation, currentCampaign, currentEntry) {
         }
     };
     
+    self.zoom = function() {
+        //self.zoomed(!self.zoomed());
+    };
+    
+    self.zoomed = ko.observable(false);
+    
     self.clearMap = function() {
         self.mapImageUrl(null);
         self.drawingTerritory(null);
         self.selectedTerritory(null);
+        self.selectedTerritory.isModified(false);
         originalImageData = null;
     };
     

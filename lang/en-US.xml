@@ -39,9 +39,9 @@
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
         <or>OR</or>
         <campaignType>Campaign type</campaignType>
-        <attackingFaction>Attacking faction</attackingFaction>
+        <attacker>Attacker</attacker>
         <remove>Remove</remove>
-        <mustAddSelfToFactionEntryList>You have to add yourself in there.</mustAddSelfToFactionEntryList>
+        <attackerRequiredValidator>You have to add an attacker!</attackerRequiredValidator>
+        <territoryRequiredValidator>You must select a territory to attack.</territoryRequiredValidator>
     </strings>
-    
 </translation>

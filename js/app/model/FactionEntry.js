@@ -5,7 +5,7 @@ var FactionEntry = function(faction, user, victoryPoints) {
     
     self.faction = ko.observable(faction ? faction : undefined);
     self.user = ko.observable(user ? user : undefined);
-    self.victoryPoints = ko.observable(victoryPoints ? victoryPoints : undefined);
+    self.victoryPoints = ko.observable((victoryPoints || victoryPoints === 0)? victoryPoints : undefined);
     self.isAttackingFaction = ko.observable();
     
     self.clone = function() {

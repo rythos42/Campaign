@@ -19,8 +19,8 @@ class CreateEntryWidget implements IWidget {
                 <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
             </div>
             <div class="entry-field in-list">
-                <label for="IsAttackingFaction"><?php echo Translation::getString("attackingFaction"); ?>:</label>
-                <input type="checkbox" id="IsAttackingFaction" data-bind="checked: isAttackingFaction, event: {keypress: keyPressAddFaction}" />
+                <label for="IsAttackingFaction"><?php echo Translation::getString("attacker"); ?>:</label>
+                <input type="checkbox" id="IsAttackingFaction" data-bind="checked: isAttackingFaction, enable: needsAttackingFaction, event: {keypress: keyPressAddFaction}" />
             </div>
             <div class="button-panel in-list">
                 <input type="button" data-bind="click: addFaction" value="<?php echo Translation::getString("addFaction"); ?>" class="ui-button ui-widget ui-corner-all" />
@@ -40,7 +40,7 @@ class CreateEntryWidget implements IWidget {
                         <td data-bind="text: username" />
                         <td data-bind="text: victoryPoints" />
                         <td class="actions">
-                            <span data-bind="visible: isAttackingFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("attackingFaction"); ?>"></span>
+                            <span data-bind="visible: isAttackingFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
                             <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
                                 <span class="ui-icon ui-icon-trash"</span>
                             </button>

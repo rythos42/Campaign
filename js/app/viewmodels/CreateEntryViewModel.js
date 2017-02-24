@@ -23,6 +23,10 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     self.isAttackingFaction = factionEntry.isAttackingFaction;
+    
+    self.needsAttackingFaction = ko.computed(function() {
+        return currentEntry.attackingFaction() === null;
+    });
         
     self.showCampaignEntry = ko.computed(function() {
         return navigation.showCampaignEntry();
@@ -34,6 +38,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         });
     }).extend({
         minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') },
+        mustContain: { params: { searchFor: true, objectProperty: 'isAttackingFaction' }, message: Translation.getString('attackerRequiredValidator') }
     });
     
     self.hasFactionEntries = ko.computed(function() {
@@ -46,7 +51,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     var validatedEntry = ko.validatedObservable([
-        self.factionEntries
+        self.factionEntries,
+        self.mapViewModel.selectedTerritory
     ]);
     
     self.saveCampaignEntry = function() {

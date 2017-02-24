@@ -7,7 +7,12 @@ class MapWidget implements IWidget {
             <ul id="MapLegend" data-bind="foreach: factions">
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
-            <canvas id="MapCanvas" style="width: 500px" data-bind="canvas: { url: mapImageUrl, onLoad: updateImage }, drawPolygonOnCanvas: drawingTerritory, event: { mousemove: drawTerritory, click: selectTerritory }"></canvas>
+            <canvas id="MapCanvas" data-bind="
+                canvas: { url: mapImageUrl, onLoad: updateImage, zoomed: zoomed }, 
+                drawPolygonOnCanvas: drawingTerritory, 
+                event: { mousemove: drawTerritory, click: selectTerritory, dblclick: zoom }">
+            </canvas>
+            <span class="validationMessage" data-bind="validationMessage: selectedTerritory"></span>
         </div>
         <!-- /ko -->
         <?php
