@@ -1,4 +1,5 @@
 /*exported MapLegendViewModel */
+/*globals ko, ColourHelper */
 var MapLegendViewModel = function(faction) {
     var self = this;
     

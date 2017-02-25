@@ -1,5 +1,5 @@
 /*exported MapViewModel */
-/*globals ko */
+/*globals ko, Translation, MapLegendViewModel */
 var MapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),

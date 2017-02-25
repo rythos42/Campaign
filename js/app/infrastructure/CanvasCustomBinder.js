@@ -10,6 +10,10 @@ ko.bindingHandlers.canvas = {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 return;
             }
+            
+            // set initial size based on parent size
+            var $canvas = $(canvas);
+            $canvas.css('width', $canvas.parent().width());
 
             var image = new Image();
             image.src = params.url();

@@ -10,6 +10,7 @@ class MapWidget implements IWidget {
             <canvas id="MapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: updateImage, zoomed: zoomed }, 
                 drawPolygonOnCanvas: drawingTerritory, 
+                resizeOnWindowResize: {},
                 event: { mousemove: drawTerritory, click: selectTerritory, dblclick: zoom }">
             </canvas>
             <span class="validationMessage" data-bind="validationMessage: selectedTerritory"></span>
