@@ -1,6 +1,9 @@
 Now:
-- look into KO components, maybe they have a thing we can use for the canvas?
-- drag factions to the map to place them?
+- In CreateCampaignMapViewModel
+    - highlight territories with a transparency of the faction colour being dragged
+    - when dropping, go to the database and set this faction as owning that territory.
+    - reload the map?
+    - tell user they can drag those little faction buttons
 
 Near Future:
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
@@ -30,6 +33,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- validate that faction names are different within a campaign
 - better way to check for isMapCampaign in Campaign.js
 - consider being able to add multiple users to a FactionEntry?
     - would allow easier adding of multi-player games

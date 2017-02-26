@@ -2,7 +2,8 @@
 /*globals ko, MapHelper, MapLegendViewModel */
 var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     var self = this,
-        mapHelper = new MapHelper('CampaignMapCanvas');
+        mapHelper = new MapHelper('CampaignMapCanvas'),
+        draggingFactionId;
     
     self.mapImageUrl = ko.observable();
     self.showMap = ko.computed(function() {
@@ -19,13 +20,24 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         mapHelper.storeImage();
     };
     
-    entryCampaign.id.subscribe(function(newCampaignId) {
-        if(entryCampaign.isMapCampaign())
-            self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaignId);
-    });
-    
     self.clearMap = function() {
         self.mapImageUrl(null);
         mapHelper.clearImageData();
     };
+    
+    self.dragFaction = function(mapLegendViewModel) {
+        draggingFactionId = mapLegendViewModel.id();
+        return true;
+    };
+    
+    self.highlightDraggingTerritory = function() {
+    };
+    
+    self.placeFactionInTerritory = function() {
+    };
+
+    entryCampaign.id.subscribe(function(newCampaignId) {
+        if(entryCampaign.isMapCampaign())
+            self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaignId);
+    });
 };

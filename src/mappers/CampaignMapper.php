@@ -6,12 +6,14 @@ class CampaignMapper {
         Database::execute("INSERT INTO Campaign (Name, CampaignType, CreatedByUserId, CreatedOnDate) VALUES (?, ?, ?, ?)", [$name, $campaignType, $createdByUserId, $today]);
 
         $campaignId = Database::getLastInsertedId();
+        $insertCampaignReturnData = array("CampaignId" => $campaignId);
         
         foreach($factions as $faction) {
             Database::execute("INSERT INTO CampaignFaction (Name, Colour, CampaignId) VALUES (?, ?, ?)", [$faction->name, $faction->colour, $campaignId]);
+            $insertCampaignReturnData[$faction->name] = Database::getLastInsertedId();
         }
         
-        return $campaignId;
+        return $insertCampaignReturnData;
     }
     
     public static function getCampaignList() {

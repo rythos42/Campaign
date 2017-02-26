@@ -20,6 +20,8 @@ switch($action) {
             $user = UserMapper::validateLogin($_REQUEST['username'], $_REQUEST['password']);
             if($user) {
                 User::setLoggedIn($user);
+                
+                header("Content-Type: text/json");
                 echo json_encode($user);
             }
             else {

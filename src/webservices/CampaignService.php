@@ -12,12 +12,13 @@ switch($action) {
         $name = $_REQUEST["name"];
         $campaignType = $_REQUEST["campaignType"];
         $factions = json_decode($_REQUEST["factions"]);
-        $newCampaignId = CampaignMapper::insertCampaign($name, $campaignType, $factions);
+        $insertCampaignReturnData = CampaignMapper::insertCampaign($name, $campaignType, $factions);
         
         if(CampaignType::Map === (int) $campaignType && User::getCurrentUser()->hasPermission(Permission::CreateMapCampaign))
-            MapMapper::generateAndSaveMapForId($newCampaignId);
+            MapMapper::generateAndSaveMapForId($insertCampaignReturnData["CampaignId"]);
         
-        echo $newCampaignId;        
+        header("Content-Type: text/json");
+        echo json_encode($insertCampaignReturnData);
         break;
 
     case "GetCampaignList":

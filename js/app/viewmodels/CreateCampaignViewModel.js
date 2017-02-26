@@ -69,8 +69,12 @@ var CreateCampaignViewModel = function(user, navigation) {
             url: 'src/webservices/CampaignService.php',
             method: 'POST',
             data: params,
-            success: function(newCampaignId) {
-                entryCampaign.id(newCampaignId);
+            success: function(insertCampaignReturnData) {
+                $.each(entryCampaign.factions(), function(index, faction) {
+                    faction.id(parseInt(insertCampaignReturnData[faction.name()], 10));
+                });
+                entryCampaign.id(parseInt(insertCampaignReturnData.CampaignId, 10));
+                
                 navigation.showMain(!entryCampaign.isMapCampaign());
             }
         });
