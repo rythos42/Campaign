@@ -1,13 +1,13 @@
 <?php
-class MapWidget implements IWidget {
+class EntryMapWidget implements IWidget {
     public function render() {
         ?>
-        <!-- ko with: mapViewModel -->
+        <!-- ko with: entryMapViewModel -->
         <div data-bind="visible: showMap">
-            <ul id="MapLegend" data-bind="foreach: factions">
+            <ul class="map-legend" data-bind="foreach: factions">
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
-            <canvas id="MapCanvas" data-bind="
+            <canvas id="EntryMapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: updateImage, zoomed: zoomed }, 
                 drawPolygonOnCanvas: drawingTerritory, 
                 resizeOnWindowResize: {},

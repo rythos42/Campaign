@@ -17,6 +17,7 @@ switch($action) {
         if(CampaignType::Map === (int) $campaignType && User::getCurrentUser()->hasPermission(Permission::CreateMapCampaign))
             MapMapper::generateAndSaveMapForId($newCampaignId);
         
+        echo $newCampaignId;        
         break;
 
     case "GetCampaignList":

@@ -4,6 +4,8 @@ var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
         entryCampaign = new Campaign();
         
+    self.createCampaignMapViewModel = new CreateCampaignMapViewModel(navigation, entryCampaign);
+        
     self.name = entryCampaign.name.extend({
         required: { message: Translation.getString('campaignNameRequiredValidation') }
     });
@@ -67,8 +69,9 @@ var CreateCampaignViewModel = function(user, navigation) {
             url: 'src/webservices/CampaignService.php',
             method: 'POST',
             data: params,
-            success: function() {
-                navigation.showMain(true);
+            success: function(newCampaignId) {
+                entryCampaign.id(newCampaignId);
+                navigation.showMain(!entryCampaign.isMapCampaign());
             }
         });
     };
@@ -107,6 +110,7 @@ var CreateCampaignViewModel = function(user, navigation) {
         self.factionNameEntry.isModified(false);
         entryCampaign.factions.removeAll();
         self.factions.isModified(false);
+        self.createCampaignMapViewModel.clearMap();
         
         self.campaignNameHasFocus(true);
     });

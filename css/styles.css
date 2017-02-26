@@ -116,13 +116,13 @@ td.actions {
     text-align: right;
 }
 
-#MapLegend {
+.map-legend {
     padding: 0;
     list-style: none;
     margin-bottom: 3px;
 }
 
-#MapLegend li {
+.map-legend li {
     color: #2779aa;
     font-weight: bold;
     border: 1px solid #aed0ea;

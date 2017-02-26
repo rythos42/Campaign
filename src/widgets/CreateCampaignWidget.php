@@ -43,6 +43,11 @@ class CreateCampaignWidget implements IWidget {
                 <input type="button" data-bind="click: saveCampaign" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
+            
+            <?php
+                $createCampaignMapWidget = new CreateCampaignMapWidget();
+                $createCampaignMapWidget->render();
+            ?>
         </div>
         <!-- /ko -->
         <?php

@@ -50,8 +50,8 @@ class CreateEntryWidget implements IWidget {
             </table>
             
             <?php
-            $mapWidget = new MapWidget();
-            $mapWidget->render();
+            $entryMapWidget = new EntryMapWidget();
+            $entryMapWidget->render();
             ?>
             
             <div class="button-panel">

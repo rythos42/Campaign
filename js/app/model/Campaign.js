@@ -14,6 +14,10 @@ var Campaign = function(serverCampaign) {
         }));
     }
     
+    self.isMapCampaign = function() {
+        return parseInt(self.campaignType(), 10) === 1;
+    };
+    
     self.clone = function() {
         var newCampaign = new Campaign();
         newCampaign.id(self.id());

@@ -3,7 +3,7 @@ ko.bindingHandlers.canvas = {
     update: function(canvas, valueAccessor) {
         var params = ko.utils.unwrapObservable(valueAccessor()),
             context = canvas.getContext('2d'),
-            zoomed = params.zoomed;
+            zoomed = params.zoomed || function() { return false; };
             
         function loadImage() {            
             if(!params.url()) {
@@ -13,7 +13,7 @@ ko.bindingHandlers.canvas = {
             
             // set initial size based on parent size
             var $canvas = $(canvas);
-            $canvas.css('width', $canvas.parent().width());
+            $canvas.css('width', $canvas.parent().width() - 20);    // it was initially giving a scroll bar
 
             var image = new Image();
             image.src = params.url();
@@ -32,8 +32,10 @@ ko.bindingHandlers.canvas = {
         }
         loadImage();
         
-        zoomed.subscribe(function() {
-            loadImage();
-        });
+        if(zoomed.subscribe) {
+            zoomed.subscribe(function() {
+                loadImage();
+            });
+        }
     }
 };

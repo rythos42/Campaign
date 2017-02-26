@@ -1,6 +1,6 @@
-/*exported MapViewModel */
+/*exported EntryMapViewModel */
 /*globals ko, Translation, MapLegendViewModel */
-var MapViewModel = function(navigation, currentCampaign, currentEntry) {
+var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
         originalImageData;
@@ -14,7 +14,7 @@ var MapViewModel = function(navigation, currentCampaign, currentEntry) {
         if(!campaign)
             return false;
         
-        return campaign.campaignType() === 1 && navigation.showCampaignEntry();
+        return campaign.isMapCampaign() && navigation.showCampaignEntry();
     });
     
     self.factions = ko.computed(function() {
@@ -103,7 +103,7 @@ var MapViewModel = function(navigation, currentCampaign, currentEntry) {
     
     function getCanvas() {
         // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
-        return document.getElementById('MapCanvas');
+        return document.getElementById('EntryMapCanvas');
     }
     
     function getMousePositionInCanvas(evt) {

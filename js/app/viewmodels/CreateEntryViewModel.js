@@ -1,12 +1,12 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation, MapViewModel */
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, User, Translation, EntryMapViewModel */
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(),
         factionEntry = new FactionEntry(),
         factionEntryValidationViewModel;
         
-    self.mapViewModel = new MapViewModel(navigation, currentCampaign, currentEntry);
+    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.selectedFaction = factionEntry.faction.extend({
@@ -52,7 +52,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     
     var validatedEntry = ko.validatedObservable([
         self.factionEntries,
-        self.mapViewModel.selectedTerritory
+        self.entryMapViewModel.selectedTerritory
     ]);
     
     self.saveCampaignEntry = function() {
@@ -64,7 +64,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         var params = {
             action: 'SaveCampaignEntry',
             campaignEntry: ko.toJSON(currentEntry),
-            territoryIdOnMap: self.mapViewModel.selectedTerritory().IdOnMap
+            territoryIdOnMap: self.entryMapViewModel.selectedTerritory().IdOnMap
         };
         
         $.ajax({
@@ -73,7 +73,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             data: params,
             success: function() {
                 navigation.showMain(true);
-                self.mapViewModel.clearMap();
+                self.entryMapViewModel.clearMap();
             }
         });
     };
@@ -132,7 +132,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     };
                
     navigation.showCampaignEntry.subscribe(function(show) {
-        self.mapViewModel.clearMap();
+        self.entryMapViewModel.clearMap();
         
         if(!show)
             return;
