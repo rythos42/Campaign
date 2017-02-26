@@ -2,8 +2,7 @@
 ko.bindingHandlers.canvas = {
     update: function(canvas, valueAccessor) {
         var params = ko.utils.unwrapObservable(valueAccessor()),
-            context = canvas.getContext('2d'),
-            zoomed = params.zoomed || function() { return false; };
+            context = canvas.getContext('2d');
             
         function loadImage() {            
             if(!params.url()) {
@@ -21,21 +20,12 @@ ko.bindingHandlers.canvas = {
                 canvas.width = image.width;
                 canvas.height = image.height;
                 
-                var imageWidth = zoomed() ? image.width / 2 : image.width;
-                var imageHeight = zoomed() ? image.height / 2 : image.height;
-                
                 context.drawImage(image, 
-                    /* source */ 0, 0, imageWidth, imageHeight,
+                    /* source */ 0, 0, image.width, image.height,
                     /* destination */ 0, 0, canvas.width, canvas.height);
                 params.onLoad();
             };
         }
         loadImage();
-        
-        if(zoomed.subscribe) {
-            zoomed.subscribe(function() {
-                loadImage();
-            });
-        }
     }
 };
