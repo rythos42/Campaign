@@ -21,7 +21,25 @@ var MapHelper = function(mapId) {
         originalImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
     };
     
-    self.getMousePositionInCanvas = function(evt) {
+    self.findPolygonUnderMouseEvent = function(territories) {
+        var actualPoint = getMousePositionInCanvas(event),
+            foundTerritory = null;
+        
+        $.each(territories, function(index, territory) {
+            if(isPointInPolygon({x: actualPoint.x, y: actualPoint.y}, territory.Points)) {
+                territory.Points.sort(function(point1, point2){
+                    return point1.PointNumber > point2.PointNumber;
+                });
+                foundTerritory = territory;
+                return false;
+            }
+            return true;
+        });
+        
+        return foundTerritory;
+    };
+    
+    function getMousePositionInCanvas(evt) {
         // http://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
         var canvas = getCanvas(),
             rect = canvas.getBoundingClientRect(),
@@ -32,9 +50,9 @@ var MapHelper = function(mapId) {
             x: (evt.clientX - rect.left) * scaleX,
             y: (evt.clientY - rect.top) * scaleY
         };
-    };
+    }
         
-    self.isPointInPolygon = function(p, polygon) {
+    function isPointInPolygon(p, polygon) {
         // http://stackoverflow.com/questions/16628184/add-onclick-and-onmouseover-to-canvas-element
         var isInside = false,
             minX = polygon[0].X, 
@@ -62,5 +80,5 @@ var MapHelper = function(mapId) {
         }
 
         return isInside;
-    };
+    }
 };

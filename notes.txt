@@ -1,9 +1,9 @@
 Now:
 - In CreateCampaignMapViewModel
-    - highlight territories with a transparency of the faction colour being dragged
-    - when dropping, go to the database and set this faction as owning that territory.
-    - reload the map?
+    - when dropping, store where the thing was dropped and continue drawing there.
     - tell user they can drag those little faction buttons
+    - "Done" or "Save" when finished -- go to the database and set this faction as owning that territory.
+
 
 Near Future:
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
@@ -33,6 +33,10 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- what happens if you save a campaign multiple times?
+- if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
+- campaign button text is centered, should be left aligned
+- chop down giant campaign names, or validate they are less than a decent number of characters
 - validate that faction names are different within a campaign
 - better way to check for isMapCampaign in Campaign.js
 - consider being able to add multiple users to a FactionEntry?

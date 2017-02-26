@@ -15,7 +15,7 @@ switch($action) {
         $insertCampaignReturnData = CampaignMapper::insertCampaign($name, $campaignType, $factions);
         
         if(CampaignType::Map === (int) $campaignType && User::getCurrentUser()->hasPermission(Permission::CreateMapCampaign))
-            MapMapper::generateAndSaveMapForId($insertCampaignReturnData["CampaignId"]);
+            $insertCampaignReturnData["TerritoryPolygons"] = MapMapper::generateAndSaveMapForId($insertCampaignReturnData["CampaignId"]);
         
         header("Content-Type: text/json");
         echo json_encode($insertCampaignReturnData);

@@ -55,22 +55,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
             return;
         
         mapHelper.restoreImage();
-        
-        var actualPoint = mapHelper.getMousePositionInCanvas(event),
-            foundTerritory = false;
-            
-        $.each(adjacentTerritories(), function(index, territory) {
-            if(mapHelper.isPointInPolygon({x: actualPoint.x, y: actualPoint.y}, territory.Points)) {
-                territory.Points.sort(function(point1, point2){
-                    return point1.PointNumber > point2.PointNumber;
-                });
-                self.drawingTerritory(territory);
-                foundTerritory = true;
-            }
-        });
-        
-        if(!foundTerritory)
-            self.drawingTerritory(null);
+        self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(adjacentTerritories(), event));
     };
     
     self.selectTerritory = function() {

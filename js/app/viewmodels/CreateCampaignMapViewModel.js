@@ -3,9 +3,12 @@
 var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     var self = this,
         mapHelper = new MapHelper('CampaignMapCanvas'),
-        draggingFactionId;
+        draggingFactionId,
+        territoryPolygons;
     
     self.mapImageUrl = ko.observable();
+    self.highlightedTerritory = ko.observable();
+
     self.showMap = ko.computed(function() {
         return entryCampaign.isMapCampaign();
     });
@@ -15,6 +18,10 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
             return new MapLegendViewModel(faction);
         });
     });
+    
+    self.setTerritoryPolygons = function(newTerritoryPolygons) {
+        territoryPolygons = newTerritoryPolygons;
+    };
     
     self.storeImage = function() {
         mapHelper.storeImage();
@@ -30,7 +37,9 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         return true;
     };
     
-    self.highlightDraggingTerritory = function() {
+    self.highlightDraggingTerritory = function(createCampaignMapViewModel, event) {
+        mapHelper.restoreImage();
+        self.highlightedTerritory(mapHelper.findPolygonUnderMouseEvent(territoryPolygons, event));
     };
     
     self.placeFactionInTerritory = function() {

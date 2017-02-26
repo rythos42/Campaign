@@ -125,6 +125,7 @@ class MapMapper {
         $lineShadow = imagecolorallocate($map, 0, 0, 0);
         $lineColor = imagecolorallocate($map, 250, 250, 250);
         $areaNumber = 0;
+        $mapReturnData = array();
         foreach ($diagram['cells'] as $cell) {
             $points = MapMapper::getPolygonPoints($cell);
 
@@ -143,15 +144,21 @@ class MapMapper {
             Database::execute("INSERT INTO Polygon (CampaignId, IdOnMap) VALUES (?, ?)", [$campaignId, $areaNumber + 1]);
             $polygonId = Database::getLastInsertedId();
             $pointNumber = 0;
+            $insertingPolygon = array("Id" => $polygonId, "IdOnMap" => $areaNumber + 1, "Points" => array());
+            
             foreach($points->pointsForCenterCalculation as $pointToSave) {
                 Database::execute("INSERT INTO PolygonPoint (PolygonId, X, Y, PointNumber) VALUES (?, ?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y, $pointNumber]);
+                $insertingPolygon["Points"][] = array("X" =>  $pointToSave->x, "Y" => $pointToSave->y, "PointNumber" => $pointNumber);
                 $pointNumber++;
             }
-            
+
+            $mapReturnData[] = $insertingPolygon;
             $areaNumber++;
         }
 
         imagepng($map, MapMapper::getMapFileNameForCampaign($campaignId));
+        
+        return $mapReturnData;
     }
     
     private static function getPolygonPoints($cell) {

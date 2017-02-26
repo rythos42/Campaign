@@ -74,6 +74,7 @@ var CreateCampaignViewModel = function(user, navigation) {
                     faction.id(parseInt(insertCampaignReturnData[faction.name()], 10));
                 });
                 entryCampaign.id(parseInt(insertCampaignReturnData.CampaignId, 10));
+                self.createCampaignMapViewModel.setTerritoryPolygons(insertCampaignReturnData.TerritoryPolygons);
                 
                 navigation.showMain(!entryCampaign.isMapCampaign());
             }

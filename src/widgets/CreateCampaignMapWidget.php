@@ -9,6 +9,7 @@ class CreateCampaignMapWidget implements IWidget {
             </ul>
             <canvas id="CampaignMapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: storeImage }, 
+                drawPolygonOnCanvas: highlightedTerritory,
                 resizeOnWindowResize: {},
                 event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory}"
             </canvas>
