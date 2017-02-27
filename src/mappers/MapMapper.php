@@ -4,10 +4,8 @@ require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
     public static function saveFactionTerritories($factionTerritories) {
-        foreach($factionTerritories as $factionId => $territoryIdList) {
-            $questionMarks = str_repeat('?, ', count($territoryIdList) - 1) . '?';
-            array_unshift($territoryIdList, $factionId);
-            Database::execute("update Polygon set OwningFactionId = ? where Id in ($questionMarks)", $territoryIdList); 
+        foreach($factionTerritories as $territoryId => $factionId) {
+            Database::execute("update Polygon set OwningFactionId = ? where Id = ?", [$factionId, $territoryId]); 
         }
     }
     

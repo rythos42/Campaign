@@ -71,10 +71,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         
         var droppingTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event),
             factionId = draggingFactionId();
-        
-        if(!factionTerritories[factionId])
-            factionTerritories[factionId] = [];
-        factionTerritories[factionId].push(droppingTerritory.Id);
+            
+        factionTerritories[droppingTerritory.Id] = factionId;
     };
     
     self.saveMap = function() {
