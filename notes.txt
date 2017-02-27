@@ -1,6 +1,8 @@
 Next:
+- software license!
 - don't allow dropping one faction over another (or allow it, and overwrite)
 - read up on database indexes and see if it would help with PolygonPoints (for getAdjacent)  
+    index X, Y and OwningFactionId
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
 - tell user they can drag those little faction buttons
 - if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
