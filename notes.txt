@@ -1,14 +1,13 @@
 Next:
-- software license!
-- don't allow dropping one faction over another (or allow it, and overwrite)
-- read up on database indexes and see if it would help with PolygonPoints (for getAdjacent)  
-    index X, Y and OwningFactionId
-- make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
+- disable dropping one faction over another
 - tell user they can drag those little faction buttons
 - if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
 - validate that faction names are different within a campaign
 - "..." progress indicator while loading map
+- make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
 
+
+-- run db change for index on geeksong
          
 Notes:
     Work:
@@ -19,6 +18,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- allow dropping one faction over another
 - allow removing territories from faction in create campaign
 - collate db changes for ease of future deployment
 - if we do the player-owned territory, need to get all adjacent territories for the logged in player
