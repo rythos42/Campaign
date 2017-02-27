@@ -41,6 +41,8 @@ var ColourHelper = {
             n = Math.max(0, Math.min(n, 255));
             return '0123456789ABCDEF'.charAt((n - n % 16) / 16) + '0123456789ABCDEF'.charAt(n % 16);
         }
+        if(!colour)
+            return null;
         
         return toHex(colour.getRed())+toHex(colour.getGreen())+toHex(colour.getBlue());
     },

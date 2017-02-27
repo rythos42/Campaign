@@ -40,7 +40,7 @@ class CreateCampaignWidget implements IWidget {
             </table>
             
             <div class="button-panel">
-                <input type="button" data-bind="click: saveCampaign" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: saveCampaign, visible: showSaveCampaignButton" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
             

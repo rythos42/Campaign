@@ -7,8 +7,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
 
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
-    self.selectedTerritory = ko.observable().extend({ required: { message: Translation.getString('territoryRequiredValidator') } });
-        
+
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
         if(!campaign)
@@ -17,6 +16,10 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         return campaign.isMapCampaign() && navigation.showCampaignEntry();
     });
     
+    self.selectedTerritory = ko.observable().extend({ 
+        required: { message: Translation.getString('territoryRequiredValidator'), onlyIf: self.showMap } 
+    });
+        
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();
         if(!campaign)
@@ -75,6 +78,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         self.drawingTerritory(null);
         self.selectedTerritory(null);
         self.selectedTerritory.isModified(false);
+        adjacentTerritories(null);
         mapHelper.clearImageData();
     };
 

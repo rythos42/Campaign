@@ -9,7 +9,7 @@ class EntryMapWidget implements IWidget {
             </ul>
             <canvas id="EntryMapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                drawPolygonOnCanvas: drawingTerritory, 
+                drawPolygonOnCanvas: { polygon: drawingTerritory }, 
                 resizeOnWindowResize: {},
                 event: { mousemove: drawTerritory, click: selectTerritory }">
             </canvas>

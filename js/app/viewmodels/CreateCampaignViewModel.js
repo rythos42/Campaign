@@ -18,6 +18,7 @@ var CreateCampaignViewModel = function(user, navigation) {
     
     self.campaignNameHasFocus = ko.observable(false);
     self.factionNameEntryHasFocus = ko.observable(false);
+    self.showSaveCampaignButton = ko.observable(true);
     
     self.showCreateCampaign = ko.computed(function() {
         return navigation.showCreateCampaign();
@@ -77,6 +78,7 @@ var CreateCampaignViewModel = function(user, navigation) {
                 self.createCampaignMapViewModel.setTerritoryPolygons(insertCampaignReturnData.TerritoryPolygons);
                 
                 navigation.showMain(!entryCampaign.isMapCampaign());
+                self.showSaveCampaignButton(!entryCampaign.isMapCampaign());
             }
         });
     };
@@ -113,9 +115,10 @@ var CreateCampaignViewModel = function(user, navigation) {
         self.name.isModified(false);
         self.factionNameEntry('');
         self.factionNameEntry.isModified(false);
+        self.createCampaignMapViewModel.clearMap();
         entryCampaign.factions.removeAll();
         self.factions.isModified(false);
-        self.createCampaignMapViewModel.clearMap();
+        self.showSaveCampaignButton(true);
         
         self.campaignNameHasFocus(true);
     });

@@ -1,27 +1,11 @@
-Now:
-- In CreateCampaignMapViewModel
-    - when dropping, store where the thing was dropped and continue drawing there.
-    - tell user they can drag those little faction buttons
-    - "Done" or "Save" when finished -- go to the database and set this faction as owning that territory.
-
-
-Near Future:
+Next:
+- don't allow dropping one faction over another (or allow it, and overwrite)
+- read up on database indexes and see if it would help with PolygonPoints (for getAdjacent)  
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
-- if we do the player-owned territory, need to get all adjacent territories for the logged in player
-    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
-    - store OwningUserId instead of (or as well as) OwningFactionId.
-        - my current view is that players could switch sides, but that breaks with OwningUserId
-
-- install kdiff at home...
-- rename database stuff:
-    CampaignEntry -> Entry
-    CampaignFactionEntry -> FactionEntry
-    CampaignFaction -> Faction
-    Polygon -> Territory
-    PolygonPoints -> TerritoryPolygonPoints?
-- collate db changes for ease of future deployment
-- update geeksong database so this can be used
-- regression test everything
+- tell user they can drag those little faction buttons
+- if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
+- validate that faction names are different within a campaign
+- "..." progress indicator while loading map
 
          
 Notes:
@@ -33,11 +17,14 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
-- what happens if you save a campaign multiple times?
-- if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
+- allow removing territories from faction in create campaign
+- collate db changes for ease of future deployment
+- if we do the player-owned territory, need to get all adjacent territories for the logged in player
+    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
+    - store OwningUserId instead of (or as well as) OwningFactionId.
+        - my current view is that players could switch sides, but that breaks with OwningUserId
 - campaign button text is centered, should be left aligned
 - chop down giant campaign names, or validate they are less than a decent number of characters
-- validate that faction names are different within a campaign
 - better way to check for isMapCampaign in Campaign.js
 - consider being able to add multiple users to a FactionEntry?
     - would allow easier adding of multi-player games
@@ -46,11 +33,8 @@ Future:
     - click-and-drag to pan
     - hover territory no longer works while zoomed.
     - zooming should be quicker -- save both images
-- should map be displayed before an Attacker is added?
 - not obvious enough that "Attacker" checkbox is disabled
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
-- "..." progress indicator while loading map
-    - something on create campaign map to indicate what the big black border is that just appeared
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
 - can anyone access a map campaign, and only certain people create them?
@@ -71,6 +55,12 @@ Future:
 - deadline for campaign entries
 - allow user to select languages if we have a list
 - factions can choose colours
+- rename database stuff:
+    CampaignEntry -> Entry
+    CampaignFactionEntry -> FactionEntry
+    CampaignFaction -> Faction
+    Polygon -> Territory
+    PolygonPoints -> TerritoryPolygonPoints?
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.

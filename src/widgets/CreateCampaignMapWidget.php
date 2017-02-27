@@ -9,10 +9,13 @@ class CreateCampaignMapWidget implements IWidget {
             </ul>
             <canvas id="CampaignMapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                drawPolygonOnCanvas: highlightedTerritory,
+                drawPolygonOnCanvas: { polygon: highlightedTerritory, colour: draggingFactionColour },
                 resizeOnWindowResize: {},
-                event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory}"
+                event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory}">
             </canvas>
+            <div class="button-panel">
+                <input type="button" data-bind="click: saveMap, visible: showSaveMap" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+            </div>
         </div>
         <!-- /ko -->
         <?php

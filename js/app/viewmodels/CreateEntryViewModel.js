@@ -64,7 +64,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         var params = {
             action: 'SaveCampaignEntry',
             campaignEntry: ko.toJSON(currentEntry),
-            territoryIdOnMap: self.entryMapViewModel.selectedTerritory().IdOnMap
+            territoryIdOnMap: currentCampaign().isMapCampaign() ? self.entryMapViewModel.selectedTerritory().IdOnMap : null
         };
         
         $.ajax({

@@ -47,6 +47,11 @@ switch($action) {
         echo json_encode(MapMapper::getAdjacentTerritoriesForFaction($factionId));
         break;
         
+    case "SaveFactionTerritories":
+        $factionTerritories = $_REQUEST["factionTerritories"];
+        MapMapper::saveFactionTerritories($factionTerritories);
+        break;
+        
 }
 
 ?>

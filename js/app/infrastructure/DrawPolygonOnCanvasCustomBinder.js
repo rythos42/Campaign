@@ -1,12 +1,15 @@
 /*globals ko */
 ko.bindingHandlers.drawPolygonOnCanvas = {
     update: function(canvas, valueAccessor) {
-        var polygon = ko.utils.unwrapObservable(valueAccessor());
+        var params = ko.utils.unwrapObservable(valueAccessor()),
+            polygon = params.polygon();
+            
         if(!polygon)
             return;
         
         var context = canvas.getContext('2d');
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillStyle = (params.colour && params.colour().getRgbaString(0.5))
+            || 'rgba(255, 255, 255, 0.5)';
         
         var points = polygon.Points;
         context.beginPath();

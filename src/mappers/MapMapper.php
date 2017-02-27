@@ -3,6 +3,14 @@ require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
 require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
+    public static function saveFactionTerritories($factionTerritories) {
+        foreach($factionTerritories as $factionId => $territoryIdList) {
+            $questionMarks = str_repeat('?, ', count($territoryIdList) - 1) . '?';
+            array_unshift($territoryIdList, $factionId);
+            Database::execute("update Polygon set OwningFactionId = ? where Id in ($questionMarks)", $territoryIdList); 
+        }
+    }
+    
     public static function getAdjacentTerritoriesForFaction($factionId) {
         // Get all polygon points, for all polygons that are adjacent to factions in the given campaign
         $dbAdjacentPolygonList = self::getAdjacentPolygonsForFaction($factionId);
@@ -31,6 +39,7 @@ class MapMapper {
                 join Polygon adjacentPolygon on 
                     adjacentPolygon.Id = adjacentPoint.PolygonId 
                     and ifnull(adjacentPolygon.OwningFactionId, -1) <> ifnull(ownedPolygon.OwningFactionId, -1)
+                    and adjacentPolygon.CampaignId = ownedPolygon.CampaignId
                 where ownedPolygon.OwningFactionId = ?
                 group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$factionId]);
     }
