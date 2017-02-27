@@ -20,7 +20,7 @@ Run SQL:
 Install 
     Change src/settings.sample.php to src/settings.php
     Update the values in src/settings.php to be correct for your server.
-    May need to create a directory /img/maps
+    Create a directory /img/maps
 
 Build
     Install NPM (instructions elsewhere)
@@ -31,6 +31,10 @@ Build
         npm install grunt-contrib-jshint --save-dev
         npm install grunt-ftp-deploy --save-dev
     
+Give user CreateMapCampaign permission:
+        INSERT INTO PermissionGroup (PermissionId, UserId) VALUES (1, ?)
+    
 
 Test
     "grunt test"
+    
