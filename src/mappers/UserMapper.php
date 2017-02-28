@@ -9,6 +9,9 @@ class UserMapper {
         $today = date('Y-m-d H:i:s');
         Database::execute("INSERT INTO User (Username, PasswordHash, CreatedOnDate) VALUES (?, ?, ?)", [$username, $passwordHash, $today]);
         
+        // In theory, this is the permission I want to try to sell. It's here for alpha testing.
+        Database::execute("INSERT INTO PermissionGroup (PermissionId, UserId) VALUES (?, ?)", [1, Database::getLastInsertedId()]);
+        
         return new User(Database::getLastInsertedId(), $username);
     }
     

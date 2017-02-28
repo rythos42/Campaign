@@ -1,10 +1,9 @@
 Next:
-- validate that faction names are different within a campaign
+- entry lists should go to UL so I can make the width 100%
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
-
-
--- run db change for index on geeksong
-         
+- not obvious enough that "Attacker" checkbox is disabled
+    -- make label text a grey colour when disabled
+        
 Notes:
     Work:
     - TestUser/password     (no map)
@@ -14,7 +13,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
-- entry lists should go to UL so I can make the width 100%
+- remove code that automatically gives permission to create map campaigns
 - allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign
 - collate db changes for ease of future deployment
@@ -23,35 +22,23 @@ Future:
     - store OwningUserId instead of (or as well as) OwningFactionId.
         - my current view is that players could switch sides, but that breaks with OwningUserId
 - better way to check for isMapCampaign in Campaign.js
-- consider being able to add multiple users to a FactionEntry?
-    - would allow easier adding of multi-player games
-    - but if territory is player-owned, you'd still need to mark one as Attacker
 - map is hard to read at mobile sizes
     - click-and-drag to pan
     - hover territory no longer works while zoomed.
     - zooming should be quicker -- save both images
-- not obvious enough that "Attacker" checkbox is disabled
-    -- make label text a grey colour when disabled
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
-- can anyone access a map campaign, and only certain people create them?
 - page campaign list
 - create campaign customization
     - set height, width, number of sectors on map
     - pick background image
-- for buying: group buy, or individual buy?
-- tournaments, with specific people needing to be played
-    - generate match-ups and rankings after each round
 - XP system
 - text writing about each game, and a place for that text to be prominently displayed
-- lock in a particular army
-- scenarios can have categories of VPs in them to break it down
 - admin can write a narrative for the campaign
 - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
 - deadline for campaign entries
-- allow user to select languages if we have a list
 - factions can choose colours
 - rename database stuff:
     CampaignEntry -> Entry
@@ -66,8 +53,23 @@ Terms:
 
 Credit: 
 - https://github.com/sroze/PHP-Voronoi-algorithm
+
+Selling Questions:
+- can anyone access a map campaign, and only certain people create them?
+- for buying: group buy, or individual buy?
+
         
 Far future:
+- consider being able to add multiple users to a FactionEntry?
+    - would allow easier adding of multi-player games
+    - but if territory is player-owned, you'd still need to mark one as Attacker
+- allow user to select languages if we have a list
+- scenarios can have categories of VPs in them to break it down
+- lock in a particular army
+- tournaments, with specific people needing to be played
+    - generate match-ups and rankings after each round
+
+
     Stats:
     - these would have to be game specific, is why they are far-future
     - races played

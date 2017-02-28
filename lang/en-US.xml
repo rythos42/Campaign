@@ -45,5 +45,6 @@
         <territoryRequiredValidator>You must select a territory to attack.</territoryRequiredValidator>
         <generateMap>Generate Map</generateMap>
         <campaignNameMaxLengthValidation>You've only got 45 characters.</campaignNameMaxLengthValidation>
+        <uniqueFactionNameValidator>Factions in your campaign must have a unique name.</uniqueFactionNameValidator>
     </strings>
 </translation>

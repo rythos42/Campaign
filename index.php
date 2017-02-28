@@ -23,6 +23,7 @@
         <script src="js/app/infrastructure/MustContainValidator.js"></script>
         <script src="js/app/infrastructure/ResizeOnWindowResizeCustomBinder.js"></script>
         <script src="js/app/infrastructure/MapHelper.js"></script>
+        <script src="js/app/infrastructure/UniqueInValidator.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

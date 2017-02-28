@@ -14,8 +14,17 @@ var CreateCampaignViewModel = function(user, navigation) {
     
     self.campaignType = entryCampaign.campaignType;
     
+    self.factions = ko.computed(function() {
+        return $.map(entryCampaign.factions(), function(faction) {
+            return new CreateFactionListItemViewModel(entryCampaign, faction);
+        });
+    }).extend({
+        minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
+    });
+    
     self.factionNameEntry = ko.observable('').extend({
-        required: { message: Translation.getString('factionNameRequiredValidation') }
+        required: { message: Translation.getString('factionNameRequiredValidation') },
+        uniqueIn: { params: { array: self.factions, arrayObjectProperty: 'name'}, message: Translation.getString('uniqueFactionNameValidator') }
     });
     
     self.campaignNameHasFocus = ko.observable(false);
@@ -35,14 +44,6 @@ var CreateCampaignViewModel = function(user, navigation) {
          
     self.numberOfFactions = ko.computed(function() {
         return entryCampaign.factions().length;
-    });
-
-    self.factions = ko.computed(function() {
-        return $.map(entryCampaign.factions(), function(faction) {
-            return new CreateFactionListItemViewModel(entryCampaign, faction);
-        });
-    }).extend({
-        minLength: { params: 1, message: Translation.getString('minimumOneFactionRequiredValidator')  }
     });
     
     self.hasFactions = ko.computed(function() {
