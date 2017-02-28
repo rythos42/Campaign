@@ -40,7 +40,8 @@ module.exports = function (grunt) {
                 'HOW TO TRAVIS ENCRYPT.txt',
                 'install.txt',
                 'settings.sample.php',
-                'db'
+                'db',
+                'img/*.pdn'
                 ]
             }
         }

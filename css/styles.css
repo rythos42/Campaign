@@ -59,6 +59,12 @@ select {
     padding: 5px;
 }
 
+#Login {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #Login .button-panel.in-list {
     text-align: right;
     width: 290px;
