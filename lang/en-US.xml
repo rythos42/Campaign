@@ -44,5 +44,6 @@
         <attackerRequiredValidator>You have to add an attacker!</attackerRequiredValidator>
         <territoryRequiredValidator>You must select a territory to attack.</territoryRequiredValidator>
         <generateMap>Generate Map</generateMap>
+        <campaignNameMaxLengthValidation>You've only got 45 characters.</campaignNameMaxLengthValidation>
     </strings>
 </translation>

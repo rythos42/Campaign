@@ -7,6 +7,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
 
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
+    self.showLoadingImage = ko.observable(true);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -80,10 +81,12 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         self.selectedTerritory.isModified(false);
         adjacentTerritories(null);
         mapHelper.clearImageData();
+        self.showLoadingImage(true);
     };
 
     self.storeImage = function() {
         mapHelper.storeImage();
+        self.showLoadingImage(false);
     };
     
     currentCampaign.subscribe(function(newCampaign) {

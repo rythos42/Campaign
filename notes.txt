@@ -1,11 +1,5 @@
 Next:
-- More "wizard like" 
-    - don't show campaign map or legend until Generate Map
-    - don't show campaign entry after Generate Map
-- tell user they can drag those little faction buttons
-- if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
 - validate that faction names are different within a campaign
-- "..." progress indicator while loading map
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
 
 
@@ -20,6 +14,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- entry lists should go to UL so I can make the width 100%
 - allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign
 - collate db changes for ease of future deployment
@@ -27,8 +22,6 @@ Future:
     - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
     - store OwningUserId instead of (or as well as) OwningFactionId.
         - my current view is that players could switch sides, but that breaks with OwningUserId
-- campaign button text is centered, should be left aligned
-- chop down giant campaign names, or validate they are less than a decent number of characters
 - better way to check for isMapCampaign in Campaign.js
 - consider being able to add multiple users to a FactionEntry?
     - would allow easier adding of multi-player games

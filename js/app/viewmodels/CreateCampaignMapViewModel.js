@@ -9,6 +9,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     
     self.mapImageUrl = ko.observable();
     self.highlightedTerritory = ko.observable();
+    self.showCreateCampaignMapEntry = ko.observable(false);
+    self.showLoadingImage = ko.observable(true);
     
     self.draggingFactionColour = ko.computed(function() {
         var factionId = draggingFactionId(),
@@ -26,11 +28,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     });
 
     self.showMap = ko.computed(function() {
-        return entryCampaign.isMapCampaign();
-    });
-    
-    self.showSaveMap = ko.computed(function() {
-        return territoryPolygons() ? territoryPolygons().length > 0 : false;
+        return entryCampaign.isMapCampaign() && self.showCreateCampaignMapEntry();
     });
     
     self.factions = ko.computed(function() {
@@ -45,6 +43,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     
     self.storeImage = function() {
         mapHelper.storeImage();
+        self.showLoadingImage(false);
     };
     
     self.clearMap = function() {
@@ -54,6 +53,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         draggingFactionId(null);
         territoryPolygons(null);
         mapHelper.clearImageData();
+        self.showCreateCampaignMapEntry(false);
+        self.showLoadingImage(true);
     };
     
     self.dragFaction = function(mapLegendViewModel) {

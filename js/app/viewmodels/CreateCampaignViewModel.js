@@ -2,12 +2,14 @@
 /*globals ko, CreateFactionListItemViewModel, Faction, Campaign, Translation, ColourHelper, CreateCampaignMapViewModel */
 var CreateCampaignViewModel = function(user, navigation) {
     var self = this,
-        entryCampaign = new Campaign();
+        entryCampaign = new Campaign(),
+        showCampaignEntry = ko.observable(true);
         
     self.createCampaignMapViewModel = new CreateCampaignMapViewModel(navigation, entryCampaign);
         
     self.name = entryCampaign.name.extend({
-        required: { message: Translation.getString('campaignNameRequiredValidation') }
+        required: { message: Translation.getString('campaignNameRequiredValidation') },
+        maxLength: { params: 45, message: Translation.getString('campaignNameMaxLengthValidation') }
     });
     
     self.campaignType = entryCampaign.campaignType;
@@ -18,10 +20,13 @@ var CreateCampaignViewModel = function(user, navigation) {
     
     self.campaignNameHasFocus = ko.observable(false);
     self.factionNameEntryHasFocus = ko.observable(false);
-    self.showSaveCampaignButton = ko.observable(true);
     
     self.showCreateCampaign = ko.computed(function() {
         return navigation.showCreateCampaign();
+    });
+    
+    self.showCreateCampaignEntry = ko.computed(function() {
+        return navigation.showCreateCampaign() && showCampaignEntry();
     });
     
     self.showCreateCampaignButton = ko.computed(function() {
@@ -79,14 +84,16 @@ var CreateCampaignViewModel = function(user, navigation) {
             method: 'POST',
             data: params,
             success: function(insertCampaignReturnData) {
+                self.createCampaignMapViewModel.showCreateCampaignMapEntry(entryCampaign.isMapCampaign());
+
                 $.each(entryCampaign.factions(), function(index, faction) {
-                    faction.id(parseInt(insertCampaignReturnData[faction.name()], 10));
+                    faction.id(parseInt(insertCampaignReturnData.Factions[faction.name()], 10));
                 });
                 entryCampaign.id(parseInt(insertCampaignReturnData.CampaignId, 10));
                 self.createCampaignMapViewModel.setTerritoryPolygons(insertCampaignReturnData.TerritoryPolygons);
                 
                 navigation.showMain(!entryCampaign.isMapCampaign());
-                self.showSaveCampaignButton(!entryCampaign.isMapCampaign());
+                showCampaignEntry(!entryCampaign.isMapCampaign());
             }
         });
     };
@@ -126,7 +133,7 @@ var CreateCampaignViewModel = function(user, navigation) {
         self.createCampaignMapViewModel.clearMap();
         entryCampaign.factions.removeAll();
         self.factions.isModified(false);
-        self.showSaveCampaignButton(true);
+        showCampaignEntry(true); 
         
         self.campaignNameHasFocus(true);
     });
