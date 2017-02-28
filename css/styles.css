@@ -130,3 +130,10 @@ td.actions {
     padding: 5px 5px 5px 10px;
     display: inline-block;
 }
+
+.drag-drop-icon {
+    background-image: url('../img/dragdrop.png');
+    width: 32px;
+    height: 32px;
+    margin-top: 1px;
+}

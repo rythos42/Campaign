@@ -43,5 +43,6 @@
         <remove>Remove</remove>
         <attackerRequiredValidator>You have to add an attacker!</attackerRequiredValidator>
         <territoryRequiredValidator>You must select a territory to attack.</territoryRequiredValidator>
+        <generateMap>Generate Map</generateMap>
     </strings>
 </translation>

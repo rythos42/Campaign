@@ -5,7 +5,10 @@ class CreateCampaignMapWidget implements IWidget {
         <!-- ko with: createCampaignMapViewModel -->
         <div data-bind="visible: showMap">
             <ul class="map-legend" data-bind="foreach: factions">
-                <li class="ui-widget ui-corner-all" draggable="true" data-bind="text: name, style: { 'background-color': colour }, event: { dragstart: $parent.dragFaction }" />
+                <li class="ui-widget ui-corner-all" draggable="true" data-bind="style: { 'background-color': colour }, event: { dragstart: $parent.dragFaction }">
+                    <span class="ui-icon drag-drop-icon"></span>
+                    <span data-bind="text: name">
+                </li>
             </ul>
             <canvas id="CampaignMapCanvas" data-bind="
                 canvas: { url: mapImageUrl, onLoad: storeImage }, 

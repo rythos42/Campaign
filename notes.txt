@@ -1,5 +1,7 @@
 Next:
-- disable dropping one faction over another
+- More "wizard like" 
+    - don't show campaign map or legend until Generate Map
+    - don't show campaign entry after Generate Map
 - tell user they can drag those little faction buttons
 - if someone calls their faction "TerritoryPolygonPoints" or "CampaignId", things get awful in CampaignService::SaveCampaign
 - validate that faction names are different within a campaign
@@ -18,7 +20,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
-- allow dropping one faction over another
+- allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign
 - collate db changes for ease of future deployment
 - if we do the player-owned territory, need to get all adjacent territories for the logged in player
@@ -36,6 +38,7 @@ Future:
     - hover territory no longer works while zoomed.
     - zooming should be quicker -- save both images
 - not obvious enough that "Attacker" checkbox is disabled
+    -- make label text a grey colour when disabled
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page

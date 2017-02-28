@@ -47,6 +47,14 @@ var CreateCampaignViewModel = function(user, navigation) {
     self.canCreateMapCampaign = ko.computed(function() {
         return user.hasPermission(1);
     });
+        
+    self.saveCampaignButtonText = ko.computed(function() {
+        if(entryCampaign.isMapCampaign()) {
+            return Translation.getString('generateMap');
+        } else {
+            return Translation.getString('save');
+        }
+    });
     
     var validatedEntry = ko.validatedObservable([
         self.name,
