@@ -21,7 +21,7 @@ var MapHelper = function(mapId) {
         originalImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
     };
     
-    self.findPolygonUnderMouseEvent = function(territories) {
+    self.findPolygonUnderMouseEvent = function(territories, event) {
         var actualPoint = getMousePositionInCanvas(event),
             foundTerritory = null;
         

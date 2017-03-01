@@ -2,14 +2,37 @@ body {
     margin: 0;
 }
 
-.entry-field label {
+ul {
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+li.entry-field,
+li.data-list,
+li.button-panel {
+    margin-left: 5%;
+    width: 300px;
+    text-align: right;
+}
+
+li.entry-field label {
     text-align: right;
     display: inline-block;
     margin-bottom: 5px;
+    width: 120px;
 }
 
-.entry-field.in-list label {
-    width: 120px;
+li.entry-field .validationMessage {
+    margin-left: 125px;
+}
+
+li.data-list span {
+    font-weight: bold;
+    display: inline-block;
+    width: 100px;
 }
 
 .link-button {
@@ -38,10 +61,6 @@ body {
     color: red;
 }
 
-.entry-field.in-list .validationMessage {
-    margin-left: 125px;
-}
-
 table {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -63,19 +82,6 @@ select {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
-}
-
-#Login .button-panel.in-list {
-    text-align: right;
-    width: 290px;
-}
-
-#CreateCampaign .button-panel.in-list {
-    margin-left: 152px;
-}
-
-#CreateCampaignEntry .button-panel.in-list {
-    margin-left: 152px;
 }
 
 #CreateCampaignEntry table {
@@ -117,6 +123,7 @@ canvas {
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
+    max-width: 1024px;
 }
 
 td.actions {
@@ -153,4 +160,9 @@ td.actions {
     width: 32px;
     height: 32px;
     margin-top: 1px;
+}
+
+.disabled-label {
+    color: #888888;
+    cursor: default !important;
 }

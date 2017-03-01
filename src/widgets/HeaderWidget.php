@@ -9,6 +9,9 @@ class HeaderWidget implements IWidget {
             <!-- ko with: createCampaignViewModel-->
             <input type="button" data-bind="click: requestCreateCampaign, visible: showCreateCampaignButton" value="<?php echo Translation::getString("createCampaign"); ?>" class="ui-button ui-widget ui-corner-all" />
             <!-- /ko -->
+            <!-- ko with: userProfileViewModel -->
+            <input type="button" data-bind="click: requestUserProfile, visible: showUserProfileButton" value="<?php echo Translation::getString("profile"); ?>" class="ui-button ui-widget ui-corner-all" />
+            <!-- /ko -->
         </div>
         <?php
     }

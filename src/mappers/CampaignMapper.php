@@ -43,7 +43,7 @@ class CampaignMapper {
         
         $campaignEntryId = Database::getLastInsertedId();
 
-        $winningFactionId = -1;
+        $winningFactionEntry = null;
         $winningVictoryPoints = -1;
         foreach($campaignEntry->factionEntries as $factionEntry) {
             Database::execute(
@@ -51,18 +51,20 @@ class CampaignMapper {
                 [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
                 
             if($factionEntry->victoryPoints > $winningVictoryPoints) {
-                $winningFactionId = $factionEntry->faction->id;
+                $winningFactionEntry = $factionEntry;
                 $winningVictoryPoints = $factionEntry->victoryPoints;
             } else if($factionEntry->victoryPoints == $winningVictoryPoints) {
-                $winningFactionId = -1; // draw, no one is winning
+                $winningFactionEntry = null; // draw, no one is winning
             }
         }
 
-        if($winningFactionId === $campaignEntry->attackingFaction->id) {
+        if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
             Database::execute(
                 "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
-                [$winningFactionId, $campaignEntry->campaignId, $territoryIdOnMap]);
+                [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $territoryIdOnMap]);
         }
+        
+        Database::execute("UPDATE User SET TerritoryBonus = TerritoryBonus + 1 WHERE ID = ?", [$winningFactionEntry->user->id]);
     }
     
     public static function getEntriesForCampaign($campaignId) {

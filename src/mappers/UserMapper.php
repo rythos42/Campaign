@@ -16,7 +16,7 @@ class UserMapper {
     }
     
     public static function validateLogin($username, $password) {
-        $dbUser = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
+        $dbUser = Database::queryObject("SELECT Id, PasswordHash, TerritoryBonus FROM User WHERE Username = ?", [$username]);
         if($dbUser && password_verify($password, $dbUser->PasswordHash)) {
             $today = date('Y-m-d H:i:s');
             Database::execute("UPDATE User SET LastLoginDate = ? WHERE Id=?", [$today, $dbUser->Id]);
@@ -26,7 +26,7 @@ class UserMapper {
                 "Permission",
                 [$dbUser->Id]);
                            
-            return new User($dbUser->Id, $username, $permissions);
+            return new User($dbUser->Id, $username, $permissions, $dbUser->TerritoryBonus);
         }
         else {
             return null;
@@ -36,6 +36,16 @@ class UserMapper {
     public static function getUsersByFilter($term) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
         return Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
+    }
+    
+    public static function getUserData($userId) {
+        $dbUser = Database::queryObject("SELECT Username, TerritoryBonus FROM User WHERE Id = ?", [$userId]);
+        $permissions = Database::queryObjectList(
+            "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
+            "Permission",
+            [$userId]);
+            
+        return new User($userId, $dbUser->Username, $permissions, $dbUser->TerritoryBonus);
     }
 }
 ?>

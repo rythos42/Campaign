@@ -1,9 +1,22 @@
 Next:
-- entry lists should go to UL so I can make the width 100%
-- make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
-- not obvious enough that "Attacker" checkbox is disabled
-    -- make label text a grey colour when disabled
+    Territory Bonus!
+        - Able to give to another player.
+        - spend TB per game - put this on the entry field
+        - spend TB to attack anywhere
         
+    Attacks:
+        - show number of attacks made this phase on profile page
+        - show available number of attacks on profile page
+        - players have 1 mandatory and 2 optional
+        
+    Phases
+        - A campaign creator has to go into and hit "Next Phase" button to move to next phase.
+        - On next phase:
+            - attack counts are reset
+            - players gain TB, allocation weighted based on how many games you played in your faction this phase
+    
+    - territory bonus SQL
+    
 Notes:
     Work:
     - TestUser/password     (no map)
@@ -13,6 +26,16 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- swap around entry
+    - pick location
+    - save
+    - come back later and enter who won or lost
+- make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
+- regression test in a few browsers! There was a FF only issue.
+- "LastLoginDate" is not accurate, with login cookies.
+- change login page to have a dedicated "sign up" page
+    - link button swaps between the two views
+    - basically the same ui, but with different labels
 - remove code that automatically gives permission to create map campaigns
 - allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign

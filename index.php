@@ -47,6 +47,7 @@
         <script src="js/app/viewmodels/EntryMapViewModel.js"></script>
         <script src="js/app/viewmodels/MapLegendViewModel.js"></script>
         <script src="js/app/viewmodels/CreateCampaignMapViewModel.js"></script>
+        <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>

@@ -74,6 +74,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             success: function() {
                 navigation.showMain(true);
                 self.entryMapViewModel.clearMap();
+                
+                user.refreshUserData();
             }
         });
     };

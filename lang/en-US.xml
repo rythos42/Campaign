@@ -7,7 +7,7 @@
         <filter>Filter</filter>
         <faction>Faction</faction>
         <user>User</user>
-        <victoryPoints>Points</victoryPoints>        
+        <victoryPoints>Victory Points</victoryPoints>        
         <factionName>Faction Name</factionName>        
         <username>Username</username>        
         <addFaction>Add Faction</addFaction>        
@@ -46,5 +46,7 @@
         <generateMap>Generate Map</generateMap>
         <campaignNameMaxLengthValidation>You've only got 45 characters.</campaignNameMaxLengthValidation>
         <uniqueFactionNameValidator>Factions in your campaign must have a unique name.</uniqueFactionNameValidator>
+        <profile>Profile</profile>
+        <territoryBonus>Territory bonus</territoryBonus>
     </strings>
 </translation>

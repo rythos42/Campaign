@@ -47,6 +47,13 @@ switch($action) {
     
         echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
         break;
+        
+    case "GetUserData":
+        if(!User::isLoggedIn())
+            die("You must be logged in to use this service.");
+        
+        echo json_encode(UserMapper::getUserData(User::getCurrentUser()->getId()));
+        break;
 }
 
 ?>

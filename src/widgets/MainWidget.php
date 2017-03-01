@@ -11,6 +11,9 @@ class MainWidget implements IWidget {
         $loginWidget = new LoginWidget();
         $loginWidget->render();
         
+        $userProfileWidget = new UserProfileWidget();
+        $userProfileWidget->render();
+        
         $createCampaignWidget = new CreateCampaignWidget();
         $createCampaignWidget->render();
         

@@ -14,6 +14,8 @@ Run SQL:
         AlterTable_User_Add_PermissionGroup
         AlterTable_Campaign_Add_CampaignType
         AlterTable_CampaignFaction_Add_Colour
+        AlterTable_User_Add_TerritoryBonus
+        AlterTable_User_Add_LastLoginId
         Insert_Permission_MapCampaign
     
 
