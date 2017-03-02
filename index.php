@@ -24,6 +24,7 @@
         <script src="js/app/infrastructure/ResizeOnWindowResizeCustomBinder.js"></script>
         <script src="js/app/infrastructure/MapHelper.js"></script>
         <script src="js/app/infrastructure/UniqueInValidator.js"></script>
+        <script src="js/app/infrastructure/DialogCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
@@ -31,6 +32,7 @@
         <script src="js/app/model/Entry.js"></script>
         <script src="js/app/model/FactionEntry.js"></script>
         <script src="js/app/model/Colour.js"></script>
+        <script src="js/app/model/DialogResult.js"></script>
         <script src="js/app/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/app/viewmodels/LoginViewModel.js"></script>
         <script src="js/app/viewmodels/LogoutViewModel.js"></script>
@@ -48,6 +50,7 @@
         <script src="js/app/viewmodels/MapLegendViewModel.js"></script>
         <script src="js/app/viewmodels/CreateCampaignMapViewModel.js"></script>
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
+        <script src="js/app/viewmodels/SelectUserDialogViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
@@ -64,7 +67,7 @@
                     
                 ko.validation.registerExtenders();
                 var viewModel = new ApplicationViewModel(user, navigation);
-                ko.applyBindings(viewModel);
+                ko.applyBindings(viewModel, document.getElementById('Everything'));
                 
                 <?php if(User::isLoggedIn()) { ?>
                 user.setFromJson(<?php echo json_encode(User::getCurrentUser()); ?>);
@@ -75,9 +78,11 @@
         
     </head>
     <body>
-        <?php
-        $mainWidget = new MainWidget();
-        $mainWidget->render();
-        ?>
+        <div id="Everything">
+            <?php
+            $mainWidget = new MainWidget();
+            $mainWidget->render();
+            ?>
+        </div>
     </body>
 </html>

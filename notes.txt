@@ -1,8 +1,8 @@
 Next:
+- reload user data to client whenever the page refreshes (after giving, not updated)
+- amount of TB to give away (need another field on "SelectUserDialog", making it not generic)
     Territory Bonus!
-        - Able to give to another player.
         - spend TB per game - put this on the entry field
-        - spend TB to attack anywhere
         
     Attacks:
         - show number of attacks made this phase on profile page
@@ -15,7 +15,6 @@ Next:
             - attack counts are reset
             - players gain TB, allocation weighted based on how many games you played in your faction this phase
     
-    - territory bonus SQL
     
 Notes:
     Work:
@@ -26,6 +25,8 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- position "Give TB" dialog better
+- spend TB to attack anywhere
 - swap around entry
     - pick location
     - save

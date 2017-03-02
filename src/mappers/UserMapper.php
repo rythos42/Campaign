@@ -47,5 +47,10 @@ class UserMapper {
             
         return new User($userId, $dbUser->Username, $permissions, $dbUser->TerritoryBonus);
     }
+    
+    public static function giveTerritoryBonusTo($userId, $amount) {
+        Database::execute("update User set TerritoryBonus = TerritoryBonus - ? where Id = ?", [$amount, User::getCurrentUser()->getId()]);
+        Database::execute("update User set TerritoryBonus = TerritoryBonus + ? where Id = ?", [$amount, $userId]);
+    }
 }
 ?>

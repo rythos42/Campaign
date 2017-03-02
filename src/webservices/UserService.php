@@ -3,6 +3,7 @@
 include("../Header.php");
 $action = $_REQUEST['action'];
         
+// these two actions don't need to be logged in to occur
 switch($action) {
     case "RegisterAndLogin":
         try {
@@ -33,26 +34,26 @@ switch($action) {
             echo ExceptionCodes::LoginFailure;
         }
         break;
-        
+}
+
+if(!User::isLoggedIn())
+    die("You must be logged in to use this service.");
+
+switch($action) {        
     case "Logout":
-        if(!User::isLoggedIn())
-            die("You must be logged in to use this service.");
-    
         User::logout();
         break;
         
     case "GetUsersByFilter":
-        if(!User::isLoggedIn())
-            die("You must be logged in to use this service.");
-    
         echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
         break;
         
     case "GetUserData":
-        if(!User::isLoggedIn())
-            die("You must be logged in to use this service.");
-        
         echo json_encode(UserMapper::getUserData(User::getCurrentUser()->getId()));
+        break;
+        
+    case "GiveTerritoryBonusTo":
+        UserMapper::giveTerritoryBonusTo($_REQUEST["userId"], $_REQUEST["amount"]);
         break;
 }
 

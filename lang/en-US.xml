@@ -48,5 +48,7 @@
         <uniqueFactionNameValidator>Factions in your campaign must have a unique name.</uniqueFactionNameValidator>
         <profile>Profile</profile>
         <territoryBonus>Territory bonus</territoryBonus>
+        <cancel>Cancel</cancel>
+        <ok>Ok</ok>
     </strings>
 </translation>

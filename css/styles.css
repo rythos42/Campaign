@@ -18,6 +18,12 @@ li.button-panel {
     text-align: right;
 }
 
+.ui-dialog li.entry-field,
+.ui-dialog li.data-list,
+.ui-dialog li.button-panel {
+    width: 250px;
+}
+
 li.entry-field label {
     text-align: right;
     display: inline-block;
@@ -25,14 +31,30 @@ li.entry-field label {
     width: 120px;
 }
 
+.ui-dialog li.entry-field label {
+    width: 70px;
+}
+
+.ui-dialog li.entry-field input {
+    width: 170px;
+}
+
 li.entry-field .validationMessage {
     margin-left: 125px;
 }
 
-li.data-list span {
+.ui-dialog li.entry-field .validationMessage {
+    margin-left: 0;
+}
+
+li.data-list > span {
     font-weight: bold;
     display: inline-block;
     width: 100px;
+}
+
+.outset-icon-button {
+    margin-right: -41px;
 }
 
 .link-button {

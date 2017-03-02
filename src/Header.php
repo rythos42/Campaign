@@ -45,6 +45,7 @@ include($installDirOnWebServer . "/src/widgets/CampaignListWidget.php");
 include($installDirOnWebServer . "/src/widgets/EntryMapWidget.php");
 include($installDirOnWebServer . "/src/widgets/CreateCampaignMapWidget.php");
 include($installDirOnWebServer . "/src/widgets/UserProfileWidget.php");
+include($installDirOnWebServer . "/src/widgets/SelectUserDialogWidget.php");
 
 session_start();
 Database::connect();
