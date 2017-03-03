@@ -1,6 +1,6 @@
-/*exported SelectUserDialogViewModel */
+/*exported GiveTerritoryBonusToUserDialogViewModel */
 /*globals ko, Translation, DialogResult, User */
-var SelectUserDialogViewModel = function() {
+var GiveTerritoryBonusToUserDialogViewModel = function() {
     var self = this;
     
     self.dialogOpenClose = ko.observable(false);
@@ -10,9 +10,24 @@ var SelectUserDialogViewModel = function() {
         requireObject: { message: Translation.getString('userEntryInvalidAccountValidation') }
     });
     
+    self.amountToGive = ko.observable().extend({
+        required: { message: Translation.getString('howMuch') },
+        min: { params: 1, message: Translation.getString('atLeastOne') }
+    });
+    
     self.dialogResult = ko.observable();
     
+    var validation = ko.validatedObservable([
+        self.selectedUser,
+        self.amountToGive
+    ]);
+    
     self.ok = function() {
+        if(!validation.isValid()) {
+            validation.errors.showAllMessages();
+            return;
+        }
+        
         self.closeDialog();
         self.dialogResult(DialogResult.Saved);
     };
@@ -23,6 +38,11 @@ var SelectUserDialogViewModel = function() {
     };        
     
     self.openDialog = function() {
+        self.selectedUser(null);
+        self.selectedUser.isModified(false);
+        self.amountToGive(null);
+        self.amountToGive.isModified(false);
+        
         self.dialogResult(DialogResult.None);
         self.dialogOpenClose(true);
     };

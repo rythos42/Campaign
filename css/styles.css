@@ -188,3 +188,7 @@ td.actions {
     color: #888888;
     cursor: default !important;
 }
+
+.ui-tooltip {
+    box-shadow: none;
+}

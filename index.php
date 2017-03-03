@@ -25,6 +25,7 @@
         <script src="js/app/infrastructure/MapHelper.js"></script>
         <script src="js/app/infrastructure/UniqueInValidator.js"></script>
         <script src="js/app/infrastructure/DialogCustomBinder.js"></script>
+        <script src="js/app/infrastructure/TooltipCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
@@ -50,7 +51,7 @@
         <script src="js/app/viewmodels/MapLegendViewModel.js"></script>
         <script src="js/app/viewmodels/CreateCampaignMapViewModel.js"></script>
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
-        <script src="js/app/viewmodels/SelectUserDialogViewModel.js"></script>
+        <script src="js/app/viewmodels/GiveTerritoryBonusToUserDialogViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>

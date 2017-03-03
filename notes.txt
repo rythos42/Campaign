@@ -1,6 +1,4 @@
 Next:
-- reload user data to client whenever the page refreshes (after giving, not updated)
-- amount of TB to give away (need another field on "SelectUserDialog", making it not generic)
     Territory Bonus!
         - spend TB per game - put this on the entry field
         
@@ -25,6 +23,8 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
+- g'damn select boxes keep changing size in different browsers
 - position "Give TB" dialog better
 - spend TB to attack anywhere
 - swap around entry

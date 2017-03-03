@@ -27,7 +27,7 @@
         <signup>Sign Up</signup>        
         <loginPageAbout>Campaign is a simple &lt;a href="https://github.com/rythos42/Campaign"&gt;open source&lt;/a&gt; web app to help you manage gaming campaigns.</loginPageAbout>
         <factionEntryRequiredValidation>Who were they playing for?</factionEntryRequiredValidation>
-        <userEntryRequiredValidation>Who played this faction in this game?</userEntryRequiredValidation>
+        <userEntryRequiredValidation>You need to enter a user.</userEntryRequiredValidation>
         <userEntryInvalidAccountValidation>That person does't have an account here.</userEntryInvalidAccountValidation>
         <victoryPointsEntryRequiredValidation>At least put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
         <minimumOneFactionValidation>You must add at least one faction to your entry.</minimumOneFactionValidation>
@@ -50,5 +50,10 @@
         <territoryBonus>Territory bonus</territoryBonus>
         <cancel>Cancel</cancel>
         <ok>Ok</ok>
+        <howMuch>How much do you want to give?</howMuch>
+        <atLeastOne>If you're going to give, you have to give at least 1.</atLeastOne>
+        <amount>Amount</amount>
+        <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
+        <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
     </strings>
 </translation>

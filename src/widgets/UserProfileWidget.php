@@ -12,7 +12,7 @@ class UserProfileWidget implements IWidget {
                 <li class="data-list">
                     <label><?php echo Translation::getString('territoryBonus'); ?>:</label>
                     <span data-bind="text: territoryBonus"></span>
-                    <button data-bind="click: showGiveTerritoryBonusDialog" class="ui-button ui-widget ui-corner-all ui-button-icon-only outset-icon-button">
+                    <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip')" class="ui-button ui-widget ui-corner-all ui-button-icon-only outset-icon-button">
                         <span class="ui-icon ui-icon-caret-1-e"></span>
                     </button>
                 </li>
@@ -21,8 +21,8 @@ class UserProfileWidget implements IWidget {
                 </li>
             </ul>
             <?php
-            $selectUserDialogWidget = new SelectUserDialogWidget();
-            $selectUserDialogWidget->render();
+            $giveTerritoryBonusToUserDialogWidget = new GiveTerritoryBonusToUserDialogWidget();
+            $giveTerritoryBonusToUserDialogWidget->render();
             ?>            
         </div>
         <!-- /ko -->
