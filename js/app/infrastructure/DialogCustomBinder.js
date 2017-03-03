@@ -1,7 +1,7 @@
 /*globals ko */
 ko.bindingHandlers.dialog = {
     init: function(elementDom, valueAccessor) {
-        var params = ko.utils.unwrapObservable(valueAccessor()),
+        var params = ko.utils.unwrapObservable(valueAccessor());
         
         params = $.extend(params, {
             autoOpen: false,
