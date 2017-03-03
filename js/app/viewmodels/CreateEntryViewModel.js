@@ -23,6 +23,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     self.isAttackingFaction = factionEntry.isAttackingFaction;
+    self.territoryBonusSpent = factionEntry.territoryBonusSpent;
     
     self.needsAttackingFaction = ko.computed(function() {
         return currentEntry.attackingFaction() === null;
@@ -48,6 +49,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.availableFactions = ko.computed(function() {
         var campaignObj = currentCampaign();
         return campaignObj ? campaignObj.factions() : null;
+    });
+    
+    self.isMapCampaign = ko.computed(function() {
+        var campaignObj = currentCampaign();
+        return campaignObj ? campaignObj.isMapCampaign() : false;
     });
     
     var validatedEntry = ko.validatedObservable([
@@ -108,6 +114,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
         self.isAttackingFaction(false);
+        self.territoryBonusSpent(undefined);
         
         self.factionEntries.isModified(false);
     };

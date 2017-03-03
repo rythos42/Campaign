@@ -19,7 +19,12 @@ class CreateEntryWidget implements IWidget {
                     <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddFaction}" />
                     <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
                 </li>
-                <li class="entry-field">
+                <li class="entry-field" data-bind="visible: isMapCampaign">
+                    <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
+                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, event: {keypress: keyPressAddFaction}" />
+                    <span class="validationMessage" data-bind="validationMessage: territoryBonusSpent"></span>
+                </li>
+                <li class="entry-field" data-bind="visible: isMapCampaign">
                     <label for="IsAttackingFaction" data-bind="css: {'disabled-label': !needsAttackingFaction()}"><?php echo Translation::getString("attacker"); ?>:</label>
                     <input type="checkbox" id="IsAttackingFaction" data-bind="checked: isAttackingFaction, enable: needsAttackingFaction, event: {keypress: keyPressAddFaction}" />
                 </li>

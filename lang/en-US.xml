@@ -55,5 +55,6 @@
         <amount>Amount</amount>
         <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
         <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
+        <territoryBonusSpent>Bonus spent</territoryBonusSpent>
     </strings>
 </translation>

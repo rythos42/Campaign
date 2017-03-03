@@ -50,6 +50,9 @@ class CampaignMapper {
                 "INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)", 
                 [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
                 
+            if($factionEntry->territoryBonusSpent)
+                Database::execute("UPDATE User SET TerritoryBonus = TerritoryBonus - ? WHERE ID = ?", [$factionEntry->territoryBonusSpent, $factionEntry->user->id]);
+                
             if($factionEntry->victoryPoints > $winningVictoryPoints) {
                 $winningFactionEntry = $factionEntry;
                 $winningVictoryPoints = $factionEntry->victoryPoints;

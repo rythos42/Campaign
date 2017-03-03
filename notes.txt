@@ -1,6 +1,6 @@
 Next:
     Territory Bonus!
-        - spend TB per game - put this on the entry field
+        - verify users aren't spending more TB on their game than they have
         
     Attacks:
         - show number of attacks made this phase on profile page
