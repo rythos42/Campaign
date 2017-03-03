@@ -1,7 +1,4 @@
 Next:
-    Territory Bonus!
-        - verify users aren't spending more TB on their game than they have
-        
     Attacks:
         - show number of attacks made this phase on profile page
         - show available number of attacks on profile page

@@ -56,5 +56,6 @@
         <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
         <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
         <territoryBonusSpent>Bonus spent</territoryBonusSpent>
+        <cannotSpendMoreThan>You can't spend more than {0}.</cannotSpendMoreThan>
     </strings>
 </translation>

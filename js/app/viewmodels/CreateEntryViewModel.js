@@ -22,9 +22,16 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
     
+    self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
+        min: { params: 1, message: Translation.getString('atLeastOne') },
+        max: { params: ko.computed(function() {
+            var user = self.selectedUser();
+            return (user && user.territoryBonus) ? user.territoryBonus() : 0;
+        }), message: Translation.getString('cannotSpendMoreThan') }
+    });
+
     self.isAttackingFaction = factionEntry.isAttackingFaction;
-    self.territoryBonusSpent = factionEntry.territoryBonusSpent;
-    
+       
     self.needsAttackingFaction = ko.computed(function() {
         return currentEntry.attackingFaction() === null;
     });
@@ -60,7 +67,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.factionEntries,
         self.entryMapViewModel.selectedTerritory
     ]);
-    
+        
     self.saveCampaignEntry = function() {
         if(!validatedEntry.isValid()) {
             validatedEntry.errors.showAllMessages();
@@ -131,7 +138,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 responseCallback($.map(results, function(serverUser) {
                     return {
                         label: serverUser.Username,
-                        object: new User(serverUser.Id, serverUser.Username)
+                        object: new User(serverUser.Id, serverUser.Username, serverUser.TerritoryBonus)
                     };
                 }));
             }

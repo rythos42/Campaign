@@ -39,14 +39,6 @@ li.entry-field label {
     width: 170px;
 }
 
-li.entry-field .validationMessage {
-    margin-left: 125px;
-}
-
-.ui-dialog li.entry-field .validationMessage {
-    margin-left: 0;
-}
-
 li.data-list > span {
     font-weight: bold;
     display: inline-block;

@@ -1,13 +1,13 @@
 /*exported User */
 /*globals ko */
-var User = function(id, username) {
+var User = function(id, username, territoryBonus) {
     var self = this;
     
     self.id = ko.observable(id);
     self.username = ko.observable(username);
     self.isLoggedIn = ko.observable(false);
     self.permissions = ko.observableArray();
-    self.territoryBonus = ko.observable();
+    self.territoryBonus = ko.observable(territoryBonus);
 
     self.hasPermission = function(permissionId) {
         return $.inArray(permissionId, self.permissions()) > -1;
