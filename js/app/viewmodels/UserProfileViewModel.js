@@ -1,9 +1,7 @@
 /*exported UserProfileViewModel */
-/*globals ko, DialogResult, GiveTerritoryBonusToUserDialogViewModel */
+/*globals ko */
 var UserProfileViewModel = function(user, navigation) {
     var self = this;
-    
-    self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel();
     
     self.showUserProfile = ko.computed(function() {
         return navigation.showUserProfile();
@@ -17,10 +15,6 @@ var UserProfileViewModel = function(user, navigation) {
         return user.username();
     });
     
-    self.territoryBonus = ko.computed(function() {
-        return user.territoryBonus();
-    });
-    
     self.requestUserProfile = function() {
         navigation.showUserProfile(true);
     };
@@ -28,29 +22,4 @@ var UserProfileViewModel = function(user, navigation) {
     self.back = function() {
         navigation.showMain(true);
     };
-    
-    self.showGiveTerritoryBonusDialog = function() {
-        self.giveTerritoryBonusToUserDialogViewModel.openDialog();
-    };
-    
-    self.giveTerritoryBonusToUserDialogViewModel.dialogResult.subscribe(function(result) {
-        if(result === DialogResult.Saved) {
-            $.ajax({
-                url: 'src/webservices/UserService.php',
-                data: {
-                    action: 'GiveTerritoryBonusTo',
-                    userId: self.giveTerritoryBonusToUserDialogViewModel.selectedUser().id(),
-                    amount: 1
-                },
-                success: function() {
-                    user.refreshUserData();
-                }
-            });
-        }
-    });
-    
-    navigation.showUserProfile.subscribe(function(showUserProfile) {
-        if(showUserProfile)
-            user.refreshUserData();
-    });
 };
