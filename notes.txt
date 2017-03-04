@@ -1,8 +1,25 @@
 Next:
+    - territory bonus is NOT a user setting! It's a campaign<->user setting. As is the number of attacks a user has made.
+    - DB home: 
+        ALTER TABLE User DROP COLUMN TerritoryBonus
+        ALTER TABLE Campaign ADD COLUMN MandatoryAttacks INT DEFAULT 1;
+        ALTER TABLE Campaign ADD COLUMN OptionalAttacks INT DEFAULT 2;
+        CREATE TABLE UserCampaignData (
+            Id INT NOT NULL AUTO_INCREMENT,
+            CampaignId INT NOT NULL,
+            UserId INT NOT NULL,
+            TerritoryBonus INT DEFAULT 0,
+            Attacks INT DEFAULT 0,
+            PRIMARY KEY (Id),
+            FOREIGN KEY UserCampaignData_Campaign (CampaignId) REFERENCES Campaign(Id),
+            FOREIGN KEY UserCampaignData_User (UserId) REFERENCES User(Id)
+        )
+
     Attacks:
-        - show number of attacks made this phase on profile page
         - show available number of attacks on profile page
+        - show number of attacks made this phase on profile page
         - players have 1 mandatory and 2 optional
+        - prevent attacking if out of attacks
         
     Phases
         - A campaign creator has to go into and hit "Next Phase" button to move to next phase.
@@ -37,7 +54,6 @@ Future:
 - remove code that automatically gives permission to create map campaigns
 - allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign
-- collate db changes for ease of future deployment
 - if we do the player-owned territory, need to get all adjacent territories for the logged in player
     - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
     - store OwningUserId instead of (or as well as) OwningFactionId.

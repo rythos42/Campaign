@@ -5,6 +5,7 @@ CREATE TABLE CampaignEntry (
     CampaignId INT NOT NULL,
     CreatedByUserId INT NOT NULL,
     CreatedOnDate datetime NOT NULL,
+    AttackingFactionId INT NOT NULL,
     PRIMARY KEY (Id),
     FOREIGN KEY CampaignEntry_User (CreatedByUserId) REFERENCES User(Id),
     FOREIGN KEY CampaignEntry_Campaign (CampaignId) REFERENCES Campaign(Id)

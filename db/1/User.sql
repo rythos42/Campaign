@@ -5,5 +5,6 @@ CREATE TABLE User (
     Username VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL,
     PasswordHash VARCHAR(255) NOT NULL,
     CreatedOnDate datetime NOT NULL,
+    LastLoginDate datetime,
     PRIMARY KEY (Id)
 );

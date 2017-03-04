@@ -1,3 +1,0 @@
-USE Campaign;
-
-ALTER TABLE User ADD COLUMN TerritoryBonus INT DEFAULT 0

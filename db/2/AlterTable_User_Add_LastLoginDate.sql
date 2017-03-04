@@ -1,3 +1,0 @@
-USE Campaign;
-
-ALTER TABLE User ADD COLUMN LastLoginDate DATETIME
