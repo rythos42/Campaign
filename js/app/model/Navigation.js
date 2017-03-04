@@ -8,29 +8,38 @@ var Navigation = function(user) {
     self.showLogin = ko.observable(false);
     self.showMain = ko.observable(false);
     self.showCreateCampaign = ko.observable(false);
-    self.showCampaignEntry = ko.observable(false);
+    self.showInProgressCampaign = ko.observable(false);
     self.showRegister = ko.observable(false);
     self.showUserProfile = ko.observable(false);
+    self.showCreateEntry = ko.observable(false);
     
-    function showHideAllExcept(show, except) {
+    var appPages = [
+        self.showLogin,
+        self.showMain,
+        self.showCreateCampaign,
+        self.showInProgressCampaign,
+        self.showRegister,
+        self.showUserProfile,
+        self.showCreateEntry
+    ];
+    
+    function showHideAllExcept(show, exceptList) {
         if(!show)
             return;
         
-        if(except !== self.showLogin) self.showLogin(false);
-        if(except !== self.showMain) self.showMain(false);
-        if(except !== self.showCreateCampaign) self.showCreateCampaign(false);
-        if(except !== self.showCampaignEntry) self.showCampaignEntry(false);
-        if(except !== self.showRegister) self.showRegister(false);
-        if(except !== self.showUserProfile) self.showUserProfile(false);
+        $.each(appPages, function(index, appShow) {
+            if(exceptList.indexOf(appShow) === -1)
+                appShow(false);
+        });
     }
     
-    self.showRegister.subscribe(function(show) { showHideAllExcept(show, self.showRegister); });
-    self.showLogin.subscribe(function(show) { showHideAllExcept(show, self.showLogin); });
-    self.showCreateCampaign.subscribe(function(show) { showHideAllExcept(show, self.showCreateCampaign); });
-    self.showCampaignEntry.subscribe(function(show) { showHideAllExcept(show, self.showCampaignEntry); });
-    self.showMain.subscribe(function(show) { showHideAllExcept(show, self.showMain); });
-    self.showUserProfile.subscribe(function(show) { showHideAllExcept(show, self.showUserProfile); });
-    
+    self.showRegister.subscribe(function(show) { showHideAllExcept(show, [self.showRegister]); });
+    self.showLogin.subscribe(function(show) { showHideAllExcept(show, [self.showLogin]); });
+    self.showCreateCampaign.subscribe(function(show) { showHideAllExcept(show, [self.showCreateCampaign]); });
+    self.showInProgressCampaign.subscribe(function(show) { showHideAllExcept(show, [self.showInProgressCampaign]); });
+    self.showMain.subscribe(function(show) { showHideAllExcept(show, [self.showMain]); });
+    self.showUserProfile.subscribe(function(show) { showHideAllExcept(show, [self.showUserProfile]); });
+    self.showCreateEntry.subscribe(function(show) { showHideAllExcept(show, [self.showCreateEntry]); });
     
     function showLoginOrMainPage() {
         var loggedIn = user.isLoggedIn();

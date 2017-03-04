@@ -3,7 +3,7 @@ class CreateEntryWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createEntryViewModel-->
-        <div id="CreateCampaignEntry" data-bind="visible: showCampaignEntry">
+        <div id="CreateCampaignEntry" data-bind="visible: showCreateEntry">
             <ul>
                 <li class="entry-field">
                     <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>

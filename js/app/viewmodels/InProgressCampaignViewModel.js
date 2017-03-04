@@ -7,12 +7,26 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
     
-    navigation.showCampaignEntry.subscribe(function(show) {
+    self.showInProgressCampaign = ko.computed(function() {
+        return navigation.showInProgressCampaign();
+    });
+
+    self.requestCreateEntry = function() {
+        navigation.showCreateEntry(true);
+    };
+    
+    self.back = function() {
+        navigation.showMain(true);
+    };
+    
+    navigation.showInProgressCampaign.subscribe(function(show) {
         if(!show)
             return;
 
         var newCampaign = navigation.parameters();
         navigation.parameters(null);
-        currentCampaign(newCampaign);
+        
+        if(newCampaign)
+            currentCampaign(newCampaign);
     });
 };

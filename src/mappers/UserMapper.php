@@ -35,7 +35,7 @@ class UserMapper {
     
     public static function getUsersByFilter($term) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
-        return Database::queryArray("SELECT Id, Username, TerritoryBonus FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
+        return Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
     }
     
     public static function getUserData($userId) {

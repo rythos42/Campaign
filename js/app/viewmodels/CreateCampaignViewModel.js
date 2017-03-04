@@ -39,7 +39,7 @@ var CreateCampaignViewModel = function(user, navigation) {
     });
     
     self.showCreateCampaignButton = ko.computed(function() {
-        return navigation.showMain() || navigation.showUserProfile();
+        return !navigation.showCreateCampaign();
     });
          
     self.numberOfFactions = ko.computed(function() {

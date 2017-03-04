@@ -14,7 +14,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         if(!campaign)
             return false;
         
-        return campaign.isMapCampaign() && navigation.showCampaignEntry();
+        return campaign.isMapCampaign() && navigation.showCreateEntry();
     });
     
     self.selectedTerritory = ko.observable().extend({ 

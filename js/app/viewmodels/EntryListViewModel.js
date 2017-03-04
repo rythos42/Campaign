@@ -5,7 +5,7 @@ var EntryListViewModel = function(navigation, currentCampaign) {
         internalEntryList = ko.observableArray();
 
     self.showCampaignEntryList = ko.computed(function() {
-        return navigation.showCampaignEntry() && self.campaignEntries().length > 0;
+        return navigation.showInProgressCampaign() && self.campaignEntries().length > 0;
     });        
         
     self.campaignEntries = ko.computed(function() {

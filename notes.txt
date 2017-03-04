@@ -1,19 +1,5 @@
 Next:
     - territory bonus is NOT a user setting! It's a campaign<->user setting. As is the number of attacks a user has made.
-    - DB home: 
-        ALTER TABLE User DROP COLUMN TerritoryBonus
-        ALTER TABLE Campaign ADD COLUMN MandatoryAttacks INT DEFAULT 1;
-        ALTER TABLE Campaign ADD COLUMN OptionalAttacks INT DEFAULT 2;
-        CREATE TABLE UserCampaignData (
-            Id INT NOT NULL AUTO_INCREMENT,
-            CampaignId INT NOT NULL,
-            UserId INT NOT NULL,
-            TerritoryBonus INT DEFAULT 0,
-            Attacks INT DEFAULT 0,
-            PRIMARY KEY (Id),
-            FOREIGN KEY UserCampaignData_Campaign (CampaignId) REFERENCES Campaign(Id),
-            FOREIGN KEY UserCampaignData_User (UserId) REFERENCES User(Id)
-        )
 
     Attacks:
         - show available number of attacks on profile page

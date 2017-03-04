@@ -36,8 +36,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         return currentEntry.attackingFaction() === null;
     });
         
-    self.showCampaignEntry = ko.computed(function() {
-        return navigation.showCampaignEntry();
+    self.showCreateEntry = ko.computed(function() {
+        return navigation.showCreateEntry();
     });
     
     self.factionEntries = ko.computed(function() {
@@ -85,14 +85,14 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             method: 'POST',
             data: params,
             success: function() {
-                navigation.showMain(true);
+                navigation.showInProgressCampaign(true);
                 self.entryMapViewModel.clearMap();
             }
         });
     };
     
     self.back = function() {
-        navigation.showMain(true);
+        navigation.showInProgressCampaign(true);
     };
     
     self.keyPressAddFaction = function(viewModel, event) {
@@ -145,7 +145,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         });
     };
                
-    navigation.showCampaignEntry.subscribe(function(show) {
+    navigation.showCreateEntry.subscribe(function(show) {
         self.entryMapViewModel.clearMap();
         
         if(!show)
