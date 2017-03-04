@@ -89,7 +89,10 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         self.showLoadingImage(false);
     };
     
-    currentCampaign.subscribe(function(newCampaign) {
-        self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaign.id());
+    navigation.showCreateEntry.subscribe(function(showCreateEntry) {
+        if(!showCreateEntry)
+            return;
+        
+        self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + currentCampaign().id());
     });
 };

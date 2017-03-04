@@ -24,7 +24,6 @@ var Entry = function(campaignId, serverEntry) {
     }
     
     self.clear = function() {
-        self.campaignId(undefined);
         self.factionEntries.removeAll();
     };
 };

@@ -48,12 +48,12 @@ switch($action) {
         echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
         break;
         
-    case "GetUserData":
-        echo json_encode(UserMapper::getUserData(User::getCurrentUser()->getId()));
+    case "GetUserDataForCampaign":
+        echo json_encode(UserMapper::getUserDataForCampaign(User::getCurrentUser()->getId(), $_REQUEST["campaignId"]));
         break;
         
-    case "GiveTerritoryBonusTo":
-        UserMapper::giveTerritoryBonusTo($_REQUEST["userId"], $_REQUEST["amount"]);
+    case "GiveTerritoryBonusInCampaignTo":
+        UserMapper::giveTerritoryBonusInCampaignTo($_REQUEST["userId"], $_REQUEST["campaignId"], $_REQUEST["amount"]);
         break;
 }
 

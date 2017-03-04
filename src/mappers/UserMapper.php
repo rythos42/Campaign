@@ -16,7 +16,7 @@ class UserMapper {
     }
     
     public static function validateLogin($username, $password) {
-        $dbUser = Database::queryObject("SELECT Id, PasswordHash, TerritoryBonus FROM User WHERE Username = ?", [$username]);
+        $dbUser = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
         if($dbUser && password_verify($password, $dbUser->PasswordHash)) {
             $today = date('Y-m-d H:i:s');
             Database::execute("UPDATE User SET LastLoginDate = ? WHERE Id=?", [$today, $dbUser->Id]);
@@ -26,7 +26,7 @@ class UserMapper {
                 "Permission",
                 [$dbUser->Id]);
                            
-            return new User($dbUser->Id, $username, $permissions, $dbUser->TerritoryBonus);
+            return new User($dbUser->Id, $username, $permissions);
         }
         else {
             return null;
@@ -38,19 +38,23 @@ class UserMapper {
         return Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
     }
     
-    public static function getUserData($userId) {
-        $dbUser = Database::queryObject("SELECT Username, TerritoryBonus FROM User WHERE Id = ?", [$userId]);
-        $permissions = Database::queryObjectList(
-            "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
-            "Permission",
-            [$userId]);
-            
-        return new User($userId, $dbUser->Username, $permissions, $dbUser->TerritoryBonus);
+    public static function getUserDataForCampaign($userId, $campaignId) {
+        UserMapper::ensureUserDataExists($userId, $campaignId);
+        return Database::queryObject("SELECT TerritoryBonus, Attacks FROM UserCampaignData WHERE UserId = ? AND CampaignId = ?", [$userId, $campaignId]);
     }
     
-    public static function giveTerritoryBonusTo($userId, $amount) {
-        Database::execute("update User set TerritoryBonus = TerritoryBonus - ? where Id = ?", [$amount, User::getCurrentUser()->getId()]);
-        Database::execute("update User set TerritoryBonus = TerritoryBonus + ? where Id = ?", [$amount, $userId]);
+    public static function ensureUserDataExists($userId, $campaignId) {
+        // I feel like this could be done better elsewhere...
+        if(!Database::exists("SELECT * FROM UserCampaignData WHERE UserId = ? AND CampaignId = ?", [$userId, $campaignId]))
+            Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId) VALUES (?, ?)", [$userId, $campaignId]);
+    }
+    
+    public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
+        UserMapper::ensureUserDataExists(User::getCurrentUser()->getId(), $campaignId);
+        UserMapper::ensureUserDataExists($userId, $campaignId);
+
+        Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus - ? where UserId = ? and CampaignId = ?", [$amount, User::getCurrentUser()->getId(), $campaignId]);
+        Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$amount, $userId, $campaignId]);
     }
 }
 ?>

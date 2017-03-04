@@ -1,6 +1,10 @@
 Next:
-    - territory bonus is NOT a user setting! It's a campaign<->user setting. As is the number of attacks a user has made.
-
+- redo max TB validation
+        max: { params: ko.computed(function() {
+            var user = self.selectedUser();
+            return (user && user.territoryBonus) ? user.territoryBonus() : 0;
+        }), message: Translation.getString('cannotSpendMoreThan') }
+    
     Attacks:
         - show available number of attacks on profile page
         - show number of attacks made this phase on profile page
@@ -12,7 +16,8 @@ Next:
         - On next phase:
             - attack counts are reset
             - players gain TB, allocation weighted based on how many games you played in your faction this phase
-    
+            
+- should be able to enter 0 into Bonus spent field    
     
 Notes:
     Work:
@@ -23,6 +28,9 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
+- regression test it all again. In a couple different browsers.
+
+- ensureUserDataExists? Or should put into table on user creation?
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers
 - position "Give TB" dialog better
@@ -32,7 +40,6 @@ Future:
     - save
     - come back later and enter who won or lost
 - make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
-- regression test in a few browsers! There was a FF only issue.
 - "LastLoginDate" is not accurate, with login cookies.
 - change login page to have a dedicated "sign up" page
     - link button swaps between the two views

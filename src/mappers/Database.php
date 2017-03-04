@@ -37,5 +37,9 @@ class Database {
     public static function getLastInsertedId() {
         return self::$conn->lastInsertId();
     }
+    
+    public static function exists($query, $params = null) {
+        return Database::execute($query, $params)->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

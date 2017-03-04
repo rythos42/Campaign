@@ -10,9 +10,11 @@ ko.bindingHandlers.canvas = {
                 return;
             }
             
-            // set initial size based on parent size
-            var $canvas = $(canvas);
-            $canvas.css('width', $canvas.parent().width() - 20);    // it was initially giving a scroll bar
+            setTimeout(function() {
+                // set initial size based on parent size
+                var $canvas = $(canvas);
+                $canvas.css('width', $canvas.parent().width() - 20);    // it was initially giving a scroll bar
+            }, 0);
 
             var image = new Image();
             image.src = params.url();

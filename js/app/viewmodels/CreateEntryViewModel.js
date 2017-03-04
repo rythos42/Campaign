@@ -23,11 +23,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
-        min: { params: 1, message: Translation.getString('atLeastOne') },
-        max: { params: ko.computed(function() {
-            var user = self.selectedUser();
-            return (user && user.territoryBonus) ? user.territoryBonus() : 0;
-        }), message: Translation.getString('cannotSpendMoreThan') }
+        min: { params: 1, message: Translation.getString('atLeastOne') }
     });
 
     self.isAttackingFaction = factionEntry.isAttackingFaction;
