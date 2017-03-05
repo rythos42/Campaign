@@ -1,9 +1,12 @@
 Next:
     Phases
-        - A campaign creator has to go into and hit "Next Phase" button to move to next phase.
-        - On next phase:
-            - attack counts are reset
-            - players gain TB, allocation weighted based on how many games you played in your faction this phase
+        - currently counting "total games ever", needs to count games since last phase
+        - "toast" when reset phase is done
+        - reload displayed stats when reset phase is done
+
+- update campaign document:
+    - if you switch factions, only your games for your LATEST faction count towards your TB for the end of phase
+    - end-of-phase TB allocation: gain a percent of the total TB based on how many games you played, rounding down.
     
 Notes:
     Work:
@@ -16,6 +19,7 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
+- maybe make Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - note that you can't interact with the entry map until you've added an attacker
 - InProgressCampaign screen is looking super shitty at < 420px
 - combine "getUsers" into a single method somewhere
@@ -36,10 +40,6 @@ Future:
 - remove code that automatically gives permission to create map campaigns
 - allow dropping one faction over another to replace it
 - allow removing territories from faction in create campaign
-- if we do the player-owned territory, need to get all adjacent territories for the logged in player
-    - but players attack factions, so can colour his territories in a static "first person" colour, then his allies in the ally colour and enemy in enemy colour
-    - store OwningUserId instead of (or as well as) OwningFactionId.
-        - my current view is that players could switch sides, but that breaks with OwningUserId
 - better way to check for isMapCampaign in Campaign.js
 - map is hard to read at mobile sizes
     - click-and-drag to pan

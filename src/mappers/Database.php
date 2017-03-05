@@ -26,6 +26,14 @@ class Database {
         return Database::execute($query, $params)->fetch(PDO::FETCH_OBJ);
     }
     
+    public static function queryScalar($query, $params = null) {
+        return Database::execute($query, $params)->fetch(PDO::FETCH_NUM)[0];
+    }
+    
+    public static function queryScalarList($query, $params = null) {
+        return Database::execute($query, $params)->fetchAll(PDO::FETCH_COLUMN, 0);
+    }
+    
     public static function queryArray($query, $params = null) {
         return Database::execute($query, $params)->fetchAll();
     }

@@ -52,6 +52,10 @@ switch($action) {
         MapMapper::saveFactionTerritories($factionTerritories);
         break;
         
+    case "ResetPhase":
+        CampaignMapper::resetPhase($_REQUEST["campaignId"]);
+        break;
+        
 }
 
 ?>

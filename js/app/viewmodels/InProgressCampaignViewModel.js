@@ -62,6 +62,25 @@ var InProgressCampaignViewModel = function(user, navigation) {
         self.giveTerritoryBonusToUserDialogViewModel.openDialog();
     };
     
+    var setUserDataForCampaign = function(userDataForCampaign) {
+        userCampaignData(userDataForCampaign);
+        currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
+        currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
+    };
+    
+    self.resetPhase = function() {
+        $.ajax({
+            url: 'src/webservices/CampaignService.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { 
+                action: 'ResetPhase', 
+                campaignId: currentCampaign().id() 
+            },
+            success: setUserDataForCampaign
+        });
+    };
+
     var refreshUserDataForCampaign = function() {
         $.ajax({
             url: 'src/webservices/UserService.php',
@@ -71,11 +90,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 action: 'GetUserDataForCampaign', 
                 campaignId: currentCampaign().id() 
             },
-            success: function(userData) {
-                userCampaignData(userData);
-                currentCampaign().mandatoryAttacks(userData.MandatoryAttacks);
-                currentCampaign().optionalAttacks(userData.OptionalAttacks);
-            }
+            success: setUserDataForCampaign
         });
     };
     

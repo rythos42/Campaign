@@ -104,5 +104,46 @@ class CampaignMapper {
         
         return $entryList;
     }
+    
+    private static function getFactionIdForUser($userId) {
+        return Database::queryScalar("select CampaignFactionId from CampaignFactionEntry where UserId = ? order by Id desc limit 1", [$userId]);
+    }
+    
+    private static function getUsersInFaction($factionId) {
+        // Each person belongs to a single faction, pick their last faction they logged against.
+        return Database::queryArray(
+            "select UserId, CampaignFactionId, 
+                (select count(*) from CampaignFactionEntry t where t.UserId = o.UserId and CampaignFactionId = ?) as GameCount
+            from CampaignFactionEntry o
+            where Id = (select max(Id) From CampaignFactionEntry i where i.UserId = o.UserId)
+            and CampaignFactionId = ?
+            group by UserId",
+            [$factionId, $factionId]);
+    }
+    
+    private static function getGameCountForFaction($factionId) {
+        return Database::queryScalar("select count(*) from CampaignFactionEntry where CampaignFactionId = ?", [$factionId]);
+    }
+    
+    public static function resetPhase($campaignId) {
+        // Reset attacks for all userse in the campaign
+        Database::execute("UPDATE UserCampaignData SET Attacks = 0 WHERE CampaignId = ?", [$campaignId]);
+        
+        // Do for each faction in the campaign
+        $factionIdList = Database::queryScalarList("SELECT Id FROM CampaignFaction WHERE CampaignId = ?", [$campaignId]);
+        foreach($factionIdList as $factionId) {
+            $tbToAllocate = Database::queryScalar("SELECT count(*) as TerritoryCount FROM Polygon WHERE OwningFactionId = ?", [$factionId]);
+            $usersInFaction = CampaignMapper::getUsersInFaction($factionId);
+            $totalGameCountForFaction = CampaignMapper::getGameCountForFaction($factionId);
+            
+            foreach($usersInFaction as $user) {
+                // Give them a percent of the total TB equal to the percent of games out of their faction they played.
+                $percent = $user["GameCount"] / $totalGameCountForFaction;
+                $tbToGive = floor($percent * $tbToAllocate);
+                
+                Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$tbToGive, $user["UserId"], $campaignId]);
+            }
+        }
+    }
 }
 ?>
