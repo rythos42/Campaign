@@ -48,15 +48,24 @@ class CampaignMapper {
         foreach($campaignEntry->factionEntries as $factionEntry) {
             UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
 
+            // Insert the faction entry
             Database::execute(
                 "INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)", 
                 [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
                 
+            // Update any TB spent by this user
             if(isset($factionEntry->territoryBonusSpent)) {
                 Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus - ? WHERE UserId = ? AND CampaignId = ?", 
                     [$factionEntry->territoryBonusSpent, $factionEntry->user->id, $campaignEntry->campaignId]);
             }
+            
+            // Increment this users number of attacks
+            if($factionEntry->faction->id === $campaignEntry->attackingFaction->id) {
+                Database::execute("UPDATE UserCampaignData SET Attacks = Attacks + 1 WHERE UserId = ? AND CampaignId = ?",
+                    [$factionEntry->user->id, $campaignEntry->campaignId]);
+            }
                 
+            // Determine who won
             if($factionEntry->victoryPoints > $winningVictoryPoints) {
                 $winningFactionEntry = $factionEntry;
                 $winningVictoryPoints = $factionEntry->victoryPoints;
@@ -65,6 +74,7 @@ class CampaignMapper {
             }
         }
 
+        // If the winner was attacking, give them the territory
         if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
             Database::execute(
                 "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",

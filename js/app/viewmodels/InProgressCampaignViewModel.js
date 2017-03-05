@@ -2,10 +2,9 @@
 /*globals ko, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
-        currentCampaign = ko.observable(null);
+        currentCampaign = ko.observable(null),
+        userCampaignData = ko.observable();
 
-    self.availableTerritoryBonus = ko.observable(0);
-        
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
@@ -17,6 +16,38 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.isMapCampaign = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.isMapCampaign() : false;
+    });
+    
+    self.availableTerritoryBonus = ko.computed(function() {
+        var userData = userCampaignData();
+        return userData ? userData.TerritoryBonus : 0;
+    });
+
+    self.mandatoryAttacks = ko.computed(function() {
+        var userData = userCampaignData();
+        if(!userData)
+            return '';
+        
+        var attacks = userData.Attacks,
+            mandatoryAttacks = userData.MandatoryAttacks;
+            
+        return attacks > mandatoryAttacks 
+            ? (mandatoryAttacks + '/' + mandatoryAttacks) 
+            : (attacks + '/' + mandatoryAttacks);
+    });
+    
+    self.optionalAttacks = ko.computed(function() {
+        var userData = userCampaignData();
+        if(!userData)
+            return '';
+                
+        var attacks = userData.Attacks,
+            mandatoryAttacks = userData.MandatoryAttacks,
+            optionalAttacks = userData.OptionalAttacks;
+            
+        return (attacks > mandatoryAttacks)
+            ? ((attacks - mandatoryAttacks) + '/' + optionalAttacks)
+            : '0/' + optionalAttacks;
     });
         
     self.requestCreateEntry = function() {
@@ -41,7 +72,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 campaignId: currentCampaign().id() 
             },
             success: function(userData) {
-                self.availableTerritoryBonus(userData.TerritoryBonus);
+                userCampaignData(userData);
             }
         });
     };

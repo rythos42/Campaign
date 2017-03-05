@@ -58,5 +58,7 @@
         <territoryBonusSpent>Bonus spent</territoryBonusSpent>
         <cannotSpendMoreThan>You only have {0}.</cannotSpendMoreThan>
         <createEntry>Create Entry</createEntry>
+        <mandatoryAttacks>Mandatory attacks</mandatoryAttacks>
+        <optionalAttacks>Optional attacks</optionalAttacks>
     </strings>
 </translation>

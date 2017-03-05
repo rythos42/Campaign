@@ -1,8 +1,5 @@
 Next:
     Attacks:
-        - show available number of attacks on profile page
-        - show number of attacks made this phase on profile page
-        - players have 1 mandatory and 2 optional
         - prevent attacking if out of attacks
         
     Phases
@@ -22,6 +19,7 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
+- note that you can't interact with the entry map until you've added an attacker
 - InProgressCampaign screen is looking super shitty at < 420px
 - combine "getUsers" into a single method somewhere
 - ensureUserDataExists? Or should put into table on user creation?
