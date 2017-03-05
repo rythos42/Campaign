@@ -26,15 +26,25 @@ var User = function(id, username, serverUserCampaignData) {
         userCampaignDataList(jsonUser.UserCampaignData);
     };
     
-    self.getAvailableTerritoryBonusForCampaign = function(campaignId) {
-        var availableTerritoryBonus = 0;
+    function getUserCampaignDataForCampaign(campaignId) {
+        var returnUserCampaignData;
         $.each(userCampaignDataList(), function(index, userCampaignData) {
             if(userCampaignData.CampaignId === campaignId) {
-                availableTerritoryBonus = userCampaignData.TerritoryBonus;
+                returnUserCampaignData = userCampaignData;
                 return false;
             }
             return true;
         });
-        return availableTerritoryBonus;        
+        return returnUserCampaignData; 
+    }
+    
+    self.getAvailableTerritoryBonusForCampaign = function(campaignId) {
+        var userCampaignData = getUserCampaignDataForCampaign(campaignId);
+        return userCampaignData ? userCampaignData.TerritoryBonus : 0;
+    };
+    
+    self.getAttacksForCampaign = function(campaignId) {
+        var userCampaignData = getUserCampaignDataForCampaign(campaignId);
+        return userCampaignData ? userCampaignData.Attacks : 0;
     };
 };

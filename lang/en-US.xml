@@ -60,5 +60,6 @@
         <createEntry>Create Entry</createEntry>
         <mandatoryAttacks>Mandatory attacks</mandatoryAttacks>
         <optionalAttacks>Optional attacks</optionalAttacks>
+        <userOutOfAttacks>That user is out of attacks this phase.</userOutOfAttacks>
     </strings>
 </translation>

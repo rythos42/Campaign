@@ -7,6 +7,8 @@ var Campaign = function(serverCampaign) {
     self.name = ko.observable(serverCampaign ? serverCampaign.Name : '');
     self.campaignType = ko.observable(serverCampaign ? serverCampaign.CampaignType : '');
     self.factions = ko.observableArray();
+    self.mandatoryAttacks = ko.observable();
+    self.optionalAttacks = ko.observable();
     
     if(serverCampaign) {
         self.factions($.map(serverCampaign.Factions, function(serverFaction) {

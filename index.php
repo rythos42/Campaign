@@ -26,6 +26,7 @@
         <script src="js/app/infrastructure/UniqueInValidator.js"></script>
         <script src="js/app/infrastructure/DialogCustomBinder.js"></script>
         <script src="js/app/infrastructure/TooltipCustomBinder.js"></script>
+        <script src="js/app/infrastructure/UserMaximumAttacksValidator.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

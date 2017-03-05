@@ -3,8 +3,7 @@
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(),
-        factionEntry = new FactionEntry(),
-        factionEntryValidationViewModel;
+        factionEntry = new FactionEntry();
         
     self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
     
@@ -30,7 +29,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         }), message: Translation.getString('cannotSpendMoreThan') }
     });
 
-    self.isAttackingFaction = factionEntry.isAttackingFaction;
+    self.isAttackingFaction = factionEntry.isAttackingFaction.extend({
+        userMaximumAttacks: { params: {user: self.selectedUser, campaign: currentCampaign}, message: Translation.getString('userOutOfAttacks') }
+    });
        
     self.needsAttackingFaction = ko.computed(function() {
         return currentEntry.attackingFaction() === null;
@@ -100,6 +101,13 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             self.addFaction();  
         return true;
     };    
+        
+    var factionEntryValidationViewModel = ko.validatedObservable([
+        self.selectedFaction,
+        self.selectedUser,
+        self.victoryPoints,
+        self.isAttackingFaction
+    ]);
     
     self.addFaction = function() {
         if(!factionEntryValidationViewModel.isValid()) {
@@ -159,10 +167,4 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     currentCampaign.subscribe(function(newCampaign) {
         currentEntry.campaignId(newCampaign.id());
     });
-    
-    factionEntryValidationViewModel = ko.validatedObservable([
-        self.selectedFaction,
-        self.selectedUser,
-        self.victoryPoints
-    ]);
 };

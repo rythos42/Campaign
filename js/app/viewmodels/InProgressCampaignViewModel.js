@@ -73,6 +73,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
             },
             success: function(userData) {
                 userCampaignData(userData);
+                currentCampaign().mandatoryAttacks(userData.MandatoryAttacks);
+                currentCampaign().optionalAttacks(userData.OptionalAttacks);
             }
         });
     };

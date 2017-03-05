@@ -1,7 +1,4 @@
 Next:
-    Attacks:
-        - prevent attacking if out of attacks
-        
     Phases
         - A campaign creator has to go into and hit "Next Phase" button to move to next phase.
         - On next phase:
