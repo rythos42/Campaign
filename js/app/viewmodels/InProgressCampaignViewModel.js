@@ -8,7 +8,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
-    self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel();
+    self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     
     self.showInProgressCampaign = ko.computed(function() {
         return navigation.showInProgressCampaign();

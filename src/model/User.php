@@ -3,11 +3,13 @@ class User implements JsonSerializable {
     private $id;
     private $name;
     private $permissions;
+    private $userCampaignData;
     
-    function __construct($id, $name, $permissions = null) {
+    function __construct($id, $name, $permissions = null, $userCampaignData = null) {
         $this->id = $id;
         $this->name = $name;
         $this->permissions = $permissions;
+        $this->userCampaignData = $userCampaignData;
     }
     
     public function getId() {
@@ -18,7 +20,8 @@ class User implements JsonSerializable {
         return array(
             "Id" => $this->id, 
             "Name" => $this->name, 
-            "Permissions" => $this->permissions
+            "Permissions" => $this->permissions,
+            "UserCampaignData" => $this->userCampaignData
         );
     }
     

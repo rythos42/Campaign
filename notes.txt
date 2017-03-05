@@ -1,10 +1,4 @@
 Next:
-- redo max TB validation
-        max: { params: ko.computed(function() {
-            var user = self.selectedUser();
-            return (user && user.territoryBonus) ? user.territoryBonus() : 0;
-        }), message: Translation.getString('cannotSpendMoreThan') }
-    
     Attacks:
         - show available number of attacks on profile page
         - show number of attacks made this phase on profile page
@@ -16,8 +10,6 @@ Next:
         - On next phase:
             - attack counts are reset
             - players gain TB, allocation weighted based on how many games you played in your faction this phase
-            
-- should be able to enter 0 into Bonus spent field    
     
 Notes:
     Work:
@@ -30,6 +22,8 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
+- InProgressCampaign screen is looking super shitty at < 420px
+- combine "getUsers" into a single method somewhere
 - ensureUserDataExists? Or should put into table on user creation?
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers

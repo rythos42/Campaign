@@ -23,7 +23,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
-        min: { params: 1, message: Translation.getString('atLeastOne') }
+        min: { params: 0, message: Translation.getString('atLeastZero') },
+        max: { params: ko.computed(function() {
+            var user = self.selectedUser();
+            return (user && user.getAvailableTerritoryBonusForCampaign) ? user.getAvailableTerritoryBonusForCampaign(currentCampaign().id()) : 0;
+        }), message: Translation.getString('cannotSpendMoreThan') }
     });
 
     self.isAttackingFaction = factionEntry.isAttackingFaction;
@@ -134,7 +138,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 responseCallback($.map(results, function(serverUser) {
                     return {
                         label: serverUser.Username,
-                        object: new User(serverUser.Id, serverUser.Username, serverUser.TerritoryBonus)
+                        object: new User(serverUser.Id, serverUser.Username, serverUser.UserCampaignData)
                     };
                 }));
             }

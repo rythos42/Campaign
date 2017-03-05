@@ -51,12 +51,12 @@
         <cancel>Cancel</cancel>
         <ok>Ok</ok>
         <howMuch>How much do you want to give?</howMuch>
-        <atLeastOne>If you're going to give, you have to give at least 1.</atLeastOne>
+        <atLeastZero>You have to enter a positive number.</atLeastZero>
         <amount>Amount</amount>
         <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
         <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
         <territoryBonusSpent>Bonus spent</territoryBonusSpent>
-        <cannotSpendMoreThan>You can't spend more than {0}.</cannotSpendMoreThan>
+        <cannotSpendMoreThan>You only have {0}.</cannotSpendMoreThan>
         <createEntry>Create Entry</createEntry>
     </strings>
 </translation>

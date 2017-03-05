@@ -25,8 +25,10 @@ class UserMapper {
                 "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
                 "Permission",
                 [$dbUser->Id]);
-                           
-            return new User($dbUser->Id, $username, $permissions);
+                
+            $userCampaignData = Database::queryArray("SELECT CampaignId, TerritoryBonus, Attacks FROM UserCampaignData WHERE UserId = ?", [$dbUser->Id]);
+           
+            return new User($dbUser->Id, $username, $permissions, $userCampaignData);
         }
         else {
             return null;
@@ -35,7 +37,13 @@ class UserMapper {
     
     public static function getUsersByFilter($term) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
-        return Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
+        $dbUserList = Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
+        $userList = array();
+        foreach($dbUserList as $user) {
+            $user["UserCampaignData"] = Database::queryArray("SELECT CampaignId, TerritoryBonus, Attacks FROM UserCampaignData WHERE UserId = ?", [$user["Id"]]);
+            $userList[] = $user;
+        }
+        return $userList;
     }
     
     public static function getUserDataForCampaign($userId, $campaignId) {
