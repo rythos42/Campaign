@@ -17,20 +17,7 @@ Next:
         - map is hard to read at mobile sizes
             - click-and-drag to pan
             - hover territory no longer works while zoomed.
-            - zooming should be quicker -- save both images
-
-
-- update campaign document:
-    - if you switch factions, only your games for your LATEST faction count towards your TB for the end of phase
-    - end-of-phase TB allocation: gain a percent of the total TB based on how many games you played, rounding down.
-- run at work:
-    CREATE TABLE Phase (
-        Id INT NOT NULL AUTO_INCREMENT,
-        CampaignId INT NOT NULL,
-        StartDate DATETIME NOT NULL,
-        PRIMARY KEY (Id),
-        FOREIGN KEY Phase_Campaign (CampaignId) REFERENCES Campaign(Id)
-    )    
+            - zooming should be quicker -- save both images    
     
 Notes:
     Work:
