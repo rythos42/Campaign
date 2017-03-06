@@ -4,8 +4,12 @@ ko.validation.rules.userMaximumAttacks = {
         if(!isAttacking)
             return true;
         
+        var user = params.user();
+        if(!user)
+            return true;
+        
         var campaign = params.campaign(),
             maximumAttacks = campaign.mandatoryAttacks() + campaign.optionalAttacks();
-        return params.user().getAttacksForCampaign(campaign.id()) < maximumAttacks;
+        return user.getAttacksForCampaign(campaign.id()) < maximumAttacks;
     }
 };

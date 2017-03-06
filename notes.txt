@@ -1,12 +1,19 @@
 Next:
-    Phases
-        - currently counting "total games ever", needs to count games since last phase
-        - "toast" when reset phase is done
-        - reload displayed stats when reset phase is done
+- "toast" when reset phase is done
+- reload displayed stats when reset phase is done
+- entry list isn't reloaded after new entry
 
 - update campaign document:
     - if you switch factions, only your games for your LATEST faction count towards your TB for the end of phase
     - end-of-phase TB allocation: gain a percent of the total TB based on how many games you played, rounding down.
+- run at work:
+    CREATE TABLE Phase (
+        Id INT NOT NULL AUTO_INCREMENT,
+        CampaignId INT NOT NULL,
+        StartDate DATETIME NOT NULL,
+        PRIMARY KEY (Id),
+        FOREIGN KEY Phase_Campaign (CampaignId) REFERENCES Campaign(Id)
+    )    
     
 Notes:
     Work:

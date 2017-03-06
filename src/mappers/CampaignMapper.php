@@ -109,20 +109,36 @@ class CampaignMapper {
         return Database::queryScalar("select CampaignFactionId from CampaignFactionEntry where UserId = ? order by Id desc limit 1", [$userId]);
     }
     
-    private static function getUsersInFaction($factionId) {
+    private static function getLastPhaseDateForCampaign($campaignId) {
+        return Database::queryScalar("select max(StartDate) from Phase where CampaignId = ?", [$campaignId]);
+    }
+    
+    private static function getUsersInFaction($campaignId, $factionId) {
+        $lastPhaseDate = CampaignMapper::getLastPhaseDateForCampaign($campaignId);
+
         // Each person belongs to a single faction, pick their last faction they logged against.
         return Database::queryArray(
             "select UserId, CampaignFactionId, 
-                (select count(*) from CampaignFactionEntry t where t.UserId = o.UserId and CampaignFactionId = ?) as GameCount
+                (select count(*) 
+                from CampaignFactionEntry t
+                join CampaignEntry on CampaignEntry.Id = t.CampaignEntryId
+                where t.UserId = o.UserId and CampaignFactionId = ? and CreatedOnDate > ?) as GameCount
             from CampaignFactionEntry o
             where Id = (select max(Id) From CampaignFactionEntry i where i.UserId = o.UserId)
             and CampaignFactionId = ?
             group by UserId",
-            [$factionId, $factionId]);
+            [$factionId, $lastPhaseDate, $factionId]);
     }
     
-    private static function getGameCountForFaction($factionId) {
-        return Database::queryScalar("select count(*) from CampaignFactionEntry where CampaignFactionId = ?", [$factionId]);
+    private static function getGameCountForFactionForCurrentPhase($campaignId, $factionId) {
+        $lastPhaseDate = CampaignMapper::getLastPhaseDateForCampaign($campaignId);
+        
+        return Database::queryScalar(
+            "select count(*) 
+            from CampaignFactionEntry 
+            join CampaignEntry on CampaignEntry.Id = CampaignFactionEntry.CampaignEntryId
+            where CampaignFactionId = ? and CreatedOnDate > ?", 
+            [$factionId, $lastPhaseDate]);
     }
     
     public static function resetPhase($campaignId) {
@@ -133,8 +149,8 @@ class CampaignMapper {
         $factionIdList = Database::queryScalarList("SELECT Id FROM CampaignFaction WHERE CampaignId = ?", [$campaignId]);
         foreach($factionIdList as $factionId) {
             $tbToAllocate = Database::queryScalar("SELECT count(*) as TerritoryCount FROM Polygon WHERE OwningFactionId = ?", [$factionId]);
-            $usersInFaction = CampaignMapper::getUsersInFaction($factionId);
-            $totalGameCountForFaction = CampaignMapper::getGameCountForFaction($factionId);
+            $usersInFaction = CampaignMapper::getUsersInFaction($campaignId, $factionId);
+            $totalGameCountForFaction = CampaignMapper::getGameCountForFactionForCurrentPhase($campaignId, $factionId);
             
             foreach($usersInFaction as $user) {
                 // Give them a percent of the total TB equal to the percent of games out of their faction they played.
@@ -144,6 +160,8 @@ class CampaignMapper {
                 Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$tbToGive, $user["UserId"], $campaignId]);
             }
         }
+        
+        Database::execute("INSERT INTO Phase (CampaignId, StartDate) VALUES (?, ?)", [$campaignId, date('Y-m-d H:i:s')]);
     }
 }
 ?>
