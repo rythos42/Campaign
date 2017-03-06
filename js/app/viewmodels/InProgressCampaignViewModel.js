@@ -49,6 +49,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
             ? ((attacks - mandatoryAttacks) + '/' + optionalAttacks)
             : '0/' + optionalAttacks;
     });
+    
+    self.showResetPhaseButton = ko.computed(function() {
+        return self.isMapCampaign() && currentCampaign().createdByUserId() === user.id();
+    });
         
     self.requestCreateEntry = function() {
         navigation.showCreateEntry(true);
@@ -77,7 +81,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 action: 'ResetPhase', 
                 campaignId: currentCampaign().id() 
             },
-            success: setUserDataForCampaign
+            success: function(userDataForCampaign) {
+                setUserDataForCampaign(userDataForCampaign);
+                toastr.info(Translation.getString('nowOnNextPhase'));
+            }
         });
     };
 

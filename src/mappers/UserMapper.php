@@ -54,7 +54,8 @@ class UserMapper {
     }
     
     public static function ensureUserDataExists($userId, $campaignId) {
-        // I feel like this could be done better elsewhere...
+        // This has to exist, because we aren't going to create a row for a user unless they interact with this particular campaign.
+        // Otherwise we'd have to create a row for every user for every campaign, which is a waste.
         if(!Database::exists("SELECT * FROM UserCampaignData WHERE UserId = ? AND CampaignId = ?", [$userId, $campaignId]))
             Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId) VALUES (?, ?)", [$userId, $campaignId]);
     }

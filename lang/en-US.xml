@@ -62,5 +62,6 @@
         <optionalAttacks>Optional attacks</optionalAttacks>
         <userOutOfAttacks>That user is out of attacks this phase.</userOutOfAttacks>
         <nextPhase>Next phase</nextPhase>
+        <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
     </strings>
 </translation>

@@ -1,5 +1,24 @@
 Next:
-- "toast" when reset phase is done
+- show start date of last phase on InProgressCampaign 
+- going to InProgressCampaign, Back, to InProgressCampaign, calls GetEntryList twice
+- combine "getUsers" into a single method somewhere
+- "LastLoginDate" is not accurate, with login cookies.
+- swap around entry
+    - pick location
+    - save -- able to save and come back
+    - come back later and enter who won or lost
+- change login page to have a dedicated "sign up" page
+    - link button swaps between the two views
+    - basically the same ui, but with different labels
+
+    Mobile:
+        - make sure canvas events work on mobile: "press"/"click"
+        - InProgressCampaign screen is looking super shitty at < 420px
+        - map is hard to read at mobile sizes
+            - click-and-drag to pan
+            - hover territory no longer works while zoomed.
+            - zooming should be quicker -- save both images
+
 
 - update campaign document:
     - if you switch factions, only your games for your LATEST faction count towards your TB for the end of phase
@@ -24,33 +43,16 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
-- going to InProgressCampaign, Back, to InProgressCampaign, calls GetEntryList twice
-- maybe make Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
-- note that you can't interact with the entry map until you've added an attacker
-- InProgressCampaign screen is looking super shitty at < 420px
-- combine "getUsers" into a single method somewhere
-- ensureUserDataExists? Or should put into table on user creation?
+- allow dropping one faction over another to replace it
+- allow removing territories from faction in create campaign
+- spend TB to attack anywhere
+- better way to check for isMapCampaign in Campaign.js
+
+- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers
 - position "Give TB" dialog better
-- spend TB to attack anywhere
-- swap around entry
-    - pick location
-    - save
-    - come back later and enter who won or lost
-- make sure canvas events work on mobile: "press"/"click" "double press?"/"dblclick" "click and drag"/"press and drag"
-- "LastLoginDate" is not accurate, with login cookies.
-- change login page to have a dedicated "sign up" page
-    - link button swaps between the two views
-    - basically the same ui, but with different labels
 - remove code that automatically gives permission to create map campaigns
-- allow dropping one faction over another to replace it
-- allow removing territories from faction in create campaign
-- better way to check for isMapCampaign in Campaign.js
-- map is hard to read at mobile sizes
-    - click-and-drag to pan
-    - hover territory no longer works while zoomed.
-    - zooming should be quicker -- save both images
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
@@ -58,10 +60,6 @@ Future:
 - create campaign customization
     - set height, width, number of sectors on map
     - pick background image
-- XP system
-- text writing about each game, and a place for that text to be prominently displayed
-- admin can write a narrative for the campaign
-- allow users to interact on the system in some way - perhaps allow comments on campaign entries
 - search campaigns by the user who created them
 - deadline for campaign entries
 - factions can choose colours
@@ -71,6 +69,13 @@ Future:
     CampaignFaction -> Faction
     Polygon -> Territory
     PolygonPoints -> TerritoryPolygonPoints?
+
+    Narrative/UserCommunication
+        - text writing about each entry
+        - a place for that text to be prominently displayed
+        - admin can write a narrative for the campaign
+        - show campaign narrative
+        - allow users to interact on the system in some way - perhaps allow comments on campaign entries
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
@@ -85,6 +90,7 @@ Selling Questions:
 
         
 Far future:
+- XP system
 - consider being able to add multiple users to a FactionEntry?
     - would allow easier adding of multi-player games
     - but if territory is player-owned, you'd still need to mark one as Attacker
