@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation, DateTimeFormatter */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -52,6 +52,11 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     self.showResetPhaseButton = ko.computed(function() {
         return self.isMapCampaign() && currentCampaign().createdByUserId() === user.id();
+    });
+    
+    self.phaseStartDate = ko.computed(function() {
+        var userData = userCampaignData();
+        return userData ? DateTimeFormatter.formatDate(userData.PhaseStartDate) : '';
     });
         
     self.requestCreateEntry = function() {

@@ -49,7 +49,11 @@ class UserMapper {
     public static function getUserDataForCampaign($userId, $campaignId) {
         UserMapper::ensureUserDataExists($userId, $campaignId);
         return Database::queryObject(
-            "SELECT TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks FROM UserCampaignData JOIN Campaign on Campaign.Id = UserCampaignData.CampaignId WHERE UserId = ? AND CampaignId = ?", 
+            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate
+            from UserCampaignData 
+            join Campaign on Campaign.Id = UserCampaignData.CampaignId 
+            join Phase on Phase.CampaignId = Campaign.Id
+            where UserId = ? and UserCampaignData.CampaignId = ?", 
             [$userId, $campaignId]);
     }
     

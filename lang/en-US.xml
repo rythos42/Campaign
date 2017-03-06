@@ -63,5 +63,6 @@
         <userOutOfAttacks>That user is out of attacks this phase.</userOutOfAttacks>
         <nextPhase>Next phase</nextPhase>
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
+        <phaseStart>Phase start</phaseStart>
     </strings>
 </translation>

@@ -1,5 +1,4 @@
 Next:
-- show start date of last phase on InProgressCampaign 
 - going to InProgressCampaign, Back, to InProgressCampaign, calls GetEntryList twice
 - combine "getUsers" into a single method somewhere
 - "LastLoginDate" is not accurate, with login cookies.

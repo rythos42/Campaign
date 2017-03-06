@@ -11,6 +11,10 @@ class InProgressCampaignViewModel {
         
             <ul data-bind="visible: isMapCampaign">
                 <li class="data-list">
+                    <label><?php echo Translation::getString('phaseStart'); ?>:</label>
+                    <span data-bind="text: phaseStartDate"></span>
+                </li>
+                <li class="data-list">
                     <label><?php echo Translation::getString('territoryBonus'); ?>:</label>
                     <span data-bind="text: availableTerritoryBonus"></span>
                     <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip')" class="ui-button ui-widget ui-corner-all ui-button-icon-only outset-icon-button">
