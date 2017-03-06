@@ -54,6 +54,8 @@ switch($action) {
         
     case "ResetPhase":
         CampaignMapper::resetPhase($_REQUEST["campaignId"]);
+        echo json_encode(UserMapper::getUserDataForCampaign(User::getCurrentUser()->getId(), $_REQUEST["campaignId"]));
+
         break;
         
 }

@@ -7,7 +7,7 @@ class InProgressCampaignViewModel {
         <div data-bind="visible: showInProgressCampaign">
             <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("createEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
             <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
-            <input type="button" data-bind="click: resetPhase, visible: isMapCampaign" value="<?php echo Translation::getString("resetPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
+            <input type="button" data-bind="click: resetPhase, visible: isMapCampaign" value="<?php echo Translation::getString("nextPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
         
             <ul data-bind="visible: isMapCampaign">
                 <li class="data-list">

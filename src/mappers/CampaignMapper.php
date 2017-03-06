@@ -152,12 +152,14 @@ class CampaignMapper {
             $usersInFaction = CampaignMapper::getUsersInFaction($campaignId, $factionId);
             $totalGameCountForFaction = CampaignMapper::getGameCountForFactionForCurrentPhase($campaignId, $factionId);
             
-            foreach($usersInFaction as $user) {
-                // Give them a percent of the total TB equal to the percent of games out of their faction they played.
-                $percent = $user["GameCount"] / $totalGameCountForFaction;
-                $tbToGive = floor($percent * $tbToAllocate);
-                
-                Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$tbToGive, $user["UserId"], $campaignId]);
+            if($totalGameCountForFaction > 0) {
+                foreach($usersInFaction as $user) {
+                    // Give them a percent of the total TB equal to the percent of games out of their faction they played.
+                    $percent = $user["GameCount"] / $totalGameCountForFaction;
+                    $tbToGive = floor($percent * $tbToAllocate);
+                    
+                    Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$tbToGive, $user["UserId"], $campaignId]);
+                }
             }
         }
         

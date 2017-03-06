@@ -103,6 +103,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
         if(newCampaign)
             currentCampaign(newCampaign);
+        
+        refreshUserDataForCampaign();
     });
     
     self.giveTerritoryBonusToUserDialogViewModel.dialogResult.subscribe(function(result) {
@@ -120,10 +122,5 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 }
             });
         }
-    });
-    
-    navigation.showInProgressCampaign.subscribe(function(showInProgressCampaign) {
-        if(showInProgressCampaign)
-            refreshUserDataForCampaign();
     });
 };

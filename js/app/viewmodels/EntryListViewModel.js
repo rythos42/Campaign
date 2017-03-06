@@ -32,7 +32,11 @@ var EntryListViewModel = function(navigation, currentCampaign) {
     });
     
     function getEntryList() {
-        var params = { action: 'GetEntryList', campaignId: currentCampaign().id() };
+        var campaign = currentCampaign();
+        if(!campaign)
+            return;
+        
+        var params = { action: 'GetEntryList', campaignId: campaign.id() };
         
         $.ajax({
             url: 'src/webservices/CampaignService.php',
@@ -41,13 +45,20 @@ var EntryListViewModel = function(navigation, currentCampaign) {
             dataType: 'JSON',
             success: function(serverEntryList) {
                 internalEntryList($.map(serverEntryList, function(serverEntry) {
-                    return new Entry(currentCampaign().id(), serverEntry);
+                    return new Entry(campaign.id(), serverEntry);
                 }));
             }
         });
     }
     
     currentCampaign.subscribe(function() {
+        getEntryList();
+    });
+    
+    navigation.showInProgressCampaign.subscribe(function(show) {
+        if(!show)
+            return;
+        
         getEntryList();
     });
 };

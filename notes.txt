@@ -1,7 +1,5 @@
 Next:
 - "toast" when reset phase is done
-- reload displayed stats when reset phase is done
-- entry list isn't reloaded after new entry
 
 - update campaign document:
     - if you switch factions, only your games for your LATEST faction count towards your TB for the end of phase
@@ -26,6 +24,7 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
+- going to InProgressCampaign, Back, to InProgressCampaign, calls GetEntryList twice
 - maybe make Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - note that you can't interact with the entry map until you've added an attacker
 - InProgressCampaign screen is looking super shitty at < 420px
