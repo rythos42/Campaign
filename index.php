@@ -38,6 +38,7 @@
         <script src="js/app/model/FactionEntry.js"></script>
         <script src="js/app/model/Colour.js"></script>
         <script src="js/app/model/DialogResult.js"></script>
+        <script src="js/app/managers/UserManager.js"></script>
         <script src="js/app/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/app/viewmodels/LoginViewModel.js"></script>
         <script src="js/app/viewmodels/LogoutViewModel.js"></script>
@@ -74,9 +75,12 @@
                 var viewModel = new ApplicationViewModel(user, navigation);
                 ko.applyBindings(viewModel, document.getElementById('Everything'));
                 
-                <?php if(User::isLoggedIn()) { ?>
-                user.setFromJson(<?php echo json_encode(User::getCurrentUser()); ?>);
-                user.isLoggedIn(true);
+                <?php 
+                if(User::isLoggedIn()) {
+                    UserMapper::updateLastLoginDate(User::getCurrentUser()->getId());
+                    ?>
+                    user.setFromJson(<?php echo json_encode(User::getCurrentUser()); ?>);
+                    user.isLoggedIn(true);
                 <?php } ?>
             });
         </script>

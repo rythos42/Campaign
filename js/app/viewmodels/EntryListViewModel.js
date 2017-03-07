@@ -2,7 +2,8 @@
 /*globals ko, EntryListItemViewModel, Entry, FactionEntrySummaryViewModel */
 var EntryListViewModel = function(navigation, currentCampaign) {
     var self = this,
-        internalEntryList = ko.observableArray();
+        internalEntryList = ko.observableArray(),
+        currentlyLoadingEntryList = false;
 
     self.showCampaignEntryList = ko.computed(function() {
         return navigation.showInProgressCampaign() && self.campaignEntries().length > 0;
@@ -33,9 +34,12 @@ var EntryListViewModel = function(navigation, currentCampaign) {
     
     function getEntryList() {
         var campaign = currentCampaign();
-        if(!campaign)
+        
+        // Don't do it again if we're already doing it.
+        if(!campaign || currentlyLoadingEntryList)
             return;
         
+        currentlyLoadingEntryList = true;
         var params = { action: 'GetEntryList', campaignId: campaign.id() };
         
         $.ajax({
@@ -47,18 +51,20 @@ var EntryListViewModel = function(navigation, currentCampaign) {
                 internalEntryList($.map(serverEntryList, function(serverEntry) {
                     return new Entry(campaign.id(), serverEntry);
                 }));
+                currentlyLoadingEntryList = false;
             }
         });
     }
     
     currentCampaign.subscribe(function() {
+        // when the campaign is changed, update the entry list
         getEntryList();
     });
     
     navigation.showInProgressCampaign.subscribe(function(show) {
-        if(!show)
-            return;
-        
-        getEntryList();
+        if(!show) 
+            internalEntryList.removeAll();
+        else // when we come here after creating an entry, update the entry list
+            getEntryList();
     });
 };

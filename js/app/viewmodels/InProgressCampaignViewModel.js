@@ -64,6 +64,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     };
     
     self.back = function() {
+        currentCampaign(null);
         navigation.showMain(true);
     };
             

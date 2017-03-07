@@ -133,25 +133,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
         self.factionEntries.isModified(false);
     };
-    
-    self.getUsers = function(term, responseCallback) {
-        $.ajax({
-            url: 'src/webservices/UserService.php',
-            dataType: 'JSON',
-            data: {
-                action: 'GetUsersByFilter',
-                term: term
-            },
-            success: function(results) {
-                responseCallback($.map(results, function(serverUser) {
-                    return {
-                        label: serverUser.Username,
-                        object: new User(serverUser.Id, serverUser.Username, serverUser.UserCampaignData)
-                    };
-                }));
-            }
-        });
-    };
                
     navigation.showCreateEntry.subscribe(function(show) {
         self.entryMapViewModel.clearMap();
@@ -165,6 +146,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     currentCampaign.subscribe(function(newCampaign) {
-        currentEntry.campaignId(newCampaign.id());
+        if(!newCampaign)
+            currentEntry.campaignId(undefined);
+        else
+            currentEntry.campaignId(newCampaign.id());
     });
 };

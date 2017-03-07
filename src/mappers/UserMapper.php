@@ -15,11 +15,14 @@ class UserMapper {
         return new User(Database::getLastInsertedId(), $username);
     }
     
+    public static function updateLastLoginDate($userId) {
+        Database::execute("UPDATE User SET LastLoginDate = ? WHERE Id=?", [date('Y-m-d H:i:s'), $userId]);
+    }
+    
     public static function validateLogin($username, $password) {
         $dbUser = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
         if($dbUser && password_verify($password, $dbUser->PasswordHash)) {
-            $today = date('Y-m-d H:i:s');
-            Database::execute("UPDATE User SET LastLoginDate = ? WHERE Id=?", [$today, $dbUser->Id]);
+            UserMapper::updateLastLoginDate($dbUser->Id);
             
             $permissions = Database::queryObjectList(
                 "SELECT Permission.Id, Permission.Name FROM PermissionGroup JOIN Permission on Permission.Id = PermissionGroup.PermissionId WHERE UserId  = ?", 
