@@ -1,5 +1,5 @@
 /*exported Campaign */
-/*globals ko, Faction */
+/*globals ko, Faction, CampaignType */
 var Campaign = function(serverCampaign) {
     var self = this;
     

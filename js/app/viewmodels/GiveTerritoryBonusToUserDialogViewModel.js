@@ -1,5 +1,5 @@
 /*exported GiveTerritoryBonusToUserDialogViewModel */
-/*globals ko, Translation, DialogResult, User */
+/*globals ko, Translation, DialogResult */
 var GiveTerritoryBonusToUserDialogViewModel = function(user, currentCampaign) {
     var self = this;
     
