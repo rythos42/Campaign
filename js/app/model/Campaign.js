@@ -18,7 +18,7 @@ var Campaign = function(serverCampaign) {
     }
     
     self.isMapCampaign = function() {
-        return parseInt(self.campaignType(), 10) === 1;
+        return self.campaignType() === CampaignType.Map;
     };
     
     self.clone = function() {

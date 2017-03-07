@@ -21,7 +21,7 @@
         <createCampaign>Create Campaign</createCampaign>        
         <password>Password</password>        
         <verifyPassword>Verify password</verifyPassword>        
-        <usernamePasswordNotCorrect>Either the username or password aren't correct.</usernamePasswordNotCorrect>        
+        <usernamePasswordNotCorrect>Username or password aren't correct.</usernamePasswordNotCorrect>        
         <usernameTaken>That username is already in use, sorry!</usernameTaken>        
         <login>Login</login>        
         <signup>Sign Up</signup>        
@@ -35,9 +35,8 @@
         <factionNameRequiredValidation>Each faction in your campaign needs a name.</factionNameRequiredValidation>
         <minimumOneFactionRequiredValidator>You must add at least one faction to your campaign.</minimumOneFactionRequiredValidator>
         <usernameRequiredValidator>You'll want a username, trust me.</usernameRequiredValidator>
-        <passwordRequiredValidator>You should use the easiest password possible, but you'll need one to keep your friends out of your account.</passwordRequiredValidator>
+        <passwordRequiredValidator>You can use any password, but you need one.</passwordRequiredValidator>
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
-        <or>OR</or>
         <campaignType>Campaign type</campaignType>
         <attacker>Attacker</attacker>
         <remove>Remove</remove>

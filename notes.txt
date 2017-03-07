@@ -3,13 +3,13 @@ Next:
     - pick location
     - save -- able to save and come back
     - come back later and enter who won or lost
-- change login page to have a dedicated "sign up" page
-    - link button swaps between the two views
-    - basically the same ui, but with different labels
 
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"
         - InProgressCampaign screen is looking super shitty at < 420px
+            - header buttons need to shrink a lot as screen size shrinks
+            - replace "Victory Points" in Create Entry with "Points"
+            - possible that li's being 300px is bad
         - map is hard to read at mobile sizes
             - click-and-drag to pan
             - hover territory no longer works while zoomed.
@@ -26,10 +26,24 @@ Notes:
 Future:
 - regression test it all again. In a couple different browsers.
 
-- allow dropping one faction over another to replace it
-- allow removing territories from faction in create campaign
+More control over create campaign map
+    - allow dropping one faction over another to replace it
+    - allow removing territories from faction in create campaign
+    
+    A few brainstorms:
+        - two layers. Background is the map, foreground is the polygons. Clear a polygon when removing/dropping.
+            - Have to manage the size of both canvas, which was turning into a pain. 
+            - Likely will make zooming/etc harder.
+        - Redraw all the polygons every time the map is updated.
+            - This may be a performance hit. Or it may not be.
+            - Easy to manage -- have an array of polygons to be drawn, just have to replace/remove to manipulate.
+            - Lots of code to write before it works though.
+        - clip()
+            - Redraw a polygon of the original image before dropping or removing
+            - Likely the easiest to implement of these 3 ideas, if clip does what it looks like it should do.
+
+
 - spend TB to attack anywhere
-- better way to check for isMapCampaign in Campaign.js
 
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close

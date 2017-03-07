@@ -38,6 +38,7 @@
         <script src="js/app/model/FactionEntry.js"></script>
         <script src="js/app/model/Colour.js"></script>
         <script src="js/app/model/DialogResult.js"></script>
+        <script src="js/app/model/CampaignType.js"></script>
         <script src="js/app/managers/UserManager.js"></script>
         <script src="js/app/viewmodels/ApplicationViewModel.js"></script>
         <script src="js/app/viewmodels/LoginViewModel.js"></script>
@@ -65,6 +66,7 @@
             (function() {var existing = ko.bindingProvider.instance;ko.bindingProvider.instance = {nodeHasBindings: existing.nodeHasBindings,getBindings: function(node, bindingContext) {var bindings;try {bindings = existing.getBindings(node, bindingContext);}catch (ex) {if (window.console && console.log) {console.log("binding error", ex.message, node, bindingContext);}}return bindings;}};})();
         
             $(document).ready(function() {
+                CampaignType.setCampaignTypes(<?php echo json_encode(CampaignType::getAllCampaignTypes()); ?>);
                 ExceptionCodes.setCodes(<?php echo json_encode(ExceptionCodes::getAllCodes()); ?>);
                 Translation.setTranslations(<?php echo Translation::getJson(); ?>);
 

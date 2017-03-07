@@ -6,6 +6,7 @@ var LoginViewModel = function(user, navigation) {
     self.usernameHasFocus = ko.observable(true);
     self.showUsernamePasswordIncorrect = ko.observable(false);
     self.showUsernameAlreadyTaken = ko.observable(false);
+    self.isSignup = ko.observable(false);
     
     self.username = ko.observable('').extend({
         required: { message: Translation.getString('usernameRequiredValidator') }
@@ -32,6 +33,7 @@ var LoginViewModel = function(user, navigation) {
         self.username('');
         self.password('');
         self.verifyPassword('');
+        self.isSignup(false);
         
         user.setFromJson(userJson);
     }
@@ -99,6 +101,14 @@ var LoginViewModel = function(user, navigation) {
                 }
             }
         });
+    };
+    
+    self.requestSignup = function() {
+        self.isSignup(true);
+    };
+    
+    self.requestLogin = function() {
+        self.isSignup(false);
     };
     
     navigation.showLogin.subscribe(function(showLogin) {
