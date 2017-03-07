@@ -8,6 +8,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
     
     self.factionSelectionHasFocus = ko.observable(false);
+    self.showAddFactions = ko.observable(false);
+    
     self.selectedFaction = factionEntry.faction.extend({
         required: { message: Translation.getString('factionEntryRequiredValidation') }
     });
@@ -28,14 +30,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             return (user && user.getAvailableTerritoryBonusForCampaign) ? user.getAvailableTerritoryBonusForCampaign(currentCampaign().id()) : 0;
         }), message: Translation.getString('cannotSpendMoreThan') }
     });
-
-    self.isAttackingFaction = factionEntry.isAttackingFaction.extend({
-        userMaximumAttacks: { params: {user: self.selectedUser, campaign: currentCampaign}, message: Translation.getString('userOutOfAttacks') }
-    });
-       
-    self.needsAttackingFaction = ko.computed(function() {
-        return currentEntry.attackingFaction() === null;
-    });
         
     self.showCreateEntry = ko.computed(function() {
         return navigation.showCreateEntry();
@@ -46,8 +40,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             return new FactionEntryListItemViewModel(currentEntry, factionEntry);
         });
     }).extend({
-        minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') },
-        mustContain: { params: { searchFor: true, objectProperty: 'isAttackingFaction' }, message: Translation.getString('attackerRequiredValidator') }
+        minLength: { params: 1, message: Translation.getString('minimumOneFactionValidation') }
     });
     
     self.hasFactionEntries = ko.computed(function() {
@@ -65,13 +58,12 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     var validatedEntry = ko.validatedObservable([
-        self.factionEntries,
         self.entryMapViewModel.selectedTerritory
     ]);
         
     self.saveCampaignEntry = function() {
-        if(!validatedEntry.isValid()) {
-            validatedEntry.errors.showAllMessages();
+        if(!self.factionEntries.isValid()) {
+            self.factionEntries.isModified(true);
             return;
         }
         
@@ -86,10 +78,20 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             method: 'POST',
             data: params,
             success: function() {
+                self.showAddFactions(false);
                 navigation.showInProgressCampaign(true);
                 self.entryMapViewModel.clearMap();
             }
         });
+    };
+    
+    self.addFactions = function() {
+        if(!self.entryMapViewModel.selectedTerritory.isValid()) {
+            self.entryMapViewModel.selectedTerritory.isModified(true);
+            return;
+        }
+        
+        self.showAddFactions(true);
     };
     
     self.back = function() {
@@ -105,8 +107,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var factionEntryValidationViewModel = ko.validatedObservable([
         self.selectedFaction,
         self.selectedUser,
-        self.victoryPoints,
-        self.isAttackingFaction
+        self.victoryPoints
     ]);
     
     self.addFaction = function() {
@@ -128,7 +129,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.selectedUser.isModified(false);
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
-        self.isAttackingFaction(false);
         self.territoryBonusSpent(undefined);
         
         self.factionEntries.isModified(false);
@@ -150,5 +150,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             currentEntry.campaignId(undefined);
         else
             currentEntry.campaignId(newCampaign.id());
+    });
+    
+    self.entryMapViewModel.attackingFaction.subscribe(function(newAttackingFaction) {
+        currentEntry.attackingFaction(newAttackingFaction);
     });
 };

@@ -1,9 +1,14 @@
 Next:
-- swap around entry
-    - pick location
-    - save -- able to save and come back
-    - come back later and enter who won or lost
-
+- Add Save button on entry map so you can save and come back
+- Need a place where you can click on a saved entry to edit it
+    - "Summary" tab should just be a list of entries and their dates
+    - Move Summary content into the main area
+- re-do starting focus on create entry
+- translation for "Select a faction"
+- adjust placement of spinning gears
+- "Back" button on CreateEntry goes back to main not necessarily back to selecting map
+- add "TB spent" on create entry table
+    
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"
         - InProgressCampaign screen is looking super shitty at < 420px

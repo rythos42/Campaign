@@ -8,6 +8,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
     self.showLoadingImage = ko.observable(true);
+    self.attackingFaction = ko.observable();
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -21,7 +22,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         required: { message: Translation.getString('territoryRequiredValidator'), onlyIf: self.showMap } 
     });
         
-    self.factions = ko.computed(function() {
+    self.mapLegendFactions = ko.computed(function() {
         var campaign = currentCampaign();
         if(!campaign)
             return null;
@@ -29,6 +30,11 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         return $.map(campaign.factions(), function(faction) {
             return new MapLegendViewModel(faction);
         });
+    });
+    
+    self.availableFactions = ko.computed(function() {
+        var campaignObj = currentCampaign();
+        return campaignObj ? campaignObj.factions() : null;
     });
     
     function getAdjacentTerritoriesForFaction(factionId) {
@@ -45,7 +51,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         });
     }
     
-    currentEntry.attackingFaction.subscribe(function(attackingFaction) {
+    self.attackingFaction.subscribe(function(attackingFaction) {
         if(!attackingFaction) {
             adjacentTerritories([]);
             return;

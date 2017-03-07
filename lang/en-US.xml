@@ -11,6 +11,7 @@
         <factionName>Faction Name</factionName>        
         <username>Username</username>        
         <addFaction>Add Faction</addFaction>        
+        <addFactions>Add Factions</addFactions>        
         <saveEntry>Save Entry</saveEntry>        
         <back>Back</back>        
         <createdOn>Created On</createdOn>        
@@ -63,5 +64,6 @@
         <nextPhase>Next phase</nextPhase>
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
+        <attackingFaction>Attacking faction</attackingFaction>
     </strings>
 </translation>

@@ -6,14 +6,8 @@ var Entry = function(campaignId, serverEntry) {
     self.createdOnDate = ko.observable(serverEntry ? serverEntry.CreatedOnDate : undefined);
     self.campaignId = ko.observable(campaignId ? campaignId : undefined);
     self.factionEntries = ko.observableArray();
-    
-    self.attackingFaction = ko.computed(function() {
-        var attackingFactionEntryList = $.grep(self.factionEntries(), function(factionEntry) {
-            return factionEntry.isAttackingFaction();
-        });
-        return (attackingFactionEntryList.length > 0) ? attackingFactionEntryList[0].faction() : null;            
-    });
-    
+    self.attackingFaction = ko.observable();
+        
     if(serverEntry) {
         $.each(serverEntry.FactionEntries, function(index, serverFactionEntry) {
             var faction = new Faction(serverFactionEntry.FactionName, serverFactionEntry.CampaignFactionId);

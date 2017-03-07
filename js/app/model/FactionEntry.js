@@ -6,7 +6,6 @@ var FactionEntry = function(faction, user, victoryPoints) {
     self.faction = ko.observable(faction ? faction : undefined);
     self.user = ko.observable(user ? user : undefined);
     self.victoryPoints = ko.observable((victoryPoints || victoryPoints === 0)? victoryPoints : undefined);
-    self.isAttackingFaction = ko.observable();
     self.territoryBonusSpent = ko.observable();
     
     self.clone = function() {
@@ -14,7 +13,6 @@ var FactionEntry = function(faction, user, victoryPoints) {
         factionEntry.faction(self.faction().clone());
         factionEntry.user(self.user().clone());
         factionEntry.victoryPoints(self.victoryPoints());
-        factionEntry.isAttackingFaction(self.isAttackingFaction());
         factionEntry.territoryBonusSpent(self.territoryBonusSpent());
         return factionEntry;
     };

@@ -4,7 +4,11 @@ class EntryMapWidget implements IWidget {
         ?>
         <!-- ko with: entryMapViewModel -->
         <div class="map-panel" data-bind="visible: showMap">
-            <ul class="map-legend" data-bind="foreach: factions">
+            <div>
+                <label for="FactionSelection"><?php echo Translation::getString("attackingFaction"); ?>:</label>
+                <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: attackingFaction, optionsCaption: 'Select a faction'"></select>
+            </div>
+            <ul class="map-legend" data-bind="foreach: mapLegendFactions">
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
             <canvas id="EntryMapCanvas" data-bind="
