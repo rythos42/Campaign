@@ -1,5 +1,5 @@
 /*exported EntryListViewModel */
-/*globals ko, EntryListItemViewModel, Entry, FactionEntrySummaryViewModel */
+/*globals ko, EntryListItemViewModel */
 var EntryListViewModel = function(navigation, currentCampaign, entryList) {
     var self = this;
 
@@ -9,7 +9,7 @@ var EntryListViewModel = function(navigation, currentCampaign, entryList) {
         
     self.campaignEntries = ko.computed(function() {
         return $.map(entryList(), function(entry) {
-            return new EntryListItemViewModel(entry);
+            return new EntryListItemViewModel(entry, navigation);
         });
     });
 };

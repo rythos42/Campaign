@@ -21,4 +21,12 @@ var Entry = function(campaignId, serverEntry) {
     self.clear = function() {
         self.factionEntries.removeAll();
     };
+    
+    self.copyFrom = function(entry) {
+        self.createdOnDate(entry.createdOnDate());
+        self.campaignId(entry.campaignId());
+        self.factionEntries(entry.factionEntries());
+        self.attackingFaction(entry.attackingFaction());
+        self.createdByUsername(entry.createdByUsername());
+    };
 };

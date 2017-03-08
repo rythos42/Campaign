@@ -1,6 +1,6 @@
 /*exported EntryMapViewModel */
 /*globals ko, Translation, MapLegendViewModel, MapHelper */
-var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
+var EntryMapViewModel = function(navigation, currentCampaign) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.

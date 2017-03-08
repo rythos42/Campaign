@@ -1,6 +1,10 @@
 Next:
-- Add Save button on entry map so you can save and come back
-- "Back" button on CreateEntry goes back to main not necessarily back to selecting map
+- Store territory being attacked, as well as attacking faction
+- "Save Entry" --> "Save"
+- Allow Save Entry button to save a previously loaded entry
+- "Finish" button that performs all of the post-game calculations
+- Save button on create entry map
+- Back button on create entry should go back to the map
     
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"

@@ -37,9 +37,9 @@ class CreateEntryWidget implements IWidget {
                 <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">
                     <thead>
                         <tr>
-                            <th><?php echo Translation::getString("factionName"); ?></th>
-                            <th><?php echo Translation::getString("username"); ?></th>
-                            <th><?php echo Translation::getString("victoryPoints"); ?></th>
+                            <th><?php echo Translation::getString("faction"); ?></th>
+                            <th><?php echo Translation::getString("user"); ?></th>
+                            <th><?php echo ucfirst(Translation::getString("points")); ?></th>
                             <th></th>
                         </tr>
                     </thead>

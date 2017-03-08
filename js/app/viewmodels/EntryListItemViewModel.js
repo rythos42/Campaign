@@ -1,6 +1,6 @@
 /*exported EntryListItemViewModel */
 /*globals ko, FactionEntryListItemViewModel */
-var EntryListItemViewModel = function(entry) {
+var EntryListItemViewModel = function(entry, navigation) {
     var self = this;
     
     self.createdOnDate = entry.createdOnDate;
@@ -11,4 +11,9 @@ var EntryListItemViewModel = function(entry) {
             return new FactionEntryListItemViewModel(entry, factionEntry);
         });
     });
+    
+    self.openEntry = function() {
+        navigation.parameters(entry);
+        navigation.showCreateEntry(true);
+    };
 };

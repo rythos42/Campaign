@@ -5,7 +5,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry = new Entry(),
         factionEntry = new FactionEntry();
         
-    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
+    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign);
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.showAddFactions = ko.observable(false);
@@ -57,10 +57,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         return campaignObj ? campaignObj.isMapCampaign() : false;
     });
     
-    var validatedEntry = ko.validatedObservable([
-        self.entryMapViewModel.selectedTerritory
-    ]);
-        
     self.saveCampaignEntry = function() {
         if(!self.factionEntries.isValid()) {
             self.factionEntries.isModified(true);
@@ -141,8 +137,12 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         if(!show)
             return;
         
-        currentEntry.clear();        
         self.clearEntry();
+        var editingEntry = navigation.parameters();
+        if(editingEntry)
+            currentEntry.copyFrom(editingEntry);
+        else
+            currentEntry.clear();        
     });
     
     currentCampaign.subscribe(function(newCampaign) {
