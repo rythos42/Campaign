@@ -22,7 +22,6 @@
         <script src="js/app/infrastructure/ColourHelper.js"></script>
         <script src="js/app/infrastructure/CanvasCustomBinder.js"></script>
         <script src="js/app/infrastructure/DrawPolygonOnCanvasCustomBinder.js"></script>
-        <script src="js/app/infrastructure/MustContainValidator.js"></script>
         <script src="js/app/infrastructure/ResizeOnWindowResizeCustomBinder.js"></script>
         <script src="js/app/infrastructure/MapHelper.js"></script>
         <script src="js/app/infrastructure/UniqueInValidator.js"></script>

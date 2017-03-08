@@ -14,7 +14,7 @@ class CreateEntryWidget implements IWidget {
                 <ul>
                     <li class="entry-field">
                         <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
-                        <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: 'Select a faction', event: {keypress: keyPressAddFaction}"></select>
+                        <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: Translation.getString('selectFaction'), event: {keypress: keyPressAddFaction}"></select>
                     </li>
                     <li class="entry-field">
                         <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>

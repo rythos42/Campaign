@@ -9,7 +9,7 @@
         <user>User</user>
         <victoryPoints>Victory Points</victoryPoints>        
         <factionName>Faction Name</factionName>        
-        <username>Username</username>        
+        <user>User</user>        
         <addFaction>Add Faction</addFaction>        
         <addFactions>Add Factions</addFactions>        
         <saveEntry>Save Entry</saveEntry>        
@@ -65,5 +65,10 @@
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
         <attackingFaction>Attacking faction</attackingFaction>
+        <points>points</points>
+        <selectFaction>Select a faction</selectFaction>
+        <createdBy>Created By</createdBy>
+        <entries>Entries</entries>
+        <details>Details</details>
     </strings>
 </translation>

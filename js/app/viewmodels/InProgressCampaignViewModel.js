@@ -3,10 +3,12 @@
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
-        userCampaignData = ko.observable();
+        userCampaignData = ko.observable(),
+        internalEntryList = ko.observableArray(),
+        currentlyLoadingEntryList = false;
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
-    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign);
+    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     
     self.showInProgressCampaign = ko.computed(function() {
@@ -58,6 +60,23 @@ var InProgressCampaignViewModel = function(user, navigation) {
         var userData = userCampaignData();
         return userData ? DateTimeFormatter.formatDate(userData.PhaseStartDate) : '';
     });
+    
+    self.factionEntrySummaries = ko.computed(function() {
+        var factionEntrySummaries = {};
+        $.each(internalEntryList(), function(i, entry) {
+            $.each(entry.factionEntries(), function(j, factionEntry) {
+                var factionId = factionEntry.faction().id();
+                if(!factionEntrySummaries[factionId])
+                    factionEntrySummaries[factionId] = new FactionEntrySummaryViewModel(factionEntry);
+                
+                var factionSummary = factionEntrySummaries[factionId];
+                factionSummary.addVictoryPoints(factionEntry.victoryPoints());
+            });
+        });
+        return $.map(factionEntrySummaries, function(factionEntrySummary) {
+            return factionEntrySummary;
+        });
+    });
         
     self.requestCreateEntry = function() {
         navigation.showCreateEntry(true);
@@ -72,6 +91,31 @@ var InProgressCampaignViewModel = function(user, navigation) {
         self.giveTerritoryBonusToUserDialogViewModel.openDialog();
     };
     
+            
+    function getEntryList() {
+        var campaign = currentCampaign();
+        
+        // Don't do it again if we're already doing it.
+        if(!campaign || currentlyLoadingEntryList)
+            return;
+        
+        currentlyLoadingEntryList = true;
+        var params = { action: 'GetEntryList', campaignId: campaign.id() };
+        
+        $.ajax({
+            url: 'src/webservices/CampaignService.php',
+            method: 'GET',
+            data: params,
+            dataType: 'JSON',
+            success: function(serverEntryList) {
+                internalEntryList($.map(serverEntryList, function(serverEntry) {
+                    return new Entry(campaign.id(), serverEntry);
+                }));
+                currentlyLoadingEntryList = false;
+            }
+        });
+    }
+        
     var setUserDataForCampaign = function(userDataForCampaign) {
         userCampaignData(userDataForCampaign);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
@@ -135,5 +179,17 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 }
             });
         }
+    });
+    
+    currentCampaign.subscribe(function() {
+        // when the campaign is changed, update the entry list
+        getEntryList();
+    });
+    
+    navigation.showInProgressCampaign.subscribe(function(show) {
+        if(!show) 
+            internalEntryList.removeAll();
+        else // when we come here after creating an entry, update the entry list
+            getEntryList();
     });
 };

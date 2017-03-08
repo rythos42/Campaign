@@ -1,19 +1,11 @@
 Next:
 - Add Save button on entry map so you can save and come back
-- Need a place where you can click on a saved entry to edit it
-    - "Summary" tab should just be a list of entries and their dates
-    - Move Summary content into the main area
-- re-do starting focus on create entry
-- translation for "Select a faction"
-- adjust placement of spinning gears
 - "Back" button on CreateEntry goes back to main not necessarily back to selecting map
-- add "TB spent" on create entry table
     
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"
         - InProgressCampaign screen is looking super shitty at < 420px
             - header buttons need to shrink a lot as screen size shrinks
-            - replace "Victory Points" in Create Entry with "Points"
             - possible that li's being 300px is bad
         - map is hard to read at mobile sizes
             - click-and-drag to pan
@@ -29,7 +21,7 @@ Notes:
     - qwer/qwer             (yes map)
 
 Future:
-- regression test it all again. In a couple different browsers.
+- regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
 
 More control over create campaign map
     - allow dropping one faction over another to replace it
@@ -50,6 +42,8 @@ More control over create campaign map
 
 - spend TB to attack anywhere
 
+- add "TB spent" on create entry table and on entry list details
+- maybe we don't need entry list after we can edit individual entries
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers

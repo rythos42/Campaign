@@ -92,6 +92,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         }
         
         self.showAddFactions(true);
+        self.factionSelectionHasFocus(true);
     };
     
     self.back = function() {
@@ -142,7 +143,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
         currentEntry.clear();        
         self.clearEntry();
-        self.factionSelectionHasFocus(true);
     });
     
     currentCampaign.subscribe(function(newCampaign) {

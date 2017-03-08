@@ -87,7 +87,12 @@ class CampaignMapper {
     public static function getEntriesForCampaign($campaignId) {
         $entryList = array();
 
-        $dbEntryList = Database::queryObjectList("SELECT * FROM CampaignEntry WHERE CampaignId = ?", "Entry", [$campaignId]);
+        $dbEntryList = Database::queryObjectList(
+            "select CampaignEntry.*, User.Username as CreatedByUsername
+            from CampaignEntry
+            join User on User.Id = CampaignEntry.CreatedByUserId
+            where CampaignId = ?", 
+            "Entry", [$campaignId]);
        
         foreach($dbEntryList as $entry) {
             $entryList[] = $entry;

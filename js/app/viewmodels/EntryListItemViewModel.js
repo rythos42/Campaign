@@ -4,6 +4,7 @@ var EntryListItemViewModel = function(entry) {
     var self = this;
     
     self.createdOnDate = entry.createdOnDate;
+    self.createdByUsername = entry.createdByUsername;
     
     self.factionEntries = ko.computed(function() {
         return $.map(entry.factionEntries(), function(factionEntry) {

@@ -29,6 +29,12 @@ class InProgressCampaignViewModel {
                     <label><?php echo Translation::getString('optionalAttacks'); ?>:</label>
                     <span data-bind="text: optionalAttacks"></span>
                 </li>
+                <!-- ko foreach: factionEntrySummaries -->
+                <li class="data-list">
+                    <label><span data-bind="text: factionName"></span> <?php echo Translation::getString('points'); ?>:</label>
+                    <span data-bind="text: victoryPoints"></span>
+                </li>
+                <!-- /ko -->
             </ul>
             
             <?php

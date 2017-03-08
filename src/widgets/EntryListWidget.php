@@ -5,21 +5,21 @@ class EntryListWidget {
         <!-- ko with: entryListViewModel -->
         <div data-bind="tab: {}, visible: showCampaignEntryList">
             <ul>
-                <li><a href="#SummaryTab">Summary</a></li>
-                <li><a href="#DetailsTab">Details</a></li>
+                <li><a href="#SummaryTab"><?php echo Translation::getString("entries"); ?></a></li>
+                <li><a href="#DetailsTab"><?php echo Translation::getString("details"); ?></a></li>
             </ul>
             <div id="SummaryTab">
                 <table class="ui-widget ui-corners-all ui-widget-content">
                     <thead>
                         <tr>
-                            <th><?php echo Translation::getString("faction"); ?></th>
-                            <th><?php echo Translation::getString("victoryPoints"); ?></th>
+                            <th><?php echo Translation::getString("createdOn"); ?></th>
+                            <th><?php echo Translation::getString("createdBy"); ?></th>
                         </tr>
                     </thead>
-                    <tbody data-bind="foreach: factionEntrySummaries">
+                    <tbody data-bind="foreach: campaignEntries">
                         <tr>
-                            <td data-bind="text: factionName" />
-                            <td data-bind="text: victoryPoints" />
+                            <td><input type="button" class="link-button" data-bind="value: createdOnDate" /></td>
+                            <td><span data-bind="text: createdByUsername"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -39,9 +39,9 @@ class EntryListWidget {
                                 <table class="ui-widget ui-corners-all ui-widget-content">
                                     <thead>
                                         <tr>
-                                            <th><?php echo Translation::getString("factionName"); ?></th>
-                                            <th><?php echo Translation::getString("username"); ?></th>
-                                            <th><?php echo Translation::getString("victoryPoints"); ?></th>
+                                            <th><?php echo Translation::getString("faction"); ?></th>
+                                            <th><?php echo Translation::getString("user"); ?></th>
+                                            <th><?php echo ucfirst(Translation::getString("points")); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody data-bind="foreach: factionEntries">
@@ -52,7 +52,7 @@ class EntryListWidget {
                                         </tr>
                                     </tbody>
                                 </table>
-                            </tr>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
