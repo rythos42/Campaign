@@ -34,12 +34,12 @@ class CampaignMapper {
         return $campaignList;
     }
     
-    public static function insertCampaignEntry($campaignEntry, $territoryIdOnMap) {
+    public static function insertCampaignEntry($campaignEntry) {
         $createdByUserId = User::getCurrentUser()->getId();
         $today = date('Y-m-d H:i:s');
         Database::execute(
-            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId) VALUES (?, ?, ?, ?)", 
-            [$campaignEntry->campaignId, $createdByUserId, $today, $campaignEntry->attackingFaction->id]);
+            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) VALUES (?, ?, ?, ?, ?)", 
+            [$campaignEntry->campaignId, $createdByUserId, $today, $campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap]);
         
         $campaignEntryId = Database::getLastInsertedId();
 
@@ -78,7 +78,7 @@ class CampaignMapper {
         if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
             Database::execute(
                 "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
-                [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $territoryIdOnMap]);
+                [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttacked->IdOnMap]);
         }
         
         Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", [$winningFactionEntry->user->id, $campaignEntry->campaignId]);

@@ -1,10 +1,13 @@
 Next:
-- Store territory being attacked, as well as attacking faction
+- Retrieve territory being attacked and attacking faction to be used on create entry
 - "Save Entry" --> "Save"
 - Allow Save Entry button to save a previously loaded entry
 - "Finish" button that performs all of the post-game calculations
 - Save button on create entry map
 - Back button on create entry should go back to the map
+
+- validation for "You must add at least one entry" after Add Faction
+- Attacking faction drop down may not be cleared properly
     
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"

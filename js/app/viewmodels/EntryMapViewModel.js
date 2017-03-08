@@ -1,6 +1,6 @@
 /*exported EntryMapViewModel */
 /*globals ko, Translation, MapLegendViewModel, MapHelper */
-var EntryMapViewModel = function(navigation, currentCampaign) {
+var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
@@ -18,7 +18,7 @@ var EntryMapViewModel = function(navigation, currentCampaign) {
         return campaign.isMapCampaign() && navigation.showCreateEntry();
     });
     
-    self.selectedTerritory = ko.observable().extend({ 
+    self.selectedTerritory = currentEntry.territoryBeingAttacked.extend({ 
         required: { message: Translation.getString('territoryRequiredValidator'), onlyIf: self.showMap } 
     });
         

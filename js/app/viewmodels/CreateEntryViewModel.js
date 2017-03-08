@@ -5,7 +5,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry = new Entry(),
         factionEntry = new FactionEntry();
         
-    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign);
+    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.showAddFactions = ko.observable(false);
@@ -65,8 +65,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
         var params = {
             action: 'SaveCampaignEntry',
-            campaignEntry: ko.toJSON(currentEntry),
-            territoryIdOnMap: currentCampaign().isMapCampaign() ? self.entryMapViewModel.selectedTerritory().IdOnMap : null
+            campaignEntry: ko.toJSON(currentEntry)
         };
         
         $.ajax({

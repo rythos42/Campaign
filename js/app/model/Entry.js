@@ -8,6 +8,7 @@ var Entry = function(campaignId, serverEntry) {
     self.factionEntries = ko.observableArray();
     self.attackingFaction = ko.observable();
     self.createdByUsername = ko.observable(serverEntry ? serverEntry.CreatedByUsername : undefined);
+    self.territoryBeingAttacked = ko.observable();
         
     if(serverEntry) {
         $.each(serverEntry.FactionEntries, function(index, serverFactionEntry) {
