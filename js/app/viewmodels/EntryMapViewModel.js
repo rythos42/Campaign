@@ -8,7 +8,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
     self.showLoadingImage = ko.observable(true);
-    self.attackingFaction = ko.observable();
+    self.attackingFaction = currentEntry.attackingFaction;
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -18,7 +18,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         return campaign.isMapCampaign() && navigation.showCreateEntry();
     });
     
-    self.selectedTerritory = currentEntry.territoryBeingAttacked.extend({ 
+    self.selectedTerritory = ko.observable().extend({ 
         required: { message: Translation.getString('territoryRequiredValidator'), onlyIf: self.showMap } 
     });
         
@@ -47,6 +47,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
             },
             success: function(newAdjacentTerritories) {
                 adjacentTerritories(newAdjacentTerritories);
+                currentEntry.updateTerritoryBeingAttacked(newAdjacentTerritories);
             }
         });
     }
@@ -88,11 +89,17 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         adjacentTerritories(null);
         mapHelper.clearImageData();
         self.showLoadingImage(true);
+        self.attackingFaction(null);
     };
 
     self.storeImage = function() {
         mapHelper.storeImage();
         self.showLoadingImage(false);
+
+        if(currentEntry.territoryBeingAttacked()) {
+            self.drawingTerritory(currentEntry.territoryBeingAttacked());
+            self.selectTerritory();
+        }
     };
     
     navigation.showCreateEntry.subscribe(function(showCreateEntry) {

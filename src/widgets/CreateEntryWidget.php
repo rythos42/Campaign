@@ -59,7 +59,7 @@ class CreateEntryWidget implements IWidget {
                 </table>
             </div>
             <div class="button-panel">
-                <input type="button" data-bind="click: saveCampaignEntry, visible: showAddFactions" value="<?php echo Translation::getString("saveEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: saveCampaignEntry, visible: showAddFactions" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("addFactions"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>

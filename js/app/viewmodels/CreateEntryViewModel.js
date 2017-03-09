@@ -91,7 +91,10 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     };
     
     self.back = function() {
-        navigation.showInProgressCampaign(true);
+        if(self.showAddFactions())
+            self.showAddFactions(false);
+        else
+            navigation.showInProgressCampaign(true);
     };
     
     self.keyPressAddFaction = function(viewModel, event) {
@@ -128,6 +131,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.territoryBonusSpent(undefined);
         
         self.factionEntries.isModified(false);
+        
+        currentEntry.id(undefined);
+        currentEntry.createdOnDate(undefined);
+        currentEntry.createdByUsername(undefined);
+        currentEntry.territoryBeingAttackedIdOnMap(undefined);
     };
                
     navigation.showCreateEntry.subscribe(function(show) {
@@ -138,10 +146,13 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
         self.clearEntry();
         var editingEntry = navigation.parameters();
-        if(editingEntry)
+        if(editingEntry) {
+            navigation.parameters(null);
             currentEntry.copyFrom(editingEntry);
-        else
+        }
+        else {
             currentEntry.clear();        
+        }
     });
     
     currentCampaign.subscribe(function(newCampaign) {
@@ -149,9 +160,5 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             currentEntry.campaignId(undefined);
         else
             currentEntry.campaignId(newCampaign.id());
-    });
-    
-    self.entryMapViewModel.attackingFaction.subscribe(function(newAttackingFaction) {
-        currentEntry.attackingFaction(newAttackingFaction);
     });
 };
