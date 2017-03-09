@@ -53,12 +53,12 @@ class CampaignMapper {
             
             if(isset($factionEntry->id)) {
                 Database::execute(
-                    "update CampaignFactionEntry set CampaignFactionId = ?, UserId = ?, VictoryPointsScored = ? where Id = ?",
-                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->id]);
+                    "update CampaignFactionEntry set CampaignFactionId = ?, UserId = ?, VictoryPointsScored = ?, TerritoryBonusSpent = ? where Id = ?",
+                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent, $factionEntry->id]);
             } else {
                 Database::execute(
-                    "insert into CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) values (?, ?, ?, ?)", 
-                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
+                    "insert into CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
+                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
         }

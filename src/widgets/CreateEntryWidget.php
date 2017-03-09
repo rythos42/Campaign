@@ -40,6 +40,7 @@ class CreateEntryWidget implements IWidget {
                             <th><?php echo Translation::getString("faction"); ?></th>
                             <th><?php echo Translation::getString("user"); ?></th>
                             <th><?php echo ucfirst(Translation::getString("points")); ?></th>
+                            <th><?php echo Translation::getString("bonus"); ?></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -48,6 +49,7 @@ class CreateEntryWidget implements IWidget {
                             <td data-bind="text: factionName" />
                             <td data-bind="text: username" />
                             <td data-bind="text: victoryPoints" />
+                            <td data-bind="text: territoryBonusSpent" />
                             <td class="actions">
                                 <span data-bind="visible: isAttackingFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
                                 <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">

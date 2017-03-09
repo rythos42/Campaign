@@ -18,6 +18,7 @@ var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry)
     });
     
     self.victoryPoints = factionEntry.victoryPoints;
+    self.territoryBonusSpent = factionEntry.territoryBonusSpent;
     
     self.isAttackingFaction = ko.computed(function() {
         var attackingFaction = currentCampaignEntry.attackingFaction();

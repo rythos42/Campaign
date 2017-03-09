@@ -42,6 +42,7 @@ class EntryListWidget {
                                             <th><?php echo Translation::getString("faction"); ?></th>
                                             <th><?php echo Translation::getString("user"); ?></th>
                                             <th><?php echo ucfirst(Translation::getString("points")); ?></th>
+                                            <th><?php echo Translation::getString("bonus"); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody data-bind="foreach: factionEntries">
@@ -49,6 +50,7 @@ class EntryListWidget {
                                             <td data-bind="text: factionName" />
                                             <td data-bind="text: username" />
                                             <td data-bind="text: victoryPoints" />
+                                            <td data-bind="text: territoryBonusSpent" />
                                         </tr>
                                     </tbody>
                                 </table>
