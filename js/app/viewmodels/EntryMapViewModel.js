@@ -48,8 +48,20 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
             success: function(newAdjacentTerritories) {
                 adjacentTerritories(newAdjacentTerritories);
                 currentEntry.updateTerritoryBeingAttacked(newAdjacentTerritories);
+
+                setTimeout(function() {
+                    // This should be done better.
+                    if(shouldDrawTerritoryBeingAttacked()) {
+                        self.drawingTerritory(currentEntry.territoryBeingAttacked());
+                        self.selectTerritory();
+                    }
+                }, 1000);
             }
         });
+    }
+    
+    function shouldDrawTerritoryBeingAttacked() {
+        return currentEntry.territoryBeingAttacked() && !self.selectedTerritory();
     }
     
     self.attackingFaction.subscribe(function(attackingFaction) {
@@ -91,21 +103,21 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         self.showLoadingImage(true);
         self.attackingFaction(null);
     };
-
+    
     self.storeImage = function() {
         mapHelper.storeImage();
         self.showLoadingImage(false);
-
-        if(currentEntry.territoryBeingAttacked()) {
-            self.drawingTerritory(currentEntry.territoryBeingAttacked());
-            self.selectTerritory();
-        }
     };
-    
+
     navigation.showCreateEntry.subscribe(function(showCreateEntry) {
         if(!showCreateEntry)
             return;
         
         self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + currentCampaign().id());
+    });
+    
+    self.selectedTerritory.subscribe(function(newSelectedTerritory) {
+        currentEntry.territoryBeingAttacked(newSelectedTerritory);
+        currentEntry.territoryBeingAttackedIdOnMap(newSelectedTerritory ? newSelectedTerritory.IdOnMap : null);
     });
 };

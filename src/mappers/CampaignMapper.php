@@ -34,20 +34,31 @@ class CampaignMapper {
         return $campaignList;
     }
     
-    public static function insertCampaignEntry($campaignEntry) {
-        Database::execute(
-            "INSERT INTO CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) VALUES (?, ?, ?, ?, ?)", 
-            [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap]);
-        
-        $campaignEntryId = Database::getLastInsertedId();
+    public static function saveCampaignEntry($campaignEntry) {
+        if(isset($campaignEntry->id)) {
+            Database::execute(
+                "update CampaignEntry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
+                [$campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap, $campaignEntry->id]);
+        } else {        
+            Database::execute(
+                "insert into CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
+                [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap]);
+            $campaignEntryId = Database::getLastInsertedId();
+        }
+            
         foreach($campaignEntry->factionEntries as $factionEntry) {
             UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
-
-            // Insert the faction entry
-            Database::execute(
-                "INSERT INTO CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) VALUES (?, ?, ?, ?)", 
-                [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
-        }
+            
+            if(isset($factionEntry->id)) {
+                Database::execute(
+                    "update CampaignFactionEntry set CampaignFactionId = ?, UserId = ?, VictoryPointsScored = ? where Id = ?",
+                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->id]);
+            } else {
+                Database::execute(
+                    "insert into CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) values (?, ?, ?, ?)", 
+                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
+            }
+        }                
     }
     
     public static function finishEntry($campaignEntry) {

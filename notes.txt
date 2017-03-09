@@ -1,5 +1,7 @@
 Next:
-- Allow Save Entry button to save a previously loaded entry
+- Test can reload everything we want to save.
+- setTimeout in EntryMapViewModel.getAdjacentTerritoriesForFaction needs to be done better - big timing issue here
+- Bonus Points spent must be saved in a faction entry
 - "Finish" button that performs all of the post-game calculations
     - removed this into CampaignMapper::finishEntry()
 - Save button on create entry map

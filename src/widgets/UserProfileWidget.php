@@ -6,7 +6,7 @@ class UserProfileWidget implements IWidget {
         <div data-bind="visible: showUserProfile">
             <ul>
                 <li class="data-list">
-                    <label><?php echo Translation::getString('username'); ?>:</label>
+                    <label><?php echo Translation::getString('user'); ?>:</label>
                     <span data-bind="text: username"></span>
                 </li>
                 <li class="button-panel">

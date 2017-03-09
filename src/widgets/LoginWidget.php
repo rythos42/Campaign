@@ -6,7 +6,7 @@ class LoginWidget implements IWidget {
         <div id="Login" data-bind="visible: showLogin">
             <ul>
                 <li class="entry-field">
-                    <label><?php echo Translation::getString("username"); ?>:</label>
+                    <label><?php echo Translation::getString("user"); ?>:</label>
                     <input type="text" id="Username" name="Username" data-bind="textInput: username, hasFocus: usernameHasFocus, event: {keypress: keyPressLogin}" />
                     <span data-bind="visible: showUsernameAlreadyTaken" class="validationMessage"><?php echo Translation::getString("usernameTaken"); ?></span>
                 </li>

@@ -27,7 +27,7 @@ switch($action) {
         
     case "SaveCampaignEntry":
         $campaignEntry = json_decode($_REQUEST["campaignEntry"]);
-        CampaignMapper::insertCampaignEntry($campaignEntry);
+        CampaignMapper::saveCampaignEntry($campaignEntry);
         break;
     
     case "GetEntryList":

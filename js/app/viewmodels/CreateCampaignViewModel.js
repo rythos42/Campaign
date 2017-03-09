@@ -12,7 +12,12 @@ var CreateCampaignViewModel = function(user, navigation) {
         maxLength: { params: 45, message: Translation.getString('campaignNameMaxLengthValidation') }
     });
     
-    self.campaignType = entryCampaign.campaignType;
+    self.campaignType = ko.computed({
+        read: function() { return entryCampaign.campaignType(); },
+        write: function(newCampaignType) {
+            entryCampaign.campaignType(parseInt(newCampaignType, 10));
+        }
+    });
     
     self.factions = ko.computed(function() {
         return $.map(entryCampaign.factions(), function(faction) {
