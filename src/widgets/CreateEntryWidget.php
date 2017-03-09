@@ -24,13 +24,13 @@ class CreateEntryWidget implements IWidget {
                     <li class="entry-field">
                         <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
                         <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddFaction}" />
-                        <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
                     </li>
                     <li class="entry-field" data-bind="visible: isMapCampaign">
                         <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
                         <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, event: {keypress: keyPressAddFaction}" />
                     </li>
                     <li class="button-panel">
+                        <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
                         <input type="button" data-bind="click: addFaction" value="<?php echo Translation::getString("addFaction"); ?>" class="ui-button ui-widget ui-corner-all" />
                     </li>
                 </ul>

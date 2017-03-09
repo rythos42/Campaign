@@ -116,12 +116,12 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         }
         
         currentEntry.factionEntries.push(factionEntry.clone());
-        self.clearEntry();
+        clearFactionEntry();
         
         self.factionSelectionHasFocus(true);
     };
     
-    self.clearEntry = function() {
+    function clearFactionEntry() {
         self.selectedFaction(undefined);
         self.selectedFaction.isModified(false);
         self.selectedUser(undefined);
@@ -131,12 +131,14 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.territoryBonusSpent(undefined);
         
         self.factionEntries.isModified(false);
-        
+    }
+    
+    function clearEntry() {
         currentEntry.id(undefined);
         currentEntry.createdOnDate(undefined);
         currentEntry.createdByUsername(undefined);
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
-    };
+    }
                
     navigation.showCreateEntry.subscribe(function(show) {
         self.entryMapViewModel.clearMap();
@@ -144,7 +146,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         if(!show)
             return;
         
-        self.clearEntry();
+        clearFactionEntry();
+        clearEntry();
         var editingEntry = navigation.parameters();
         if(editingEntry) {
             navigation.parameters(null);

@@ -120,4 +120,9 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         currentEntry.territoryBeingAttacked(newSelectedTerritory);
         currentEntry.territoryBeingAttackedIdOnMap(newSelectedTerritory ? newSelectedTerritory.IdOnMap : null);
     });
+    
+    self.attackingFaction.subscribe(function() {
+        self.selectedTerritory(null);
+        mapHelper.restoreImage();
+    });
 };

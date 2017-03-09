@@ -30,7 +30,7 @@
         <userEntryRequiredValidation>You need to enter a user.</userEntryRequiredValidation>
         <userEntryInvalidAccountValidation>That person does't have an account here.</userEntryInvalidAccountValidation>
         <victoryPointsEntryRequiredValidation>At least put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
-        <minimumOneFactionValidation>You must add at least one faction to your entry.</minimumOneFactionValidation>
+        <minimumOneFactionValidation>You must add at least one faction.</minimumOneFactionValidation>
         <campaignNameRequiredValidation>Your campaign needs a name.</campaignNameRequiredValidation>
         <factionNameRequiredValidation>Each faction in your campaign needs a name.</factionNameRequiredValidation>
         <minimumOneFactionRequiredValidator>You must add at least one faction to your campaign.</minimumOneFactionRequiredValidator>

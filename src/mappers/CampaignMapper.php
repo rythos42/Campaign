@@ -39,6 +39,7 @@ class CampaignMapper {
             Database::execute(
                 "update CampaignEntry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
                 [$campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap, $campaignEntry->id]);
+            $campaignEntryId = $campaignEntry->id;
         } else {        
             Database::execute(
                 "insert into CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
@@ -46,6 +47,7 @@ class CampaignMapper {
             $campaignEntryId = Database::getLastInsertedId();
         }
             
+        // Add/update new CampaignEntries
         foreach($campaignEntry->factionEntries as $factionEntry) {
             UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
             
@@ -57,8 +59,25 @@ class CampaignMapper {
                 Database::execute(
                     "insert into CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored) values (?, ?, ?, ?)", 
                     [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints]);
+                $factionEntry->id = Database::getLastInsertedId();
             }
-        }                
+        }
+        
+        // Delete any that were removed
+        $existingFactionEntries = Database::queryArray("select Id from CampaignFactionEntry where CampaignEntryId = ?", [$campaignEntryId]);
+        foreach($existingFactionEntries as $dbFactionEntry) {
+            $found = false;
+            foreach($campaignEntry->factionEntries as $factionEntry) {
+                if($dbFactionEntry["Id"] != $factionEntry->id)
+                    continue;
+                
+                $found = true;
+                break;
+            }
+            
+            if(!$found)
+                Database::execute("delete from CampaignFactionEntry where Id = ?", [$dbFactionEntry["Id"]]);
+        }        
     }
     
     public static function finishEntry($campaignEntry) {

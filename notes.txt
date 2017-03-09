@@ -1,14 +1,10 @@
 Next:
-- Test can reload everything we want to save.
 - setTimeout in EntryMapViewModel.getAdjacentTerritoriesForFaction needs to be done better - big timing issue here
 - Bonus Points spent must be saved in a faction entry
 - "Finish" button that performs all of the post-game calculations
     - removed this into CampaignMapper::finishEntry()
 - Save button on create entry map
-- sometimes map element isn't selected - there's a timing issue in storeImage in map entry
-- validation for "You must add at least one entry" after Add Faction
-    - it's in the wrong place too.
-- territory is still selected if you leave and come back
+- validation for "You must add at least one entry" after "Add Factions" button?
     
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"
