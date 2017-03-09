@@ -1,5 +1,4 @@
 Next:
-- setTimeout in EntryMapViewModel.getAdjacentTerritoriesForFaction needs to be done better - big timing issue here
 - Bonus Points spent must be saved in a faction entry
 - "Finish" button that performs all of the post-game calculations
     - removed this into CampaignMapper::finishEntry()
@@ -46,6 +45,7 @@ More control over create campaign map
 
 - spend TB to attack anywhere
 
+- when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
 - add "TB spent" on create entry table and on entry list details
 - maybe we don't need entry list after we can edit individual entries
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.

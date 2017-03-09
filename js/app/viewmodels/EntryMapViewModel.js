@@ -3,7 +3,9 @@
 var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
-        mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
+        mapHelper = new MapHelper('EntryMapCanvas'),    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
+        loadingMapDeferred,
+        loadingTerritoriesDeferred;
 
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
@@ -48,18 +50,12 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
             success: function(newAdjacentTerritories) {
                 adjacentTerritories(newAdjacentTerritories);
                 currentEntry.updateTerritoryBeingAttacked(newAdjacentTerritories);
-
-                setTimeout(function() {
-                    // This should be done better.
-                    if(shouldDrawTerritoryBeingAttacked()) {
-                        self.drawingTerritory(currentEntry.territoryBeingAttacked());
-                        self.selectTerritory();
-                    }
-                }, 1000);
+                
+                loadingTerritoriesDeferred.resolve();
             }
         });
     }
-    
+        
     function shouldDrawTerritoryBeingAttacked() {
         return currentEntry.territoryBeingAttacked() && !self.selectedTerritory();
     }
@@ -107,12 +103,24 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     self.storeImage = function() {
         mapHelper.storeImage();
         self.showLoadingImage(false);
+        
+        loadingMapDeferred.resolve();
     };
 
     navigation.showCreateEntry.subscribe(function(showCreateEntry) {
         if(!showCreateEntry)
             return;
         
+        loadingMapDeferred = $.Deferred();
+        loadingTerritoriesDeferred = $.Deferred();
+        $.when(loadingMapDeferred, loadingTerritoriesDeferred).then(function() {
+            // Wait for both the map and the territories to be loaded before drawing any highlighted territory
+            if(shouldDrawTerritoryBeingAttacked()) {
+                self.drawingTerritory(currentEntry.territoryBeingAttacked());
+                self.selectTerritory();
+            }
+        });
+
         self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + currentCampaign().id());
     });
     
