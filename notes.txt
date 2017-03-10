@@ -1,9 +1,7 @@
 Next:
     Mobile:
-        - make sure canvas events work on mobile: "press"/"click"
-        - InProgressCampaign screen is looking super shitty at < 420px
-            - header buttons need to shrink a lot as screen size shrinks
-            - possible that li's being 300px is bad
+        - make create campaign drag/drop work on mobile
+        - check other phone sizes
         - map is hard to read at mobile sizes
             - click-and-drag to pan
             - hover territory no longer works while zoomed.

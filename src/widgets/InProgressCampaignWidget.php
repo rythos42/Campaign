@@ -17,8 +17,8 @@ class InProgressCampaignViewModel {
                 <li class="data-list">
                     <label><?php echo Translation::getString('territoryBonus'); ?>:</label>
                     <span data-bind="text: availableTerritoryBonus"></span>
-                    <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip')" class="ui-button ui-widget ui-corner-all ui-button-icon-only outset-icon-button">
-                        <span class="ui-icon ui-icon-caret-1-e"></span>
+                    <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip')" class="ui-button ui-widget ui-corner-all outset-icon-button">
+                        <span class="icon-upload"></span>
                     </button>
                 </li>
                 <li class="data-list">

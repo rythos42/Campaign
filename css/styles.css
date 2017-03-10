@@ -45,8 +45,13 @@ li.data-list > span {
     width: 100px;
 }
 
+.ui-button {
+    padding: 0.4em 0.8em;
+}
+
 .outset-icon-button {
-    margin-right: -41px;
+    margin-right: -28px;
+    padding: 0.15em;
 }
 
 .link-button {
@@ -81,6 +86,7 @@ table {
 }
 
 td {
+    font-size: 16px;
     padding: 4px;    
 }
 
@@ -186,8 +192,9 @@ td.actions {
     box-shadow: none;
 }
 
-.ui-button {
-    padding: 0.4em 0.8em;
+table [class^="icon-"], table [class*=" icon-"] {
+    color: #2779aa;
+    
 }
 
 @font-face {
@@ -216,10 +223,20 @@ td.actions {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-upload:before {
+  content: "\e961";
+}
 .icon-user:before {
   content: "\e971";
+}
+.icon-bin:before {
+  content: "\e9ac";
+}
+.icon-flag:before {
+  content: "\e9cc";
 }
 .icon-exit:before {
   content: "\ea14";
 }
+
 

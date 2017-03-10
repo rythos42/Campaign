@@ -51,9 +51,9 @@ class CreateEntryWidget implements IWidget {
                             <td data-bind="text: victoryPoints" />
                             <td data-bind="text: territoryBonusSpent" />
                             <td class="actions">
-                                <span data-bind="visible: isAttackingFaction" class="ui-icon ui-icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
+                                <span data-bind="visible: isAttackingFaction" class="icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
                                 <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
-                                    <span class="ui-icon ui-icon-trash"</span>
+                                    <span class="icon-bin"</span>
                                 </button>
                             </td>
                         </tr>
