@@ -1,11 +1,4 @@
-Bonus spent added to entry table and entry list details.
-
 Next:
-- "Finish" button that performs all of the post-game calculations
-    - removed this into CampaignMapper::finishEntry()
-- Save button on create entry map
-- validation for "You must add at least one entry" after "Add Factions" button?
-    
     Run at home:
         alter table CampaignEntry add column FinishDate datetime;
         alter table CampaignFactionEntry add column TerritoryBonusSpent int;
@@ -50,6 +43,8 @@ More control over create campaign map
 
 - spend TB to attack anywhere
 
+- read-only view of Entry when finished, rather than removing link
+- confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
 - maybe we don't need entry list after we can edit individual entries
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.

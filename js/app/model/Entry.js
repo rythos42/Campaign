@@ -11,6 +11,7 @@ var Entry = function(campaign, serverEntry) {
     self.createdByUsername = ko.observable(serverEntry ? serverEntry.CreatedByUsername : undefined);
     self.territoryBeingAttacked = ko.observable();
     self.territoryBeingAttackedIdOnMap = ko.observable(serverEntry ? serverEntry.TerritoryBeingAttackedIdOnMap : undefined);
+    self.finishDate = ko.observable(serverEntry ? serverEntry.FinishDate : undefined);
         
     if(serverEntry) {
         $.each(campaign.factions(), function(index, faction) {

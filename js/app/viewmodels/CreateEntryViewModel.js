@@ -56,16 +56,25 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         var campaignObj = currentCampaign();
         return campaignObj ? campaignObj.isMapCampaign() : false;
     });
-    
-    self.saveCampaignEntry = function() {
+            
+    self.finish = function() {
         if(!self.factionEntries.isValid()) {
             self.factionEntries.isModified(true);
             return;
         }
         
+        saveCampaignEntry({finish: true});
+    };
+    
+    self.saveCampaignEntry = function() {
+        saveCampaignEntry({finish: false});
+    };
+    
+    function saveCampaignEntry(args) {
         var params = {
             action: 'SaveCampaignEntry',
-            campaignEntry: ko.toJSON(currentEntry)
+            campaignEntry: ko.toJSON(currentEntry),
+            finish: args && args.finish
         };
         
         $.ajax({
@@ -78,7 +87,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 self.entryMapViewModel.clearMap();
             }
         });
-    };
+    }
     
     self.addFactions = function() {
         if(!self.entryMapViewModel.selectedTerritory.isValid()) {

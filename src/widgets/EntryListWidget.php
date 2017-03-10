@@ -18,7 +18,14 @@ class EntryListWidget {
                     </thead>
                     <tbody data-bind="foreach: campaignEntries">
                         <tr>
-                            <td><input type="button" class="link-button" data-bind="click: openEntry, value: createdOnDate" /></td>
+                            <td>
+                                <!-- ko if: finished -->
+                                <span data-bind="text: createdOnDate, tooltip: Translation.getString('entryFinishedTooltip')"></span>
+                                <!-- /ko -->
+                                <!-- ko ifnot: finished -->
+                                <input type="button" class="link-button" data-bind="click: openEntry, value: createdOnDate" />
+                                <!-- /ko -->
+                            </td>
                             <td><span data-bind="text: createdByUsername"></span></td>
                         </tr>
                     </tbody>

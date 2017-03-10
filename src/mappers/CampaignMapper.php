@@ -115,6 +115,7 @@ class CampaignMapper {
         }
         
         Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
+        Database::execute("update CampaignEntry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
     }
     
     public static function getEntriesForCampaign($campaignId) {

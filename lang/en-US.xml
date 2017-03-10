@@ -70,5 +70,7 @@
         <entries>Entries</entries>
         <details>Details</details>
         <bonus>Bonus</bonus>
+        <finish>Finish</finish>
+        <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
     </strings>
 </translation>
