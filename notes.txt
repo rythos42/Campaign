@@ -1,8 +1,4 @@
 Next:
-    Run at home:
-        alter table CampaignEntry add column FinishDate datetime;
-        alter table CampaignFactionEntry add column TerritoryBonusSpent int;
-    
     Mobile:
         - make sure canvas events work on mobile: "press"/"click"
         - InProgressCampaign screen is looking super shitty at < 420px
@@ -46,11 +42,10 @@ More control over create campaign map
 - read-only view of Entry when finished, rather than removing link
 - confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
-- maybe we don't need entry list after we can edit individual entries
+- maybe we don't need entry list after we can view individual entries after they are saved
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers
-- position "Give TB" dialog better
 - remove code that automatically gives permission to create map campaigns
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
