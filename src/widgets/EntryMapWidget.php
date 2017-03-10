@@ -11,12 +11,13 @@ class EntryMapWidget implements IWidget {
             <ul class="map-legend" data-bind="foreach: mapLegendFactions">
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
-            <canvas id="EntryMapCanvas" data-bind="
-                canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                drawPolygonOnCanvas: { polygon: drawingTerritory }, 
-                resizeOnWindowResize: {},
-                event: { mousemove: drawTerritory, click: selectTerritory }">
-            </canvas>
+            <div>
+                <canvas id="EntryMapCanvas" data-bind="
+                    canvas: { url: mapImageUrl, onLoad: storeImage }, 
+                    drawPolygonOnCanvas: { polygon: drawingTerritory }, 
+                    event: { mousemove: drawTerritory, click: selectTerritory }">
+                </canvas>
+            </div>
             <img class="loading-image" src="img/gears.gif" data-bind="visible: showLoadingImage" />
             <span class="validationMessage" data-bind="validationMessage: selectedTerritory"></span>
         </div>

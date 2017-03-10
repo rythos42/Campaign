@@ -10,12 +10,13 @@ class CreateCampaignMapWidget implements IWidget {
                     <span data-bind="text: name">
                 </li>
             </ul>
-            <canvas id="CampaignMapCanvas" data-bind="
-                canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                drawPolygonOnCanvas: { polygon: highlightedTerritory, colour: draggingFactionColour },
-                resizeOnWindowResize: {},
-                event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory}">
-            </canvas>
+            <div>
+                <canvas id="CampaignMapCanvas" data-bind="
+                    canvas: { url: mapImageUrl, onLoad: storeImage }, 
+                    drawPolygonOnCanvas: { polygon: highlightedTerritory, colour: draggingFactionColour },
+                    event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory}">
+                </canvas>
+            </div>
             <img class="loading-image" src="img/gears.gif" data-bind="visible: showLoadingImage" />
             <div class="button-panel">
                 <input type="button" data-bind="click: saveMap" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />

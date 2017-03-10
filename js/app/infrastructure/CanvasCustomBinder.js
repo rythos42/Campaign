@@ -14,6 +14,20 @@ ko.bindingHandlers.canvas = {
                 // set initial size based on parent size
                 var $canvas = $(canvas);
                 $canvas.css('width', $canvas.parent().width() - 20);    // it was initially giving a scroll bar
+                $canvas.panzoom({
+                    panOnlyWhenZoomed: true
+                });
+                
+                $canvas.parent().on('mousewheel.focal', function( e ) {
+                    e.preventDefault();
+                    var delta = e.delta || e.originalEvent.wheelDelta;
+                    var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+                    $canvas.panzoom('zoom', zoomOut, {
+                        increment: 0.1,
+                        animate: false,
+                        focal: e
+                    });
+                });
             }, 0);
 
             var image = new Image();

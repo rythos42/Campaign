@@ -2,11 +2,7 @@ Next:
     Mobile:
         - make create campaign drag/drop work on mobile
         - check other phone sizes
-        - map is hard to read at mobile sizes
-            - click-and-drag to pan
-            - hover territory no longer works while zoomed.
-            - zooming should be quicker -- save both images    
-    
+        - ensure pan/zoom works on mobile
 Notes:
     Work:
     - TestUser/password     (no map)

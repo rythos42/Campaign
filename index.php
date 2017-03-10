@@ -58,6 +58,7 @@
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
         <script src="js/app/viewmodels/GiveTerritoryBonusToUserDialogViewModel.js"></script>
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
+        <script src="js/lib/jquery.panzoom.min.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         
