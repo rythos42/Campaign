@@ -37,14 +37,16 @@ class CreateCampaignWidget implements IWidget {
                         <tr>
                             <td data-bind="text: name" />
                             <td style="width: 100px" data-bind="style: { 'background-color': colour }"></td>
-                            <td><button class="icon-button" data-bind="click: removeFaction"><span class="ui-icon ui-icon-trash"</span></button></td>
+                            <td><button class="button-icon" data-bind="click: removeFaction"><span class="ui-icon ui-icon-trash"</span></button></td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div class="button-panel">
+                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                        <span class="icon-arrow-left2"></span>
+                    </button>
                     <input type="button" data-bind="click: saveCampaign, value: saveCampaignButtonText" class="ui-button ui-widget ui-corner-all" />
-                    <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </div>
             </div>
             

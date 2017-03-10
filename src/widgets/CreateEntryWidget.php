@@ -52,7 +52,7 @@ class CreateEntryWidget implements IWidget {
                             <td data-bind="text: territoryBonusSpent" />
                             <td class="actions">
                                 <span data-bind="visible: isAttackingFaction" class="icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
-                                <button class="icon-button" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
+                                <button class="button-icon" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
                                     <span class="icon-bin"</span>
                                 </button>
                             </td>
@@ -61,9 +61,11 @@ class CreateEntryWidget implements IWidget {
                 </table>
             </div>
             <div class="button-panel">
+                <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                    <span class="icon-arrow-left2"></span>
+                </button>
                 <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("addFactions"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: finish, visible: showAddFactions" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
         </div>

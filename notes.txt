@@ -1,6 +1,7 @@
 Next:
     Mobile:
         - make create campaign drag/drop work on mobile
+        - selceting territory no longer works on mobile?
         - check other phone sizes
         - ensure pan/zoom works on mobile
 Notes:

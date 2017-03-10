@@ -5,8 +5,10 @@ class InProgressCampaignViewModel {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
         <div data-bind="visible: showInProgressCampaign">
+            <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                <span class="icon-arrow-left2"></span>
+            </button>
             <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("createEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
-            <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
             <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("nextPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
         
             <ul data-bind="visible: isMapCampaign">

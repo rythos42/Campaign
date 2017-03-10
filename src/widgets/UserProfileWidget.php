@@ -10,7 +10,9 @@ class UserProfileWidget implements IWidget {
                     <span data-bind="text: username"></span>
                 </li>
                 <li class="button-panel">
-                    <input type="button" data-bind="click: back" value="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                        <span class="icon-arrow-left2"></span>
+                    </button>
                 </li>
             </ul>
         </div>

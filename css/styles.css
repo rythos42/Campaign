@@ -63,11 +63,15 @@ li.data-list > span {
     text-align: left;
 }
 
-.icon-button {
+td .button-icon {
     border: 0;
     background-color: transparent;
     cursor: pointer;
     height: 20px;
+}
+
+.button-icon {
+    padding: 0.5em 0.8em;
 }
 
 .button-panel {
@@ -238,5 +242,6 @@ table [class^="icon-"], table [class*=" icon-"] {
 .icon-exit:before {
   content: "\ea14";
 }
-
-
+.icon-arrow-left2:before {
+  content: "\ea40";
+}

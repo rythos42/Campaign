@@ -15,7 +15,8 @@ ko.bindingHandlers.canvas = {
                 var $canvas = $(canvas);
                 $canvas.css('width', $canvas.parent().width() - 20);    // it was initially giving a scroll bar
                 $canvas.panzoom({
-                    panOnlyWhenZoomed: true
+                    panOnlyWhenZoomed: true,
+                    contain: 'invert'
                 });
                 
                 $canvas.parent().on('mousewheel.focal', function( e ) {
