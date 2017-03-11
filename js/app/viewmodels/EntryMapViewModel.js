@@ -79,8 +79,10 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     
     self.selectTerritory = function() {
         // if there is a territory selected, unselect it
-        if(self.selectedTerritory())
+        if(self.selectedTerritory()) {
             self.selectedTerritory(null);
+            mapHelper.restoreImage();
+        }
 
         // if we're hovering over a territory, select it
         if(self.drawingTerritory()) {

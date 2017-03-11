@@ -1,7 +1,6 @@
 Next:
     Mobile:
         - make create campaign drag/drop work on mobile
-        - selecting territory no longer works on mobile
         - check other phone sizes
 
 Notes:
