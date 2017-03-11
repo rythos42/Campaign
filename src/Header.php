@@ -46,6 +46,7 @@ include($installDirOnWebServer . "/src/widgets/EntryMapWidget.php");
 include($installDirOnWebServer . "/src/widgets/CreateCampaignMapWidget.php");
 include($installDirOnWebServer . "/src/widgets/UserProfileWidget.php");
 include($installDirOnWebServer . "/src/widgets/GiveTerritoryBonusToUserDialogWidget.php");
+include($installDirOnWebServer . "/src/widgets/LoadingImageWidget.php");
 
 session_start();
 Database::connect();

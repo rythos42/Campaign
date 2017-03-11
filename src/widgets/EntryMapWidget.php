@@ -12,13 +12,13 @@ class EntryMapWidget implements IWidget {
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
             <div>
+                <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
                     drawPolygonOnCanvas: { polygon: drawingTerritory }, 
                     event: { mousemove: drawTerritory, click: selectTerritory }">
                 </canvas>
             </div>
-            <img class="loading-image" src="img/gears.gif" data-bind="visible: showLoadingImage" />
             <span class="validationMessage" data-bind="validationMessage: selectedTerritory"></span>
         </div>
         <!-- /ko -->

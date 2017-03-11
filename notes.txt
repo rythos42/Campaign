@@ -1,9 +1,9 @@
 Next:
     Mobile:
         - make create campaign drag/drop work on mobile
-        - selceting territory no longer works on mobile
+        - selecting territory no longer works on mobile
         - check other phone sizes
-        - remove wheel zoom, use buttons
+
 Notes:
     Work:
     - TestUser/password     (no map)
