@@ -10,12 +10,18 @@ class CreateCampaignMapWidget implements IWidget {
                     <span data-bind="text: name">
                 </li>
             </ul>
+            <span data-bind="visible: hasSelectedTerritory">
+                <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: deleteSelectedTerritory" title="<?php echo Translation::getString("removeFactionFromTerritory"); ?>">
+                    <span class="icon-bin"></span>
+                </button>
+            </span>
             <div>
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="CampaignMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
                     drawPolygonOnCanvas: { polygon: highlightedTerritory, colour: draggingFactionColour },
-                    event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory}">
+                    drawPolygonOnCanvas: { polygon: selectedTerritory },
+                    event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory, click: selectTerritory}">
                 </canvas>
             </div>
             <div class="button-panel">

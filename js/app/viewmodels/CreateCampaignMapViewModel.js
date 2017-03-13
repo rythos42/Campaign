@@ -11,6 +11,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     self.highlightedTerritory = ko.observable();
     self.showCreateCampaignMapEntry = ko.observable(false);
     self.showLoadingImage = ko.observable(true);
+    self.selectedTerritory = ko.observable();
     
     self.draggingFactionColour = ko.computed(function() {
         var factionId = draggingFactionId(),
@@ -35,6 +36,11 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         return $.map(entryCampaign.factions(), function(faction) {
             return new MapLegendViewModel(faction);
         });
+    });
+    
+    self.hasSelectedTerritory = ko.computed(function() {
+        var selected = self.selectedTerritory();
+        return selected !== null && selected !== undefined;
     });
     
     self.setTerritoryPolygons = function(newTerritoryPolygons) {
@@ -71,10 +77,26 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         var droppingTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event),
             factionId = draggingFactionId();
             
+        self.selectedTerritory(null);
+            
         mapHelper.restoreOriginalImageForPolygon(droppingTerritory);
         mapHelper.drawTerritory(droppingTerritory, self.draggingFactionColour);
         mapHelper.storeImage();
         factionTerritories[droppingTerritory.Id] = factionId;
+    };
+    
+    self.selectTerritory = function(createCampaignMapViewModel, event) {
+        var clickedTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event);
+        
+        if(!factionTerritories[clickedTerritory.Id])
+            return;
+        
+        mapHelper.restoreImage();
+        if(self.selectedTerritory() === clickedTerritory) {
+            self.selectedTerritory(null);
+        } else {
+            self.selectedTerritory(clickedTerritory);
+        }
     };
     
     self.saveMap = function() {
@@ -89,6 +111,13 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
                 navigation.showMain(true);
             }
         });
+    };
+    
+    self.deleteSelectedTerritory = function() {
+        var selected = self.selectedTerritory();
+        factionTerritories[selected.Id] = undefined;
+        mapHelper.restoreOriginalImageForPolygon(selected);
+        mapHelper.storeImage();
     };
 
     entryCampaign.id.subscribe(function(newCampaignId) {

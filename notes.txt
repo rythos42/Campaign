@@ -1,10 +1,14 @@
 Next:
-    More control over create campaign map
-        - allow removing territories from faction in create campaign
+    - campaign must have a territory for each faction
         
-- Check desktop UI
-- Check 300px wide lists on mobile, need a better solution than margin:auto because that looks dumb on mobile
-    - maybe margin auto, with percent-wide middle part and aligned left?
+    Features are good enough to be used successfully. Need to do a complete UI pass.
+        - Check desktop UI
+        - Check 300px wide lists on mobile, need a better solution than margin:auto because that looks dumb on mobile
+            - maybe margin auto, with percent-wide middle part and aligned left?
+            
+        - Should I put a grey box around the main UI?
+        - put a max size on the map bounding box
+        - Graphics?
                 
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
@@ -22,7 +26,6 @@ Future:
 
 - spend TB to attack anywhere
 
-- 320px wide has some label issues that need resolving - Create Entry, Create Campaign, Login
 - read-only view of Entry when finished, rather than removing link
 - confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?

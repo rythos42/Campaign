@@ -1,4 +1,4 @@
-/*globals ko */
+/*globals ko, MapHelper */
 ko.bindingHandlers.drawPolygonOnCanvas = {
     update: function(canvas, valueAccessor) {
         var params = ko.utils.unwrapObservable(valueAccessor()),

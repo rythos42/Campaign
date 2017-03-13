@@ -157,6 +157,7 @@ td.actions {
 
 .map-panel {
     position: relative;
+    width: 1024px;
 }
 
 .map-panel .loading-image {
@@ -169,6 +170,7 @@ td.actions {
     padding: 0;
     list-style: none;
     margin-bottom: 3px;
+    display: inline-block;
 }
 
 .map-legend li {

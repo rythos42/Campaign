@@ -73,5 +73,6 @@
         <finish>Finish</finish>
         <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
         <campaign>Campaign</campaign>
+        <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
     </strings>
 </translation>
