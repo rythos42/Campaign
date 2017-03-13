@@ -14,8 +14,8 @@
         <addFactions>Add Factions</addFactions>        
         <back>Back</back>        
         <createdOn>Created On</createdOn>        
-        <campaignName>Campaign name</campaignName>        
-        <campaignFactions>Campaign Factions</campaignFactions>        
+        <name>Name</name>        
+        <factions>Factions</factions>        
         <save>Save</save>        
         <logout>Logout</logout>        
         <createCampaign>Create Campaign</createCampaign>        
@@ -37,7 +37,7 @@
         <usernameRequiredValidator>You'll want a username, trust me.</usernameRequiredValidator>
         <passwordRequiredValidator>You can use any password, but you need one.</passwordRequiredValidator>
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>
-        <campaignType>Campaign type</campaignType>
+        <type>Type</type>
         <attacker>Attacker</attacker>
         <remove>Remove</remove>
         <attackerRequiredValidator>You have to add an attacker!</attackerRequiredValidator>
@@ -72,5 +72,6 @@
         <bonus>Bonus</bonus>
         <finish>Finish</finish>
         <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
+        <campaign>Campaign</campaign>
     </strings>
 </translation>

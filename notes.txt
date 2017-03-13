@@ -1,38 +1,41 @@
 Next:
-    Mobile:
-        - make create campaign drag/drop work on mobile
-        - check other phone sizes
+    More control over create campaign map
+        - allow dropping one faction over another to replace it
+        - allow removing territories from faction in create campaign
+        
+        A few brainstorms:
+            - two layers. Background is the map, foreground is the polygons. Clear a polygon when removing/dropping.
+                - Have to manage the size of both canvas, which was turning into a pain. 
+                - Likely will make zooming/etc harder.
+            - Redraw all the polygons every time the map is updated.
+                - This may be a performance hit. Or it may not be.
+                - Easy to manage -- have an array of polygons to be drawn, just have to replace/remove to manipulate.
+                - Lots of code to write before it works though.
+            - clip()
+                - Redraw a polygon of the original image before dropping or removing
+                - Likely the easiest to implement of these 3 ideas, if clip does what it looks like it should do.
 
-Notes:
-    Work:
-    - TestUser/password     (no map)
-    - rythos42/             (yes map)
-    Home:
-    - c/c                   (no map)
-    - qwer/qwer             (yes map)
-
+- Check desktop UI
+- Check 300px wide lists on mobile, need a better solution than margin:auto because that looks dumb on mobile
+    - maybe margin auto, with percent-wide middle part and aligned left?
+                
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
-
-More control over create campaign map
-    - allow dropping one faction over another to replace it
-    - allow removing territories from faction in create campaign
-    
-    A few brainstorms:
-        - two layers. Background is the map, foreground is the polygons. Clear a polygon when removing/dropping.
-            - Have to manage the size of both canvas, which was turning into a pain. 
-            - Likely will make zooming/etc harder.
-        - Redraw all the polygons every time the map is updated.
-            - This may be a performance hit. Or it may not be.
-            - Easy to manage -- have an array of polygons to be drawn, just have to replace/remove to manipulate.
-            - Lots of code to write before it works though.
-        - clip()
-            - Redraw a polygon of the original image before dropping or removing
-            - Likely the easiest to implement of these 3 ideas, if clip does what it looks like it should do.
+                
+    Narrative/Communication
+        - Move "Available Campaigns" list to a menu.
+        - Allow users to select a default campaign on InProgressCampaign
+        - Button to go to their default campaign.
+        - Front page is a scrolling news list
+            - news from admins
+            - any updates from campaign admin
+            - latest entry score and narrative
+        - perhaps allow comments on campaign entries
 
 
 - spend TB to attack anywhere
 
+- 320px wide has some label issues that need resolving - Create Entry, Create Campaign, Login
 - read-only view of Entry when finished, rather than removing link
 - confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
@@ -41,7 +44,6 @@ More control over create campaign map
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 - g'damn select boxes keep changing size in different browsers
 - remove code that automatically gives permission to create map campaigns
-- maybe a custom binder to do "keypressACTION" instead of copying this code around
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
 - page campaign list
@@ -58,13 +60,6 @@ More control over create campaign map
     Polygon -> Territory
     PolygonPoints -> TerritoryPolygonPoints?
 
-    Narrative/UserCommunication
-        - text writing about each entry
-        - a place for that text to be prominently displayed
-        - admin can write a narrative for the campaign
-        - show campaign narrative
-        - allow users to interact on the system in some way - perhaps allow comments on campaign entries
-
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
     An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
@@ -78,6 +73,7 @@ Selling Questions:
 
         
 Far future:
+- maybe a custom binder to do "keypressACTION" instead of copying this code around
 - XP system
 - consider being able to add multiple users to a FactionEntry?
     - would allow easier adding of multi-player games
@@ -87,7 +83,6 @@ Far future:
 - lock in a particular army
 - tournaments, with specific people needing to be played
     - generate match-ups and rankings after each round
-
 
     Stats:
     - these would have to be game specific, is why they are far-future

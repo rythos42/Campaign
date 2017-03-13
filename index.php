@@ -14,6 +14,11 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+        <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
+        <script src="js/lib/jquery.panzoom.js"></script>
+        <script src="js/lib/DragDropTouch.js"></script>
+
         <script src="js/app/infrastructure/ExceptionCodes.js"></script>
         <script src="js/app/infrastructure/RequireObjectValidator.js"></script>
         <script src="js/app/infrastructure/Translation.js"></script>
@@ -56,8 +61,6 @@
         <script src="js/app/viewmodels/CreateCampaignMapViewModel.js"></script>
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
         <script src="js/app/viewmodels/GiveTerritoryBonusToUserDialogViewModel.js"></script>
-        <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
-        <script src="js/lib/jquery.panzoom.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         

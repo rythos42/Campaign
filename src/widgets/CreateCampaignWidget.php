@@ -6,12 +6,15 @@ class CreateCampaignWidget implements IWidget {
         <div id="CreateCampaign" data-bind="visible: showCreateCampaign">
             <div data-bind="visible: showCreateCampaignEntry">
                 <ul>
+                    <li class="title">
+                        <h2><?php echo Translation::getString("campaign"); ?></h2>
+                    </li>
                     <li class="entry-field">
-                        <label for="CampaignName"><?php echo Translation::getString("campaignName"); ?>:</label>
+                        <label for="CampaignName"><?php echo Translation::getString("name"); ?>:</label>
                         <input id="CampaignName" type="text" data-bind="value: name, hasFocus: campaignNameHasFocus" />
                     </li>
                     <li class="entry-field" data-bind="visible: canCreateMapCampaign">
-                        <label for="CampaignType"><?php echo Translation::getString("campaignType"); ?>:</label>
+                        <label for="CampaignType"><?php echo Translation::getString("type"); ?>:</label>
                         <select id="CampaignType" data-bind="value: campaignType">
                             <option value="0">Simple</option>
                             <option value="1">Map</option>
@@ -29,7 +32,7 @@ class CreateCampaignWidget implements IWidget {
                
                 <table data-bind="visible: hasFactions" class="ui-widget ui-corner-all ui-widget-content">
                     <thead>
-                        <th><span class="ui-widget-title"><?php echo Translation::getString("campaignFactions"); ?></span></th>
+                        <th><span class="ui-widget-title"><?php echo Translation::getString("factions"); ?></span></th>
                         <th></th>
                         <th></th>
                     </thead>
