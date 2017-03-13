@@ -1,24 +1,66 @@
 /*exported MapHelper */
-var MapHelper = function(mapId) {
+var MapHelper = function(mapIdOrCanvas) {
     var self = this,
-        originalImageData;
+        originalImageCanvas,
+        currentImageData;
             
     function getCanvas() {
-        return document.getElementById(mapId);
+        if(typeof(mapIdOrCanvas) === 'string')
+            return document.getElementById(mapIdOrCanvas);
+        else
+            return mapIdOrCanvas;
     }
     
     self.restoreImage = function() {
-        if(originalImageData)   // conditional shouldn't be needed, but it kept throwing...
-            getCanvas().getContext('2d').putImageData(originalImageData, 0, 0);
+        if(currentImageData)   // conditional shouldn't be needed, but it kept throwing...
+            getCanvas().getContext('2d').putImageData(currentImageData, 0, 0);
     };
     
     self.clearImageData = function() {
-        originalImageData = null;
+        currentImageData = null;
     };
     
     self.storeImage = function() {
         var canvas = getCanvas();
-        originalImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        currentImageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        
+        if(!originalImageCanvas) {
+            originalImageCanvas = document.createElement('canvas');    
+            originalImageCanvas.width = canvas.width;
+            originalImageCanvas.height = canvas.height;
+
+            originalImageCanvas.getContext('2d').putImageData(currentImageData, 0, 0);
+        }
+    };
+    
+    function drawPolygon(context, points) {
+        context.beginPath();
+        context.moveTo(points[0].X, points[0].Y);
+        for(var i = 1; i < points.length; i ++){
+            context.lineTo(points[i].X, points[i].Y);
+        }
+        context.closePath();
+    }
+    
+    self.restoreOriginalImageForPolygon = function(territory) {
+        var canvas = getCanvas(),
+            context = canvas.getContext('2d'),        
+            points = territory.Points;
+            
+        context.save();
+        drawPolygon(context, points);
+        context.clip();
+        context.drawImage(originalImageCanvas, 0, 0);
+        context.restore();
+    };
+    
+    self.drawTerritory = function(territory, colour) {
+        var canvas = getCanvas(),
+            context = canvas.getContext('2d');
+        context.fillStyle = (colour && colour().getRgbaString(0.5)) || 'rgba(255, 255, 255, 0.5)';
+        
+        drawPolygon(context, territory.Points);
+        context.fill();
     };
     
     self.findPolygonUnderMouseEvent = function(territories, event) {

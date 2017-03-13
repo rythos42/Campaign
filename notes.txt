@@ -1,20 +1,7 @@
 Next:
     More control over create campaign map
-        - allow dropping one faction over another to replace it
         - allow removing territories from faction in create campaign
         
-        A few brainstorms:
-            - two layers. Background is the map, foreground is the polygons. Clear a polygon when removing/dropping.
-                - Have to manage the size of both canvas, which was turning into a pain. 
-                - Likely will make zooming/etc harder.
-            - Redraw all the polygons every time the map is updated.
-                - This may be a performance hit. Or it may not be.
-                - Easy to manage -- have an array of polygons to be drawn, just have to replace/remove to manipulate.
-                - Lots of code to write before it works though.
-            - clip()
-                - Redraw a polygon of the original image before dropping or removing
-                - Likely the easiest to implement of these 3 ideas, if clip does what it looks like it should do.
-
 - Check desktop UI
 - Check 300px wide lists on mobile, need a better solution than margin:auto because that looks dumb on mobile
     - maybe margin auto, with percent-wide middle part and aligned left?

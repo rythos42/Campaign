@@ -71,11 +71,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         var droppingTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event),
             factionId = draggingFactionId();
             
-        if(factionTerritories[droppingTerritory.Id]) {
-            mapHelper.restoreImage();
-            return;
-        }
-
+        mapHelper.restoreOriginalImageForPolygon(droppingTerritory);
+        mapHelper.drawTerritory(droppingTerritory, self.draggingFactionColour);
         mapHelper.storeImage();
         factionTerritories[droppingTerritory.Id] = factionId;
     };
