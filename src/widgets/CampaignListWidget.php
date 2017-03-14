@@ -3,7 +3,7 @@ class CampaignListWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: campaignListViewModel -->
-        <div id="CampaignList" data-bind="visible: showCampaignList">
+        <div id="CampaignList" data-bind="visible: showCampaignList" class="grouping">
             <div class="entry-field">
                 <label for="CampaignListFilter"><?php echo Translation::getString("filter"); ?></label>
                 <input id="CampaignListFilter" type="text" data-bind="value: campaignListFilter, valueUpdate: 'keyup'" />
