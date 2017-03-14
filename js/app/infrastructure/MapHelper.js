@@ -18,6 +18,7 @@ var MapHelper = function(mapIdOrCanvas) {
     
     self.clearImageData = function() {
         currentImageData = null;
+        originalImageCanvas = null;
     };
     
     self.storeImage = function() {

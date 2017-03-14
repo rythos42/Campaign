@@ -23,7 +23,7 @@ class CreateCampaignMapWidget implements IWidget {
                     drawPolygonOnCanvas: { polygon: selectedTerritory },
                     event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory, click: selectTerritory}">
                 </canvas>
-                <span class="validationMessage" data-bind="validationMessage: notEveryFactionHasATerritoryValidation"></span>
+                <span class="validationMessage" data-bind="validationMessage: factionTerritories"></span>
             </div>
             <div class="button-panel">
                 <input type="button" data-bind="click: saveMap" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />

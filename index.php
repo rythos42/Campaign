@@ -33,6 +33,7 @@
         <script src="js/app/infrastructure/TooltipCustomBinder.js"></script>
         <script src="js/app/infrastructure/UserMaximumAttacksValidator.js"></script>
         <script src="js/app/infrastructure/DateTimeFormatter.js"></script>
+        <script src="js/app/infrastructure/EveryFactionRequiresATerritoryValidator.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

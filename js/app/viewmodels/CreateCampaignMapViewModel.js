@@ -4,8 +4,11 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     var self = this,
         mapHelper = new MapHelper('CampaignMapCanvas'),
         draggingFactionId = ko.observable(),
-        territoryPolygons = ko.observable(),
-        factionTerritories = {};
+        territoryPolygons = ko.observable();
+        
+    self.factionTerritories = ko.observable({}).extend({
+        everyFactionRequiresATerritory: { message: Translation.getString('everyFactionMustHaveATerritory'), params: entryCampaign.factions }
+    });
     
     self.mapImageUrl = ko.observable();
     self.highlightedTerritory = ko.observable();
@@ -43,32 +46,6 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         return selected !== null && selected !== undefined;
     });
     
-    self.notEveryFactionHasATerritoryValidation = ko.observable().extend({
-        required: { 
-            message: Translation.getString('everyFactionMustHaveATerritory'),
-            onlyIf: function() {
-                var allHaveTerritories = true;
-                $.each(entryCampaign.factions(), function(index, faction) {
-                    var hasTerritory = false;
-                    $.each(factionTerritories, function(territoryId, factionId) {
-                        if(factionId === faction.id()) {
-                            hasTerritory = true;
-                            return false;
-                        }
-                        return true;
-                    });
-                    
-                    if(!hasTerritory) {
-                        allHaveTerritories = false;
-                        return false;
-                    }
-                    return true;
-                });
-                return allHaveTerritories;
-            }
-        }
-    });
-    
     self.setTerritoryPolygons = function(newTerritoryPolygons) {
         territoryPolygons(newTerritoryPolygons);
     };
@@ -81,14 +58,13 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     self.clearMap = function() {
         self.mapImageUrl(null);
         self.highlightedTerritory(null);
-        factionTerritories = {};
+        self.factionTerritories({});
+        self.factionTerritories.isModified(false);
         draggingFactionId(null);
         territoryPolygons(null);
         mapHelper.clearImageData();
         self.showCreateCampaignMapEntry(false);
         self.showLoadingImage(true);
-        self.notEveryFactionHasATerritoryValidation(undefined);
-        self.notEveryFactionHasATerritoryValidation.isModified(false);
     };
     
     self.dragFaction = function(mapLegendViewModel) {
@@ -110,15 +86,13 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         mapHelper.restoreOriginalImageForPolygon(droppingTerritory);
         mapHelper.drawTerritory(droppingTerritory, self.draggingFactionColour);
         mapHelper.storeImage();
-        factionTerritories[droppingTerritory.Id] = factionId;
-        
-        self.notEveryFactionHasATerritoryValidation(null);
+        giveTerritoryToFaction(droppingTerritory.Id, factionId);
     };
     
     self.selectTerritory = function(createCampaignMapViewModel, event) {
         var clickedTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event);
         
-        if(!factionTerritories[clickedTerritory.Id])
+        if(!self.factionTerritories()[clickedTerritory.Id])
             return;
         
         mapHelper.restoreImage();
@@ -130,8 +104,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     };
     
     self.saveMap = function() {
-        if(!self.notEveryFactionHasATerritoryValidation.isValid()) {
-            self.notEveryFactionHasATerritoryValidation.isModified(true);
+        if(!self.factionTerritories.isValid()) {
+            self.factionTerritories.isModified(true);
             return;
         }
         
@@ -140,7 +114,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
             datatype: 'JSON',
             data: {
                 action: 'SaveFactionTerritories',
-                factionTerritories: factionTerritories
+                factionTerritories: self.factionTerritories()
             },
             success: function() {
                 navigation.showMain(true);
@@ -148,9 +122,15 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         });
     };
     
+    function giveTerritoryToFaction(territoryId, factionId) {
+        var territories = self.factionTerritories();
+        territories[territoryId] = factionId;
+        self.factionTerritories(territories);
+    }
+    
     self.deleteSelectedTerritory = function() {
         var selected = self.selectedTerritory();
-        factionTerritories[selected.Id] = undefined;
+        giveTerritoryToFaction(selected.Id, undefined);
         mapHelper.restoreOriginalImageForPolygon(selected);
         mapHelper.storeImage();
     };
