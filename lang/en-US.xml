@@ -32,8 +32,8 @@
         <victoryPointsEntryRequiredValidation>At least put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
         <minimumOneFactionValidation>You must add at least one faction.</minimumOneFactionValidation>
         <campaignNameRequiredValidation>Your campaign needs a name.</campaignNameRequiredValidation>
-        <factionNameRequiredValidation>Each faction in your campaign needs a name.</factionNameRequiredValidation>
-        <minimumOneFactionRequiredValidator>You must add at least one faction to your campaign.</minimumOneFactionRequiredValidator>
+        <factionNameRequiredValidation>Each faction needs a name.</factionNameRequiredValidation>
+        <minimumOneFactionRequiredValidator>You need at least one faction.</minimumOneFactionRequiredValidator>
         <usernameRequiredValidator>You'll want a username, trust me.</usernameRequiredValidator>
         <passwordRequiredValidator>You can use any password, but you need one.</passwordRequiredValidator>
         <passwordMatchValidator>Your passwords don't match.</passwordMatchValidator>

@@ -3,7 +3,7 @@ class EntryMapWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: entryMapViewModel -->
-        <div class="map-panel" data-bind="visible: showMap">
+        <div data-bind="visible: showMap">
             <div>
                 <label for="FactionSelection"><?php echo Translation::getString("attackingFaction"); ?>:</label>
                 <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: attackingFaction, optionsCaption: Translation.getString('selectFaction')"></select>
@@ -11,7 +11,7 @@ class EntryMapWidget implements IWidget {
             <ul class="map-legend" data-bind="foreach: mapLegendFactions">
                 <li class="ui-widget ui-corner-all" data-bind="text: name, style: { 'background-color': colour }" />
             </ul>
-            <div>
+            <div class="map-panel">
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 

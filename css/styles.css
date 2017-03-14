@@ -117,6 +117,13 @@ td {
     text-align: justify;
 }
 
+.map-grouping {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
 .grouping {
     width: 320px;
     margin-left: auto;
@@ -163,14 +170,11 @@ td {
 }
 
 canvas {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 3px solid black;
     -webkit-user-select: none; /* webkit (safari, chrome) browsers */
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
-    max-width: 1024px;
+    max-width: 768px;
 }
 
 td.actions {
@@ -178,8 +182,9 @@ td.actions {
 }
 
 .map-panel {
+    max-width: 768px;
+    border: 3px ridge grey;
     position: relative;
-    width: 1024px;
 }
 
 .map-panel .loading-image {
@@ -204,11 +209,14 @@ td.actions {
     display: inline-block;
 }
 
-.drag-drop-icon {
+.drag-drop-button span::before {
+    content: " ";
+    display: inline-block;
     background-image: url('../img/dragdrop.png');
     width: 32px;
     height: 32px;
-    margin-top: 1px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 .disabled-label {

@@ -1,9 +1,5 @@
 Next:
     Desktop
-        Create Campaign Map
-            - can't scroll because the map is giant.
-            - Map could use a more notable border (unless the border is plain missing)
-            - Save button is not at all visible with the map at huge size
         In Progress Campaign
             - table needs a max size
             - whole thing could use a grouping element
@@ -32,6 +28,7 @@ Next:
             - 300px wide off screen
 
 - sweet background on header
+- can I do double click to zoom on map? Is ok if double-press doesn't do the same thing.
                 
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
