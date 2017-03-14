@@ -3,7 +3,7 @@ class LoginWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: loginViewModel -->
-        <div id="Login" data-bind="visible: showLogin">
+        <div class="grouping" data-bind="visible: showLogin">
             <ul>
                 <li class="entry-field">
                     <label><?php echo Translation::getString("user"); ?>:</label>

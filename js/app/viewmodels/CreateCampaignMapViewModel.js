@@ -65,6 +65,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         mapHelper.clearImageData();
         self.showCreateCampaignMapEntry(false);
         self.showLoadingImage(true);
+        self.selectedTerritory(null);
     };
     
     self.dragFaction = function(mapLegendViewModel) {
@@ -133,6 +134,7 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         giveTerritoryToFaction(selected.Id, undefined);
         mapHelper.restoreOriginalImageForPolygon(selected);
         mapHelper.storeImage();
+        self.selectedTerritory(null);
     };
 
     entryCampaign.id.subscribe(function(newCampaignId) {

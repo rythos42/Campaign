@@ -1,9 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
+input[type="text"], input[type="password"], input[type="number"], select {
+    width: 140px;
+}
+
 body {
     margin: 0;
 }
 
 ul {
     padding: 0;
+    margin: 0;
 }
 
 ul li {
@@ -14,21 +23,21 @@ li.entry-field,
 li.data-list,
 li.button-panel {
     margin-left: 5%;
-    width: 300px;
+    width: 280px;
     text-align: right;
 }
 
 .ui-dialog li.entry-field,
 .ui-dialog li.data-list,
 .ui-dialog li.button-panel {
-    width: 250px;
+    width: 280px;
 }
 
 li.entry-field label {
     text-align: right;
     display: inline-block;
     margin-bottom: 5px;
-    width: 120px;
+    width: 130px;
 }
 
 .ui-dialog li.entry-field label {
@@ -76,7 +85,6 @@ td .button-icon {
 
 .button-panel {
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .validationMessage {
@@ -89,13 +97,13 @@ table {
     margin-bottom: 10px;
 }
 
+thead th {
+   text-align: left;
+}
+
 td {
     font-size: 16px;
     padding: 4px;    
-}
-
-select {
-    width: 173px;
 }
 
 .paragraph {
@@ -103,15 +111,28 @@ select {
     text-align: justify;
 }
 
-#Login {
-    width: 300px;
+.grouping {
+    width: 320px;
     margin-left: auto;
     margin-right: auto;
+    padding: 10px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #CreateCampaignEntry table {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#CreateCampaign table {
+    padding: 5px;
+    width: 294px;
 }
 
 #Main {

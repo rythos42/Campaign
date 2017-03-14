@@ -4,10 +4,10 @@ class CreateCampaignWidget implements IWidget {
         ?>
         <!-- ko with: createCampaignViewModel-->
         <div id="CreateCampaign" data-bind="visible: showCreateCampaign">
-            <div data-bind="visible: showCreateCampaignEntry">
+            <div data-bind="visible: showCreateCampaignEntry" class="grouping ui-widget ui-corners-all ui-widget-content">
                 <ul>
                     <li class="title">
-                        <h2><?php echo Translation::getString("campaign"); ?></h2>
+                        <?php echo Translation::getString("createCampaign"); ?>
                     </li>
                     <li class="entry-field">
                         <label for="CampaignName"><?php echo Translation::getString("name"); ?>:</label>
@@ -20,6 +20,9 @@ class CreateCampaignWidget implements IWidget {
                             <option value="1">Map</option>
                         </select>
                     </li>
+                    <li class="title">
+                        <?php echo Translation::getString("factions"); ?>
+                    </li>
                     <li class="entry-field">
                         <label for="CampaignFactionNameEntry"><?php echo Translation::getString("factionName"); ?>:</label>
                         <input id="CampaignFactionNameEntry" type="text" data-bind="textInput: factionNameEntry, event: {keypress: keyPressAddFaction}, hasFocus: factionNameEntryHasFocus" />
@@ -31,11 +34,6 @@ class CreateCampaignWidget implements IWidget {
                 </ul>
                
                 <table data-bind="visible: hasFactions" class="ui-widget ui-corner-all ui-widget-content">
-                    <thead>
-                        <th><span class="ui-widget-title"><?php echo Translation::getString("factions"); ?></span></th>
-                        <th></th>
-                        <th></th>
-                    </thead>
                     <tbody data-bind="foreach: factions">
                         <tr>
                             <td data-bind="text: name" />

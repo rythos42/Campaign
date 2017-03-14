@@ -72,7 +72,6 @@
         <bonus>Bonus</bonus>
         <finish>Finish</finish>
         <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
-        <campaign>Campaign</campaign>
         <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
         <everyFactionMustHaveATerritory>Every faction must have a territory.</everyFactionMustHaveATerritory>
     </strings>
