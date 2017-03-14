@@ -43,6 +43,32 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         return selected !== null && selected !== undefined;
     });
     
+    self.notEveryFactionHasATerritoryValidation = ko.observable().extend({
+        required: { 
+            message: Translation.getString('everyFactionMustHaveATerritory'),
+            onlyIf: function() {
+                var allHaveTerritories = true;
+                $.each(entryCampaign.factions(), function(index, faction) {
+                    var hasTerritory = false;
+                    $.each(factionTerritories, function(territoryId, factionId) {
+                        if(factionId === faction.id()) {
+                            hasTerritory = true;
+                            return false;
+                        }
+                        return true;
+                    });
+                    
+                    if(!hasTerritory) {
+                        allHaveTerritories = false;
+                        return false;
+                    }
+                    return true;
+                });
+                return allHaveTerritories;
+            }
+        }
+    });
+    
     self.setTerritoryPolygons = function(newTerritoryPolygons) {
         territoryPolygons(newTerritoryPolygons);
     };
@@ -61,6 +87,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         mapHelper.clearImageData();
         self.showCreateCampaignMapEntry(false);
         self.showLoadingImage(true);
+        self.notEveryFactionHasATerritoryValidation(undefined);
+        self.notEveryFactionHasATerritoryValidation.isModified(false);
     };
     
     self.dragFaction = function(mapLegendViewModel) {
@@ -83,6 +111,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         mapHelper.drawTerritory(droppingTerritory, self.draggingFactionColour);
         mapHelper.storeImage();
         factionTerritories[droppingTerritory.Id] = factionId;
+        
+        self.notEveryFactionHasATerritoryValidation(null);
     };
     
     self.selectTerritory = function(createCampaignMapViewModel, event) {
@@ -100,6 +130,11 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     };
     
     self.saveMap = function() {
+        if(!self.notEveryFactionHasATerritoryValidation.isValid()) {
+            self.notEveryFactionHasATerritoryValidation.isModified(true);
+            return;
+        }
+        
         $.ajax({
             url: 'src/webservices/CampaignService.php',
             datatype: 'JSON',
