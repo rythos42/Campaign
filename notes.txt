@@ -1,14 +1,50 @@
 Next:
-    - campaign must have a territory for each faction
-        
-    Features are good enough to be used successfully. Need to do a complete UI pass.
-        - Check desktop UI
-        - Check 300px wide lists on mobile, need a better solution than margin:auto because that looks dumb on mobile
-            - maybe margin auto, with percent-wide middle part and aligned left?
+    UI pass
+        Desktop
+            Header
+                - I kind of want some sweet background graphic here
+            Create Campaign
+                - that damn drop down list too wide issue
+                - could use a "grouping element"
+                - factions table needs padding
+            Create Campaign Map
+                - can't scroll because the map is giant.
+                - Map could use a more notable border (unless the border is plain missing)
+                - Save button is not at all visible with the map at huge size
+            In Progress Campaign
+                - table needs a max size
+                - whole thing could use a grouping element
+            Map Entry
+                - map takes up too much space, can't scroll
+                - needs border, maybe a ridged border or something.
+            Entry
+                - grouping element
+                - "YOu must add at least one faction" validator shows up for no reason.
+                - drop down list mis-sized
+                
+        Mobile 375
+            - map-panel size doesn't work here -- expands off edge of screen.
+            - Map Entry: can't scroll map without clicking on map and de-selecting territory
             
-        - Should I put a grey box around the main UI?
-        - put a max size on the map bounding box
-        - Graphics?
+        Mobile 320 
+            Create Campaign
+                - 300px wide list to big, off screen.
+            In Progress Campaign
+                - Button bar to wide, "Next phase" is on the next line
+                - 300px wide list to big, off screen.
+                - Details tab too wide, off screen
+            Entry
+                - 300px wide list too big, off screen
+                - button off screen
+            Profile
+                - 300px wide off screen
+                
+    - old map data bug still there?
+    - Not consistent about tooltips -- some are title attributes, some are jquery tooltips
+            
+                
+
+
                 
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
