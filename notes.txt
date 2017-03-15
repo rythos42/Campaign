@@ -1,8 +1,5 @@
 Next:
     Desktop
-        In Progress Campaign
-            - table needs a max size
-            - whole thing could use a grouping element
         Map Entry
             - map takes up too much space, can't scroll
             - needs border, maybe a ridged border or something.
@@ -48,6 +45,7 @@ Future:
 
 - organize CSS
 - Not consistent about tooltips -- some are title attributes, some are jquery tooltips
+- give TB dialog positioned weirdly when entry list really long
 - read-only view of Entry when finished, rather than removing link
 - confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?

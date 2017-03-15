@@ -9,11 +9,11 @@ class EntryListWidget {
                 <li><a href="#DetailsTab"><?php echo Translation::getString("details"); ?></a></li>
             </ul>
             <div id="SummaryTab">
-                <table class="ui-widget ui-corners-all ui-widget-content">
+                <table>
                     <thead>
                         <tr>
-                            <th><?php echo Translation::getString("createdOn"); ?></th>
-                            <th><?php echo Translation::getString("createdBy"); ?></th>
+                            <th><?php echo Translation::getString("created"); ?></th>
+                            <th><?php echo Translation::getString("by"); ?></th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: campaignEntries">
@@ -32,37 +32,34 @@ class EntryListWidget {
                 </table>
             </div>
             <div id="DetailsTab">
-                <table class="ui-widget ui-corners-all ui-widget-content">
+                <table>
                     <thead>
                         <tr>
-                            <th><?php echo Translation::getString("createdOn"); ?></th>
-                            <th></th>
+                            <th><?php echo Translation::getString("created"); ?></th>
+                            <th><?php echo Translation::getString("faction"); ?></th>
+                            <th><?php echo Translation::getString("user"); ?></th>
+                            <th><?php echo Translation::getString("vps"); ?></th>
+                            <th><?php echo Translation::getString("bonus"); ?></th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: campaignEntries">
                         <tr>
-                            <td data-bind="text: createdOnDate" />
-                            <td>
-                                <table class="ui-widget ui-corners-all ui-widget-content">
-                                    <thead>
-                                        <tr>
-                                            <th><?php echo Translation::getString("faction"); ?></th>
-                                            <th><?php echo Translation::getString("user"); ?></th>
-                                            <th><?php echo ucfirst(Translation::getString("points")); ?></th>
-                                            <th><?php echo Translation::getString("bonus"); ?></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody data-bind="foreach: factionEntries">
-                                        <tr>
-                                            <td data-bind="text: factionName" />
-                                            <td data-bind="text: username" />
-                                            <td data-bind="text: victoryPoints" />
-                                            <td data-bind="text: territoryBonusSpent" />
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
+                            <td data-bind="text: createdOnDate, attr: {'rowspan': factionEntryCount}"></td>
+                            <!-- ko with: firstFactionEntry -->
+                            <td data-bind="text: factionName"></td>
+                            <td data-bind="text: username"></td>
+                            <td data-bind="text: victoryPoints"></td>
+                            <td data-bind="text: territoryBonusSpent"></td>
+                            <!-- /ko -->
                         </tr>
+                        <!-- ko foreach: restOfFactionEntries -->
+                        <tr>
+                            <td data-bind="text: factionName"></td>
+                            <td data-bind="text: username"></td>
+                            <td data-bind="text: victoryPoints"></td>
+                            <td data-bind="text: territoryBonusSpent"></td>
+                        </tr>
+                        <!-- /ko -->
                     </tbody>
                 </table>
             </div>

@@ -3,7 +3,7 @@ class GiveTerritoryBonusToUserDialogWidget implements IWidget {
     public function render() {
         ?>
             <!-- ko with: giveTerritoryBonusToUserDialogViewModel -->
-            <div data-bind="dialog: { title: Translation.getString('giveTerritoryBonusDialogTitle') }, dialogOpenClose: dialogOpenClose">
+            <div data-bind="dialog: { title: Translation.getString('giveTerritoryBonusDialogTitle'), width: 300 }, dialogOpenClose: dialogOpenClose">
                 <ul>
                     <li class="entry-field">
                         <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>

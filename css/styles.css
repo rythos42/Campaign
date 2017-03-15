@@ -30,7 +30,7 @@ li.button-panel {
 .ui-dialog li.entry-field,
 .ui-dialog li.data-list,
 .ui-dialog li.button-panel {
-    width: 280px;
+    width: 260px;
 }
 
 li.entry-field label {
@@ -55,11 +55,11 @@ li.data-list > span {
 }
 
 .ui-button {
-    padding: 0.4em 0.8em;
+    padding: 0.4em 0.5em;
 }
 
-.outset-icon-button {
-    margin-right: -28px;
+.inline-icon-button {
+    font-size: 0.8em;
     padding: 0.15em;
 }
 
@@ -70,6 +70,7 @@ li.data-list > span {
     text-decoration: underline;
     color: blue;
     text-align: left;
+    padding: 0;
 }
 
 td .button-icon {
@@ -226,6 +227,23 @@ td.actions {
 
 .ui-tooltip {
     box-shadow: none;
+}
+
+.ui-tabs { 
+    padding: 0px; 
+    background: none; 
+    border: 0 !important;
+} 
+.ui-tabs .ui-tabs-nav { 
+    padding-left: 0px; 
+    background: transparent; 
+    border-width: 0px 0px 1px 0px; 
+    -moz-border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px; 
+} 
+.ui-tabs .ui-tabs-panel { 
+    border-width: 0px 1px 1px 1px; 
 }
 
 

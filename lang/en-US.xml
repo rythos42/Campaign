@@ -13,7 +13,8 @@
         <addFaction>Add Faction</addFaction>        
         <addFactions>Add Factions</addFactions>        
         <back>Back</back>        
-        <createdOn>Created On</createdOn>        
+        <created>Created</created>  
+        <by>By</by>
         <name>Name</name>        
         <factions>Factions</factions>        
         <save>Save</save>        
@@ -56,11 +57,11 @@
         <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
         <territoryBonusSpent>Bonus spent</territoryBonusSpent>
         <cannotSpendMoreThan>You only have {0}.</cannotSpendMoreThan>
-        <createEntry>Create Entry</createEntry>
+        <newEntry>New Entry</newEntry>
         <mandatoryAttacks>Mandatory attacks</mandatoryAttacks>
         <optionalAttacks>Optional attacks</optionalAttacks>
         <userOutOfAttacks>That user is out of attacks this phase.</userOutOfAttacks>
-        <nextPhase>Next phase</nextPhase>
+        <newPhase>New Phase</newPhase>
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
         <attackingFaction>Attacking faction</attackingFaction>
@@ -74,5 +75,6 @@
         <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
         <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
         <everyFactionMustHaveATerritory>Every faction must have a territory.</everyFactionMustHaveATerritory>
+        <vps>VPs</vps>
     </strings>
 </translation>
