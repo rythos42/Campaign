@@ -84,8 +84,12 @@ td .button-icon {
     padding: 0.5em 0.8em;
 }
 
-.button-panel {
+.bottom-button-panel {
     margin-top: 10px;
+}
+
+.top-button-panel {
+    margin-bottom: 10px;
 }
 
 .validationMessage {
@@ -139,11 +143,6 @@ td {
     padding-bottom: 5px;
 }
 
-#CreateCampaignEntry table {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 #Main {
     margin: 10px;
 }
@@ -180,6 +179,11 @@ canvas {
 
 td.actions {
     text-align: right;
+    font-size: 14px;
+}
+
+td.actions .button-icon {
+    padding: 0;
 }
 
 .map-panel {

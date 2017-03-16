@@ -1,12 +1,4 @@
 Next:
-    Desktop
-        Map Entry
-            - map takes up too much space, can't scroll
-            - needs border, maybe a ridged border or something.
-        Entry
-            - grouping element
-            - "YOu must add at least one faction" validator shows up for no reason.
-            
     Mobile 375
         - map-panel size doesn't work here -- expands off edge of screen.
         - Map Entry: can't scroll map without clicking on map and de-selecting territory
@@ -44,6 +36,7 @@ Future:
 - spend TB to attack anywhere
 
 - organize CSS
+- relook at entry map screen - there I could do better UI here, I think.
 - Not consistent about tooltips -- some are title attributes, some are jquery tooltips
 - give TB dialog positioned weirdly when entry list really long
 - read-only view of Entry when finished, rather than removing link

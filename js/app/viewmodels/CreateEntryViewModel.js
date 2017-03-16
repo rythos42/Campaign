@@ -167,6 +167,10 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         }
     });
     
+    self.showAddFactions.subscribe(function() {
+        self.factionEntries.isModified(false);
+    });
+    
     currentCampaign.subscribe(function(newCampaign) {
         if(!newCampaign)
             currentEntry.campaignId(undefined);

@@ -3,14 +3,8 @@ class CreateEntryWidget implements IWidget {
     public function render() {
         ?>
         <!-- ko with: createEntryViewModel-->
-        <div id="CreateCampaignEntry" data-bind="visible: showCreateEntry">
-            <div data-bind="visible: !showAddFactions()">
-                <?php
-                $entryMapWidget = new EntryMapWidget();
-                $entryMapWidget->render();
-                ?>
-            </div>
-            <div data-bind="visible: showAddFactions">
+        <div data-bind="visible: showCreateEntry">
+            <div data-bind="visible: showAddFactions" class="grouping ui-widget ui-corners-all ui-widget-content">
                 <ul>
                     <li class="entry-field">
                         <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
@@ -59,14 +53,26 @@ class CreateEntryWidget implements IWidget {
                         </tr>
                     </tbody>
                 </table>
+                <div class="bottom-button-panel">
+                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                        <span class="icon-arrow-left2"></span>
+                    </button>
+                    <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: finish, visible: showAddFactions" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
+                </div>
             </div>
-            <div class="button-panel">
-                <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
-                    <span class="icon-arrow-left2"></span>
-                </button>
-                <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("addFactions"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: finish, visible: showAddFactions" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
+            <div data-bind="visible: !showAddFactions()" class="map-grouping ui-widget ui-corners-all ui-widget-content">
+                <div class="top-button-panel">
+                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                        <span class="icon-arrow-left2"></span>
+                    </button>
+                    <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("whoPlayed"); ?>" class="ui-button ui-widget ui-corner-all" />
+                </div>
+                <?php
+                $entryMapWidget = new EntryMapWidget();
+                $entryMapWidget->render();
+                ?>
             </div>
         </div>
         <!-- /ko -->

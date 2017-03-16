@@ -4,12 +4,12 @@ class InProgressCampaignViewModel {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
         <div data-bind="visible: showInProgressCampaign" class="grouping ui-widget-content ui-corner-all">
-            <div>
-            <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
-                <span class="icon-arrow-left2"></span>
-            </button>
-            <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
-            <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
+            <div class="top-button-panel">
+                <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                    <span class="icon-arrow-left2"></span>
+                </button>
+                <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
         
             <ul data-bind="visible: isMapCampaign">

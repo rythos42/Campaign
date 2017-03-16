@@ -11,7 +11,6 @@
         <factionName>Faction Name</factionName>        
         <user>User</user>        
         <addFaction>Add Faction</addFaction>        
-        <addFactions>Add Factions</addFactions>        
         <back>Back</back>        
         <created>Created</created>  
         <by>By</by>
@@ -29,9 +28,9 @@
         <loginPageAbout>Campaign is a simple &lt;a href="https://github.com/rythos42/Campaign"&gt;open source&lt;/a&gt; web app to help you manage gaming campaigns.</loginPageAbout>
         <factionEntryRequiredValidation>Who were they playing for?</factionEntryRequiredValidation>
         <userEntryRequiredValidation>You need to enter a user.</userEntryRequiredValidation>
-        <userEntryInvalidAccountValidation>That person does't have an account here.</userEntryInvalidAccountValidation>
-        <victoryPointsEntryRequiredValidation>At least put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
-        <minimumOneFactionValidation>You must add at least one faction.</minimumOneFactionValidation>
+        <userEntryInvalidAccountValidation>That user doesn't have an account .</userEntryInvalidAccountValidation>
+        <victoryPointsEntryRequiredValidation>Put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
+        <minimumOneFactionValidation>You need at least one faction.</minimumOneFactionValidation>
         <campaignNameRequiredValidation>Your campaign needs a name.</campaignNameRequiredValidation>
         <factionNameRequiredValidation>Each faction needs a name.</factionNameRequiredValidation>
         <minimumOneFactionRequiredValidator>You need at least one faction.</minimumOneFactionRequiredValidator>
@@ -51,7 +50,7 @@
         <cancel>Cancel</cancel>
         <ok>Ok</ok>
         <howMuch>How much do you want to give?</howMuch>
-        <atLeastZero>You have to enter a positive number.</atLeastZero>
+        <atLeastZero>Enter a positive number.</atLeastZero>
         <amount>Amount</amount>
         <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
         <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
@@ -64,9 +63,8 @@
         <newPhase>New Phase</newPhase>
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
-        <attackingFaction>Attacking faction</attackingFaction>
         <points>points</points>
-        <selectFaction>Select a faction</selectFaction>
+        <selectFaction>Select faction</selectFaction>
         <createdBy>Created By</createdBy>
         <entries>Entries</entries>
         <details>Details</details>
@@ -76,5 +74,7 @@
         <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
         <everyFactionMustHaveATerritory>Every faction must have a territory.</everyFactionMustHaveATerritory>
         <vps>VPs</vps>
+        <whoPlayed>Who played?</whoPlayed>
+        <whatTerritoryIsBeingAttacked>What territory is being attacked?</whatTerritoryIsBeingAttacked>
     </strings>
 </translation>
