@@ -75,6 +75,6 @@
         <everyFactionMustHaveATerritory>Every faction must have a territory.</everyFactionMustHaveATerritory>
         <vps>VPs</vps>
         <whoPlayed>Who played?</whoPlayed>
-        <whatTerritoryIsBeingAttacked>What territory is being attacked?</whatTerritoryIsBeingAttacked>
+        <whatTerritoryIsBeingAttacked>Where to attack?</whatTerritoryIsBeingAttacked>
     </strings>
 </translation>
