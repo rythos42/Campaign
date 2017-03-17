@@ -18,12 +18,22 @@ ko.bindingHandlers.canvas = {
                     contain: 'invert'
                 });
 
-                $canvas.parent().on('mousewheel.focal', function( e ) {
+                $canvas.parent().on('mousewheel.focal', function(e) {
                     e.preventDefault();
                     var delta = e.delta || e.originalEvent.wheelDelta;
                     var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
                     $canvas.panzoom('zoom', zoomOut, {
                         increment: 0.1,
+                        animate: false,
+                        focal: e
+                    });
+                });
+                
+                $canvas.parent().on('dblclick', function(e) {
+                    e.preventDefault();
+                    var zoomOut = false;
+                    $canvas.panzoom('zoom', zoomOut, {
+                        increment: 0.5,
                         animate: false,
                         focal: e
                     });

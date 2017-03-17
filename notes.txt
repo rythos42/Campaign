@@ -1,6 +1,5 @@
 Next:
 - organize CSS
-- can I do double click to zoom on map? Is ok if double-press doesn't do the same thing.
 - relook at entry map screen - there I could do better UI here, I think.
 - confirm dialog when Finishing entry?
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
