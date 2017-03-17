@@ -1,4 +1,11 @@
 Next:
+- spend TB to attack anywhere
+    - checkbox on entry map page "Attack anywhere for 1 territory bonus"
+    - greyed out if the current user doesn't have 1??
+        - then only current user can spend.
+    - or validate after we select who the attacking user is on the next page?
+
+
 - organize CSS
 - relook at entry map screen - there I could do better UI here, I think.
 - confirm dialog when Finishing entry?
@@ -30,7 +37,6 @@ Future:
         - perhaps allow comments on campaign entries
 
 
-- spend TB to attack anywhere
 
 - sweet background on header
 - Not consistent about tooltips -- some are title attributes, some are jquery tooltips
@@ -47,6 +53,7 @@ Future:
 - create campaign customization
     - set height, width, number of sectors on map
     - pick background image
+- "territory bonus" is an awful name.
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
