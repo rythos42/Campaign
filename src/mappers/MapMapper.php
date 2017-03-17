@@ -5,7 +5,7 @@ require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 class MapMapper {
     public static function saveFactionTerritories($factionTerritories) {
         foreach($factionTerritories as $territoryId => $factionId) {
-            Database::execute("update Polygon set OwningFactionId = ? where Id = ?", [$factionId, $territoryId]); 
+            Database::execute("update Territory set OwningFactionId = ? where Id = ?", [$factionId, $territoryId]); 
         }
     }
     
@@ -17,7 +17,7 @@ class MapMapper {
             $dbPolygon = array();
             $dbPolygon["Id"] = $dbAdjacentPolygon["Id"];
             $dbPolygon["IdOnMap"] = $dbAdjacentPolygon["IdOnMap"];
-            $dbPolygon["Points"] = Database::queryArray("select X, Y, PointNumber from PolygonPoint where PolygonId = ?", [$dbAdjacentPolygon["Id"]]);
+            $dbPolygon["Points"] = Database::queryArray("select X, Y, PointNumber from TerritoryPoint where TerritoryId = ?", [$dbAdjacentPolygon["Id"]]);
             $dbPolygonList[] = $dbPolygon;
         }
             
@@ -28,14 +28,14 @@ class MapMapper {
         // get all polygons adjacent (within -2 to +2 pixels) to the given faction
         return Database::queryArray(
             "select adjacentPolygon.Id, adjacentPolygon.IdOnMap
-                from Polygon ownedPolygon
-                join PolygonPoint ownedPoint on ownedPoint.PolygonId = ownedPolygon.Id
-                join PolygonPoint adjacentPoint on 
+                from Territory ownedPolygon
+                join TerritoryPoint ownedPoint on ownedPoint.TerritoryId = ownedPolygon.Id
+                join TerritoryPoint adjacentPoint on 
                     (ownedPoint.X < adjacentPoint.X + 2 and ownedPoint.X > adjacentPoint.X - 2)
                     and (ownedPoint.Y < adjacentPoint.Y + 2 and ownedPoint.Y > adjacentPoint.Y - 2)
-                    and ownedPoint.PolygonId <> adjacentPoint.PolygonId
-                join Polygon adjacentPolygon on 
-                    adjacentPolygon.Id = adjacentPoint.PolygonId 
+                    and ownedPoint.TerritoryId <> adjacentPoint.TerritoryId
+                join Territory adjacentPolygon on 
+                    adjacentPolygon.Id = adjacentPoint.TerritoryId 
                     and ifnull(adjacentPolygon.OwningFactionId, -1) <> ifnull(ownedPolygon.OwningFactionId, -1)
                     and adjacentPolygon.CampaignId = ownedPolygon.CampaignId
                 where ownedPolygon.OwningFactionId = ?
@@ -79,11 +79,11 @@ class MapMapper {
         imagecopy($image, $sectorImage, 0, 0, 0, 0, $width, $height);
                
         $dbPolygonList = Database::queryArray(
-            "select IdOnMap, CampaignFaction.Colour, PolygonPoint.X, PolygonPoint.Y 
-            from Polygon 
-            join PolygonPoint on PolygonPoint.PolygonId = Polygon.Id
-            left join CampaignFaction on CampaignFaction.Id = Polygon.OwningFactionId
-            where Polygon.CampaignId=?", 
+            "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y 
+            from Territory 
+            join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
+            left join Faction on Faction.Id = Territory.OwningFactionId
+            where Territory.CampaignId=?", 
             [$campaignId]);
         
         foreach(self::getPolygonListFromDatabasePolygonList($dbPolygonList) as $polygon) {
@@ -149,13 +149,13 @@ class MapMapper {
             imagettftext($map, $fontSize, 0, $center->x - ($textBoundingBox[0] / 2), $center->y - ($textBoundingBox[1] / 2), $lineShadow, $font, $areaNumber + 1);
             imagettftext($map, $fontSize - 2, 0, $center->x - ($textBoundingBox[0] / 2), $center->y - ($textBoundingBox[1] / 2), $lineColor, $font, $areaNumber + 1);
             
-            Database::execute("INSERT INTO Polygon (CampaignId, IdOnMap) VALUES (?, ?)", [$campaignId, $areaNumber + 1]);
+            Database::execute("INSERT INTO Territory (CampaignId, IdOnMap) VALUES (?, ?)", [$campaignId, $areaNumber + 1]);
             $polygonId = Database::getLastInsertedId();
             $pointNumber = 0;
             $insertingPolygon = array("Id" => $polygonId, "IdOnMap" => $areaNumber + 1, "Points" => array());
             
             foreach($points->pointsForCenterCalculation as $pointToSave) {
-                Database::execute("INSERT INTO PolygonPoint (PolygonId, X, Y, PointNumber) VALUES (?, ?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y, $pointNumber]);
+                Database::execute("INSERT INTO TerritoryPoint (TerritoryId, X, Y, PointNumber) VALUES (?, ?, ?, ?)", [$polygonId, $pointToSave->x, $pointToSave->y, $pointNumber]);
                 $insertingPolygon["Points"][] = array("X" =>  $pointToSave->x, "Y" => $pointToSave->y, "PointNumber" => $pointNumber);
                 $pointNumber++;
             }

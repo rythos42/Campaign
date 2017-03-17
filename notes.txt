@@ -1,20 +1,21 @@
 Next:
-    Mobile 320 
-        - most mobile issues are solved by the initial-scale, but do another pass to make sure.
-        Create Campaign
-            - 300px wide list to big, off screen.
-        In Progress Campaign
-            - Button bar to wide, "Next phase" is on the next line
-            - 300px wide list to big, off screen.
-            - Details tab too wide, off screen
-        Entry
-            - 300px wide list too big, off screen
-            - button off screen
-        Profile
-            - 300px wide off screen
-
-- sweet background on header
+- organize CSS
 - can I do double click to zoom on map? Is ok if double-press doesn't do the same thing.
+- relook at entry map screen - there I could do better UI here, I think.
+- confirm dialog when Finishing entry?
+- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
+    
+run at home:  
+use Campaign;
+RENAME TABLE CampaignEntry TO Entry;
+RENAME TABLE CampaignFactionEntry TO FactionEntry;
+RENAME TABLE CampaignFaction TO Faction;
+RENAME TABLE Polygon TO Territory;
+RENAME TABLE PolygonPoint TO TerritoryPoint;
+
+ALTER TABLE TerritoryPoint CHANGE COLUMN PolygonId TerritoryId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE FactionEntry CHANGE COLUMN CampaignEntryId EntryId INT NOT NULL;
+ALTER TABLE FactionEntry CHANGE COLUMN CampaignFactionId FactionId INT NOT NULL;
                 
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
@@ -32,33 +33,21 @@ Future:
 
 - spend TB to attack anywhere
 
-- organize CSS
-- relook at entry map screen - there I could do better UI here, I think.
+- sweet background on header
 - Not consistent about tooltips -- some are title attributes, some are jquery tooltips
-- give TB dialog positioned weirdly when entry list really long
+- "give TB" dialog positioned weirdly when entry list really long
 - read-only view of Entry when finished, rather than removing link
-- confirm dialog when Finishing entry?
 - when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
 - maybe we don't need entry list after we can view individual entries after they are saved
-- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
-- g'damn select boxes keep changing size in different browsers
+
 - remove code that automatically gives permission to create map campaigns
+- factions can choose colours
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - means building a user profile page
-- page campaign list
 - create campaign customization
     - set height, width, number of sectors on map
     - pick background image
-- search campaigns by the user who created them
-- deadline for campaign entries
-- factions can choose colours
-- rename database stuff:
-    CampaignEntry -> Entry
-    CampaignFactionEntry -> FactionEntry
-    CampaignFaction -> Faction
-    Polygon -> Territory
-    PolygonPoints -> TerritoryPolygonPoints?
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
@@ -71,8 +60,12 @@ Selling Questions:
 - can anyone access a map campaign, and only certain people create them?
 - for buying: group buy, or individual buy?
 
-        
-Far future:
+
+Far Future:
+- rename table indexes -- easier in mySQL 5.7
+- page campaign list
+- search campaigns by the user who created them
+- deadline for campaign entries
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - XP system
 - consider being able to add multiple users to a FactionEntry?

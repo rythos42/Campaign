@@ -10,7 +10,7 @@ class CampaignMapper {
         $insertCampaignReturnData["Factions"] = array();
         
         foreach($factions as $faction) {
-            Database::execute("INSERT INTO CampaignFaction (Name, Colour, CampaignId) VALUES (?, ?, ?)", [$faction->name, $faction->colour, $campaignId]);
+            Database::execute("INSERT INTO Faction (Name, Colour, CampaignId) VALUES (?, ?, ?)", [$faction->name, $faction->colour, $campaignId]);
             $insertCampaignReturnData["Factions"][$faction->name] = Database::getLastInsertedId();
         }
         
@@ -25,7 +25,7 @@ class CampaignMapper {
             $campaignList[$campaign->Id] = $campaign;
         }
 
-        $dbCampaignFactionList = Database::queryObjectList("SELECT * FROM CampaignFaction", "Faction");
+        $dbCampaignFactionList = Database::queryObjectList("SELECT * FROM Faction", "Faction");
         foreach($dbCampaignFactionList as $campaignFaction) {
             $campaign = $campaignList[$campaignFaction->CampaignId];
             $campaign->Factions[] = $campaignFaction;
@@ -37,12 +37,12 @@ class CampaignMapper {
     public static function saveCampaignEntry($campaignEntry) {
         if(isset($campaignEntry->id)) {
             Database::execute(
-                "update CampaignEntry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
+                "update Entry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
                 [$campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap, $campaignEntry->id]);
             $campaignEntryId = $campaignEntry->id;
         } else {        
             Database::execute(
-                "insert into CampaignEntry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
+                "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
                 [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap]);
             $campaignEntryId = Database::getLastInsertedId();
         }
@@ -53,18 +53,18 @@ class CampaignMapper {
             
             if(isset($factionEntry->id)) {
                 Database::execute(
-                    "update CampaignFactionEntry set CampaignFactionId = ?, UserId = ?, VictoryPointsScored = ?, TerritoryBonusSpent = ? where Id = ?",
+                    "update FactionEntry set FactionId = ?, UserId = ?, VictoryPointsScored = ?, TerritoryBonusSpent = ? where Id = ?",
                     [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent, $factionEntry->id]);
             } else {
                 Database::execute(
-                    "insert into CampaignFactionEntry (CampaignEntryId, CampaignFactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
+                    "insert into FactionEntry (EntryId, FactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
                     [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
         }
         
         // Delete any that were removed
-        $existingFactionEntries = Database::queryArray("select Id from CampaignFactionEntry where CampaignEntryId = ?", [$campaignEntryId]);
+        $existingFactionEntries = Database::queryArray("select Id from FactionEntry where EntryId = ?", [$campaignEntryId]);
         foreach($existingFactionEntries as $dbFactionEntry) {
             $found = false;
             foreach($campaignEntry->factionEntries as $factionEntry) {
@@ -76,7 +76,7 @@ class CampaignMapper {
             }
             
             if(!$found)
-                Database::execute("delete from CampaignFactionEntry where Id = ?", [$dbFactionEntry["Id"]]);
+                Database::execute("delete from FactionEntry where Id = ?", [$dbFactionEntry["Id"]]);
         }        
     }
     
@@ -110,21 +110,21 @@ class CampaignMapper {
         // If the winner was attacking, give them the territory
         if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
             Database::execute(
-                "UPDATE Polygon SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
+                "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
                 [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttacked->IdOnMap]);
         }
         
         Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
-        Database::execute("update CampaignEntry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
+        Database::execute("update Entry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
     }
     
     public static function getEntriesForCampaign($campaignId) {
         $entryList = array();
 
         $dbEntryList = Database::queryObjectList(
-            "select CampaignEntry.*, User.Username as CreatedByUsername
-            from CampaignEntry
-            join User on User.Id = CampaignEntry.CreatedByUserId
+            "select Entry.*, User.Username as CreatedByUsername
+            from Entry
+            join User on User.Id = Entry.CreatedByUserId
             where CampaignId = ?", 
             "Entry", [$campaignId]);
        
@@ -132,10 +132,10 @@ class CampaignMapper {
             $entryList[] = $entry;
 
             $dbFactionEntryRow = Database::queryArray(
-                "SELECT CampaignFactionEntry.*, User.Username, CampaignFaction.Name as FactionName FROM CampaignFactionEntry 
-                    JOIN User on User.Id = CampaignFactionEntry.UserId
-                    JOIN CampaignFaction on CampaignFaction.Id = CampaignFactionEntry.CampaignFactionId
-                    WHERE CampaignEntryId = ?", [$entry->Id]);
+                "SELECT FactionEntry.*, User.Username, Faction.Name as FactionName FROM FactionEntry 
+                    JOIN User on User.Id = FactionEntry.UserId
+                    JOIN Faction on Faction.Id = FactionEntry.FactionId
+                    WHERE EntryId = ?", [$entry->Id]);
             foreach($dbFactionEntryRow as $factionEntryRow) {
                 $entry->FactionEntries[] = $factionEntryRow;
             }
@@ -145,7 +145,7 @@ class CampaignMapper {
     }
     
     private static function getFactionIdForUser($userId) {
-        return Database::queryScalar("select CampaignFactionId from CampaignFactionEntry where UserId = ? order by Id desc limit 1", [$userId]);
+        return Database::queryScalar("select FactionId from FactionEntry where UserId = ? order by Id desc limit 1", [$userId]);
     }
     
     private static function getLastPhaseDateForCampaign($campaignId) {
@@ -157,14 +157,14 @@ class CampaignMapper {
 
         // Each person belongs to a single faction, pick their last faction they logged against.
         return Database::queryArray(
-            "select UserId, CampaignFactionId, 
+            "select UserId, FactionId, 
                 (select count(*) 
-                from CampaignFactionEntry t
-                join CampaignEntry on CampaignEntry.Id = t.CampaignEntryId
-                where t.UserId = o.UserId and CampaignFactionId = ? and CreatedOnDate > ?) as GameCount
-            from CampaignFactionEntry o
-            where Id = (select max(Id) From CampaignFactionEntry i where i.UserId = o.UserId)
-            and CampaignFactionId = ?
+                from FactionEntry t
+                join Entry on Entry.Id = t.EntryId
+                where t.UserId = o.UserId and FactionId = ? and CreatedOnDate > ?) as GameCount
+            from FactionEntry o
+            where Id = (select max(Id) From FactionEntry i where i.UserId = o.UserId)
+            and FactionId = ?
             group by UserId",
             [$factionId, $lastPhaseDate, $factionId]);
     }
@@ -174,9 +174,9 @@ class CampaignMapper {
         
         return Database::queryScalar(
             "select count(*) 
-            from CampaignFactionEntry 
-            join CampaignEntry on CampaignEntry.Id = CampaignFactionEntry.CampaignEntryId
-            where CampaignFactionId = ? and CreatedOnDate > ?", 
+            from FactionEntry 
+            join Entry on Entry.Id = FactionEntry.EntryId
+            where FactionId = ? and CreatedOnDate > ?", 
             [$factionId, $lastPhaseDate]);
     }
     
@@ -185,9 +185,9 @@ class CampaignMapper {
         Database::execute("UPDATE UserCampaignData SET Attacks = 0 WHERE CampaignId = ?", [$campaignId]);
         
         // Do for each faction in the campaign
-        $factionIdList = Database::queryScalarList("SELECT Id FROM CampaignFaction WHERE CampaignId = ?", [$campaignId]);
+        $factionIdList = Database::queryScalarList("SELECT Id FROM Faction WHERE CampaignId = ?", [$campaignId]);
         foreach($factionIdList as $factionId) {
-            $tbToAllocate = Database::queryScalar("SELECT count(*) as TerritoryCount FROM Polygon WHERE OwningFactionId = ?", [$factionId]);
+            $tbToAllocate = Database::queryScalar("SELECT count(*) as TerritoryCount FROM Territory WHERE OwningFactionId = ?", [$factionId]);
             $usersInFaction = CampaignMapper::getUsersInFaction($campaignId, $factionId);
             $totalGameCountForFaction = CampaignMapper::getGameCountForFactionForCurrentPhase($campaignId, $factionId);
             

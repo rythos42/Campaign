@@ -22,9 +22,15 @@ ul li {
 li.entry-field,
 li.data-list,
 li.button-panel {
+    
     margin-left: 5%;
     width: 280px;
     text-align: right;
+}
+
+li.button-panel {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .ui-dialog li.entry-field,
@@ -149,6 +155,10 @@ td {
     
     .map-panel {
         height: 350px;
+    }
+    
+    .map-legend {
+        margin-top: 5px;
     }
 }
 

@@ -1,5 +1,5 @@
 /*exported CreateCampaignMapViewModel */
-/*globals ko, MapHelper, MapLegendViewModel */
+/*globals ko, MapHelper, MapLegendViewModel, Translation */
 var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     var self = this,
         mapHelper = new MapHelper('CampaignMapCanvas'),

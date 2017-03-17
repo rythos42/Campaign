@@ -23,7 +23,7 @@ var Entry = function(campaign, serverEntry) {
         });
         
         $.each(serverEntry.FactionEntries, function(index, serverFactionEntry) {
-            var faction = new Faction(serverFactionEntry.FactionName, serverFactionEntry.CampaignFactionId);
+            var faction = new Faction(serverFactionEntry.FactionName, serverFactionEntry.FactionId);
             var user = new User(serverFactionEntry.UserId, serverFactionEntry.Username);
             var factionEntry = new FactionEntry(faction, user, serverFactionEntry);
             factionEntry.id(serverFactionEntry.Id);
