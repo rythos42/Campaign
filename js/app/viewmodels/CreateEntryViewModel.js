@@ -1,5 +1,5 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, EntryMapViewModel */
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, EntryMapViewModel, DialogResult, ConfirmationDialogViewModel */
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(),
@@ -151,7 +151,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     }
     
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {
-        if(dialogResult == DialogResult.Saved)
+        if(dialogResult === DialogResult.Saved)
             saveCampaignEntry({finish: true});
     });
                

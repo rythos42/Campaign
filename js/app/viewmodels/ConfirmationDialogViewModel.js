@@ -1,4 +1,5 @@
 /*exported ConfirmationDialogViewModel */
+/*globals ko, DialogResult */
 var ConfirmationDialogViewModel = function() {
     var self = this;
     
@@ -18,5 +19,5 @@ var ConfirmationDialogViewModel = function() {
     self.openDialog = function() {
         self.dialogResult(DialogResult.None);
         self.dialogOpenClose(true);
-    }
+    };
 };
