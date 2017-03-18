@@ -1,5 +1,5 @@
 <?php
-class CampaignListWidget implements IWidget {
+class CampaignListWidget {
     public function render() {
         ?>
         <!-- ko with: campaignListViewModel -->

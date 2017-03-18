@@ -1,5 +1,5 @@
 <?php
-class EntryMapWidget implements IWidget {
+class EntryMapWidget {
     public function render() {
         ?>
         <!-- ko with: entryMapViewModel -->

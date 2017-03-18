@@ -1,5 +1,5 @@
 <?php
-class LoadingImageWidget implements IWidget {
+class LoadingImageWidget {
     public function render() {
         ?>
         <div class="s1">

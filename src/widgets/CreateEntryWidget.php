@@ -1,5 +1,5 @@
 <?php
-class CreateEntryWidget implements IWidget {
+class CreateEntryWidget {
     public function render() {
         ?>
         <!-- ko with: createEntryViewModel-->
@@ -69,6 +69,18 @@ class CreateEntryWidget implements IWidget {
                     <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
                     <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("whoPlayed"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </div>
+                <!-- ko with: confirmFinishDialogViewModel -->
+                <?php
+                $confirmFinishDialogWidget = new ConfirmationDialogWidget();
+                $confirmFinishDialogWidget->render(
+                    Translation::getString('finishEntryTitle'),
+                    Translation::getString('youWillBeUnableToEditAfterFinishing'),
+                    Translation::getString('finish'),
+                    Translation::getString('doNotFinish')
+                );
+                ?>
+                <!-- /ko -->
+                
                 <?php
                 $entryMapWidget = new EntryMapWidget();
                 $entryMapWidget->render();

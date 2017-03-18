@@ -76,5 +76,9 @@
         <vps>VPs</vps>
         <whoPlayed>Who played?</whoPlayed>
         <whatTerritoryIsBeingAttacked>Where to attack?</whatTerritoryIsBeingAttacked>
+        <finishEntryTitle>Finish Entry?</finishEntryTitle>
+        <youWillBeUnableToEditAfterFinishing>You will be unable to edit this entry after you finish it.</youWillBeUnableToEditAfterFinishing>
+        <finish>Finish</finish>
+        <doNotFinish>Do Not Finish</doNotFinish>
     </strings>
 </translation>

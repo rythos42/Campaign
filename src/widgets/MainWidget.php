@@ -1,5 +1,5 @@
 <?php
-class MainWidget implements IWidget {
+class MainWidget {
     public function render() {
         $headerWidget = new HeaderWidget();
         $headerWidget->render();

@@ -1,5 +1,5 @@
 <?php
-class LoginWidget implements IWidget {
+class LoginWidget {
     public function render() {
         ?>
         <!-- ko with: loginViewModel -->

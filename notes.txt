@@ -1,28 +1,6 @@
 Next:
-- spend TB to attack anywhere
-    - checkbox on entry map page "Attack anywhere for 1 territory bonus"
-    - greyed out if the current user doesn't have 1??
-        - then only current user can spend.
-    - or validate after we select who the attacking user is on the next page?
-
-
-- organize CSS
 - relook at entry map screen - there I could do better UI here, I think.
-- confirm dialog when Finishing entry?
-- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
-    
-run at home:  
-use Campaign;
-RENAME TABLE CampaignEntry TO Entry;
-RENAME TABLE CampaignFactionEntry TO FactionEntry;
-RENAME TABLE CampaignFaction TO Faction;
-RENAME TABLE Polygon TO Territory;
-RENAME TABLE PolygonPoint TO TerritoryPoint;
-
-ALTER TABLE TerritoryPoint CHANGE COLUMN PolygonId TerritoryId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT;
-ALTER TABLE FactionEntry CHANGE COLUMN CampaignEntryId EntryId INT NOT NULL;
-ALTER TABLE FactionEntry CHANGE COLUMN CampaignFactionId FactionId INT NOT NULL;
-                
+               
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
                 
@@ -68,6 +46,12 @@ Selling Questions:
 
 
 Far Future:
+- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
+- spend TB to attack anywhere
+    - checkbox on entry map page "Attack anywhere for 1 territory bonus"
+    - greyed out if the current user doesn't have 1??
+        - then only current user can spend.
+    - or validate after we select who the attacking user is on the next page?
 - rename table indexes -- easier in mySQL 5.7
 - page campaign list
 - search campaigns by the user who created them

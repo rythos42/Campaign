@@ -1,5 +1,5 @@
 <?php
-class UserProfileWidget implements IWidget {
+class UserProfileWidget {
     public function render() {
         ?>
         <!-- ko with: userProfileViewModel -->

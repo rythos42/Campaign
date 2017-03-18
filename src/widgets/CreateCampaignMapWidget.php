@@ -1,5 +1,5 @@
 <?php
-class CreateCampaignMapWidget implements IWidget {
+class CreateCampaignMapWidget {
     public function render() {
         ?>
         <!-- ko with: createCampaignMapViewModel -->

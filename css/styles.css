@@ -2,12 +2,34 @@
     box-sizing: border-box;
 }
 
+#Main {
+    margin: 10px;
+}
+
+#Header {
+    background-color: #E5E5E5;
+    width: 100%;
+    height: 3em;
+    padding: 4px 0 3px 10px;
+    border-bottom: solid black 2px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
 input[type="text"], input[type="password"], input[type="number"], select {
     width: 140px;
 }
 
 body {
     margin: 0;
+}
+
+canvas {
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    max-width: 768px;
 }
 
 ul {
@@ -60,49 +82,6 @@ li.data-list > span {
     width: 100px;
 }
 
-.ui-button {
-    padding: 0.4em 0.5em;
-}
-
-.inline-icon-button {
-    font-size: 0.8em;
-    padding: 0.15em;
-}
-
-.link-button {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    text-decoration: underline;
-    color: blue;
-    text-align: left;
-    padding: 0;
-}
-
-td .button-icon {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    height: 20px;
-}
-
-.button-icon {
-    padding: 0.5em 0.8em;
-}
-
-.bottom-button-panel {
-    margin-top: 10px;
-}
-
-.top-button-panel {
-    margin-bottom: 10px;
-}
-
-.validationMessage {
-    display: block;
-    color: red;
-}
-
 table {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -121,6 +100,54 @@ thead th {
 td {
     font-size: 16px;
     padding: 4px;    
+}
+
+td .button-icon {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    height: 20px;
+}
+
+td.actions {
+    text-align: right;
+    font-size: 14px;
+}
+
+td.actions .button-icon {
+    padding: 0;
+}
+
+.inline-icon-button {
+    font-size: 0.8em;
+    padding: 0.15em;
+}
+
+.link-button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+    text-align: left;
+    padding: 0;
+}
+
+.button-icon {
+    padding: 0.5em 0.8em;
+}
+
+.bottom-button-panel {
+    margin-top: 10px;
+}
+
+.top-button-panel {
+    margin-bottom: 10px;
+}
+
+.validationMessage {
+    display: block;
+    color: red;
 }
 
 .paragraph {
@@ -169,47 +196,8 @@ td {
     padding-bottom: 5px;
 }
 
-#Main {
-    margin: 10px;
-}
-
-#Header {
-    background-color: #E5E5E5;
-    width: 100%;
-    height: 3em;
-    padding: 4px 0 3px 10px;
-    border-bottom: solid black 2px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-.ui-tabs {
-    margin-top: 10px;
-}
-
-.ui-tabs .ui-tabs-panel {
-    padding: 3px;
-}
-
 .conditional {
     text-align: center;
-}
-
-canvas {
-    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-    -moz-user-select: none; /* mozilla browsers */
-    -khtml-user-select: none; /* webkit (konqueror) browsers */
-    -ms-user-select: none; /* IE10+ */
-    max-width: 768px;
-}
-
-td.actions {
-    text-align: right;
-    font-size: 14px;
-}
-
-td.actions .button-icon {
-    padding: 0;
 }
 
 .map-panel {
@@ -255,15 +243,21 @@ td.actions .button-icon {
     cursor: default !important;
 }
 
+.ui-button {
+    padding: 0.4em 0.5em;
+}
+
 .ui-tooltip {
     box-shadow: none;
 }
 
 .ui-tabs { 
+    margin-top: 10px;
     padding: 0px; 
     background: none; 
     border: 0 !important;
-} 
+}
+
 .ui-tabs .ui-tabs-nav { 
     padding-left: 0px; 
     background: transparent; 
@@ -271,9 +265,11 @@ td.actions .button-icon {
     -moz-border-radius: 0px; 
     -webkit-border-radius: 0px; 
     border-radius: 0px; 
-} 
+}
+
 .ui-tabs .ui-tabs-panel { 
     border-width: 0px 1px 1px 1px; 
+    padding: 3px;
 }
 
 

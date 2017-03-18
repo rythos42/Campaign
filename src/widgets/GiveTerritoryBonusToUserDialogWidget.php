@@ -1,5 +1,5 @@
 <?php
-class GiveTerritoryBonusToUserDialogWidget implements IWidget {
+class GiveTerritoryBonusToUserDialogWidget {
     public function render() {
         ?>
             <!-- ko with: giveTerritoryBonusToUserDialogViewModel -->

@@ -33,7 +33,6 @@ include($installDirOnWebServer . "/src/mappers/Database.php");
 include($installDirOnWebServer . "/src/mappers/UserMapper.php");
 include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");
 include($installDirOnWebServer . "/src/mappers/MapMapper.php");
-include($installDirOnWebServer . "/src/widgets/IWidget.php");
 include($installDirOnWebServer . "/src/widgets/MainWidget.php");
 include($installDirOnWebServer . "/src/widgets/HeaderWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoginWidget.php");
@@ -47,6 +46,7 @@ include($installDirOnWebServer . "/src/widgets/CreateCampaignMapWidget.php");
 include($installDirOnWebServer . "/src/widgets/UserProfileWidget.php");
 include($installDirOnWebServer . "/src/widgets/GiveTerritoryBonusToUserDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoadingImageWidget.php");
+include($installDirOnWebServer . "/src/widgets/ConfirmationDialogWidget.php");
 
 session_start();
 Database::connect();

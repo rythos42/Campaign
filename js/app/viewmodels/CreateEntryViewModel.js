@@ -6,6 +6,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         factionEntry = new FactionEntry();
         
     self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
+    self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.showAddFactions = ko.observable(false);
@@ -63,7 +64,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             return;
         }
         
-        saveCampaignEntry({finish: true});
+        self.confirmFinishDialogViewModel.openDialog();
     };
     
     self.saveCampaignEntry = function() {
@@ -148,6 +149,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry.createdByUsername(undefined);
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
     }
+    
+    self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {
+        if(dialogResult == DialogResult.Saved)
+            saveCampaignEntry({finish: true});
+    });
                
     navigation.showCreateEntry.subscribe(function(show) {
         self.entryMapViewModel.clearMap();

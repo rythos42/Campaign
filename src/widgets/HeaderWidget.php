@@ -1,5 +1,5 @@
 <?php
-class HeaderWidget implements IWidget {
+class HeaderWidget {
     public function render() {
         ?>
         <div id="Header">
