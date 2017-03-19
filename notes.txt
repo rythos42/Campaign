@@ -1,5 +1,4 @@
 Next:
-- relook at entry map screen - there I could do better UI here, I think.
                
 Future:
 - regression test it all again. In a couple different browsers. Make sure to test Simple functionality.

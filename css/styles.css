@@ -201,6 +201,7 @@ td.actions .button-icon {
 }
 
 .map-panel {
+    margin-top: 5px;
     max-width: 768px;
     border: 3px ridge grey;
     position: relative;

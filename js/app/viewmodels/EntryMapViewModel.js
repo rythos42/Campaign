@@ -23,17 +23,7 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     self.selectedTerritory = ko.observable().extend({ 
         required: { message: Translation.getString('territoryRequiredValidator'), onlyIf: self.showMap } 
     });
-        
-    self.mapLegendFactions = ko.computed(function() {
-        var campaign = currentCampaign();
-        if(!campaign)
-            return null;
-
-        return $.map(campaign.factions(), function(faction) {
-            return new MapLegendViewModel(faction);
-        });
-    });
-    
+            
     self.availableFactions = ko.computed(function() {
         var campaignObj = currentCampaign();
         return campaignObj ? campaignObj.factions() : null;
@@ -107,6 +97,11 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
         self.showLoadingImage(false);
         
         loadingMapDeferred.resolve();
+    };
+    
+    self.setFactionColourInList = function(option, item) {
+        if(item)
+            ko.applyBindingsToNode(option, {domColour: item.colour}, item);
     };
 
     navigation.showCreateEntry.subscribe(function(showCreateEntry) {
