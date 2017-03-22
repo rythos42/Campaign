@@ -5,7 +5,8 @@ class CreateEntryWidget {
         <!-- ko with: createEntryViewModel-->
         <div data-bind="visible: showCreateEntry">
             <div data-bind="visible: showAddFactions" class="grouping ui-widget ui-corners-all ui-widget-content">
-                <ul>
+                <div data-bind="visible: isReadOnly"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
+                <ul data-bind="visible: !isReadOnly()">
                     <li class="entry-field">
                         <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
                         <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: Translation.getString('selectFaction'), event: {keypress: keyPressAddFaction}"></select>
@@ -33,7 +34,7 @@ class CreateEntryWidget {
                         <tr>
                             <th><?php echo Translation::getString("faction"); ?></th>
                             <th><?php echo Translation::getString("user"); ?></th>
-                            <th><?php echo ucfirst(Translation::getString("points")); ?></th>
+                            <th><?php echo Translation::getString("vps"); ?></th>
                             <th><?php echo Translation::getString("bonus"); ?></th>
                             <th></th>
                         </tr>
@@ -45,8 +46,8 @@ class CreateEntryWidget {
                             <td data-bind="text: victoryPoints" />
                             <td data-bind="text: territoryBonusSpent" />
                             <td class="actions">
-                                <span data-bind="visible: isAttackingFaction" class="icon-flag" title="<?php echo Translation::getString("attacker"); ?>"></span>
-                                <button class="button-icon" data-bind="click: removeFactionEntry" title="<?php echo Translation::getString("remove"); ?>">
+                                <span data-bind="visible: isAttackingFaction, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
+                                <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">
                                     <span class="icon-bin"</span>
                                 </button>
                             </td>
@@ -54,20 +55,11 @@ class CreateEntryWidget {
                     </tbody>
                 </table>
                 <div class="bottom-button-panel">
-                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                    <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                         <span class="icon-arrow-left2"></span>
                     </button>
-                    <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                    <input type="button" data-bind="click: finish, visible: showAddFactions" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
-                </div>
-            </div>
-            <div data-bind="visible: !showAddFactions()" class="map-grouping ui-widget ui-corners-all ui-widget-content">
-                <div class="top-button-panel">
-                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
-                        <span class="icon-arrow-left2"></span>
-                    </button>
-                    <input type="button" data-bind="click: saveCampaignEntry" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                    <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("whoPlayed"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: saveCampaignEntry, visible: !isReadOnly()" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: finish, visible: showFinishButton" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </div>
                 <!-- ko with: confirmFinishDialogViewModel -->
                 <?php
@@ -80,6 +72,17 @@ class CreateEntryWidget {
                 );
                 ?>
                 <!-- /ko -->
+            </div>
+            <div data-bind="visible: !showAddFactions()" class="map-grouping ui-widget ui-corners-all ui-widget-content">
+                <div class="top-button-panel">
+                    <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
+                        <span class="icon-arrow-left2"></span>
+                    </button>
+                    <input type="button" data-bind="click: saveCampaignEntry, visible: !isReadOnly()" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: addFactions, visible: !showAddFactions()" value="<?php echo Translation::getString("whoPlayed"); ?>" class="ui-button ui-widget ui-corner-all" />
+                </div>
+
+                <div data-bind="visible: isReadOnly"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
                 
                 <?php
                 $entryMapWidget = new EntryMapWidget();

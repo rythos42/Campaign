@@ -95,6 +95,7 @@ table [class^="icon-"], table [class*=" icon-"] {
 
 thead th {
    text-align: left;
+   font-size: 0.9em;
 }
 
 td {

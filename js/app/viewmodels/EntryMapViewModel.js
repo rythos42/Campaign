@@ -1,5 +1,5 @@
 /*exported EntryMapViewModel */
-/*globals ko, Translation, MapLegendViewModel, MapHelper */
+/*globals ko, Translation, MapHelper */
 var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
@@ -27,6 +27,10 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     self.availableFactions = ko.computed(function() {
         var campaignObj = currentCampaign();
         return campaignObj ? campaignObj.factions() : null;
+    }); 
+    
+    self.isReadOnly = ko.computed(function() {
+        return currentEntry.isFinished();
     });
     
     function getAdjacentTerritoriesForFaction(factionId) {
@@ -60,6 +64,9 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     });
     
     self.drawTerritory = function(viewModel, event) {
+        if(self.isReadOnly())   // can't select in read-only
+            return;
+        
         if(self.selectedTerritory())
             return;
         
@@ -68,6 +75,9 @@ var EntryMapViewModel = function(navigation, currentCampaign, currentEntry) {
     };
     
     self.selectTerritory = function() {
+        if(self.isReadOnly())   // can't select in read-only
+            return;
+        
         // if there is a territory selected, unselect it
         if(self.selectedTerritory()) {
             self.selectedTerritory(null);

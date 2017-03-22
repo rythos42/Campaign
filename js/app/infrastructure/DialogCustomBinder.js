@@ -5,7 +5,8 @@ ko.bindingHandlers.dialog = {
         
         params = $.extend(params, {
             autoOpen: false,
-            modal: true
+            modal: true,
+            position: { my: 'top', at: 'top+150px', of: window }
         });
          
         $(elementDom).dialog(params);

@@ -57,6 +57,14 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         var campaignObj = currentCampaign();
         return campaignObj ? campaignObj.isMapCampaign() : false;
     });
+    
+    self.isReadOnly = ko.computed(function() {
+        return currentEntry.isFinished();
+    });
+    
+    self.showFinishButton = ko.computed(function() {
+        return self.showAddFactions() && !self.isReadOnly();
+    });
             
     self.finish = function() {
         if(!self.factionEntries.isValid()) {
@@ -91,7 +99,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     }
     
     self.addFactions = function() {
-        if(!self.entryMapViewModel.selectedTerritory.isValid()) {
+        if(!self.entryMapViewModel.selectedTerritory.isValid() && !self.isReadOnly()) {
             self.entryMapViewModel.selectedTerritory.isModified(true);
             return;
         }

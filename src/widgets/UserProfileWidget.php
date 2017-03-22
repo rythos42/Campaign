@@ -10,7 +10,7 @@ class UserProfileWidget {
                     <span data-bind="text: username"></span>
                 </li>
                 <li class="button-panel">
-                    <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                    <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                         <span class="icon-arrow-left2"></span>
                     </button>
                 </li>

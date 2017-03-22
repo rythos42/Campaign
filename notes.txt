@@ -1,40 +1,33 @@
 Next:
-               
+- regression test it all again. 
+    - Create a Simple campaign
+        - Check creating
+        - Check creating entry
+    - Test in IE, FF and Chrome
+    - Map campaign probably doesn't need much looking at - I've been touching it a lot
+    
+    
 Future:
-- regression test it all again. In a couple different browsers. Make sure to test Simple functionality.
-                
-    Narrative/Communication
-        - Move "Available Campaigns" list to a menu.
-        - Allow users to select a default campaign on InProgressCampaign
-        - Button to go to their default campaign.
-        - Front page is a scrolling news list
-            - news from admins
-            - any updates from campaign admin
-            - latest entry score and narrative
-        - perhaps allow comments on campaign entries
-
-
+Narrative/Communication
+    - Move "Available Campaigns" list to a menu.
+    - Allow users to select a default campaign on InProgressCampaign
+    - Button to go to their default campaign.
+    - Front page is a scrolling news list
+        - news from admins
+        - any updates from campaign admin
+        - latest entry score and narrative
+    - perhaps allow comments on campaign entries
 
 - sweet background on header
-- Not consistent about tooltips -- some are title attributes, some are jquery tooltips
-- "give TB" dialog positioned weirdly when entry list really long
-- read-only view of Entry when finished, rather than removing link
-- when editing entry, highlight is placed a split second after showing map -- can this be done more seemlessly?
-- maybe we don't need entry list after we can view individual entries after they are saved
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 
+Before a general release:
 - remove code that automatically gives permission to create map campaigns
-- factions can choose colours
-- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
-    - means building a user profile page
-- create campaign customization
-    - set height, width, number of sectors on map
-    - pick background image
-- "territory bonus" is an awful name.
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
     An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
+    TerritoryBonus is a generic term for "materials" in the current UI. I didn't want to update all of the code to say "materials", in case we theme this for another settings in the future.
 
 Credit: 
 - https://github.com/sroze/PHP-Voronoi-algorithm
@@ -45,6 +38,12 @@ Selling Questions:
 
 
 Far Future:
+- factions can choose colours
+- create campaign customization
+    - set height, width, number of sectors on map
+    - pick background image
+- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    - little ! icon on profile until they fill in e-mail
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - spend TB to attack anywhere
     - checkbox on entry map page "Attack anywhere for 1 territory bonus"

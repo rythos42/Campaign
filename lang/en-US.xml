@@ -46,15 +46,15 @@
         <campaignNameMaxLengthValidation>You've only got 45 characters.</campaignNameMaxLengthValidation>
         <uniqueFactionNameValidator>Factions in your campaign must have a unique name.</uniqueFactionNameValidator>
         <profile>Profile</profile>
-        <territoryBonus>Territory bonus</territoryBonus>
+        <territoryBonus>Materials</territoryBonus>
         <cancel>Cancel</cancel>
         <ok>Ok</ok>
         <howMuch>How much do you want to give?</howMuch>
         <atLeastZero>Enter a positive number.</atLeastZero>
         <amount>Amount</amount>
-        <giveTerritoryBonusDialogTitle>Who to give bonus to?</giveTerritoryBonusDialogTitle>
-        <giveTerritoryBonusTooltip>Give territory bonus to another user.</giveTerritoryBonusTooltip>
-        <territoryBonusSpent>Bonus spent</territoryBonusSpent>
+        <giveTerritoryBonusDialogTitle>Give materials to?</giveTerritoryBonusDialogTitle>
+        <giveTerritoryBonusTooltip>Give materials to another user.</giveTerritoryBonusTooltip>
+        <territoryBonusSpent>Materials used</territoryBonusSpent>
         <cannotSpendMoreThan>You only have {0}.</cannotSpendMoreThan>
         <newEntry>New Entry</newEntry>
         <mandatoryAttacks>Mandatory attacks</mandatoryAttacks>
@@ -63,12 +63,10 @@
         <newPhase>New Phase</newPhase>
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
-        <points>points</points>
         <selectFaction>Select faction</selectFaction>
         <createdBy>Created By</createdBy>
         <entries>Entries</entries>
-        <details>Details</details>
-        <bonus>Bonus</bonus>
+        <bonus>Materials</bonus>
         <finish>Finish</finish>
         <entryFinishedTooltip>This entry is finished and can't be edited.</entryFinishedTooltip>
         <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
@@ -80,5 +78,6 @@
         <youWillBeUnableToEditAfterFinishing>You will be unable to edit this entry after you finish it.</youWillBeUnableToEditAfterFinishing>
         <finish>Finish</finish>
         <doNotFinish>Do Not Finish</doNotFinish>
+        <campaign>Campaign</campaign>
     </strings>
 </translation>

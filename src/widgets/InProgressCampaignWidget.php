@@ -5,7 +5,7 @@ class InProgressCampaignViewModel {
         <!-- ko with: inProgressCampaignViewModel-->
         <div data-bind="visible: showInProgressCampaign" class="grouping ui-widget-content ui-corner-all">
             <div class="top-button-panel">
-                <button data-bind="click: back" title="<?php echo Translation::getString("back"); ?>" class="ui-button ui-widget ui-corner-all button-icon">
+                <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
                 <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
@@ -13,7 +13,7 @@ class InProgressCampaignViewModel {
             </div>
         
             <ul data-bind="visible: isMapCampaign">
-                <li class="button-panel">
+                <li><h3><?php echo Translation::getString("campaign"); ?></h3>
                 </li>
                 <li class="data-list">
                     <label><?php echo Translation::getString('phaseStart'); ?>:</label>
@@ -38,7 +38,7 @@ class InProgressCampaignViewModel {
                 </li>
                 <!-- ko foreach: factionEntrySummaries -->
                 <li class="data-list">
-                    <label><span data-bind="text: factionName"></span> <?php echo Translation::getString('points'); ?>:</label>
+                    <label><span data-bind="text: factionName"></span> <?php echo Translation::getString('vps'); ?>:</label>
                     <span data-bind="text: victoryPoints"></span>
                 </li>
                 <!-- /ko -->

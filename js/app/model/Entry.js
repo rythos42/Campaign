@@ -41,6 +41,11 @@ var Entry = function(campaign, serverEntry) {
         });
     };
     
+    self.isFinished = ko.computed(function() {
+        var finishDate = self.finishDate();
+        return finishDate !== null && finishDate !== undefined;
+    });
+    
     self.clear = function() {
         self.factionEntries.removeAll();
     };
@@ -54,5 +59,6 @@ var Entry = function(campaign, serverEntry) {
         self.createdByUsername(entry.createdByUsername());
         self.territoryBeingAttacked(entry.territoryBeingAttacked());
         self.territoryBeingAttackedIdOnMap(entry.territoryBeingAttackedIdOnMap());
+        self.finishDate(entry.finishDate());
     };
 };

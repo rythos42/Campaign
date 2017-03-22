@@ -7,12 +7,12 @@ class HeaderWidget {
             <input type="button" data-bind="click: requestCreateCampaign, visible: showCreateCampaignButton" value="<?php echo Translation::getString("createCampaign"); ?>" class="ui-button ui-widget ui-corner-all" />
             <!-- /ko -->
             <!-- ko with: userProfileViewModel -->
-            <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: requestUserProfile, visible: showUserProfileButton" title="<?php echo Translation::getString("profile"); ?>">
+            <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: requestUserProfile, visible: showUserProfileButton, tooltip: '<?php echo Translation::getString("profile"); ?>'">
                 <span class="icon-user"></span>
             </button>
             <!-- /ko -->
             <!-- ko with: logoutViewModel -->
-            <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: logout, visible: showLogout" title="<?php echo Translation::getString("logout"); ?>">
+            <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: logout, visible: showLogout, tooltip: '<?php echo Translation::getString("logout"); ?>'">
                 <span class="icon-exit"></span>
             </button>
             <!-- /ko -->

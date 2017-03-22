@@ -11,7 +11,7 @@ class CreateCampaignMapWidget {
             </ul>
             <span>
                 <input type="button" data-bind="click: saveMap" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="visible: hasSelectedTerritory, click: deleteSelectedTerritory" title="<?php echo Translation::getString("removeFactionFromTerritory"); ?>">
+                <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="visible: hasSelectedTerritory, click: deleteSelectedTerritory, tooltip: '<?php echo Translation::getString("removeFactionFromTerritory"); ?>'">
                     <span class="icon-bin"></span>
                 </button>
             </span>

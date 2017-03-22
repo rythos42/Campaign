@@ -5,7 +5,7 @@ class EntryMapWidget {
         <!-- ko with: entryMapViewModel -->
         <div data-bind="visible: showMap">
             <h3><?php echo Translation::getString("whatTerritoryIsBeingAttacked"); ?></h3>
-            <div>
+            <div data-bind="visible: !isReadOnly()">
                 <label for="FactionSelection"><?php echo Translation::getString("attacker"); ?>:</label>
                 <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: attackingFaction, optionsCaption: Translation.getString('selectFaction'), optionsAfterRender: setFactionColourInList"></select>
                 <span class="validationMessage" data-bind="validationMessage: selectedTerritory"></span>
