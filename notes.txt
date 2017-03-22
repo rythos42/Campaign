@@ -6,8 +6,8 @@ Next:
         
     - can't drag/drop in create campaign in FF
     - upon logging out, place focus on username field
-    - validate you can't attack if you're out of attacks - this got lost in some deletion
-
+    - validate (on Save/Finish) you can't attack if you're out of attacks - this got lost in some deletion
+    
 Future:
 
 Narrative/Communication

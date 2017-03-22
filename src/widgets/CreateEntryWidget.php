@@ -83,6 +83,7 @@ class CreateEntryWidget {
                 </div>
 
                 <div data-bind="visible: isReadOnly"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
+                <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
                 
                 <?php
                 $entryMapWidget = new EntryMapWidget();

@@ -65,6 +65,14 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.showFinishButton = ko.computed(function() {
         return self.showAddFactions() && !self.isReadOnly();
     });
+    
+    self.currentUserOutOfAttacks = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return false;
+        
+        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
+    });
             
     self.finish = function() {
         if(!self.factionEntries.isValid()) {

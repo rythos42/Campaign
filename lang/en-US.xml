@@ -81,5 +81,6 @@
         <campaign>Campaign</campaign>
         <join>Join</join>
         <mustFirstJoinTheCampaign>You must first join.</mustFirstJoinTheCampaign>
+        <youAreOutOfAttacks>You are out of attacks this phase.</youAreOutOfAttacks>
     </strings>
 </translation>
