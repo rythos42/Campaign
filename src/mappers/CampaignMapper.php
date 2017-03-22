@@ -52,8 +52,6 @@ class CampaignMapper {
             
         // Add/update new CampaignEntries
         foreach($campaignEntry->factionEntries as $factionEntry) {
-            UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
-            
             $territoryBonusSpent = isset($factionEntry->territoryBonusSpent) ? $factionEntry->territoryBonusSpent : null;
             
             if(isset($factionEntry->id)) {
@@ -90,8 +88,6 @@ class CampaignMapper {
             $winningFactionEntry = null;
             $winningVictoryPoints = -1;
             foreach($campaignEntry->factionEntries as $factionEntry) {
-                UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
-
                 // Update any TB spent by this user
                 if(isset($factionEntry->territoryBonusSpent)) {
                     Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus - ? WHERE UserId = ? AND CampaignId = ?", 
@@ -151,6 +147,10 @@ class CampaignMapper {
         }
         
         return $entryList;
+    }
+            
+    public static function joinCampaign($userId, $campaignId) {
+        Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId) VALUES (?, ?)", [$userId, $campaignId]);
     }
     
     private static function isMapCampaign($campaignId) {

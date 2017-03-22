@@ -14,7 +14,14 @@ class EntryListWidget {
                 </thead>
                 <tbody data-bind="foreach: campaignEntries">
                     <tr>
-                        <td><input type="button" class="link-button" data-bind="click: openEntry, value: createdOnDate" /></td>
+                        <td>
+                            <!-- ko if: joinedCampaign -->
+                            <input type="button" class="link-button" data-bind="click: openEntry, value: createdOnDate" />
+                            <!-- /ko -->
+                            <!-- ko ifnot: joinedCampaign -->
+                            <span data-bind="text: createdOnDate, tooltip: Translation.getString('mustFirstJoinTheCampaign')"></span>
+                            <!-- /ko -->
+                        </td>
                         <td><span data-bind="text: createdByUsername"></span></td>
                     </tr>
                 </tbody>

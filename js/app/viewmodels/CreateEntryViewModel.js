@@ -1,5 +1,5 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, EntryMapViewModel, DialogResult, ConfirmationDialogViewModel */
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, EntryMapViewModel, DialogResult, ConfirmationDialogViewModel, UserManager */
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(),
@@ -28,7 +28,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         min: { params: 0, message: Translation.getString('atLeastZero') },
         max: { params: ko.computed(function() {
             var user = self.selectedUser();
-            return (user && user.getAvailableTerritoryBonusForCampaign) ? user.getAvailableTerritoryBonusForCampaign(currentCampaign().id()) : 0;
+            return user ? user.territoryBonus() : 0;
         }), message: Translation.getString('cannotSpendMoreThan') }
     });
         
@@ -137,6 +137,13 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         clearFactionEntry();
         
         self.factionSelectionHasFocus(true);
+    };
+    
+    self.getUsers = function(term, responseCallback) {
+        var campaign = currentCampaign(),
+            campaignId = campaign ? campaign.id() : 0;
+            
+        UserManager.getUsersForCampaign(term, campaignId, responseCallback);
     };
     
     function clearFactionEntry() {

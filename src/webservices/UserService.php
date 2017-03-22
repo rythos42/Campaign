@@ -45,7 +45,7 @@ switch($action) {
         break;
         
     case "GetUsersByFilter":
-        echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"]));
+        echo json_encode(UserMapper::getUsersByFilter($_REQUEST["term"], $_REQUEST["campaignId"]));
         break;
         
     case "GetUserDataForCampaign":

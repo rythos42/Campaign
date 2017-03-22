@@ -10,6 +10,6 @@ ko.validation.rules.userMaximumAttacks = {
         
         var campaign = params.campaign(),
             maximumAttacks = campaign.mandatoryAttacks() + campaign.optionalAttacks();
-        return user.getAttacksForCampaign(campaign.id()) < maximumAttacks;
+        return user.attacks() < maximumAttacks;
     }
 };

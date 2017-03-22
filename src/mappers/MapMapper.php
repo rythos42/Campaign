@@ -111,7 +111,7 @@ class MapMapper {
         $bbox->yt = 0;
         $bbox->yb = 768;
 
-        $n = 50;
+        $n = 30;
         $fontSize = 14;
 
         // Generate random points

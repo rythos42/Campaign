@@ -1,10 +1,12 @@
 Next:
     Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
 
-    Admin Help
-        - list of challenges that are awaiting that can be defended, and who they are from
-        - list of players who haven't finished their mandatory attacks
+    - list of challenges that are awaiting that can be defended, and who they are from
+    - list of players who haven't finished their mandatory attacks
+        
     - can't drag/drop in create campaign in FF
+    - upon logging out, place focus on username field
+    - validate you can't attack if you're out of attacks - this got lost in some deletion
 
 Future:
 
@@ -18,14 +20,14 @@ Narrative/Communication
         - latest entry score and narrative
     - perhaps allow comments on campaign entries
 
+- make "not joined yet" UI a little nicer
 - sweet background on header
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
+- hide Join/New Entry until after UI is loaded
 
     
 Before a general release:
 - remove code that automatically gives permission to create map campaigns
-- how to prevent "unauthorized" people from editing an entry
-    - WHO is authorized?
 - can anyone access a map campaign, and only certain people create them?
 - promotion to allow creation of map campaigns by everyone
 - for buying: group buy, or individual buy? 

@@ -13,6 +13,7 @@ switch($action) {
         $campaignType = $_REQUEST["campaignType"];
         $factions = json_decode($_REQUEST["factions"]);
         $insertCampaignReturnData = CampaignMapper::insertCampaign($name, $campaignType, $factions);
+        CampaignMapper::joinCampaign(User::getCurrentUser()->getId(), $insertCampaignReturnData["CampaignId"]);
         
         if(CampaignType::Map === (int) $campaignType && User::getCurrentUser()->hasPermission(Permission::CreateMapCampaign))
             $insertCampaignReturnData["TerritoryPolygons"] = MapMapper::generateAndSaveMapForId($insertCampaignReturnData["CampaignId"]);
@@ -59,6 +60,13 @@ switch($action) {
         CampaignMapper::resetPhase($_REQUEST["campaignId"]);
         echo json_encode(UserMapper::getUserDataForCampaign(User::getCurrentUser()->getId(), $_REQUEST["campaignId"]));
 
+        break;
+        
+    case "JoinCampaign":
+        $campaignId = $_REQUEST["campaignId"];
+        $currentUserId = User::getCurrentUser()->getId();
+        CampaignMapper::joinCampaign($currentUserId, $campaignId);
+        echo json_encode(UserMapper::getUserDataForCampaign($currentUserId, $campaignId));
         break;
         
 }

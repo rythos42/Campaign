@@ -38,19 +38,14 @@ class UserMapper {
         }
     }
     
-    public static function getUsersByFilter($term) {
+    public static function getUsersByFilter($term, $campaignId) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
-        $dbUserList = Database::queryArray("SELECT Id, Username FROM User WHERE Username LIKE ?", ['%' . $term . '%']);
-        $userList = array();
-        foreach($dbUserList as $user) {
-            $user["UserCampaignData"] = Database::queryArray("SELECT CampaignId, TerritoryBonus, Attacks FROM UserCampaignData WHERE UserId = ?", [$user["Id"]]);
-            $userList[] = $user;
-        }
-        return $userList;
+        return Database::queryArray(
+            "select User.Id, Username, TerritoryBonus, Attacks from User join UserCampaignData on UserCampaignData.UserId = User.Id where Username like ? and CampaignId = ?", 
+            ['%' . $term . '%', $campaignId]);
     }
     
     public static function getUserDataForCampaign($userId, $campaignId) {
-        UserMapper::ensureUserDataExists($userId, $campaignId);
         return Database::queryObject(
             "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate
             from UserCampaignData 
@@ -60,17 +55,7 @@ class UserMapper {
             [$userId, $campaignId]);
     }
     
-    public static function ensureUserDataExists($userId, $campaignId) {
-        // This has to exist, because we aren't going to create a row for a user unless they interact with this particular campaign.
-        // Otherwise we'd have to create a row for every user for every campaign, which is a waste.
-        if(!Database::exists("SELECT * FROM UserCampaignData WHERE UserId = ? AND CampaignId = ?", [$userId, $campaignId]))
-            Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId) VALUES (?, ?)", [$userId, $campaignId]);
-    }
-    
     public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
-        UserMapper::ensureUserDataExists(User::getCurrentUser()->getId(), $campaignId);
-        UserMapper::ensureUserDataExists($userId, $campaignId);
-
         Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus - ? where UserId = ? and CampaignId = ?", [$amount, User::getCurrentUser()->getId(), $campaignId]);
         Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$amount, $userId, $campaignId]);
     }

@@ -8,7 +8,8 @@ class InProgressCampaignViewModel {
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
-                <input type="button" data-bind="click: requestCreateEntry" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: joinCampaign, visible: !joinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: requestCreateEntry, visible: joinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
         
@@ -24,7 +25,7 @@ class InProgressCampaignViewModel {
                     <label><?php echo Translation::getString('territoryBonus'); ?>:</label>
                     <span>
                         <span data-bind="text: availableTerritoryBonus"></span>
-                        <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip')" class="ui-button ui-widget ui-corner-all inline-icon-button">
+                        <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip'), visible: joinedCampaign" class="ui-button ui-widget ui-corner-all inline-icon-button">
                             <span class="icon-upload"></span>
                         </button>
                     </span>

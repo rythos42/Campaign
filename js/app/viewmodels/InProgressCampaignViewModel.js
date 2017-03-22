@@ -8,7 +8,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentlyLoadingEntryList = false;
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
-    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList);
+    self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     
     self.showInProgressCampaign = ko.computed(function() {
@@ -64,6 +64,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
         return DateTimeFormatter.formatDate(userData.PhaseStartDate);
     });
     
+    self.joinedCampaign = ko.computed(function() {
+        return !!userCampaignData();
+    });
+    
     self.factionEntrySummaries = ko.computed(function() {
         var factionEntrySummaries = {};
         $.each(internalEntryList(), function(i, entry) {
@@ -93,7 +97,6 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.showGiveTerritoryBonusDialog = function() {
         self.giveTerritoryBonusToUserDialogViewModel.openDialog();
     };
-    
             
     function getEntryList() {
         var campaign = currentCampaign();
@@ -121,6 +124,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
     var setUserDataForCampaign = function(userDataForCampaign) {
         userCampaignData(userDataForCampaign);
+        user.territoryBonus(userDataForCampaign.TerritoryBonus);
+        user.attacks(userDataForCampaign.Attacks);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
     };
@@ -148,6 +153,19 @@ var InProgressCampaignViewModel = function(user, navigation) {
             dataType: 'JSON',
             data: { 
                 action: 'GetUserDataForCampaign', 
+                campaignId: currentCampaign().id() 
+            },
+            success: setUserDataForCampaign
+        });
+    };
+    
+    self.joinCampaign = function() {
+        $.ajax({
+            url: 'src/webservices/CampaignService.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { 
+                action: 'JoinCampaign', 
                 campaignId: currentCampaign().id() 
             },
             success: setUserDataForCampaign

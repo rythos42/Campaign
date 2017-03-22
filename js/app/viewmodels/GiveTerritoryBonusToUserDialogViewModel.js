@@ -1,5 +1,5 @@
 /*exported GiveTerritoryBonusToUserDialogViewModel */
-/*globals ko, Translation, DialogResult */
+/*globals ko, Translation, DialogResult, UserManager */
 var GiveTerritoryBonusToUserDialogViewModel = function(user, currentCampaign) {
     var self = this;
     
@@ -13,10 +13,7 @@ var GiveTerritoryBonusToUserDialogViewModel = function(user, currentCampaign) {
     self.amountToGive = ko.observable().extend({
         required: { message: Translation.getString('howMuch') },
         min: { params: 0, message: Translation.getString('atLeastZero') },
-        max: { params: ko.computed(function() {
-            var campaign = currentCampaign();
-            return campaign ? user.getAvailableTerritoryBonusForCampaign(currentCampaign().id()) : 0;
-        }), message: Translation.getString('cannotSpendMoreThan') }
+        max: { params: user.territoryBonus, message: Translation.getString('cannotSpendMoreThan') }
     });
     
     self.dialogResult = ko.observable();
@@ -53,5 +50,12 @@ var GiveTerritoryBonusToUserDialogViewModel = function(user, currentCampaign) {
     
     self.closeDialog = function() {
         self.dialogOpenClose(false);
+    };
+    
+    self.getUsers = function(term, responseCallback) {
+        var campaign = currentCampaign(),
+            campaignId = campaign ? campaign.id() : 0;
+            
+        UserManager.getUsersForCampaign(term, campaignId, responseCallback);
     };
 };

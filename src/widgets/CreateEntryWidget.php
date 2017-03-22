@@ -13,7 +13,7 @@ class CreateEntryWidget {
                     </li>
                     <li class="entry-field">
                         <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                        <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: UserManager.getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}"></select>
+                        <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}"></select>
                         <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                     </li>
                     <li class="entry-field">
