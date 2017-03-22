@@ -1,13 +1,13 @@
 Next:
-- regression test it all again. 
-    - Create a Simple campaign
-        - Check creating
-        - Check creating entry
-    - Test in IE, FF and Chrome
-    - Map campaign probably doesn't need much looking at - I've been touching it a lot
-    
-    
+    Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
+
+    Admin Help
+        - list of challenges that are awaiting that can be defended, and who they are from
+        - list of players who haven't finished their mandatory attacks
+    - can't drag/drop in create campaign in FF
+
 Future:
+
 Narrative/Communication
     - Move "Available Campaigns" list to a menu.
     - Allow users to select a default campaign on InProgressCampaign
@@ -21,8 +21,15 @@ Narrative/Communication
 - sweet background on header
 - tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
 
+    
 Before a general release:
 - remove code that automatically gives permission to create map campaigns
+- how to prevent "unauthorized" people from editing an entry
+    - WHO is authorized?
+- can anyone access a map campaign, and only certain people create them?
+- promotion to allow creation of map campaigns by everyone
+- for buying: group buy, or individual buy? 
+    Roll20: group buy, $5/month or $50/year.
 
 Terms:
     A Campaign is something created to be played in. A Campaign contains Factions.
@@ -31,11 +38,6 @@ Terms:
 
 Credit: 
 - https://github.com/sroze/PHP-Voronoi-algorithm
-
-Selling Questions:
-- can anyone access a map campaign, and only certain people create them?
-- for buying: group buy, or individual buy?
-
 
 Far Future:
 - factions can choose colours

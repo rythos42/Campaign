@@ -35,7 +35,7 @@ class CreateEntryWidget {
                             <th><?php echo Translation::getString("faction"); ?></th>
                             <th><?php echo Translation::getString("user"); ?></th>
                             <th><?php echo Translation::getString("vps"); ?></th>
-                            <th><?php echo Translation::getString("bonus"); ?></th>
+                            <th data-bind="visible: isMapCampaign"><?php echo Translation::getString("bonus"); ?></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@ class CreateEntryWidget {
                             <td data-bind="text: factionName" />
                             <td data-bind="text: username" />
                             <td data-bind="text: victoryPoints" />
-                            <td data-bind="text: territoryBonusSpent" />
+                            <td data-bind="text: territoryBonusSpent, visible: $parent.isMapCampaign" />
                             <td class="actions">
                                 <span data-bind="visible: isAttackingFaction, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
                                 <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">

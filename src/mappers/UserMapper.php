@@ -55,7 +55,7 @@ class UserMapper {
             "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate
             from UserCampaignData 
             join Campaign on Campaign.Id = UserCampaignData.CampaignId 
-            join Phase on Phase.CampaignId = Campaign.Id
+            left outer join Phase on Phase.CampaignId = Campaign.Id
             where UserId = ? and UserCampaignData.CampaignId = ?", 
             [$userId, $campaignId]);
     }

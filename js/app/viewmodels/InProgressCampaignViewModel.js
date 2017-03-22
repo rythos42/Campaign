@@ -58,7 +58,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     self.phaseStartDate = ko.computed(function() {
         var userData = userCampaignData();
-        return userData ? DateTimeFormatter.formatDate(userData.PhaseStartDate) : '';
+        if(!userData || !userData.PhaseStartDate)
+            return '--';
+        
+        return DateTimeFormatter.formatDate(userData.PhaseStartDate);
     });
     
     self.factionEntrySummaries = ko.computed(function() {

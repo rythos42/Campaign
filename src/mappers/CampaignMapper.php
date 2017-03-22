@@ -35,15 +35,18 @@ class CampaignMapper {
     }
     
     public static function saveCampaignEntry($campaignEntry) {
+        $attackingFactionId = isset($campaignEntry->attackingFaction->id) ? $campaignEntry->attackingFaction->id : null;
+        $territoryBeingAttacked = isset($campaignEntry->territoryBeingAttacked->IdOnMap) ? $campaignEntry->territoryBeingAttacked->IdOnMap : null;
+        
         if(isset($campaignEntry->id)) {
             Database::execute(
                 "update Entry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
-                [$campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap, $campaignEntry->id]);
+                [$attackingFactionId, $territoryBeingAttacked, $campaignEntry->id]);
             $campaignEntryId = $campaignEntry->id;
         } else {        
             Database::execute(
                 "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
-                [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $campaignEntry->attackingFaction->id, $campaignEntry->territoryBeingAttacked->IdOnMap]);
+                [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $attackingFactionId, $territoryBeingAttacked]);
             $campaignEntryId = Database::getLastInsertedId();
         }
             
@@ -51,14 +54,16 @@ class CampaignMapper {
         foreach($campaignEntry->factionEntries as $factionEntry) {
             UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
             
+            $territoryBonusSpent = isset($factionEntry->territoryBonusSpent) ? $factionEntry->territoryBonusSpent : null;
+            
             if(isset($factionEntry->id)) {
                 Database::execute(
                     "update FactionEntry set FactionId = ?, UserId = ?, VictoryPointsScored = ?, TerritoryBonusSpent = ? where Id = ?",
-                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent, $factionEntry->id]);
+                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpent, $factionEntry->id]);
             } else {
                 Database::execute(
                     "insert into FactionEntry (EntryId, FactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
-                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->territoryBonusSpent]);
+                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpentF]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
         }
@@ -81,40 +86,44 @@ class CampaignMapper {
     }
     
     public static function finishEntry($campaignEntry) {
-        $winningFactionEntry = null;
-        $winningVictoryPoints = -1;
-        foreach($campaignEntry->factionEntries as $factionEntry) {
-            UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
+        if(self::isMapCampaign($campaignEntry->campaignId)) {            
+            $winningFactionEntry = null;
+            $winningVictoryPoints = -1;
+            foreach($campaignEntry->factionEntries as $factionEntry) {
+                UserMapper::ensureUserDataExists($factionEntry->user->id, $campaignEntry->campaignId);
 
-            // Update any TB spent by this user
-            if(isset($factionEntry->territoryBonusSpent)) {
-                Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus - ? WHERE UserId = ? AND CampaignId = ?", 
-                    [$factionEntry->territoryBonusSpent, $factionEntry->user->id, $campaignEntry->campaignId]);
+                // Update any TB spent by this user
+                if(isset($factionEntry->territoryBonusSpent)) {
+                    Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus - ? WHERE UserId = ? AND CampaignId = ?", 
+                        [$factionEntry->territoryBonusSpent, $factionEntry->user->id, $campaignEntry->campaignId]);
+                }
+                
+                // Increment this users number of attacks
+                if($factionEntry->faction->id === $campaignEntry->attackingFaction->id) {
+                    Database::execute("UPDATE UserCampaignData SET Attacks = Attacks + 1 WHERE UserId = ? AND CampaignId = ?",
+                        [$factionEntry->user->id, $campaignEntry->campaignId]);
+                }
+                    
+                // Determine who won
+                if($factionEntry->victoryPoints > $winningVictoryPoints) {
+                    $winningFactionEntry = $factionEntry;
+                    $winningVictoryPoints = $factionEntry->victoryPoints;
+                } else if($factionEntry->victoryPoints == $winningVictoryPoints) {
+                    $winningFactionEntry = null; // draw, no one is winning
+                }
+            }
+
+            // If the winner was attacking, give them the territory
+            if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
+                Database::execute(
+                    "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
+                    [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttacked->IdOnMap]);
             }
             
-            // Increment this users number of attacks
-            if($factionEntry->faction->id === $campaignEntry->attackingFaction->id) {
-                Database::execute("UPDATE UserCampaignData SET Attacks = Attacks + 1 WHERE UserId = ? AND CampaignId = ?",
-                    [$factionEntry->user->id, $campaignEntry->campaignId]);
-            }
-                
-            // Determine who won
-            if($factionEntry->victoryPoints > $winningVictoryPoints) {
-                $winningFactionEntry = $factionEntry;
-                $winningVictoryPoints = $factionEntry->victoryPoints;
-            } else if($factionEntry->victoryPoints == $winningVictoryPoints) {
-                $winningFactionEntry = null; // draw, no one is winning
-            }
-        }
-
-        // If the winner was attacking, give them the territory
-        if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
             Database::execute(
-                "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
-                [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttacked->IdOnMap]);
+                "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
+                [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
         }
-        
-        Database::execute("UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
         Database::execute("update Entry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
     }
     
@@ -142,6 +151,10 @@ class CampaignMapper {
         }
         
         return $entryList;
+    }
+    
+    private static function isMapCampaign($campaignId) {
+        return Database::queryScalar("select CampaignType from Campaign where Id = ?", [$campaignId]) === CampaignType::Map;
     }
     
     private static function getFactionIdForUser($userId) {

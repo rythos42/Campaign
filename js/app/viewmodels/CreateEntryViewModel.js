@@ -91,7 +91,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             method: 'POST',
             data: params,
             success: function() {
-                self.showAddFactions(false);
+                self.showAddFactions(!self.isMapCampaign());
                 navigation.showInProgressCampaign(true);
                 self.entryMapViewModel.clearMap();
             }
@@ -109,7 +109,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     };
     
     self.back = function() {
-        if(self.showAddFactions())
+        if(self.showAddFactions() && self.isMapCampaign())
             self.showAddFactions(false);
         else
             navigation.showInProgressCampaign(true);
@@ -156,6 +156,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry.createdOnDate(undefined);
         currentEntry.createdByUsername(undefined);
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
+        currentEntry.finishDate(undefined);
     }
     
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {
@@ -179,16 +180,17 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         else {
             currentEntry.clear();        
         }
-    });
-    
-    self.showAddFactions.subscribe(function() {
+        
         self.factionEntries.isModified(false);
+        self.factionSelectionHasFocus(!self.isMapCampaign());
     });
-    
+        
     currentCampaign.subscribe(function(newCampaign) {
-        if(!newCampaign)
+        if(!newCampaign) {
             currentEntry.campaignId(undefined);
-        else
+        } else {
             currentEntry.campaignId(newCampaign.id());
+            self.showAddFactions(!self.isMapCampaign());
+        }
     });
 };
