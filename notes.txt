@@ -1,8 +1,6 @@
 Next:
     Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
 
-    - refactor "EntryListViewModel" as it no longer properly describes it's contents
-    
 Future:
 
 Narrative/Communication

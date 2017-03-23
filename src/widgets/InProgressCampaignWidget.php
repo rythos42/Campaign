@@ -46,10 +46,25 @@ class InProgressCampaignViewModel {
                 <!-- /ko -->
             </ul>
             
+            <div data-bind="tab: {}" class="ui-widget ui-corners-all ui-widget-content">
+                <ul>
+                    <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>
+                    <li><a href="#PlayersTab"><?php echo Translation::getString("players"); ?></a></li>
+                </ul>
+                <div id="EntriesTab">
+                    <?php
+                    $entryListWidget = new EntryListWidget();
+                    $entryListWidget->render();
+                    ?>
+                </div>
+                <div id="PlayersTab">
+                    <?php
+                    $playerListWidget = new PlayerListWidget();
+                    $playerListWidget->render();
+                    ?>
+                </div>
+            </div>
             <?php
-            $entryListWidget = new EntryListWidget();
-            $entryListWidget->render();
-
             $giveTerritoryBonusToUserDialogWidget = new GiveTerritoryBonusToUserDialogWidget();
             $giveTerritoryBonusToUserDialogWidget->render();
             ?>            

@@ -63,6 +63,7 @@
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
         <script src="js/app/viewmodels/GiveTerritoryBonusToUserDialogViewModel.js"></script>
         <script src="js/app/viewmodels/ConfirmationDialogViewModel.js"></script>
+        <script src="js/app/viewmodels/PlayerListViewModel.js"></script>
         <script src="js/app/viewmodels/PlayerListItemViewModel.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>

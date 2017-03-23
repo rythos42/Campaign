@@ -47,6 +47,7 @@ include($installDirOnWebServer . "/src/widgets/UserProfileWidget.php");
 include($installDirOnWebServer . "/src/widgets/GiveTerritoryBonusToUserDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoadingImageWidget.php");
 include($installDirOnWebServer . "/src/widgets/ConfirmationDialogWidget.php");
+include($installDirOnWebServer . "/src/widgets/PlayerListWidget.php");
 
 session_start();
 Database::connect();
