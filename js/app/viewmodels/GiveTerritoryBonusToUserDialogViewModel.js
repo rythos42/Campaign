@@ -56,6 +56,6 @@ var GiveTerritoryBonusToUserDialogViewModel = function(user, currentCampaign) {
         var campaign = currentCampaign(),
             campaignId = campaign ? campaign.id() : 0;
             
-        UserManager.getUsersForCampaign(term, campaignId, responseCallback);
+        UserManager.getFilteredUsersForCampaign(term, campaignId, responseCallback);
     };
 };

@@ -100,7 +100,7 @@ thead th {
 
 td {
     font-size: 16px;
-    padding: 4px;    
+    padding: 4px 4px 4px 0;    
 }
 
 td .button-icon {
@@ -271,9 +271,8 @@ td.actions .button-icon {
 
 .ui-tabs .ui-tabs-panel { 
     border-width: 0px 1px 1px 1px; 
-    padding: 3px;
+    padding: 10px 3px;
 }
-
 
 /* Icon fonts */
 @font-face {

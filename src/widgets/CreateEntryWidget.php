@@ -26,6 +26,7 @@ class CreateEntryWidget {
                     </li>
                     <li class="button-panel">
                         <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
+                        <span class="validationMessage" data-bind="visible: attackingUserOutOfAttacks"><?php echo Translation::getString("attackerOutOfAttacks"); ?></span>
                         <input type="button" data-bind="click: addFaction" value="<?php echo Translation::getString("addFaction"); ?>" class="ui-button ui-widget ui-corner-all" />
                     </li>
                 </ul>

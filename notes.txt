@@ -1,12 +1,8 @@
 Next:
     Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
 
-    - list of challenges that are awaiting that can be defended, and who they are from
-    - list of players who haven't finished their mandatory attacks
-        
     - can't drag/drop in create campaign in FF
-    - upon logging out, place focus on username field
-    - validate (on Save/Finish) you can't attack if you're out of attacks - this got lost in some deletion
+    - refactor "EntryListViewModel" as it no longer properly describes it's contents
     
 Future:
 

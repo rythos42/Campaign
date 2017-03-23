@@ -128,4 +128,9 @@ var LoginViewModel = function(user, navigation) {
     self.password.subscribe(function() {
         self.showUsernamePasswordIncorrect(false);
     });
+    
+    user.isLoggedIn.subscribe(function(isLoggedIn) {
+        if(!isLoggedIn)
+            self.usernameHasFocus(true);
+    });
 };

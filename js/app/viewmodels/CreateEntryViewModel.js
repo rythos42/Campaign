@@ -73,6 +73,18 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
         return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
     });
+    
+    self.attackingUserOutOfAttacks = ko.computed(function() {
+        var attackingFaction = currentEntry.attackingFaction(),
+            campaign = currentCampaign(),
+            faction = self.selectedFaction(),
+            user = self.selectedUser();
+            
+        if(!attackingFaction || !campaign || !faction || !user || faction.id() !== attackingFaction.id())
+            return false;
+        
+        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());        
+    });
             
     self.finish = function() {
         if(!self.factionEntries.isValid()) {
@@ -136,7 +148,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     ]);
     
     self.addFaction = function() {
-        if(!factionEntryValidationViewModel.isValid()) {
+        if(!factionEntryValidationViewModel.isValid() || self.attackingUserOutOfAttacks()) {
             factionEntryValidationViewModel.errors.showAllMessages();
             return;
         }
@@ -151,7 +163,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         var campaign = currentCampaign(),
             campaignId = campaign ? campaign.id() : 0;
             
-        UserManager.getUsersForCampaign(term, campaignId, responseCallback);
+        UserManager.getFilteredUsersForCampaign(term, campaignId, responseCallback);
     };
     
     function clearFactionEntry() {
