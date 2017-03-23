@@ -68,8 +68,9 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
         self.selectedTerritory(null);
     };
     
-    self.dragFaction = function(mapLegendViewModel) {
+    self.dragFaction = function(mapLegendViewModel, event) {
         draggingFactionId(mapLegendViewModel.id());
+        event.originalEvent.dataTransfer.setData('text/plain', 'anything'); // Firefox requires this data transfer happen.
         return true;
     };
     
