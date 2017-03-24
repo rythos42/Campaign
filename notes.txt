@@ -1,17 +1,37 @@
-Next:
-    Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
+Made header fixed.
+Moved "Available Campaigns" to sidebar
+Moved "Create Campaign" to sidebar
 
+Next:
+    Run at home: 
+        ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
+        CREATE TABLE News (
+            Id INT NOT NULL AUTO_INCREMENT,
+            News TEXT,
+            CampaignId INT,
+            EntryId INT,
+            CreatedByUserId INT,
+            PRIMARY KEY (Id),
+            FOREIGN KEY News_Campaign (CampaignId) REFERENCES Campaign(Id),
+            FOREIGN KEY News_Entry (EntryId) REFERENCES Entry(Id),
+            FOREIGN KEY News_User (CreatedByUserId) REFERENCES User(Id)
+        ); 
+    
     Narrative/Communication
-    - Move "Available Campaigns" list to a menu.
-    - Allow users to select a default campaign on InProgressCampaign
-    - Button to go to their default campaign.
     - Front page is a scrolling news list
         - news from admins
         - any updates from campaign admin
         - latest entry score and narrative
+    - Allow users to select a default campaign on InProgressCampaign
+    - Button to go to their default campaign.
     - perhaps allow comments on campaign entries
     
 Future:
+    - no scroll bar on sidebar
+    - can't select new campaign while sidebar still open
+    - check what happens with rest of page while menu is open and : create campaign, create entry
+
+
 - sweet background on header
 
     

@@ -4,12 +4,18 @@ class MainWidget {
         $headerWidget = new HeaderWidget();
         $headerWidget->render();
 
+        $sideBarWidget = new SideBarWidget();
+        $sideBarWidget->render();
+        
         ?>
         <div id="Main">
         <?php
 
         $loginWidget = new LoginWidget();
         $loginWidget->render();
+        
+        $newsWidget = new NewsWidget();
+        $newsWidget->render();
         
         $userProfileWidget = new UserProfileWidget();
         $userProfileWidget->render();
@@ -19,10 +25,7 @@ class MainWidget {
         
         $inProgressCampaignViewModel = new InProgressCampaignViewModel();
         $inProgressCampaignViewModel->render();
-        
-        $campaignListWidget = new CampaignListWidget();
-        $campaignListWidget->render();
-        
+               
         ?>
         </div>
         <?php

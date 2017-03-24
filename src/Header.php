@@ -48,6 +48,8 @@ include($installDirOnWebServer . "/src/widgets/GiveTerritoryBonusToUserDialogWid
 include($installDirOnWebServer . "/src/widgets/LoadingImageWidget.php");
 include($installDirOnWebServer . "/src/widgets/ConfirmationDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/PlayerListWidget.php");
+include($installDirOnWebServer . "/src/widgets/SideBarWidget.php");
+include($installDirOnWebServer . "/src/widgets/NewsWidget.php");
 
 session_start();
 Database::connect();

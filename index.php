@@ -7,6 +7,9 @@
         <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" />
         <link href="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css" type="text/css" rel="stylesheet" />
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
+        <link href="css/icon-fonts.css" type="text/css" rel="stylesheet" />
+        <link href="css/loading-image.css" type="text/css" rel="stylesheet" />
+        <link href="css/slideout.css" type="text/css" rel="stylesheet" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
@@ -65,6 +68,7 @@
         <script src="js/app/viewmodels/ConfirmationDialogViewModel.js"></script>
         <script src="js/app/viewmodels/PlayerListViewModel.js"></script>
         <script src="js/app/viewmodels/PlayerListItemViewModel.js"></script>
+        <script src="js/app/viewmodels/NewsViewModel.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         

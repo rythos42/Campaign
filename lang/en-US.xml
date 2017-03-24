@@ -86,5 +86,6 @@
         <players>Players</players>
         <attacks>Attacks</attacks>
         <onlyWithoutOpponent>Only those without opponent</onlyWithoutOpponent>
+        <campaigns>Campaigns</campaigns>
     </strings>
 </translation>

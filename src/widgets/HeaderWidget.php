@@ -3,9 +3,6 @@ class HeaderWidget {
     public function render() {
         ?>
         <div id="Header">
-            <!-- ko with: createCampaignViewModel-->
-            <input type="button" data-bind="click: requestCreateCampaign, visible: showCreateCampaignButton" value="<?php echo Translation::getString("createCampaign"); ?>" class="ui-button ui-widget ui-corner-all" />
-            <!-- /ko -->
             <!-- ko with: userProfileViewModel -->
             <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: requestUserProfile, visible: showUserProfileButton, tooltip: '<?php echo Translation::getString("profile"); ?>'">
                 <span class="icon-user"></span>

@@ -6,10 +6,6 @@ var CampaignListViewModel = function(user, navigation) {
     
     self.campaignListFilter = ko.observable();
     
-    self.showCampaignList = ko.computed(function() {
-        return navigation.showMain();
-    });
-    
     self.campaignList = ko.computed(function() {
         var filter = self.campaignListFilter(),
             campaignList;
