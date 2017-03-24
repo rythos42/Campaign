@@ -6,7 +6,10 @@ ko.bindingHandlers.dialog = {
         params = $.extend(params, {
             autoOpen: false,
             modal: true,
-            position: { my: 'top', at: 'top+150px', of: window }
+            position: { my: 'top', at: 'top+150px', of: window },
+            close: function() {
+                $('.tooltip-element').tooltip('close'); // jquery tooltip appears again after dialog close for Give TB dialog
+            }
         });
          
         $(elementDom).dialog(params);

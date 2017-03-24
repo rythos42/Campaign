@@ -1,9 +1,9 @@
 Next:
     Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
 
-Future:
+    - hide InProgressCampaign doesn't look good until after it finishes loading
 
-Narrative/Communication
+    Narrative/Communication
     - Move "Available Campaigns" list to a menu.
     - Allow users to select a default campaign on InProgressCampaign
     - Button to go to their default campaign.
@@ -12,11 +12,9 @@ Narrative/Communication
         - any updates from campaign admin
         - latest entry score and narrative
     - perhaps allow comments on campaign entries
-
-- make "not joined yet" UI a little nicer
+    
+Future:
 - sweet background on header
-- tooltip stays up on "give" button: http://stackoverflow.com/questions/21737608/jqueryui-tooltip-on-modal-button-re-appears-on-modal-close
-- hide Join/New Entry until after UI is loaded
 
     
 Before a general release:
