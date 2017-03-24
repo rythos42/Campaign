@@ -1,8 +1,6 @@
 Next:
     Run at home: ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
 
-    - hide InProgressCampaign doesn't look good until after it finishes loading
-
     Narrative/Communication
     - Move "Available Campaigns" list to a menu.
     - Allow users to select a default campaign on InProgressCampaign

@@ -5,7 +5,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentCampaign = ko.observable(null),
         userCampaignData = ko.observable(),
         internalEntryList = ko.observableArray(),
-        currentlyLoadingEntryList = false;
+        currentlyLoadingEntryList = false,
+        finishedLoading = ko.observable(false);
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
@@ -13,7 +14,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     
     self.showInProgressCampaign = ko.computed(function() {
-        return navigation.showInProgressCampaign();
+        return navigation.showInProgressCampaign() && finishedLoading();
     });
     
     self.isMapCampaign = ko.computed(function() {
@@ -129,6 +130,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         user.attacks(userDataForCampaign.Attacks);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
+        finishedLoading(true);
     };
     
     self.resetPhase = function() {
@@ -174,8 +176,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
     };
     
     navigation.showInProgressCampaign.subscribe(function(show) {
-        if(!show)
+        if(!show) {
+            finishedLoading(false);
             return;
+        }
 
         var newCampaign = navigation.parameters();
         navigation.parameters(null);
