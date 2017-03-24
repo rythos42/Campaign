@@ -13,7 +13,7 @@ class InProgressCampaignViewModel {
                 <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
         
-            <ul>
+            <ul data-bind="visible: joinedCampaign">
                 <li>
                     <h3><?php echo Translation::getString("campaign"); ?></h3>
                 </li>

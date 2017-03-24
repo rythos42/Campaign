@@ -3,7 +3,10 @@ class EntryListWidget {
     public function render() {
         ?>
         <!-- ko with: entryListViewModel -->
-        <label><input type="checkbox" data-bind="checked: onlyEntriesWithoutOpponent" />Only those without opponent</label>
+        <label data-bind="visible: joinedCampaign">
+            <input type="checkbox" data-bind="checked: onlyEntriesWithoutOpponent" />
+            <span><?php echo Translation::getString("onlyWithoutOpponent"); ?></span>
+        </label>
         <table>
             <thead>
                 <tr>

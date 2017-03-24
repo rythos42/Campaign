@@ -4,6 +4,10 @@ var EntryListViewModel = function(navigation, currentCampaign, entryList, userCa
     var self = this;
         
     self.onlyEntriesWithoutOpponent = ko.observable(false);
+    
+    self.joinedCampaign = ko.computed(function() {
+        return !!userCampaignData();
+    });
         
     self.entries = ko.computed(function() {
         function makeList(list) {
