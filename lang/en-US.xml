@@ -87,5 +87,6 @@
         <attacks>Attacks</attacks>
         <onlyWithoutOpponent>Only those without opponent</onlyWithoutOpponent>
         <campaigns>Campaigns</campaigns>
+        <admin>admin</admin>
     </strings>
 </translation>

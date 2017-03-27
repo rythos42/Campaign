@@ -33,6 +33,7 @@ include($installDirOnWebServer . "/src/mappers/Database.php");
 include($installDirOnWebServer . "/src/mappers/UserMapper.php");
 include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");
 include($installDirOnWebServer . "/src/mappers/MapMapper.php");
+include($installDirOnWebServer . "/src/mappers/NewsMapper.php");
 include($installDirOnWebServer . "/src/widgets/MainWidget.php");
 include($installDirOnWebServer . "/src/widgets/HeaderWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoginWidget.php");
@@ -49,7 +50,7 @@ include($installDirOnWebServer . "/src/widgets/LoadingImageWidget.php");
 include($installDirOnWebServer . "/src/widgets/ConfirmationDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/PlayerListWidget.php");
 include($installDirOnWebServer . "/src/widgets/SideBarWidget.php");
-include($installDirOnWebServer . "/src/widgets/NewsWidget.php");
+include($installDirOnWebServer . "/src/widgets/NewsListWidget.php");
 
 session_start();
 Database::connect();

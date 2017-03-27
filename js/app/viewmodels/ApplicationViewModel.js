@@ -1,5 +1,5 @@
 /*exported ApplicationViewModel */
-/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, InProgressCampaignViewModel, CampaignListViewModel, UserProfileViewModel, NewsViewModel */
+/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, InProgressCampaignViewModel, CampaignListViewModel, UserProfileViewModel, NewsListViewModel */
 var ApplicationViewModel = function(user, navigation) {
     var self = this;
 
@@ -9,5 +9,5 @@ var ApplicationViewModel = function(user, navigation) {
     self.inProgressCampaignViewModel = new InProgressCampaignViewModel(user, navigation);
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
     self.userProfileViewModel = new UserProfileViewModel(user, navigation);
-    self.newsViewModel = new NewsViewModel();
+    self.newsListViewModel = new NewsListViewModel();
 };

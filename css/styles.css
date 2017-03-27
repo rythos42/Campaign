@@ -250,6 +250,17 @@ td.actions .button-icon {
     cursor: default !important;
 }
 
+.news-item {
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.news-item .created-by {
+    font-size: 10px;
+    color: #888;
+    display: block;
+}
+
 .ui-button {
     padding: 0.4em 0.5em;
 }

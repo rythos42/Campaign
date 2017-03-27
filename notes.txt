@@ -1,7 +1,3 @@
-Made header fixed.
-Moved "Available Campaigns" to sidebar
-Moved "Create Campaign" to sidebar
-
 Next:
     Run at home: 
         ALTER TABLE Entry CHANGE COLUMN AttackingFactionId AttackingFactionId INT;
@@ -19,7 +15,6 @@ Next:
     
     Narrative/Communication
     - Front page is a scrolling news list
-        - news from admins
         - any updates from campaign admin
         - latest entry score and narrative
     - Allow users to select a default campaign on InProgressCampaign
@@ -27,12 +22,12 @@ Next:
     - perhaps allow comments on campaign entries
     
 Future:
+    - make "Campaigns" sidebar show up regularly on desktop since we have the space
     - no scroll bar on sidebar
     - can't select new campaign while sidebar still open
     - check what happens with rest of page while menu is open and : create campaign, create entry
-
-
-- sweet background on header
+    - page news list, or infinite scroll or something
+    - sweet background on header
 
     
 Before a general release:
@@ -42,10 +37,11 @@ Before a general release:
 - for buying: group buy, or individual buy? 
     Roll20: group buy, $5/month or $50/year.
 
-Terms:
-    A Campaign is something created to be played in. A Campaign contains Factions.
-    An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
-    TerritoryBonus is a generic term for "materials" in the current UI. I didn't want to update all of the code to say "materials", in case we theme this for another settings in the future.
+Terms and Admin Help:
+    - A Campaign is something created to be played in. A Campaign contains Factions.
+    - An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
+    - TerritoryBonus is a generic term for "materials" in the current UI. I didn't want to update all of the code to say "materials", in case we theme this for another settings in the future.
+    - To insert administrative news: insert into News (News) VALUES ('Mores news');
 
 Credit: 
 - https://github.com/sroze/PHP-Voronoi-algorithm

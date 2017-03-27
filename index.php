@@ -68,7 +68,8 @@
         <script src="js/app/viewmodels/ConfirmationDialogViewModel.js"></script>
         <script src="js/app/viewmodels/PlayerListViewModel.js"></script>
         <script src="js/app/viewmodels/PlayerListItemViewModel.js"></script>
-        <script src="js/app/viewmodels/NewsViewModel.js"></script>
+        <script src="js/app/viewmodels/NewsListViewModel.js"></script>
+        <script src="js/app/viewmodels/NewsListItemViewModel.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         
