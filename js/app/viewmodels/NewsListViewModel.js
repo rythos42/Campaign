@@ -1,8 +1,12 @@
 /*exported NewsListViewModel */
 /*globals ko, NewsListItemViewModel */
-var NewsListViewModel = function() {
+var NewsListViewModel = function(navigation) {
     var self = this,
         internalNewsItems = ko.observableArray();
+    
+    self.showNews = ko.computed(function() {
+        return navigation.showMain();
+    });
     
     self.newsItems = ko.computed(function() {
         return $.map(internalNewsItems(), function(serverNewsItem) {

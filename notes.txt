@@ -14,12 +14,14 @@ Next:
         ); 
     
     Narrative/Communication
-    - Front page is a scrolling news list
-        - any updates from campaign admin
-        - latest entry score and narrative
-    - Allow users to select a default campaign on InProgressCampaign
-    - Button to go to their default campaign.
-    - perhaps allow comments on campaign entries
+    - hide news if you click on something else! (campaign, profile)
+    - Make "New Phase" button a drop-down button for admins:
+        - New Phase
+        - New News
+    - on "add factions" section, have a space for any news about the entry
+    - Allow users to subscribe/unsubscribe to a campaign on InProgressCampaign
+    - Only show news for their subscribed campaigns
+    - Main page buttons to go to their subscribed campaigns.
     
 Future:
     - make "Campaigns" sidebar show up regularly on desktop since we have the space
@@ -28,6 +30,8 @@ Future:
     - check what happens with rest of page while menu is open and : create campaign, create entry
     - page news list, or infinite scroll or something
     - sweet background on header
+    - "contact us"
+    - "More/Less" buttons for news items that are much much larger than 150 characters
 
     
 Before a general release:

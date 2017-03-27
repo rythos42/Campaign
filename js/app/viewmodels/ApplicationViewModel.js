@@ -9,5 +9,5 @@ var ApplicationViewModel = function(user, navigation) {
     self.inProgressCampaignViewModel = new InProgressCampaignViewModel(user, navigation);
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
     self.userProfileViewModel = new UserProfileViewModel(user, navigation);
-    self.newsListViewModel = new NewsListViewModel();
+    self.newsListViewModel = new NewsListViewModel(navigation);
 };

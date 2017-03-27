@@ -261,6 +261,18 @@ td.actions .button-icon {
     display: block;
 }
 
+.news-item .news {
+    overflow-wrap: break-word;
+}
+
+.news-item .news.smaller {
+    font-size: 16px;
+}
+
+.news-item .news.smallest {
+    font-size: 12px;
+}
+
 .ui-button {
     padding: 0.4em 0.5em;
 }
