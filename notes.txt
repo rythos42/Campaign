@@ -1,7 +1,6 @@
 Next:
     - bookmark menu should hide after clicking
         - also New Phase button
-    - hide tooltips after clicking drop down buttons
     - sidebar should hide after being clicked
     - "Contact us"
     - "More/Less" buttons for news items that are much much larger than 150 characters

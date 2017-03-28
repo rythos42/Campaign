@@ -10,10 +10,10 @@ class InProgressCampaignViewModel {
                 </button>
                 <input type="button" data-bind="click: joinCampaign, visible: !joinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: requestCreateEntry, visible: joinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton" class="ui-button ui-widget ui-corner-all button-icon">
+                <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton, tooltip: '<?php echo ucfirst(Translation::getString("admin")); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-cog"></span>
                 </button>
-                <div id="InProgressAdminMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">
+                <div id="InProgressAdminMenu" data-bind="hideTooltipOnShow: {}" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">
                     <ul class="jq-dropdown-menu">
                         <li data-bind="visible: showResetPhaseButton"><input type="button" data-bind="click: resetPhase" value="<?php echo Translation::getString("newPhase"); ?>" /></li>
                         <li><input type="button" data-bind="click: addNews" value="<?php echo Translation::getString("addNews"); ?>" /></li>
