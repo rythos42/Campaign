@@ -12,6 +12,7 @@
         <link href="css/icon-fonts.css" type="text/css" rel="stylesheet" />
         <link href="css/loading-image.css" type="text/css" rel="stylesheet" />
         <link href="css/slideout.css" type="text/css" rel="stylesheet" />
+        <link href="css/mobile.css" type="text/css" rel="stylesheet" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js"></script>

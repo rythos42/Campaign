@@ -91,5 +91,6 @@
         <addNews>Add News</addNews>
         <newsAdded>News Added</newsAdded>
         <narrative>Narrative</narrative>
+        <joinedCampaigns>Joined campaigns</joinedCampaigns>
     </strings>
 </translation>

@@ -20,7 +20,16 @@ class CampaignMapper {
     public static function getCampaignList() {
         $campaignList = array();
         
-        $dbCampaignList = Database::queryObjectList("SELECT * FROM Campaign", "Campaign");
+        $dbCampaignList = Database::queryObjectList(
+            "select *, 
+                (select exists 
+                    (select * 
+                        from UserCampaignData 
+                        where UserCampaignData.CampaignId = Campaign.Id and UserCampaignData.UserId = 4)) 
+                as CurrentUserJoinedCampaign
+                from Campaign",
+                "Campaign");
+                
         foreach($dbCampaignList as $campaign) {
             $campaignList[$campaign->Id] = $campaign;
         }

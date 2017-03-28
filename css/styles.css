@@ -4,7 +4,6 @@
 
 #Main {
     padding: 3.6em 10px 10px 10px;
-    
 }
 
 #Header {
@@ -152,6 +151,7 @@ td.actions .button-icon {
 
 .jq-dropdown .jq-dropdown-menu li {
     padding: 5px;
+    overflow: hidden;
 }
 
 .jq-dropdown-menu li:hover {
@@ -192,26 +192,6 @@ td.actions .button-icon {
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-}
-
-@media (max-width: 875px) {
-    .map-grouping {
-        width: 85%;
-    }
-}
-
-@media (max-width: 400px) {
-    .map-grouping {
-        width: 95%;
-    }
-    
-    .map-panel {
-        height: 350px;
-    }
-    
-    .map-legend {
-        margin-top: 5px;
-    }
 }
 
 .title {

@@ -1,0 +1,27 @@
+@media (max-width: 875px) {
+    #Main {
+        padding-top: 7em;
+    }
+    
+    .map-grouping {
+        width: 85%;
+    }
+}
+
+@media (max-width: 400px) {
+    #Main {
+        padding-top: 7em;
+    }
+
+    .map-grouping {
+        width: 95%;
+    }
+    
+    .map-panel {
+        height: 350px;
+    }
+    
+    .map-legend {
+        margin-top: 5px;
+    }
+}

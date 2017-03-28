@@ -15,7 +15,7 @@ class CampaignListWidget {
                 <tbody data-bind="foreach: campaignList">
                     <tr>
                         <td>
-                            <button data-bind="text: name, click: createCampaignEntry" class="link-button" />
+                            <button data-bind="text: name, click: showInProgressCampaign" class="link-button" />
                         </td>
                     </tr>
                 </tbody>

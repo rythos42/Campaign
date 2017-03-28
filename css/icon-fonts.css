@@ -39,6 +39,9 @@
 .icon-flag:before {
   content: "\e9cc";
 }
+.icon-star-full:before {
+  content: "\e9d9";
+}
 .icon-exit:before {
   content: "\ea14";
 }

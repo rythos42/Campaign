@@ -21,6 +21,16 @@ var CampaignListViewModel = function(user, navigation) {
         });
     });
     
+    self.joinedCampaigns = ko.computed(function() {
+        return $.map($.grep(internalCampaignList(), 
+            function(campaign) {
+                return campaign.currentUserJoinedCampaign();
+            }),
+            function(campaign) {
+                return new CampaignListItemViewModel(campaign, navigation);
+            });
+    });
+    
     self.hasCampaigns = ko.computed(function() {
         return self.campaignList().length > 0;
     });
@@ -40,12 +50,10 @@ var CampaignListViewModel = function(user, navigation) {
     });
     
     self.getCampaignList = function() {
-        var params = { action: 'GetCampaignList' };
-        
         $.ajax({
             url: 'src/webservices/CampaignService.php',
             method: 'GET',
-            data: params,
+            data: { action: 'GetCampaignList' },
             dataType: 'JSON',
             success: function(serverCampaignList) {
                 internalCampaignList($.map(serverCampaignList, function(serverCampaign) {

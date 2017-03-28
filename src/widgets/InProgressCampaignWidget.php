@@ -15,7 +15,7 @@ class InProgressCampaignViewModel {
                 </button>
                 <div id="InProgressAdminMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">
                     <ul class="jq-dropdown-menu">
-                        <li><input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" /></li>
+                        <li data-bind="visible: showResetPhaseButton"><input type="button" data-bind="click: resetPhase" value="<?php echo Translation::getString("newPhase"); ?>" /></li>
                         <li><input type="button" data-bind="click: addNews" value="<?php echo Translation::getString("addNews"); ?>" /></li>
                     </ul>
                 </div>
