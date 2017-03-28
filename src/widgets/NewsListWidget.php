@@ -6,7 +6,7 @@ class NewsWidget {
         <div data-bind="visible: showNews, foreach: newsItems" class="grouping ui-widget ">
             <div class="news-item ui-corners-all ui-widget-content">
                 <span class="news" data-bind="text: news, css: {'smaller': smallerText, 'smallest': smallestText}"></span>
-                <span class="created-by" ><span data-bind="text: Translation.getString('createdBy')"></span> <span data-bind="text: createdByUserName"></span></span>
+                <span class="created-by" ><span data-bind="text: Translation.getString('createdBy')"></span> <span class="username" data-bind="text: createdByUserName"></span></span>
             </div>
         </div>
         <!-- /ko -->

@@ -64,7 +64,7 @@
         <nowOnNextPhase>You are now on the next phase.</nowOnNextPhase>
         <phaseStart>Phase start</phaseStart>
         <selectFaction>Select faction</selectFaction>
-        <createdBy>Created By</createdBy>
+        <createdBy>Created by</createdBy>
         <entries>Entries</entries>
         <bonus>Materials</bonus>
         <finish>Finish</finish>
@@ -88,5 +88,8 @@
         <onlyWithoutOpponent>Only those without opponent</onlyWithoutOpponent>
         <campaigns>Campaigns</campaigns>
         <admin>admin</admin>
+        <addNews>Add News</addNews>
+        <newsAdded>News Added</newsAdded>
+        <narrative>Narrative</narrative>
     </strings>
 </translation>

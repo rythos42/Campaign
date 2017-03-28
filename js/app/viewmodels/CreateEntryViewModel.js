@@ -10,6 +10,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     
     self.factionSelectionHasFocus = ko.observable(false);
     self.showAddFactions = ko.observable(false);
+    self.narrative = currentEntry.narrative;
     
     self.selectedFaction = factionEntry.faction.extend({
         required: { message: Translation.getString('factionEntryRequiredValidation') }
@@ -109,12 +110,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         $.ajax({
             url: 'src/webservices/CampaignService.php',
             method: 'POST',
-            data: params,
-            success: function() {
-                self.showAddFactions(!self.isMapCampaign());
-                navigation.showInProgressCampaign(true);
-                self.entryMapViewModel.clearMap();
-            }
+            data: params
+        }).then(function() {
+            self.showAddFactions(!self.isMapCampaign());
+            navigation.showInProgressCampaign(true);
+            self.entryMapViewModel.clearMap();
         });
     }
     
@@ -184,6 +184,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry.createdByUsername(undefined);
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
         currentEntry.finishDate(undefined);
+        currentEntry.narrative(undefined);
     }
     
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {

@@ -29,6 +29,10 @@ body {
     margin: 0;
 }
 
+textarea {
+    width: 100%;
+}
+
 canvas {
     -webkit-user-select: none; /* webkit (safari, chrome) browsers */
     -moz-user-select: none; /* mozilla browsers */
@@ -137,6 +141,21 @@ td.actions .button-icon {
     color: blue;
     text-align: left;
     padding: 0;
+}
+
+.jq-dropdown-menu input[type="button"] {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.jq-dropdown .jq-dropdown-menu li {
+    padding: 5px;
+}
+
+.jq-dropdown-menu li:hover {
+    background-color: rgba(215, 235, 249, 0.5);
 }
 
 .button-icon {
@@ -263,6 +282,10 @@ td.actions .button-icon {
 
 .news-item .news {
     overflow-wrap: break-word;
+}
+
+.news-item .username {
+    font-weight: bold;
 }
 
 .news-item .news.smaller {

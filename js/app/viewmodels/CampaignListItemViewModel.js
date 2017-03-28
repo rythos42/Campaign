@@ -7,6 +7,10 @@ var CampaignListItemViewModel = function(campaign, navigation) {
     
     self.createCampaignEntry = function() {
         navigation.parameters(campaign);
-        navigation.showInProgressCampaign(true);
+        
+        if(navigation.showInProgressCampaign()) 
+            navigation.showInProgressCampaign.notifySubscribers(true);
+        else
+            navigation.showInProgressCampaign(true);
     };
 };

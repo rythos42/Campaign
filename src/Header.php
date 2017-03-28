@@ -51,6 +51,7 @@ include($installDirOnWebServer . "/src/widgets/ConfirmationDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/PlayerListWidget.php");
 include($installDirOnWebServer . "/src/widgets/SideBarWidget.php");
 include($installDirOnWebServer . "/src/widgets/NewsListWidget.php");
+include($installDirOnWebServer . "/src/widgets/TextFieldDialogWidget.php");
 
 session_start();
 Database::connect();

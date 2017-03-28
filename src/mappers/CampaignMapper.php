@@ -37,6 +37,8 @@ class CampaignMapper {
     public static function saveCampaignEntry($campaignEntry) {
         $attackingFactionId = isset($campaignEntry->attackingFaction->id) ? $campaignEntry->attackingFaction->id : null;
         $territoryBeingAttacked = isset($campaignEntry->territoryBeingAttacked->IdOnMap) ? $campaignEntry->territoryBeingAttacked->IdOnMap : null;
+        $createdByUserId = User::getCurrentUser()->getId();
+        $createdOnDate = date('Y-m-d H:i:s');
         
         if(isset($campaignEntry->id)) {
             Database::execute(
@@ -46,7 +48,7 @@ class CampaignMapper {
         } else {        
             Database::execute(
                 "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
-                [$campaignEntry->campaignId, User::getCurrentUser()->getId(), date('Y-m-d H:i:s'), $attackingFactionId, $territoryBeingAttacked]);
+                [$campaignEntry->campaignId, $createdByUserId, $createdOnDate, $attackingFactionId, $territoryBeingAttacked]);
             $campaignEntryId = Database::getLastInsertedId();
         }
             
@@ -80,7 +82,19 @@ class CampaignMapper {
             
             if(!$found)
                 Database::execute("delete from FactionEntry where Id = ?", [$dbFactionEntry["Id"]]);
-        }        
+        }
+
+        // Save the narrative
+        if(isset($campaignEntry->narrative)) {
+            $hasNarrative = Database::queryScalar("select count(*) from News where EntryId = ?", [$campaignEntry->id]);
+            if($hasNarrative === 0) {
+                Database::execute("insert into News (News, CampaignId, EntryId, CreatedByUserId, CreatedOnDate) values (?, ?, ?, ?, ?)",
+                    [$campaignEntry->narrative, $campaignEntry->campaignId, $campaignEntry->id, $createdByUserId, $createdOnDate]);
+            } else {
+                Database::execute("update News set News = ?, CreatedByUserId = ?, CreatedOnDate = ? where EntryId = ?",
+                    [$campaignEntry->narrative, $createdByUserId, $createdOnDate, $campaignEntry->id]);
+            }            
+        }
     }
     
     public static function finishEntry($campaignEntry) {
@@ -127,10 +141,12 @@ class CampaignMapper {
         $entryList = array();
 
         $dbEntryList = Database::queryObjectList(
-            "select Entry.*, User.Username as CreatedByUsername
+            "select Entry.*, User.Username as CreatedByUsername, News.News as Narrative
             from Entry
             join User on User.Id = Entry.CreatedByUserId
-            where CampaignId = ?", 
+            left join News on News.EntryId = Entry.Id
+            where Entry.CampaignId = ?
+            order by Entry.CreatedOnDate desc", 
             "Entry", [$campaignId]);
        
         foreach($dbEntryList as $entry) {

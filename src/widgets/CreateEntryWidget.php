@@ -55,6 +55,10 @@ class CreateEntryWidget {
                         </tr>
                     </tbody>
                 </table>
+                <div>
+                    <label for="EntryNew"><?php echo Translation::getString('narrative'); ?></label>
+                    <textarea data-bind="enable: !isReadOnly(), value: narrative"></textarea>
+                </div>
                 <div class="bottom-button-panel">
                     <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                         <span class="icon-arrow-left2"></span>

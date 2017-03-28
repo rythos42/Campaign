@@ -7,6 +7,7 @@ Next:
             CampaignId INT,
             EntryId INT,
             CreatedByUserId INT,
+            CreatedOnDate datetime,
             PRIMARY KEY (Id),
             FOREIGN KEY News_Campaign (CampaignId) REFERENCES Campaign(Id),
             FOREIGN KEY News_Entry (EntryId) REFERENCES Entry(Id),
@@ -14,11 +15,6 @@ Next:
         ); 
     
     Narrative/Communication
-    - hide news if you click on something else! (campaign, profile)
-    - Make "New Phase" button a drop-down button for admins:
-        - New Phase
-        - New News
-    - on "add factions" section, have a space for any news about the entry
     - Allow users to subscribe/unsubscribe to a campaign on InProgressCampaign
     - Only show news for their subscribed campaigns
     - Main page buttons to go to their subscribed campaigns.
@@ -26,13 +22,13 @@ Next:
 Future:
     - make "Campaigns" sidebar show up regularly on desktop since we have the space
     - no scroll bar on sidebar
-    - can't select new campaign while sidebar still open
     - check what happens with rest of page while menu is open and : create campaign, create entry
     - page news list, or infinite scroll or something
     - sweet background on header
     - "contact us"
     - "More/Less" buttons for news items that are much much larger than 150 characters
 
+- check New Phase not visible if not permission for Maps, but Admin buttons are 
     
 Before a general release:
 - remove code that automatically gives permission to create map campaigns

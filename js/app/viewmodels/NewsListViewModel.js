@@ -26,4 +26,11 @@ var NewsListViewModel = function(navigation) {
     }
     
     getMainPageNews();
+    
+    navigation.showMain.subscribe(function(showMain) {
+        if(!showMain)
+            return;
+        
+        getMainPageNews();
+    });
 };

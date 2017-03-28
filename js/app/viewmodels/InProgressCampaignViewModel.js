@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -12,6 +12,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
+    self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     
     self.showInProgressCampaign = ko.computed(function() {
         return navigation.showInProgressCampaign() && finishedLoading();
@@ -54,8 +55,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
             : '0/' + optionalAttacks;
     });
     
+    self.showAdminButton = ko.computed(function() {
+        var campaign = currentCampaign();
+        return campaign ? campaign.createdByUserId() === user.id() : false;
+    });
+    
     self.showResetPhaseButton = ko.computed(function() {
-        return self.isMapCampaign() && currentCampaign().createdByUserId() === user.id();
+        return self.isMapCampaign();
     });
     
     self.phaseStartDate = ko.computed(function() {
@@ -174,6 +180,26 @@ var InProgressCampaignViewModel = function(user, navigation) {
             success: setUserDataForCampaign
         });
     };
+    
+    self.addNews = function() {
+        self.addNewsDialogViewModel.openDialog();
+    };
+    
+    self.addNewsDialogViewModel.dialogResult.subscribe(function(result) {
+        if(result === DialogResult.Saved) {
+            $.ajax({
+                url: 'src/webservices/NewsService.php',
+                data: {
+                    action: 'AddNews',
+                    createdByUserId: user.id(),
+                    campaignId: currentCampaign().id(),
+                    text: self.addNewsDialogViewModel.text()
+                }
+            }).then(function() {
+                toastr.info(Translation.getString('newsAdded'));
+            });
+        }
+    });
     
     navigation.showInProgressCampaign.subscribe(function(show) {
         if(!show) {

@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
         <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" />
         <link href="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css" type="text/css" rel="stylesheet" />
+        <link href="css/jquery.dropdown.css" type="text/css" rel="stylesheet" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
         <link href="css/icon-fonts.css" type="text/css" rel="stylesheet" />
         <link href="css/loading-image.css" type="text/css" rel="stylesheet" />
         <link href="css/slideout.css" type="text/css" rel="stylesheet" />
-        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js"></script>
@@ -21,6 +22,7 @@
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         <script src="js/lib/jquery.panzoom.js"></script>
         <script src="js/lib/DragDropTouch.js"></script>
+        <script src="js/lib/jquery.dropdown.min.js"></script>
 
         <script src="js/app/infrastructure/ExceptionCodes.js"></script>
         <script src="js/app/infrastructure/RequireObjectValidator.js"></script>
@@ -70,6 +72,7 @@
         <script src="js/app/viewmodels/PlayerListItemViewModel.js"></script>
         <script src="js/app/viewmodels/NewsListViewModel.js"></script>
         <script src="js/app/viewmodels/NewsListItemViewModel.js"></script>
+        <script src="js/app/viewmodels/TextFieldDialogViewModel.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         

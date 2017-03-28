@@ -4,13 +4,31 @@ class InProgressCampaignViewModel {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
         <div data-bind="visible: showInProgressCampaign" class="grouping ui-widget-content ui-corner-all">
-            <div class="top-button-panel">
+            <div class="top-button-panel" style="position: relative">
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
                 <input type="button" data-bind="click: joinCampaign, visible: !joinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <input type="button" data-bind="click: requestCreateEntry, visible: joinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton" class="ui-button ui-widget ui-corner-all button-icon">
+                    <span class="icon-cog"></span>
+                </button>
+                <div id="InProgressAdminMenu" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">
+                    <ul class="jq-dropdown-menu">
+                        <li><input type="button" data-bind="click: resetPhase, visible: showResetPhaseButton" value="<?php echo Translation::getString("newPhase"); ?>" /></li>
+                        <li><input type="button" data-bind="click: addNews" value="<?php echo Translation::getString("addNews"); ?>" /></li>
+                    </ul>
+                </div>
+                <!-- ko with: addNewsDialogViewModel -->
+                <?php
+                    $textFieldDialogWidget = new TextFieldDialogWidget();
+                    $textFieldDialogWidget->render(
+                        Translation::getString('addNews'),
+                        Translation::getString('addNews'),
+                        Translation::getString('cancel')
+                    );
+                ?>
+                <!-- /ko -->
             </div>
         
             <ul data-bind="visible: joinedCampaign">

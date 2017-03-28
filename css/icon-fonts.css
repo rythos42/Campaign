@@ -30,6 +30,9 @@
 .icon-user:before {
   content: "\e971";
 }
+.icon-cog:before {
+  content: "\e994";
+}
 .icon-bin:before {
   content: "\e9ac";
 }
@@ -42,3 +45,4 @@
 .icon-arrow-left2:before {
   content: "\ea40";
 }
+

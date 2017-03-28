@@ -12,6 +12,7 @@ var Entry = function(campaign, serverEntry) {
     self.territoryBeingAttacked = ko.observable();
     self.territoryBeingAttackedIdOnMap = ko.observable(serverEntry ? serverEntry.TerritoryBeingAttackedIdOnMap : undefined);
     self.finishDate = ko.observable(serverEntry ? serverEntry.FinishDate : undefined);
+    self.narrative = ko.observable(serverEntry ? serverEntry.Narrative : undefined);
         
     if(serverEntry) {
         $.each(campaign.factions(), function(index, faction) {
@@ -60,5 +61,6 @@ var Entry = function(campaign, serverEntry) {
         self.territoryBeingAttacked(entry.territoryBeingAttacked());
         self.territoryBeingAttackedIdOnMap(entry.territoryBeingAttackedIdOnMap());
         self.finishDate(entry.finishDate());
+        self.narrative(entry.narrative());
     };
 };
