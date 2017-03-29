@@ -1,5 +1,5 @@
 /*exported ApplicationViewModel */
-/*globals LoginViewModel, LogoutViewModel, CreateCampaignViewModel, InProgressCampaignViewModel, CampaignListViewModel, UserProfileViewModel, NewsListViewModel */
+/*globals ko, LoginViewModel, LogoutViewModel, CreateCampaignViewModel, InProgressCampaignViewModel, CampaignListViewModel, UserProfileViewModel, NewsListViewModel */
 var ApplicationViewModel = function(user, navigation) {
     var self = this;
 
@@ -10,4 +10,8 @@ var ApplicationViewModel = function(user, navigation) {
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
     self.userProfileViewModel = new UserProfileViewModel(user, navigation);
     self.newsListViewModel = new NewsListViewModel(navigation);
+    
+    self.showSideBar = ko.computed(function() {
+        return user.isLoggedIn();
+    });
 };

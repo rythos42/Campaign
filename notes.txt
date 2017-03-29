@@ -1,6 +1,6 @@
+Dropdown hides after clicking button in it.
+
 Next:
-    - bookmark menu should hide after clicking
-        - also New Phase button
     - sidebar should hide after being clicked
     - "Contact us"
     - "More/Less" buttons for news items that are much much larger than 150 characters
@@ -8,6 +8,7 @@ Next:
         - hide sidebar
         - hide Campaigns button
         - hide bookmarks
+    - "You haven't joined any campaigns" if the star is empty
     
 Future:
     - no scroll bar on sidebar

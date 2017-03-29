@@ -4,7 +4,7 @@ class HeaderWidget {
         ?>
         <div id="Header">
             <!-- ko with: campaignListViewModel -->
-            <button data-jq-dropdown="#JoinedCampaignsMenu" class="ui-button ui-widget ui-corner-all button-icon" data-bind="tooltip: '<?php echo Translation::getString("joinedCampaigns"); ?>'">
+            <button data-jq-dropdown="#JoinedCampaignsMenu" class="ui-button ui-widget ui-corner-all button-icon" data-bind="tooltip: '<?php echo Translation::getString("joinedCampaigns"); ?>', visible: showJoinedCampaignsButton">
                 <span class="icon-star-full"></span>
             </button>
             <div id="JoinedCampaignsMenu" data-bind="hideTooltipOnShow: {}" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">

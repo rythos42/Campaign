@@ -35,6 +35,10 @@ var CampaignListViewModel = function(user, navigation) {
         return self.campaignList().length > 0;
     });
     
+    self.showJoinedCampaignsButton = ko.computed(function() {
+        return user.isLoggedIn();
+    });
+    
     navigation.showMain.subscribe(function(show) {
         if(!show)
             return;
