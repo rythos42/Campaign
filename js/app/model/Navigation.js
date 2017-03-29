@@ -12,6 +12,7 @@ var Navigation = function(user) {
     self.showRegister = ko.observable(false);
     self.showUserProfile = ko.observable(false);
     self.showCreateEntry = ko.observable(false);
+    self.isSideBarOpen = ko.observable(false);
     
     var appPages = [
         self.showLogin,

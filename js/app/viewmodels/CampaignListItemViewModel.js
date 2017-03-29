@@ -7,6 +7,7 @@ var CampaignListItemViewModel = function(campaign, navigation) {
     
     self.showInProgressCampaign = function() {
         navigation.parameters(campaign);
+        navigation.isSideBarOpen(false);
         
         if(navigation.showInProgressCampaign()) 
             navigation.showInProgressCampaign.notifySubscribers(true);

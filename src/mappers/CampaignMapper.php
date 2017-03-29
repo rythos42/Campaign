@@ -25,10 +25,10 @@ class CampaignMapper {
                 (select exists 
                     (select * 
                         from UserCampaignData 
-                        where UserCampaignData.CampaignId = Campaign.Id and UserCampaignData.UserId = 4)) 
+                        where UserCampaignData.CampaignId = Campaign.Id and UserCampaignData.UserId = ?)) 
                 as CurrentUserJoinedCampaign
                 from Campaign",
-                "Campaign");
+                "Campaign", [User::getCurrentUser()->getId()]);
                 
         foreach($dbCampaignList as $campaign) {
             $campaignList[$campaign->Id] = $campaign;

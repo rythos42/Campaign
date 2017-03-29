@@ -7,9 +7,12 @@ class HeaderWidget {
             <button data-jq-dropdown="#JoinedCampaignsMenu" class="ui-button ui-widget ui-corner-all button-icon" data-bind="tooltip: '<?php echo Translation::getString("joinedCampaigns"); ?>', visible: showJoinedCampaignsButton">
                 <span class="icon-star-full"></span>
             </button>
-            <div id="JoinedCampaignsMenu" data-bind="hideTooltipOnShow: {}" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative">
-                <ul data-bind="foreach: joinedCampaigns" class="jq-dropdown-menu">
+            <div id="JoinedCampaignsMenu" data-bind="hideTooltipOnShow: {}" class="ui-widget jq-dropdown jq-dropdown-tip jq-dropdown-relative">
+                <ul data-bind="foreach: joinedCampaigns, visible: !noJoinedCampaigns()" class="jq-dropdown-menu">
                     <li><input type="button" data-bind="value: name, click: showInProgressCampaign" /></li>
+                </ul>
+                <ul data-bind="visible: noJoinedCampaigns" class="jq-dropdown-menu">
+                    <li><?php echo Translation::getString("noJoinedCampaigns"); ?></li>
                 </ul>
             </div>
             <!-- /ko -->

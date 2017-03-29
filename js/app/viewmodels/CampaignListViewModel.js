@@ -31,6 +31,10 @@ var CampaignListViewModel = function(user, navigation) {
             });
     });
     
+    self.noJoinedCampaigns = ko.computed(function() {
+        return self.joinedCampaigns().length === 0;
+    });
+    
     self.hasCampaigns = ko.computed(function() {
         return self.campaignList().length > 0;
     });

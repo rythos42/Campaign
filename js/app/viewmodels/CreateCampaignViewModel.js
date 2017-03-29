@@ -128,6 +128,7 @@ var CreateCampaignViewModel = function(user, navigation) {
     };
     
     self.requestCreateCampaign = function() {
+        navigation.isSideBarOpen(false);
         navigation.showCreateCampaign(true);
     };
     

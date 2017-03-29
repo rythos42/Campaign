@@ -1,20 +1,23 @@
-Dropdown hides after clicking button in it.
-
 Next:
-    - sidebar should hide after being clicked
-    - "Contact us"
-    - "More/Less" buttons for news items that are much much larger than 150 characters
-    - if not logged in:
-        - hide sidebar
-        - hide Campaigns button
-        - hide bookmarks
-    - "You haven't joined any campaigns" if the star is empty
+    InProgressCampaign:
+        - when joining a campaign, you must select you faction from the list of possible factions
+        - show map here.
+            - can only click on your factions adjacent territories to attack
+        - after you click on a map, then you fill in your data
+            - your name and faction are pre-filled and can't be changed.
     
 Future:
+    - "More/Less" buttons for news items that are much much larger than 150 characters
+    - "Contact us"
+
+    - icon noting which campaigns are map and which are simple
+    - if not logged in hide sidebar
     - no scroll bar on sidebar
     - page news list, or infinite scroll or something
     - sweet background on header
-    - make "Campaigns" sidebar show up regularly on desktop since we have the space
+    - something to allow players to switch factions in a campaign
+    - sometimes you type "c" and it doesn't select - can I fix this?
+        - compare text value against a given list?
     
 Before a general release:
 - remove code that automatically gives permission to create map campaigns
@@ -34,6 +37,7 @@ Credit:
 
 Far Future:
 - factions can choose colours
+- admin can rename factions in their campaign
 - create campaign customization
     - set height, width, number of sectors on map
     - pick background image

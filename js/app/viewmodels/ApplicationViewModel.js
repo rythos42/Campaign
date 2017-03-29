@@ -14,4 +14,6 @@ var ApplicationViewModel = function(user, navigation) {
     self.showSideBar = ko.computed(function() {
         return user.isLoggedIn();
     });
+    
+    self.isSideBarOpen = navigation.isSideBarOpen;
 };
