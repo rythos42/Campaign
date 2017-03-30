@@ -64,8 +64,9 @@ switch($action) {
         
     case "JoinCampaign":
         $campaignId = $_REQUEST["campaignId"];
+        $factionId = $_REQUEST["factionId"];
         $currentUserId = User::getCurrentUser()->getId();
-        CampaignMapper::joinCampaign($currentUserId, $campaignId);
+        CampaignMapper::joinCampaign($currentUserId, $campaignId, $factionId);
         echo json_encode(UserMapper::getUserDataForCampaign($currentUserId, $campaignId));
         break;
         

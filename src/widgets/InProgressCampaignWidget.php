@@ -9,6 +9,16 @@ class InProgressCampaignViewModel {
                     <span class="icon-arrow-left2"></span>
                 </button>
                 <input type="button" data-bind="click: joinCampaign, visible: !joinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <!-- ko with: joinCampaignDialogViewModel -->
+                <?php
+                    $joinCampaignDialogWidget = new DropDownListDialogWidget();
+                    $joinCampaignDialogWidget->render(
+                        Translation::getString('selectFaction'),
+                        Translation::getString('join'),
+                        Translation::getString('doNotJoin')                       
+                    );
+                ?>
+                <!-- /ko -->
                 <input type="button" data-bind="click: requestCreateEntry, visible: joinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton, tooltip: '<?php echo ucfirst(Translation::getString("admin")); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-cog"></span>
@@ -21,8 +31,8 @@ class InProgressCampaignViewModel {
                 </div>
                 <!-- ko with: addNewsDialogViewModel -->
                 <?php
-                    $textFieldDialogWidget = new TextFieldDialogWidget();
-                    $textFieldDialogWidget->render(
+                    $addNewsDialogWidget = new TextFieldDialogWidget();
+                    $addNewsDialogWidget->render(
                         Translation::getString('addNews'),
                         Translation::getString('addNews'),
                         Translation::getString('cancel')

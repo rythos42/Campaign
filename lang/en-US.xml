@@ -80,6 +80,7 @@
         <doNotFinish>Do Not Finish</doNotFinish>
         <campaign>Campaign</campaign>
         <join>Join</join>
+        <doNotJoin>Do Not Join</doNotJoin>
         <mustFirstJoinTheCampaign>You must first join.</mustFirstJoinTheCampaign>
         <youAreOutOfAttacks>You are out of attacks this phase.</youAreOutOfAttacks>
         <attackerOutOfAttacks>That faction is attacking and the user is out of attacks this phase.</attackerOutOfAttacks>

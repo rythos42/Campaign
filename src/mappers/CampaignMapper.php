@@ -174,8 +174,8 @@ class CampaignMapper {
         return $entryList;
     }
             
-    public static function joinCampaign($userId, $campaignId) {
-        Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId) VALUES (?, ?)", [$userId, $campaignId]);
+    public static function joinCampaign($userId, $campaignId, $factionId) {
+        Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId, FactionId) VALUES (?, ?, ?)", [$userId, $campaignId, $factionId]);
     }
     
     private static function isMapCampaign($campaignId) {

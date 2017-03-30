@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, GiveTerritoryBonusToUserDialogViewModel, Translation, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -13,6 +13,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
+    
+    var campaignFactions = ko.computed(function() {
+        var campaign = currentCampaign();
+        return campaign ? campaign.factions() : [];
+    });
+    
+    self.joinCampaignDialogViewModel = new DropDownListDialogViewModel(campaignFactions, 'name', Translation.getString('selectFaction'));
     
     self.showInProgressCampaign = ko.computed(function() {
         return navigation.showInProgressCampaign() && finishedLoading();
@@ -169,21 +176,28 @@ var InProgressCampaignViewModel = function(user, navigation) {
     };
     
     self.joinCampaign = function() {
-        $.ajax({
-            url: 'src/webservices/CampaignService.php',
-            method: 'POST',
-            dataType: 'JSON',
-            data: { 
-                action: 'JoinCampaign', 
-                campaignId: currentCampaign().id() 
-            },
-            success: setUserDataForCampaign
-        });
+        self.joinCampaignDialogViewModel.openDialog();
     };
     
     self.addNews = function() {
         self.addNewsDialogViewModel.openDialog();
     };
+    
+    self.joinCampaignDialogViewModel.dialogResult.subscribe(function(result) {
+        if(result === DialogResult.Saved) {
+            $.ajax({
+                url: 'src/webservices/CampaignService.php',
+                method: 'POST',
+                dataType: 'JSON',
+                data: { 
+                    action: 'JoinCampaign', 
+                    campaignId: currentCampaign().id(),
+                    factionId: self.joinCampaignDialogViewModel.selectedValue().id()
+                },
+                success: setUserDataForCampaign
+            });
+        }
+    });
     
     self.addNewsDialogViewModel.dialogResult.subscribe(function(result) {
         if(result === DialogResult.Saved) {
