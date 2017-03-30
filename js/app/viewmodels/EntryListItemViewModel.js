@@ -6,7 +6,7 @@ var EntryListItemViewModel = function(entry, navigation, userCampaignData) {
     self.createdOnDate = entry.createdOnDate;
     self.createdByUsername = entry.createdByUsername;
         
-    self.joinedCampaign = ko.computed(function() {
+    self.hasJoinedCampaign = ko.computed(function() {
         return !!userCampaignData();
     });
    

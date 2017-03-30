@@ -8,7 +8,7 @@ class InProgressCampaignViewModel {
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
-                <input type="button" data-bind="click: joinCampaign, visible: !joinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: joinCampaign, visible: !hasJoinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <!-- ko with: joinCampaignDialogViewModel -->
                 <?php
                     $joinCampaignDialogWidget = new DropDownListDialogWidget();
@@ -19,7 +19,7 @@ class InProgressCampaignViewModel {
                     );
                 ?>
                 <!-- /ko -->
-                <input type="button" data-bind="click: requestCreateEntry, visible: joinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: requestCreateEntry, visible: hasJoinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton, tooltip: '<?php echo ucfirst(Translation::getString("admin")); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-cog"></span>
                 </button>
@@ -41,7 +41,7 @@ class InProgressCampaignViewModel {
                 <!-- /ko -->
             </div>
         
-            <ul data-bind="visible: joinedCampaign">
+            <ul data-bind="visible: hasJoinedCampaign">
                 <li>
                     <h3><?php echo Translation::getString("campaign"); ?></h3>
                 </li>
@@ -53,7 +53,7 @@ class InProgressCampaignViewModel {
                     <label><?php echo Translation::getString('territoryBonus'); ?>:</label>
                     <span>
                         <span data-bind="text: availableTerritoryBonus"></span>
-                        <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip'), visible: joinedCampaign" class="ui-button ui-widget ui-corner-all inline-icon-button">
+                        <button data-bind="click: showGiveTerritoryBonusDialog, tooltip: Translation.getString('giveTerritoryBonusTooltip'), visible: hasJoinedCampaign" class="ui-button ui-widget ui-corner-all inline-icon-button">
                             <span class="icon-upload"></span>
                         </button>
                     </span>

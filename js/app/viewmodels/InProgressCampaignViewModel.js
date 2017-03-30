@@ -78,9 +78,16 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
         return DateTimeFormatter.formatDate(userData.PhaseStartDate);
     });
+        
+    self.hasJoinedCampaign = ko.computed(function() {
+        return !!userCampaignData();
+    });
     
     self.joinedCampaign = ko.computed(function() {
-        return !!userCampaignData();
+        if(!self.hasJoinedCampaign())
+            return null;
+        
+        return currentCampaign();
     });
     
     self.factionEntrySummaries = ko.computed(function() {
@@ -105,6 +112,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     };
     
     self.back = function() {
+        userCampaignData(null);
         currentCampaign(null);
         navigation.showMain(true);
     };
@@ -136,7 +144,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
             }
         });
     }
-        
+    
     var setUserDataForCampaign = function(userDataForCampaign) {
         userCampaignData(userDataForCampaign);
         user.territoryBonus(userDataForCampaign.TerritoryBonus);

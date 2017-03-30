@@ -43,20 +43,16 @@ var CampaignListViewModel = function(user, navigation) {
         return user.isLoggedIn();
     });
     
-    navigation.showMain.subscribe(function(show) {
-        if(!show)
-            return;
+    self.addToJoinedList = function(joinedCampaign) {
+        $.each(internalCampaignList(), function(index, campaign) {
+            if(joinedCampaign.id() === campaign.id()) {
+                campaign.currentUserJoinedCampaign(true);
+                return false;
+            }
+            return true;
+        });
+    };
         
-        self.getCampaignList();
-    });
-    
-    user.isLoggedIn.subscribe(function(isLoggedIn) {
-        if(!isLoggedIn)
-            return;
-        
-        self.getCampaignList();
-    });
-    
     self.getCampaignList = function() {
         $.ajax({
             url: 'src/webservices/CampaignService.php',
@@ -70,4 +66,18 @@ var CampaignListViewModel = function(user, navigation) {
             }
         });
     };
+    
+    navigation.showMain.subscribe(function(show) {
+        if(!show)
+            return;
+        
+        self.getCampaignList();
+    });
+    
+    user.isLoggedIn.subscribe(function(isLoggedIn) {
+        if(!isLoggedIn)
+            return;
+        
+        self.getCampaignList();
+    });
 };

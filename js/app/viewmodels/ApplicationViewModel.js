@@ -16,4 +16,9 @@ var ApplicationViewModel = function(user, navigation) {
     });
     
     self.isSideBarOpen = navigation.isSideBarOpen;
+    
+    self.inProgressCampaignViewModel.joinedCampaign.subscribe(function(joinedCampaign) {
+        if(joinedCampaign)
+            self.campaignListViewModel.addToJoinedList(joinedCampaign);
+    });
 };

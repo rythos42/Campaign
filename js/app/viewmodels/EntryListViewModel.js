@@ -5,7 +5,7 @@ var EntryListViewModel = function(navigation, currentCampaign, entryList, userCa
         
     self.onlyEntriesWithoutOpponent = ko.observable(false);
     
-    self.joinedCampaign = ko.computed(function() {
+    self.hasJoinedCampaign = ko.computed(function() {
         return !!userCampaignData();
     });
         

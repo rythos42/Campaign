@@ -1,11 +1,5 @@
 Next:
-Run at work and geeksong:
-        alter table UserCampaignData add column FactionId int not null;
-        alter table UserCampaignData add constraint UserCampaignData_Faction foreign key (FactionId) references Faction(Id)
-
     InProgressCampaign:
-        - update Joined Campaigns list after joining
-        
         - show map here.
             - can only click on your factions adjacent territories to attack
         - after you click on a map, then you fill in your data

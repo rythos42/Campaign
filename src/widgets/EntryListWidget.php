@@ -3,7 +3,7 @@ class EntryListWidget {
     public function render() {
         ?>
         <!-- ko with: entryListViewModel -->
-        <label data-bind="visible: joinedCampaign">
+        <label data-bind="visible: hasJoinedCampaign">
             <input type="checkbox" data-bind="checked: onlyEntriesWithoutOpponent" />
             <span><?php echo Translation::getString("onlyWithoutOpponent"); ?></span>
         </label>
@@ -17,10 +17,10 @@ class EntryListWidget {
             <tbody data-bind="foreach: entries">
                 <tr>
                     <td>
-                        <!-- ko if: joinedCampaign -->
+                        <!-- ko if: hasJoinedCampaign -->
                         <input type="button" class="link-button" data-bind="click: openEntry, value: createdOnDate" />
                         <!-- /ko -->
-                        <!-- ko ifnot: joinedCampaign -->
+                        <!-- ko ifnot: hasJoinedCampaign -->
                         <span data-bind="text: createdOnDate, tooltip: Translation.getString('mustFirstJoinTheCampaign')"></span>
                         <!-- /ko -->
                     </td>
