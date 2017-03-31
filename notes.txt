@@ -1,12 +1,18 @@
 Next:
-    InProgressCampaign:
-        - show map here.
-            - can only click on your factions adjacent territories to attack
-        - after you click on a map, then you fill in your data
-            - your name and faction are pre-filled and can't be changed.
-        - make sure simple campaign still works - need "Attack!" button there instead of map
+    - fill in attackers name and faction in the fields, don't allow them to be changed
+    - show map id being attacked somewhere on entry page
+    - narrative not being saved anymore
+    - add faction legend to map
+    - add a new note that current user is out of attacks:
+    - Entry.updateTerritoryBeingAttacked
+        - was being used when you want to update an entry to re-select the correct territory
+        - may not be necessary, but needs more checking
+    - make sure simple campaign still works - need "Attack!" button there instead of map
+    - UI pass again over InProgressCampaign
+    - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
     
 Future:
+    - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
     - "More/Less" buttons for news items that are much much larger than 150 characters
     - "Contact us"
 

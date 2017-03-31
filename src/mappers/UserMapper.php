@@ -47,7 +47,7 @@ class UserMapper {
     
     public static function getUserDataForCampaign($userId, $campaignId) {
         return Database::queryObject(
-            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate
+            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate, FactionId
             from UserCampaignData 
             join Campaign on Campaign.Id = UserCampaignData.CampaignId 
             left outer join Phase on Phase.CampaignId = Campaign.Id

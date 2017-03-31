@@ -1,15 +1,13 @@
 /*exported CreateEntryViewModel */
-/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, EntryMapViewModel, DialogResult, ConfirmationDialogViewModel, UserManager */
+/*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, DialogResult, ConfirmationDialogViewModel, UserManager */
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(),
         factionEntry = new FactionEntry();
         
-    self.entryMapViewModel = new EntryMapViewModel(navigation, currentCampaign, currentEntry);
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.factionSelectionHasFocus = ko.observable(false);
-    self.showAddFactions = ko.observable(false);
     self.narrative = currentEntry.narrative;
     
     self.selectedFaction = factionEntry.faction.extend({
@@ -29,7 +27,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         min: { params: 0, message: Translation.getString('atLeastZero') },
         max: { params: ko.computed(function() {
             var user = self.selectedUser();
-            return user ? user.territoryBonus() : 0;
+            return typeof(user) === 'object' ? user.territoryBonus() : 0;
         }), message: Translation.getString('cannotSpendMoreThan') }
     });
         
@@ -64,29 +62,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
     
     self.showFinishButton = ko.computed(function() {
-        return self.showAddFactions() && !self.isReadOnly();
+        return !self.isReadOnly();
     });
-    
-    self.currentUserOutOfAttacks = ko.computed(function() {
-        var campaign = currentCampaign();
-        if(!campaign)
-            return false;
-        
-        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
-    });
-    
-    self.attackingUserOutOfAttacks = ko.computed(function() {
-        var attackingFaction = currentEntry.attackingFaction(),
-            campaign = currentCampaign(),
-            faction = self.selectedFaction(),
-            user = self.selectedUser();
-            
-        if(!attackingFaction || !campaign || !faction || !user || faction.id() !== attackingFaction.id())
-            return false;
-        
-        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());        
-    });
-            
+                
     self.finish = function() {
         if(!self.factionEntries.isValid()) {
             self.factionEntries.isModified(true);
@@ -112,27 +90,12 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             method: 'POST',
             data: params
         }).then(function() {
-            self.showAddFactions(!self.isMapCampaign());
             navigation.showInProgressCampaign(true);
-            self.entryMapViewModel.clearMap();
         });
     }
     
-    self.addFactions = function() {
-        if(!self.entryMapViewModel.selectedTerritory.isValid() && !self.isReadOnly()) {
-            self.entryMapViewModel.selectedTerritory.isModified(true);
-            return;
-        }
-        
-        self.showAddFactions(true);
-        self.factionSelectionHasFocus(true);
-    };
-    
     self.back = function() {
-        if(self.showAddFactions() && self.isMapCampaign())
-            self.showAddFactions(false);
-        else
-            navigation.showInProgressCampaign(true);
+        navigation.showInProgressCampaign(true);
     };
     
     self.keyPressAddFaction = function(viewModel, event) {
@@ -148,7 +111,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     ]);
     
     self.addFaction = function() {
-        if(!factionEntryValidationViewModel.isValid() || self.attackingUserOutOfAttacks()) {
+        if(!factionEntryValidationViewModel.isValid()) {
             factionEntryValidationViewModel.errors.showAllMessages();
             return;
         }
@@ -193,17 +156,22 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
                
     navigation.showCreateEntry.subscribe(function(show) {
-        self.entryMapViewModel.clearMap();
-        
         if(!show)
             return;
         
         clearFactionEntry();
         clearEntry();
-        var editingEntry = navigation.parameters();
-        if(editingEntry) {
-            navigation.parameters(null);
-            currentEntry.copyFrom(editingEntry);
+        var parameter = navigation.parameters();
+        navigation.parameters(null);
+        if(parameter) {
+            if(parameter instanceof Entry) {
+                navigation.parameters(null);
+                currentEntry.copyFrom(parameter);
+            } else {
+                currentEntry.clear();        
+                currentEntry.territoryBeingAttacked(parameter);
+                currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
+            }
         }
         else {
             currentEntry.clear();        
@@ -214,11 +182,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     });
         
     currentCampaign.subscribe(function(newCampaign) {
-        if(!newCampaign) {
+        if(!newCampaign)
             currentEntry.campaignId(undefined);
-        } else {
+        else
             currentEntry.campaignId(newCampaign.id());
-            self.showAddFactions(!self.isMapCampaign());
-        }
     });
 };

@@ -3,7 +3,7 @@ class InProgressCampaignViewModel {
     public function render() {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
-        <div data-bind="visible: showInProgressCampaign" class="grouping ui-widget-content ui-corner-all">
+        <div data-bind="visible: showInProgressCampaign" class="map-grouping ui-widget-content ui-corner-all">
             <div class="top-button-panel" style="position: relative">
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
@@ -19,7 +19,6 @@ class InProgressCampaignViewModel {
                     );
                 ?>
                 <!-- /ko -->
-                <input type="button" data-bind="click: requestCreateEntry, visible: hasJoinedCampaign" value="<?php echo Translation::getString("newEntry"); ?>" class="ui-button ui-widget ui-corner-all" />
                 <button data-jq-dropdown="#InProgressAdminMenu" data-bind="visible: showAdminButton, tooltip: '<?php echo ucfirst(Translation::getString("admin")); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-cog"></span>
                 </button>
@@ -40,11 +39,14 @@ class InProgressCampaignViewModel {
                 ?>
                 <!-- /ko -->
             </div>
+            
+            <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>            
+            <?php
+                $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
+                $inProgressCampaignMapWidget->render();
+            ?>
         
             <ul data-bind="visible: hasJoinedCampaign">
-                <li>
-                    <h3><?php echo Translation::getString("campaign"); ?></h3>
-                </li>
                 <li class="data-list" data-bind="visible: isMapCampaign">
                     <label><?php echo Translation::getString('phaseStart'); ?>:</label>
                     <span data-bind="text: phaseStartDate"></span>

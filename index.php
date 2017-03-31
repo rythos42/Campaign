@@ -39,7 +39,6 @@
         <script src="js/app/infrastructure/TooltipCustomBinder.js"></script>
         <script src="js/app/infrastructure/DateTimeFormatter.js"></script>
         <script src="js/app/infrastructure/EveryFactionRequiresATerritoryValidator.js"></script>
-        <script src="js/app/infrastructure/DomColourCustomBinder.js"></script>
         <script src="js/app/infrastructure/HideTooltipOnShowCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
@@ -64,7 +63,7 @@
         <script src="js/app/viewmodels/InProgressCampaignViewModel.js"></script>
         <script src="js/app/viewmodels/FactionEntryListItemViewModel.js"></script>
         <script src="js/app/viewmodels/FactionEntrySummaryViewModel.js"></script>
-        <script src="js/app/viewmodels/EntryMapViewModel.js"></script>
+        <script src="js/app/viewmodels/InProgressCampaignMapViewModel.js"></script>
         <script src="js/app/viewmodels/MapLegendViewModel.js"></script>
         <script src="js/app/viewmodels/CreateCampaignMapViewModel.js"></script>
         <script src="js/app/viewmodels/UserProfileViewModel.js"></script>
