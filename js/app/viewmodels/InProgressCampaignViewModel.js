@@ -143,7 +143,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
             dataType: 'JSON',
             success: function(serverEntryList) {
                 internalEntryList($.map(serverEntryList, function(serverEntry) {
-                    return new Entry(campaign, serverEntry);
+                    return new Entry(user, campaign, serverEntry);
                 }));
                 currentlyLoadingEntryList = false;
             }

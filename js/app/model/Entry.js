@@ -1,6 +1,6 @@
 /*exported Entry */
 /*globals ko, Faction, User, FactionEntry */
-var Entry = function(campaign, serverEntry) {
+var Entry = function(user, campaign, serverEntry) {
     var self = this;
     
     self.id = ko.observable(serverEntry ? serverEntry.Id : undefined);
@@ -47,6 +47,12 @@ var Entry = function(campaign, serverEntry) {
         return finishDate !== null && finishDate !== undefined;
     });
     
+    self.hasCurrentUser = ko.computed(function() {
+        return $.grep(self.factionEntries(), function(factionEntry) {
+            return factionEntry.user().id() === user.id();
+        }).length > 0;
+    });
+
     self.clear = function() {
         self.factionEntries.removeAll();
     };

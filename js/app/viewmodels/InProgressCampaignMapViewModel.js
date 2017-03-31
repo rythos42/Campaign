@@ -1,5 +1,5 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals ko, Translation, MapHelper */
+/*globals ko, MapHelper */
 var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userCampaignData) {
     var self = this,
         adjacentTerritories = ko.observableArray(),

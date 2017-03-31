@@ -1,10 +1,10 @@
 Next:
-    - fill in attackers name and faction in the fields, don't allow them to be changed
+    - no reason to enter faction on entry anymore - it can be determined from the user
     - Entry.updateTerritoryBeingAttacked
         - was being used when you want to update an entry to re-select the correct territory
         - may not be necessary, but needs more checking
+    - do I need "Entry.attackingFaction" anymore?
     - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
-    - when deleting faction entry, need to fill in attackers name, faction, set readonly
     - "attacker flag" not showing up anymore
 
     - show map id being attacked somewhere on entry page

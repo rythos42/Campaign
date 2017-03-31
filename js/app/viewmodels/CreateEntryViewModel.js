@@ -2,13 +2,13 @@
 /*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, DialogResult, ConfirmationDialogViewModel, UserManager */
 var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampaignData) {
     var self = this,
-        currentEntry = new Entry(),
+        currentEntry = new Entry(user),
         factionEntry = new FactionEntry();
         
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.factionSelectionHasFocus = ko.observable(false);
-    self.isNotAttacker = ko.observable(true);
+    self.hasCurrentUser = currentEntry.hasCurrentUser;
     self.narrative = currentEntry.narrative;
     
     self.selectedFaction = factionEntry.faction.extend({
@@ -138,7 +138,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
         self.territoryBonusSpent(undefined);
-        self.isNotAttacker(true);
         
         self.factionEntries.isModified(false);
     }
@@ -150,6 +149,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
         currentEntry.finishDate(undefined);
         currentEntry.narrative(undefined);
+    }
+    
+    function fillEntryWithCurrentUser() {
+        self.selectedFaction(currentCampaign().getFactionById(userCampaignData().FactionId));
+        self.selectedUser(user);
     }
 
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {
@@ -173,9 +177,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
                 currentEntry.clear();        
                 currentEntry.territoryBeingAttacked(parameter);
                 currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
-                self.selectedFaction(currentCampaign().getFactionById(userCampaignData().FactionId));
-                self.selectedUser(user);
-                self.isNotAttacker(false);
+                fillEntryWithCurrentUser();
             }
         }
         else {
@@ -184,6 +186,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         
         self.factionEntries.isModified(false);
         self.factionSelectionHasFocus(!self.isMapCampaign());
+    });
+    
+    currentEntry.hasCurrentUser.subscribe(function(hasCurrentUser) {
+        if(!hasCurrentUser)
+            fillEntryWithCurrentUser();
     });
         
     currentCampaign.subscribe(function(newCampaign) {
