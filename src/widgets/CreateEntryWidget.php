@@ -12,7 +12,7 @@ class CreateEntryWidget {
                 </li>
                 <li class="entry-field">
                     <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}, enable: hasAttackingFaction"></select>
+                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}, enable: hasAttackingUser"></select>
                     <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                 </li>
                 <li class="entry-field">
@@ -45,7 +45,7 @@ class CreateEntryWidget {
                         <td data-bind="text: victoryPoints" />
                         <td data-bind="text: territoryBonusSpent, visible: $parent.isMapCampaign" />
                         <td class="actions">
-                            <span data-bind="visible: isAttackingFaction, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
+                            <span data-bind="visible: isAttackingUser, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
                             <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">
                                 <span class="icon-bin"</span>
                             </button>

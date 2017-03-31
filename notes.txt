@@ -1,9 +1,13 @@
 Next:
-    - change "AttackingFactionId" to "AttackingUserId"
-        - in CreateEntryViewModel.fillInAttackingUser, can do this action now. Current code is wrong.
+Run @ home
+        alter table Entry change AttackingFactionId AttackingUserId int;
+        delete from factionentry;
+        delete from entry;
+        delete from news where entryid is not null;
+
     - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
                 
-
+    - do we need Campaign.getFactionById?
     - "CreateEntryWidget" - "Add Faction" button no longer properly named
     - do I need "Entry.attackingFaction" anymore?
     - remove (lang) factionEntryRequiredValidation

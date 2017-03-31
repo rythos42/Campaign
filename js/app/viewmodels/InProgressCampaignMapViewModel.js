@@ -47,7 +47,6 @@ var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userC
         adjacentTerritories(null);
         mapHelper.clearImageData();
         self.showLoadingImage(true);
-        self.attackingFaction(null);
     };
     
     self.storeImage = function() {

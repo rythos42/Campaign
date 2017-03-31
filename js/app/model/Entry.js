@@ -7,16 +7,16 @@ var Entry = function(user, campaign, serverEntry) {
     self.createdOnDate = ko.observable(serverEntry ? serverEntry.CreatedOnDate : undefined);
     self.campaignId = ko.observable(campaign ? campaign.id() : undefined);
     self.factionEntries = ko.observableArray();
-    self.attackingFaction = ko.observable();
+    self.attackingUser = ko.observable();
     self.createdByUsername = ko.observable(serverEntry ? serverEntry.CreatedByUsername : undefined);
     self.territoryBeingAttackedIdOnMap = ko.observable(serverEntry ? serverEntry.TerritoryBeingAttackedIdOnMap : undefined);
     self.finishDate = ko.observable(serverEntry ? serverEntry.FinishDate : undefined);
     self.narrative = ko.observable(serverEntry ? serverEntry.Narrative : undefined);
         
     if(serverEntry) {
-        $.each(campaign.factions(), function(index, faction) {
-            if(faction.id() === serverEntry.AttackingFactionId) {
-                self.attackingFaction(faction);
+        $.each(campaign.players(), function(index, user) {
+            if(user.id() === serverEntry.AttackingUserId) {
+                self.attackingUser(user);
                 return false;
             }
             return true;
@@ -37,9 +37,9 @@ var Entry = function(user, campaign, serverEntry) {
         return finishDate !== null && finishDate !== undefined;
     });
     
-    self.hasAttackingFaction = ko.computed(function() {
+    self.hasAttackingUser = ko.computed(function() {
         return $.grep(self.factionEntries(), function(factionEntry) {
-            return factionEntry.faction().id() === self.attackingFaction.id();
+            return factionEntry.user().id() === self.attackingUser().id();
         }).length > 0;
     });
 
@@ -51,8 +51,8 @@ var Entry = function(user, campaign, serverEntry) {
         self.id(entry.id());
         self.createdOnDate(entry.createdOnDate());
         self.campaignId(entry.campaignId());
+        self.attackingUser(entry.attackingUser());
         self.factionEntries(entry.factionEntries());
-        self.attackingFaction(entry.attackingFaction());
         self.createdByUsername(entry.createdByUsername());
         self.territoryBeingAttackedIdOnMap(entry.territoryBeingAttackedIdOnMap());
         self.finishDate(entry.finishDate());

@@ -20,9 +20,9 @@ var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry)
     self.victoryPoints = factionEntry.victoryPoints;
     self.territoryBonusSpent = factionEntry.territoryBonusSpent;
     
-    self.isAttackingFaction = ko.computed(function() {
-        var attackingFaction = currentCampaignEntry.attackingFaction();
-        return attackingFaction ? currentCampaignEntry.attackingFaction().id() === factionEntry.faction().id() : false;
+    self.isAttackingUser = ko.computed(function() {
+        var attackingUser = currentCampaignEntry.attackingUser();
+        return attackingUser ? currentCampaignEntry.attackingUser().id() === factionEntry.user().id() : false;
     });
     
     self.removeFactionEntry = function() {

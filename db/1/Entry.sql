@@ -5,7 +5,7 @@ CREATE TABLE Entry (
     CampaignId INT NOT NULL,
     CreatedByUserId INT NOT NULL,
     CreatedOnDate datetime NOT NULL,
-    AttackingFactionId INT,
+    AttackingUserId INT,
     FinishDate datetime,
     TerritoryBeingAttackedIdOnMap int,
     PRIMARY KEY (Id),
