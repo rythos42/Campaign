@@ -1,15 +1,11 @@
 Next:
-    - Entry.updateTerritoryBeingAttacked
-        - was being used when you want to update an entry to re-select the correct territory
-        - may not be necessary, but needs more checking
-    - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
+    - narrative not being saved anymore
     - "attacker flag" not showing up anymore
+    - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
 
     - "CreateEntryWidget" - "Add Faction" button no longer properly named
     - do I need "Entry.attackingFaction" anymore?
     - remove (lang) factionEntryRequiredValidation
-    - show map id being attacked somewhere on entry page
-    - narrative not being saved anymore
     - add faction legend to map
     - add a new note that current user is out of attacks:
     - make sure simple campaign still works - need "Attack!" button there instead of map

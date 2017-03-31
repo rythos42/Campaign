@@ -45,19 +45,19 @@ class CampaignMapper {
     
     public static function saveCampaignEntry($campaignEntry) {
         $attackingFactionId = isset($campaignEntry->attackingFaction->id) ? $campaignEntry->attackingFaction->id : null;
-        $territoryBeingAttacked = isset($campaignEntry->territoryBeingAttacked->IdOnMap) ? $campaignEntry->territoryBeingAttacked->IdOnMap : null;
+        $territoryBeingAttackedIdOnMap = isset($campaignEntry->territoryBeingAttackedIdOnMap) ? $campaignEntry->territoryBeingAttackedIdOnMap : null;
         $createdByUserId = User::getCurrentUser()->getId();
         $createdOnDate = date('Y-m-d H:i:s');
         
         if(isset($campaignEntry->id)) {
             Database::execute(
                 "update Entry set AttackingFactionId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
-                [$attackingFactionId, $territoryBeingAttacked, $campaignEntry->id]);
+                [$attackingFactionId, $territoryBeingAttackedIdOnMap, $campaignEntry->id]);
             $campaignEntryId = $campaignEntry->id;
         } else {        
             Database::execute(
                 "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingFactionId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
-                [$campaignEntry->campaignId, $createdByUserId, $createdOnDate, $attackingFactionId, $territoryBeingAttacked]);
+                [$campaignEntry->campaignId, $createdByUserId, $createdOnDate, $attackingFactionId, $territoryBeingAttackedIdOnMap]);
             $campaignEntryId = Database::getLastInsertedId();
         }
             
@@ -136,7 +136,7 @@ class CampaignMapper {
             if($winningFactionEntry->faction->id === $campaignEntry->attackingFaction->id) {
                 Database::execute(
                     "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
-                    [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttacked->IdOnMap]);
+                    [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap]);
             }
             
             Database::execute(

@@ -10,6 +10,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.factionSelectionHasFocus = ko.observable(false);
     self.hasCurrentUser = currentEntry.hasCurrentUser;
     self.narrative = currentEntry.narrative;
+    self.territoryBeingAttackedIdOnMap = currentEntry.territoryBeingAttackedIdOnMap;
     
     self.selectedUser = factionEntry.user.extend({
         required: { message: Translation.getString('userEntryRequiredValidation') },
@@ -161,7 +162,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 currentEntry.copyFrom(parameter);
             } else {
                 currentEntry.clear();        
-                currentEntry.territoryBeingAttacked(parameter);
                 currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
                 self.selectedUser(user);
             }

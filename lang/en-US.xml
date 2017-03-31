@@ -92,5 +92,6 @@
         <narrative>Narrative</narrative>
         <joinedCampaigns>Joined campaigns</joinedCampaigns>
         <noJoinedCampaigns>You have no joined campaigns!</noJoinedCampaigns>
+        <territory>Territory</territory>
     </strings>
 </translation>

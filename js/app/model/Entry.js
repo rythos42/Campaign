@@ -9,7 +9,6 @@ var Entry = function(user, campaign, serverEntry) {
     self.factionEntries = ko.observableArray();
     self.attackingFaction = ko.observable();
     self.createdByUsername = ko.observable(serverEntry ? serverEntry.CreatedByUsername : undefined);
-    self.territoryBeingAttacked = ko.observable();
     self.territoryBeingAttackedIdOnMap = ko.observable(serverEntry ? serverEntry.TerritoryBeingAttackedIdOnMap : undefined);
     self.finishDate = ko.observable(serverEntry ? serverEntry.FinishDate : undefined);
     self.narrative = ko.observable(serverEntry ? serverEntry.Narrative : undefined);
@@ -33,16 +32,6 @@ var Entry = function(user, campaign, serverEntry) {
         });
     }
     
-    self.updateTerritoryBeingAttacked = function(adjacentTerritories) {
-        $.each(adjacentTerritories, function(index, territory) {
-            if(territory.IdOnMap === self.territoryBeingAttackedIdOnMap()) {
-                self.territoryBeingAttacked(territory);
-                return false;
-            }
-            return true;
-        });
-    };
-    
     self.isFinished = ko.computed(function() {
         var finishDate = self.finishDate();
         return finishDate !== null && finishDate !== undefined;
@@ -65,7 +54,6 @@ var Entry = function(user, campaign, serverEntry) {
         self.factionEntries(entry.factionEntries());
         self.attackingFaction(entry.attackingFaction());
         self.createdByUsername(entry.createdByUsername());
-        self.territoryBeingAttacked(entry.territoryBeingAttacked());
         self.territoryBeingAttackedIdOnMap(entry.territoryBeingAttackedIdOnMap());
         self.finishDate(entry.finishDate());
         self.narrative(entry.narrative());

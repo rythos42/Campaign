@@ -52,7 +52,6 @@ ul li {
 li.entry-field,
 li.data-list,
 li.button-panel {
-    
     margin-left: 5%;
     width: 280px;
     text-align: right;
@@ -74,6 +73,11 @@ li.entry-field label {
     display: inline-block;
     margin-bottom: 5px;
     width: 130px;
+}
+
+li.entry-field > span {
+    width: 140px;
+    display: inline-block;
 }
 
 .ui-dialog li.entry-field label {
