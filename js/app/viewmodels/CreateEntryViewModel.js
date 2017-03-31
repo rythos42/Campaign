@@ -8,7 +8,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.factionSelectionHasFocus = ko.observable(false);
-    self.hasCurrentUser = currentEntry.hasCurrentUser;
+    self.hasAttackingFaction = currentEntry.hasAttackingFaction;
     self.narrative = currentEntry.narrative;
     self.territoryBeingAttackedIdOnMap = currentEntry.territoryBeingAttackedIdOnMap;
     
@@ -147,6 +147,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         if(dialogResult === DialogResult.Saved)
             saveCampaignEntry({finish: true});
     });
+    
+    function fillInAttackingUser() {
+        // oops
+        self.selectedUser(user);
+    }
                
     navigation.showCreateEntry.subscribe(function(show) {
         if(!show)
@@ -163,7 +168,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             } else {
                 currentEntry.clear();        
                 currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
-                self.selectedUser(user);
+                currentEntry.attackingFaction(currentCampaign().getFactionById(user.factionId()));
+                fillInAttackingUser();
             }
         }
         else {
@@ -174,9 +180,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.factionSelectionHasFocus(!self.isMapCampaign());
     });
     
-    currentEntry.hasCurrentUser.subscribe(function(hasCurrentUser) {
-        if(!hasCurrentUser)
-            self.selectedUser(user);
+    currentEntry.hasAttackingFaction.subscribe(function(hasAttackingFaction) {
+        if(!hasAttackingFaction)
+            fillInAttackingUser();
     });
         
     currentCampaign.subscribe(function(newCampaign) {

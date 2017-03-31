@@ -1,7 +1,8 @@
 Next:
-    - narrative not being saved anymore
-    - "attacker flag" not showing up anymore
+    - change "AttackingFactionId" to "AttackingUserId"
+        - in CreateEntryViewModel.fillInAttackingUser, can do this action now. Current code is wrong.
     - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
+                
 
     - "CreateEntryWidget" - "Add Faction" button no longer properly named
     - do I need "Entry.attackingFaction" anymore?

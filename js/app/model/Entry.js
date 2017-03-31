@@ -37,9 +37,9 @@ var Entry = function(user, campaign, serverEntry) {
         return finishDate !== null && finishDate !== undefined;
     });
     
-    self.hasCurrentUser = ko.computed(function() {
+    self.hasAttackingFaction = ko.computed(function() {
         return $.grep(self.factionEntries(), function(factionEntry) {
-            return factionEntry.user().id() === user.id();
+            return factionEntry.faction().id() === self.attackingFaction.id();
         }).length > 0;
     });
 
