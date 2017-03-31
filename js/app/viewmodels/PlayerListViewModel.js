@@ -18,7 +18,7 @@ var PlayerListViewModel = function(currentCampaign) {
         
         UserManager.getUsersForCampaign(campaign.id()).done(function(results) {
             internalPlayers($.map(results, function(serverUser) {
-                return new User(serverUser.Id, serverUser.Username, serverUser.TerritoryBonus, serverUser.Attacks);
+                return new User(serverUser);
             }));
         });
     });

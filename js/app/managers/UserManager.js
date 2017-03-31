@@ -20,7 +20,7 @@ var UserManager = {
     getFilteredUsersForCampaign: function(term, campaignId, responseCallback) {
         UserManager.__getUsersForCampaign(term, campaignId).done(function(results) {
             responseCallback($.map(results, function(serverUser) {
-                return new User(serverUser.Id, serverUser.Username, serverUser.TerritoryBonus, serverUser.Attacks);
+                return new User(serverUser);
             }));
         });
     }

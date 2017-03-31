@@ -7,10 +7,6 @@ class CreateEntryWidget {
             <div data-bind="visible: isReadOnly"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
             <ul data-bind="visible: !isReadOnly()">
                 <li class="entry-field">
-                    <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
-                    <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: Translation.getString('selectFaction'), event: {keypress: keyPressAddFaction}, enable: hasCurrentUser"></select>
-                </li>
-                <li class="entry-field">
                     <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
                     <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}, enable: hasCurrentUser"></select>
                     <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>

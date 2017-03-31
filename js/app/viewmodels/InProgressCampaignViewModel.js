@@ -8,7 +8,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentlyLoadingEntryList = false,
         finishedLoading = ko.observable(false);
 
-    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
+    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
@@ -154,6 +154,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         userCampaignData(userDataForCampaign);
         user.territoryBonus(userDataForCampaign.TerritoryBonus);
         user.attacks(userDataForCampaign.Attacks);
+        user.factionId(userDataForCampaign.FactionId);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
         finishedLoading(true);

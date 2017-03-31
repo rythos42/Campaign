@@ -41,7 +41,10 @@ class UserMapper {
     public static function getUsersByFilter($term, $campaignId) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
         return Database::queryArray(
-            "select User.Id, Username, TerritoryBonus, Attacks from User join UserCampaignData on UserCampaignData.UserId = User.Id where Username like ? and CampaignId = ?", 
+            "select User.Id, User.Username, UserCampaignData.TerritoryBonus, UserCampaignData.Attacks, UserCampaignData.FactionId 
+            from User 
+            join UserCampaignData on UserCampaignData.UserId = User.Id 
+            where Username like ? and CampaignId = ?", 
             ['%' . $term . '%', $campaignId]);
     }
     

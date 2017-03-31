@@ -72,7 +72,7 @@ class CampaignMapper {
             } else {
                 Database::execute(
                     "insert into FactionEntry (EntryId, FactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
-                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpentF]);
+                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpent]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
         }
