@@ -8,7 +8,14 @@ var User = function(id, username, serverTerritoryBonus, serverAttacks) {
     self.isLoggedIn = ko.observable(false);
     self.permissions = ko.observableArray();
     self.territoryBonus = ko.observable(serverTerritoryBonus);
-    self.attacks = ko.observable(serverAttacks);    
+    self.attacks = ko.observable(serverAttacks);  
+
+    // used in the autocomplete, because it apparently can't read observables
+    self.name = username;
+    
+    self.username.subscribe(function(newName) {
+        self.name = newName;
+    });
 
     self.hasPermission = function(permissionId) {
         return $.inArray(permissionId, self.permissions()) > -1;

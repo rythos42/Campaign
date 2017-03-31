@@ -31,4 +31,10 @@ var Campaign = function(serverCampaign) {
         }));
         return newCampaign;
     };
+    
+    self.getFactionById = function(factionId) {
+        return $.grep(self.factions(), function(faction) {
+            return faction.id() === factionId;
+        })[0];
+    };
 };

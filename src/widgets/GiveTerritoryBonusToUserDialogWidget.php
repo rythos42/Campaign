@@ -7,7 +7,7 @@ class GiveTerritoryBonusToUserDialogWidget {
                 <ul>
                     <li class="entry-field">
                         <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                        <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser"></select>
+                        <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser"></select>
                         <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                     </li>
                     <li class="entry-field">

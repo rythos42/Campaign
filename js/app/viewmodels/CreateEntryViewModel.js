@@ -1,6 +1,6 @@
 /*exported CreateEntryViewModel */
 /*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, DialogResult, ConfirmationDialogViewModel, UserManager */
-var CreateEntryViewModel = function(user, navigation, currentCampaign) {
+var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampaignData) {
     var self = this,
         currentEntry = new Entry(),
         factionEntry = new FactionEntry();
@@ -8,6 +8,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.factionSelectionHasFocus = ko.observable(false);
+    self.isNotAttacker = ko.observable(true);
     self.narrative = currentEntry.narrative;
     
     self.selectedFaction = factionEntry.faction.extend({
@@ -64,7 +65,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     self.showFinishButton = ko.computed(function() {
         return !self.isReadOnly();
     });
-                
+    
     self.finish = function() {
         if(!self.factionEntries.isValid()) {
             self.factionEntries.isModified(true);
@@ -137,6 +138,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.victoryPoints(undefined);
         self.victoryPoints.isModified(false);
         self.territoryBonusSpent(undefined);
+        self.isNotAttacker(true);
         
         self.factionEntries.isModified(false);
     }
@@ -149,7 +151,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry.finishDate(undefined);
         currentEntry.narrative(undefined);
     }
-    
+
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {
         if(dialogResult === DialogResult.Saved)
             saveCampaignEntry({finish: true});
@@ -171,10 +173,13 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 currentEntry.clear();        
                 currentEntry.territoryBeingAttacked(parameter);
                 currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
+                self.selectedFaction(currentCampaign().getFactionById(userCampaignData().FactionId));
+                self.selectedUser(user);
+                self.isNotAttacker(false);
             }
         }
         else {
-            currentEntry.clear();        
+            currentEntry.clear();
         }
         
         self.factionEntries.isModified(false);

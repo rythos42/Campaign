@@ -8,11 +8,11 @@ class CreateEntryWidget {
             <ul data-bind="visible: !isReadOnly()">
                 <li class="entry-field">
                     <label for="FactionSelection"><?php echo Translation::getString("faction"); ?>:</label>
-                    <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: Translation.getString('selectFaction'), event: {keypress: keyPressAddFaction}"></select>
+                    <select id="FactionSelection" data-bind="options: availableFactions, optionsText: 'name', value: selectedFaction, hasFocus: factionSelectionHasFocus, optionsCaption: Translation.getString('selectFaction'), event: {keypress: keyPressAddFaction}, enable: isNotAttacker"></select>
                 </li>
                 <li class="entry-field">
                     <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, inputProp: 'label', labelProp: 'label', valueProp: 'object' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}"></select>
+                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}, enable: isNotAttacker"></select>
                     <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                 </li>
                 <li class="entry-field">

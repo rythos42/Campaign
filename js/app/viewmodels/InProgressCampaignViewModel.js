@@ -8,7 +8,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentlyLoadingEntryList = false,
         finishedLoading = ko.observable(false);
 
-    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
+    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
