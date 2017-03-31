@@ -10,7 +10,8 @@
         <victoryPoints>Victory Points</victoryPoints>        
         <factionName>Faction Name</factionName>        
         <user>User</user>        
-        <addFaction>Add Faction</addFaction>        
+        <addFaction>Add User</addFaction>
+        <addUser>Add User</addUser>  
         <back>Back</back>        
         <created>Created</created>  
         <by>By</by>
@@ -26,7 +27,6 @@
         <login>Login</login>        
         <signup>Sign Up</signup>        
         <loginPageAbout>Campaign is a simple &lt;a href="https://github.com/rythos42/Campaign"&gt;open source&lt;/a&gt; web app to help you manage gaming campaigns.</loginPageAbout>
-        <factionEntryRequiredValidation>Who were they playing for?</factionEntryRequiredValidation>
         <userEntryRequiredValidation>You need to enter a user.</userEntryRequiredValidation>
         <userEntryInvalidAccountValidation>User is not in this campaign.</userEntryInvalidAccountValidation>
         <victoryPointsEntryRequiredValidation>Put a 0 if there was no score!</victoryPointsEntryRequiredValidation>

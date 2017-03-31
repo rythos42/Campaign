@@ -12,20 +12,20 @@ class CreateEntryWidget {
                 </li>
                 <li class="entry-field">
                     <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddFaction}, enable: hasAttackingUser"></select>
+                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddUser}, enable: hasAttackingUser"></select>
                     <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                 </li>
                 <li class="entry-field">
                     <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
-                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddFaction}" />
+                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddUser}" />
                 </li>
                 <li class="entry-field" data-bind="visible: isMapCampaign">
                     <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
-                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, event: {keypress: keyPressAddFaction}" />
+                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, event: {keypress: keyPressAddUser}" />
                 </li>
                 <li class="button-panel">
                     <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
-                    <input type="button" data-bind="click: addFaction" value="<?php echo Translation::getString("addFaction"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </li>
             </ul>
             <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">

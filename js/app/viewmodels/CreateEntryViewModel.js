@@ -91,9 +91,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         navigation.showInProgressCampaign(true);
     };
     
-    self.keyPressAddFaction = function(viewModel, event) {
+    self.keyPressAddUser = function(viewModel, event) {
         if(event.keyCode === 13)
-            self.addFaction();  
+            self.addUser();  
         return true;
     };    
         
@@ -102,7 +102,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         self.victoryPoints
     ]);
     
-    self.addFaction = function() {
+    self.addUser = function() {
         if(!factionEntryValidationViewModel.isValid()) {
             factionEntryValidationViewModel.errors.showAllMessages();
             return;

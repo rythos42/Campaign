@@ -37,6 +37,9 @@ var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userC
     };
     
     self.startChallenge = function() {
+        if(!self.drawingTerritory())
+            return;
+        
         navigation.parameters(self.drawingTerritory());
         navigation.showCreateEntry(true);
     };

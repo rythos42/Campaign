@@ -7,21 +7,18 @@ Run @ home
 
     - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
                 
-    - do we need Campaign.getFactionById?
-    - "CreateEntryWidget" - "Add Faction" button no longer properly named
-    - do I need "Entry.attackingFaction" anymore?
-    - remove (lang) factionEntryRequiredValidation
-    - add faction legend to map
+    - if you Save an entry without any factionentries, and go back, you can't edit the user name?
     - add a new note that current user is out of attacks:
     - make sure simple campaign still works - need "Attack!" button there instead of map
     - UI pass again over InProgressCampaign
-    - put focus on user instead of factionSelectionHasFocus
     
 Future:
     - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
     - "More/Less" buttons for news items that are much much larger than 150 characters
     - "Contact us"
 
+    - put focus on user instead of factionSelectionHasFocus
+    - dragging map clicks on territories, it should ignore it.
     - icon noting which campaigns are map and which are simple
     - if not logged in hide sidebar
     - no scroll bar on sidebar

@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, MapLegendViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -15,12 +15,22 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, currentCampaign, userCampaignData);
     
-    var campaignFactions = ko.computed(function() {
+    self.factions = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.factions() : [];
     });
     
-    self.joinCampaignDialogViewModel = new DropDownListDialogViewModel(campaignFactions, 'name', Translation.getString('selectFaction'));
+    self.legendFactions = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return;
+        
+        return $.map(campaign.factions(), function(faction) {
+            return new MapLegendViewModel(faction);
+        });
+    });
+    
+    self.joinCampaignDialogViewModel = new DropDownListDialogViewModel(self.factions, 'name', Translation.getString('selectFaction'));
     
     self.showInProgressCampaign = ko.computed(function() {
         return navigation.showInProgressCampaign() && finishedLoading();
