@@ -40,6 +40,9 @@
         <script src="js/app/infrastructure/DateTimeFormatter.js"></script>
         <script src="js/app/infrastructure/EveryFactionRequiresATerritoryValidator.js"></script>
         <script src="js/app/infrastructure/HideTooltipOnShowCustomBinder.js"></script>
+        <script src="js/app/infrastructure/CanvasClickToZoomOutCustomBinder.js"></script>
+        <script src="js/app/infrastructure/CanvasClickToZoomInCustomBinder.js"></script>
+        <script src="js/app/infrastructure/CanvasClickCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

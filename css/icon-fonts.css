@@ -42,6 +42,12 @@
 .icon-star-full:before {
   content: "\e9d9";
 }
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
 .icon-exit:before {
   content: "\ea14";
 }

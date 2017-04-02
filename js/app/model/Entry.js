@@ -39,6 +39,9 @@ var Entry = function(user, campaign, serverEntry) {
     
     self.hasAttackingUser = ko.computed(function() {
         return $.grep(self.factionEntries(), function(factionEntry) {
+            if(!self.attackingUser())
+                console.log('No attacking user on FactionEntry id: ' + factionEntry.id());
+            
             return factionEntry.user().id() === self.attackingUser().id();
         }).length > 0;
     });

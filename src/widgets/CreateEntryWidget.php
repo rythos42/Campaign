@@ -12,12 +12,12 @@ class CreateEntryWidget {
                 </li>
                 <li class="entry-field">
                     <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddUser}, enable: hasAttackingUser"></select>
+                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, event: {keypress: keyPressAddUser}, enable: hasAttackingUser, hasfocus: usernameHasFocus"></select>
                     <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
                 </li>
                 <li class="entry-field">
                     <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
-                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddUser}" />
+                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, event: {keypress: keyPressAddUser}, hasfocus: victoryPointsHasFocus" />
                 </li>
                 <li class="entry-field" data-bind="visible: isMapCampaign">
                     <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>

@@ -1,20 +1,15 @@
 Next:
-    - put focus on user instead of factionSelectionHasFocus
-    - dragging map clicks on territories, it should ignore it.
-    
+    - make sure simple campaign still works - need "Attack!" button there instead of map
+    - UI pass again over InProgressCampaign
     
 Future:
     - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
     - "More/Less" buttons for news items that are much much larger than 150 characters
     - "Contact us"
-    - icon noting which campaigns are map and which are simple
 
     - if not logged in hide sidebar
     - no scroll bar on sidebar
     - page news list, or infinite scroll or something
-    - make sure simple campaign still works - need "Attack!" button there instead of map
-    - UI pass again over InProgressCampaign
-
         
 Before a general release:
 - remove code that automatically gives permission to create map campaigns
@@ -33,6 +28,7 @@ Credit:
 - https://github.com/sroze/PHP-Voronoi-algorithm
 
 Far Future:
+- icon noting which campaigns are map and which are simple
 - something to allow players to switch factions in a campaign
 - sweet background on header
 - factions can choose colours

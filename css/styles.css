@@ -191,6 +191,12 @@ td.actions .button-icon {
     padding: 10px;
 }
 
+.map-buttons {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
 .grouping {
     width: 320px;
     margin-left: auto;

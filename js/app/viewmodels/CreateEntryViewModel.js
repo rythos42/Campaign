@@ -7,7 +7,8 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
-    self.factionSelectionHasFocus = ko.observable(false);
+    self.usernameHasFocus = ko.observable(false);
+    self.victoryPointsHasFocus = ko.observable(false);
     self.hasAttackingUser = currentEntry.hasAttackingUser;
     self.narrative = currentEntry.narrative;
     self.territoryBeingAttackedIdOnMap = currentEntry.territoryBeingAttackedIdOnMap;
@@ -114,7 +115,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         currentEntry.factionEntries.push(factionEntry.clone());
         clearFactionEntry();
         
-        self.factionSelectionHasFocus(true);
+        self.usernameHasFocus(true);
     };
     
     self.getUsers = function(term, responseCallback) {
@@ -175,7 +176,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         }
         
         self.factionEntries.isModified(false);
-        self.factionSelectionHasFocus(!self.isMapCampaign());
+        self.victoryPointsHasFocus(true);
     });
     
     currentEntry.hasAttackingUser.subscribe(function(hasAttackingUser) {
