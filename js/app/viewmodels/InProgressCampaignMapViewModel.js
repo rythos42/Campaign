@@ -57,11 +57,26 @@ var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userC
         self.showLoadingImage(false);
     };
     
+    function loadMapImage() {
+        var url = 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + currentCampaign().id();
+        if(self.mapImageUrl() === url)
+            self.mapImageUrl.notifySubscribers(url);
+        else
+            self.mapImageUrl(url);
+    }
+
+    navigation.showInProgressCampaign.subscribe(function(showInProgressCampaign) {
+        if(!showInProgressCampaign || !currentCampaign())
+            return;
+        
+        loadMapImage(); // load when we show InProgressCampaign, but only if there is a campaign set.
+    });
+    
     currentCampaign.subscribe(function(campaign) {
         if(!campaign)
             return;
         
-        self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + campaign.id());
+        loadMapImage(); // load when we set the current campaign
     });
     
     userCampaignData.subscribe(function(campaignData) {

@@ -9,7 +9,7 @@ var PlayerListViewModel = function(currentCampaign) {
             return;
         
         return $.map(campaign.players(), function(user) {
-            return new PlayerListItemViewModel(user);
+            return new PlayerListItemViewModel(user, currentCampaign);
         });
     });
     

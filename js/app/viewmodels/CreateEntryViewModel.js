@@ -160,6 +160,9 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
             if(parameter instanceof Entry) {
                 navigation.parameters(null);
                 currentEntry.copyFrom(parameter);
+                
+                if(!self.hasAttackingUser())
+                    self.selectedUser(currentEntry.attackingUser());
             } else {
                 currentEntry.clear();        
                 currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);

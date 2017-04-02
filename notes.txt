@@ -1,33 +1,21 @@
 Next:
-Run @ home
-        alter table Entry change AttackingFactionId AttackingUserId int;
-        delete from factionentry;
-        delete from entry;
-        delete from news where entryid is not null;
-
-    - ensure finishing works (gives tb, gives territory to proper user, territory highlights with their colour afterwards)
-                
-    - if you Save an entry without any factionentries, and go back, you can't edit the user name?
-    - add a new note that current user is out of attacks:
-    - make sure simple campaign still works - need "Attack!" button there instead of map
-    - UI pass again over InProgressCampaign
+    - put focus on user instead of factionSelectionHasFocus
+    - dragging map clicks on territories, it should ignore it.
+    
     
 Future:
     - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
     - "More/Less" buttons for news items that are much much larger than 150 characters
     - "Contact us"
-
-    - put focus on user instead of factionSelectionHasFocus
-    - dragging map clicks on territories, it should ignore it.
     - icon noting which campaigns are map and which are simple
+
     - if not logged in hide sidebar
     - no scroll bar on sidebar
     - page news list, or infinite scroll or something
-    - sweet background on header
-    - something to allow players to switch factions in a campaign
-    - sometimes you type "c" and it doesn't select - can I fix this?
-        - compare text value against a given list?
-    
+    - make sure simple campaign still works - need "Attack!" button there instead of map
+    - UI pass again over InProgressCampaign
+
+        
 Before a general release:
 - remove code that automatically gives permission to create map campaigns
 - can anyone access a map campaign, and only certain people create them?
@@ -45,6 +33,8 @@ Credit:
 - https://github.com/sroze/PHP-Voronoi-algorithm
 
 Far Future:
+- something to allow players to switch factions in a campaign
+- sweet background on header
 - factions can choose colours
 - admin can rename factions in their campaign
 - create campaign customization

@@ -26,7 +26,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
             return;
         
         return $.map(campaign.factions(), function(faction) {
-            return new MapLegendViewModel(faction);
+            return new MapLegendViewModel(faction, user);
         });
     });
     

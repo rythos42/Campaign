@@ -59,6 +59,7 @@ class CampaignMapper {
                 "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingUserId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
                 [$campaignEntry->campaignId, $createdByUserId, $createdOnDate, $attackingUserId, $territoryBeingAttackedIdOnMap]);
             $campaignEntryId = Database::getLastInsertedId();
+            $campaignEntry->id = $campaignEntryId;
         }
             
         // Add/update new CampaignEntries

@@ -47,7 +47,7 @@ class CreateEntryWidget {
                         <td class="actions">
                             <span data-bind="visible: isAttackingUser, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
                             <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">
-                                <span class="icon-bin"</span>
+                                <span class="icon-bin"></span>
                             </button>
                         </td>
                     </tr>
