@@ -20,6 +20,10 @@
     margin-bottom: 10px;
 }
 
+#InProgressCampaign > div {
+    margin-top: 10px;
+}
+
 input[type="text"], input[type="password"], input[type="number"], select {
     width: 140px;
 }
@@ -37,7 +41,6 @@ canvas {
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
-    max-width: 768px;
 }
 
 ul {
@@ -172,6 +175,7 @@ td.actions .button-icon {
 
 .top-button-panel {
     margin-bottom: 10px;
+    position: relative;
 }
 
 .validationMessage {
@@ -217,7 +221,6 @@ td.actions .button-icon {
 
 .map-panel {
     margin-top: 5px;
-    max-width: 768px;
     border: 3px ridge grey;
     position: relative;
 }

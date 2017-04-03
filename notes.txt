@@ -1,6 +1,7 @@
 Next:
     - make sure simple campaign still works - need "Attack!" button there instead of map
-    - UI pass again over InProgressCampaign
+    - attackingUser in Entry isn't being loaded in sme cases?
+    - put a footer on the page (InProgressCampaign is weird at the bottom when you check the checkbox)
     
 Future:
     - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?

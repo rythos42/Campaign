@@ -3,8 +3,8 @@ class InProgressCampaignViewModel {
     public function render() {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
-        <div data-bind="visible: showInProgressCampaign" class="map-grouping ui-widget-content ui-corner-all">
-            <div class="top-button-panel" style="position: relative">
+        <div id="InProgressCampaign" data-bind="visible: showInProgressCampaign" class="map-grouping ui-widget-content ui-corner-all">
+            <div class="top-button-panel">
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
@@ -39,19 +39,7 @@ class InProgressCampaignViewModel {
                 ?>
                 <!-- /ko -->
             </div>
-            
-            <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>            
-            <ul class="map-legend" data-bind="foreach: legendFactions">
-                <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
-                    <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
-                    <span data-bind="text: name"></span>
-                </li>
-            </ul>
-            <?php
-                $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
-                $inProgressCampaignMapWidget->render();
-            ?>
-        
+                    
             <ul data-bind="visible: hasJoinedCampaign">
                 <li class="data-list" data-bind="visible: isMapCampaign">
                     <label><?php echo Translation::getString('phaseStart'); ?>:</label>
@@ -81,6 +69,20 @@ class InProgressCampaignViewModel {
                 </li>
                 <!-- /ko -->
             </ul>
+            
+            <div>
+                <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>            
+                <ul class="map-legend" data-bind="foreach: legendFactions">
+                    <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
+                        <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
+                        <span data-bind="text: name"></span>
+                    </li>
+                </ul>
+                <?php
+                    $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
+                    $inProgressCampaignMapWidget->render();
+                ?>
+            </div>
             
             <div data-bind="tab: {}" class="ui-widget ui-corners-all ui-widget-content">
                 <ul>
