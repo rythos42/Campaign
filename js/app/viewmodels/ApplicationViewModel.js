@@ -11,11 +11,16 @@ var ApplicationViewModel = function(user, navigation) {
     self.userProfileViewModel = new UserProfileViewModel(user, navigation);
     self.newsListViewModel = new NewsListViewModel(navigation);
     
-    self.showSideBar = ko.computed(function() {
+    self.showOpenSideBarButton = ko.computed(function() {
         return user.isLoggedIn();
     });
     
     self.isSideBarOpen = navigation.isSideBarOpen;
+    
+    user.isLoggedIn.subscribe(function(isLoggedIn) {
+        if(!isLoggedIn)
+            self.isSideBarOpen(false);
+    });
     
     self.inProgressCampaignViewModel.joinedCampaign.subscribe(function(joinedCampaign) {
         if(joinedCampaign)

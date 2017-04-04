@@ -41,4 +41,10 @@ var User = function(serverUser) {
         self.attacks(jsonUser.Attacks);
         self.factionId(jsonUser.FactionId);
     };
+    
+    self.clearCampaignData = function() {
+        self.factionId(undefined);
+        self.territoryBonus(undefined);
+        self.attacks(undefined);
+    };
 };

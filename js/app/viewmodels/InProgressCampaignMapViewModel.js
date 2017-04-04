@@ -1,6 +1,6 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals ko, MapHelper */
-var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userCampaignData) {
+/*globals ko, MapHelper, MapLegendViewModel */
+var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, userCampaignData) {
     var self = this,
         adjacentTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
@@ -15,6 +15,16 @@ var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userC
             return false;
         
         return campaign.isMapCampaign();
+    });
+        
+    self.legendFactions = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return;
+        
+        return $.map(campaign.factions(), function(faction) {
+            return new MapLegendViewModel(faction, user);
+        });
     });
     
     function getAdjacentTerritoriesForFaction(factionId) {
@@ -37,10 +47,14 @@ var InProgressCampaignMapViewModel = function(navigation, currentCampaign, userC
     };
     
     self.startChallenge = function() {
-        if(!self.drawingTerritory())
-            return;
+        if(currentCampaign().isMapCampaign()) {
+            if(!self.drawingTerritory())
+                return;
+            navigation.parameters(self.drawingTerritory());
+        } else {
+            navigation.parameters({});
+        }
         
-        navigation.parameters(self.drawingTerritory());
         navigation.showCreateEntry(true);
     };
     

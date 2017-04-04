@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, MapLegendViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -13,21 +13,11 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
-    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, currentCampaign, userCampaignData);
+    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
     
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.factions() : [];
-    });
-    
-    self.legendFactions = ko.computed(function() {
-        var campaign = currentCampaign();
-        if(!campaign)
-            return;
-        
-        return $.map(campaign.factions(), function(faction) {
-            return new MapLegendViewModel(faction, user);
-        });
     });
     
     self.joinCampaignDialogViewModel = new DropDownListDialogViewModel(self.factions, 'name', Translation.getString('selectFaction'));
@@ -129,6 +119,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.back = function() {
         userCampaignData(null);
         currentCampaign(null);
+        user.clearCampaignData();
+        
         navigation.showMain(true);
     };
             
@@ -146,17 +138,20 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentlyLoadingEntryList = true;
         var params = { action: 'GetEntryList', campaignId: campaign.id() };
         
-        $.ajax({
-            url: 'src/webservices/CampaignService.php',
-            method: 'GET',
-            data: params,
-            dataType: 'JSON',
-            success: function(serverEntryList) {
-                internalEntryList($.map(serverEntryList, function(serverEntry) {
-                    return new Entry(user, campaign, serverEntry);
-                }));
-                currentlyLoadingEntryList = false;
-            }
+        $.when(
+            $.ajax({
+                url: 'src/webservices/CampaignService.php',
+                method: 'GET',
+                data: params,
+                dataType: 'JSON'
+            }), 
+            self.playerListViewModel.loadedPlayersPromise
+        ).then(function(ajaxResults) {
+            var serverEntryList = ajaxResults[0];
+            internalEntryList($.map(serverEntryList, function(serverEntry) {
+                return new Entry(user, campaign, serverEntry);
+            }));
+            currentlyLoadingEntryList = false;
         });
     }
     

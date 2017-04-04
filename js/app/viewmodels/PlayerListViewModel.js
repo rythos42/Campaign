@@ -13,14 +13,19 @@ var PlayerListViewModel = function(currentCampaign) {
         });
     });
     
+    self.loadedPlayersPromise = null;
+    
     currentCampaign.subscribe(function(campaign) {
         if(!campaign)
             return;
+        
+        self.loadedPlayersPromise = $.Deferred();
         
         UserManager.getUsersForCampaign(campaign.id()).done(function(results) {
             currentCampaign().players($.map(results, function(serverUser) {
                 return new User(serverUser);
             }));
+            self.loadedPlayersPromise.resolve();            
         });
     });
 };

@@ -1,17 +1,37 @@
 /*exported NewsListItemViewModel */
 /*globals ko, Translation */
 var NewsListItemViewModel = function(serverNewsItem) {
-    var self = this;
-    
-    self.news = ko.observable(serverNewsItem ? serverNewsItem.News : '');
+    var self = this,
+        newsText = serverNewsItem ? serverNewsItem.News : '',
+        maxDisplayedLength = 400,
+        isShowingLess = ko.observable(true);
     
     self.createdByUserName = ko.observable(serverNewsItem && serverNewsItem.CreatedByUserName ? serverNewsItem.CreatedByUserName : Translation.getString('admin'));
     
+    self.showMoreLessButtons = ko.computed(function() {
+        return newsText.length > maxDisplayedLength;
+    });
+    
+    self.news = ko.computed(function() {
+        if(self.showMoreLessButtons() && isShowingLess()) {
+            return newsText.substring(0, maxDisplayedLength);
+        }
+        return newsText;
+    });
+    
     self.smallestText = ko.computed(function() {
-        return self.news().length > 150;
+        return newsText.length > 150;
     });
 
     self.smallerText = ko.computed(function() {
-        return !self.smallestText() && self.news().length > 40;
-    });   
+        return !self.smallestText() && newsText.length > 40;
+    });
+    
+    self.showMoreLessButtonText = ko.computed(function() {
+        return '[' + (isShowingLess() ? Translation.getString('more') : Translation.getString('less')) + ']';
+    });
+    
+    self.toggleMoreLess = function() {
+        isShowingLess(!isShowingLess());
+    };
 };

@@ -273,6 +273,10 @@ td.actions .button-icon {
     display: block;
 }
 
+.news-item .link-button {
+    font-size: 10px;
+}
+
 .news-item .news {
     overflow-wrap: break-word;
 }

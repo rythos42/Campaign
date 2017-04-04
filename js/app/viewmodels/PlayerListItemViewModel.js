@@ -7,6 +7,11 @@ var PlayerListItemViewModel = function(user, currentCampaign) {
     self.attacks = user.attacks;    
     
     self.factionName = ko.computed(function() {
-        return currentCampaign().getFactionById(user.factionId()).name();
+        var campaign = currentCampaign();
+        if(!campaign)
+            return '';
+        
+        var faction = campaign.getFactionById(user.factionId());
+        return faction ? faction.name() : '';
     });
 };

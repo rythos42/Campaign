@@ -72,12 +72,6 @@ class InProgressCampaignViewModel {
             
             <div>
                 <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>            
-                <ul class="map-legend" data-bind="foreach: legendFactions">
-                    <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
-                        <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
-                        <span data-bind="text: name"></span>
-                    </li>
-                </ul>
                 <?php
                     $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
                     $inProgressCampaignMapWidget->render();
