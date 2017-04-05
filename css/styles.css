@@ -83,6 +83,10 @@ li.entry-field > span {
     display: inline-block;
 }
 
+li.entry-field > span.validationMessage {
+    width: auto;
+}
+
 .ui-dialog li.entry-field label {
     width: 70px;
 }

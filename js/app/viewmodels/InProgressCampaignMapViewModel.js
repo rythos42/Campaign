@@ -2,12 +2,14 @@
 /*globals ko, MapHelper, MapLegendViewModel */
 var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, userCampaignData) {
     var self = this,
-        adjacentTerritories = ko.observableArray(),
+        serverTerritories,
+        reachableTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
 
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
     self.showLoadingImage = ko.observable(true);
+    self.attackAnywhere = ko.observable(false);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -15,6 +17,14 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             return false;
         
         return campaign.isMapCampaign();
+    });
+    
+    self.currentUserOutOfAttacks = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return false;
+        
+        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
     });
         
     self.legendFactions = ko.computed(function() {
@@ -27,6 +37,10 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         });
     });
     
+    self.hasAtLeastOneTerritoryBonus = ko.computed(function() {
+       return user.territoryBonus() > 0;
+    });
+    
     function getAdjacentTerritoriesForFaction(factionId) {
         $.ajax({
             url: 'src/webservices/CampaignService.php',
@@ -35,22 +49,29 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
                 action: 'GetAdjacentTerritoriesForFaction',
                 factionId: factionId
             },
-            success: function(newAdjacentTerritories) {
-                adjacentTerritories(newAdjacentTerritories);
+            success: function(territories) {
+                serverTerritories = territories;
+                reachableTerritories(self.attackAnywhere() ? serverTerritories.All : serverTerritories.Adjacent);
             }
         });
     }
                
     self.drawTerritory = function(viewModel, event) {
+        if(self.currentUserOutOfAttacks())
+            return;
+        
         mapHelper.restoreImage();
-        self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(adjacentTerritories(), event));
+        self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(reachableTerritories(), event));
     };
     
     self.startChallenge = function() {
+        if(self.currentUserOutOfAttacks())
+            return;
+
         if(currentCampaign().isMapCampaign()) {
             if(!self.drawingTerritory())
                 return;
-            navigation.parameters(self.drawingTerritory());
+            navigation.parameters({ territory: self.drawingTerritory(), attackingAnywhere: self.attackAnywhere() });
         } else {
             navigation.parameters({});
         }
@@ -61,7 +82,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     self.clearMap = function() {
         self.mapImageUrl(null);
         self.drawingTerritory(null);
-        adjacentTerritories(null);
+        reachableTerritories(null);
         mapHelper.clearImageData();
         self.showLoadingImage(true);
     };
@@ -98,5 +119,9 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             return;
         
         getAdjacentTerritoriesForFaction(campaignData.FactionId);
+    });
+    
+    self.attackAnywhere.subscribe(function(attackAnywhere) {
+        reachableTerritories(attackAnywhere ? serverTerritories.All : serverTerritories.Adjacent);
     });
 };

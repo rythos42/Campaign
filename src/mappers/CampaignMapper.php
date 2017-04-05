@@ -243,5 +243,9 @@ class CampaignMapper {
         
         Database::execute("INSERT INTO Phase (CampaignId, StartDate) VALUES (?, ?)", [$campaignId, date('Y-m-d H:i:s')]);
     }
+    
+    public static function getCampaignIdForFactionId($factionId) {
+        return Database::queryScalar("select CampaignId from Faction where Id = ?", [$factionId]);
+    }
 }
 ?>

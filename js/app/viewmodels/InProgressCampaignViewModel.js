@@ -108,14 +108,6 @@ var InProgressCampaignViewModel = function(user, navigation) {
         });
     });
     
-    self.currentUserOutOfAttacks = ko.computed(function() {
-        var campaign = currentCampaign();
-        if(!campaign)
-            return false;
-        
-        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
-    });
-
     self.back = function() {
         userCampaignData(null);
         currentCampaign(null);
@@ -157,9 +149,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     var setUserDataForCampaign = function(userDataForCampaign) {
         userCampaignData(userDataForCampaign);
-        user.territoryBonus(userDataForCampaign.TerritoryBonus);
-        user.attacks(userDataForCampaign.Attacks);
-        user.factionId(userDataForCampaign.FactionId);
+        user.setFromCampaignData(userDataForCampaign);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
         finishedLoading(true);

@@ -3,7 +3,9 @@
 var CreateEntryViewModel = function(user, navigation, currentCampaign) {
     var self = this,
         currentEntry = new Entry(user),
-        factionEntry = new FactionEntry();
+        factionEntry = new FactionEntry(),
+        attackingAnywhere = ko.observable(false),
+        minimumTerritoryBonusSpent = ko.observable(0);
         
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
@@ -22,8 +24,15 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
     
+    var minimumTerritoryBonusSpentValidationMessage = function() {
+        if(attackingAnywhere())
+            return Translation.getString('attackingNonAdjacentMustSpendOne');
+        else
+            return Translation.getString('atLeastZero');
+    };
+    
     self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
-        min: { params: 0, message: Translation.getString('atLeastZero') },
+        min: { params: minimumTerritoryBonusSpent, message: minimumTerritoryBonusSpentValidationMessage },
         max: { params: ko.computed(function() {
             var user = self.selectedUser();
             return typeof(user) === 'object' ? user.territoryBonus() : 0;
@@ -165,8 +174,13 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
                 if(!self.hasAttackingUser())
                     self.selectedUser(currentEntry.attackingUser());
             } else {
+                var territory = parameter.territory;
+                attackingAnywhere(parameter.attackingAnywhere);
+                minimumTerritoryBonusSpent(attackingAnywhere() ? 1 : 0);
+                self.territoryBonusSpent(attackingAnywhere() ? 1 : undefined);
+                
                 currentEntry.clear();        
-                currentEntry.territoryBeingAttackedIdOnMap(parameter.IdOnMap);
+                currentEntry.territoryBeingAttackedIdOnMap(territory.IdOnMap);
                 currentEntry.attackingUser(user);
                 self.selectedUser(user);
             }

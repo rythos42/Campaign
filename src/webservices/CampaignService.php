@@ -47,7 +47,11 @@ switch($action) {
         
     case "GetAdjacentTerritoriesForFaction":
         $factionId = $_REQUEST["factionId"];
-        echo json_encode(MapMapper::getAdjacentTerritoriesForFaction($factionId));
+        $campaignId = CampaignMapper::getCampaignIdForFactionId($factionId);
+        echo json_encode(array(
+            "Adjacent" => MapMapper::getAdjacentTerritoriesForFaction($factionId),
+            "All" => MapMapper::getAllTerritoriesForCampaign($campaignId)
+        ));
         break;
         
     case "SaveFactionTerritories":

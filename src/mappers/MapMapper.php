@@ -10,18 +10,25 @@ class MapMapper {
     }
     
     public static function getAdjacentTerritoriesForFaction($factionId) {
-        // Get all polygon points, for all polygons that are adjacent to factions in the given campaign
-        $dbAdjacentPolygonList = self::getAdjacentPolygonsForFaction($factionId);
-        $dbPolygonList = array();
-        foreach($dbAdjacentPolygonList as $dbAdjacentPolygon) {
-            $dbPolygon = array();
-            $dbPolygon["Id"] = $dbAdjacentPolygon["Id"];
-            $dbPolygon["IdOnMap"] = $dbAdjacentPolygon["IdOnMap"];
-            $dbPolygon["Points"] = Database::queryArray("select X, Y, PointNumber from TerritoryPoint where TerritoryId = ?", [$dbAdjacentPolygon["Id"]]);
-            $dbPolygonList[] = $dbPolygon;
+        $dbAdjacentTerritoryList = self::getAdjacentPolygonsForFaction($factionId);
+        return MapMapper::getTerritoryPointsListFromTerritoryList($dbAdjacentTerritoryList);
+    }
+    
+    public static function getAllTerritoriesForCampaign($campaignId) {
+        $dbTerritoryListForCampaign = Database::queryArray("select Id, IdOnMap from Territory where CampaignId = ?", [$campaignId]);
+        return MapMapper::getTerritoryPointsListFromTerritoryList($dbTerritoryListForCampaign);
+    }
+    
+    private static function getTerritoryPointsListFromTerritoryList($dbTerritoryList) {
+        $returnTerritoryList = array();
+        foreach($dbTerritoryList as $dbTerritory) {
+            $returnTerritory = array();
+            $returnTerritory["Id"] = $dbTerritory["Id"];
+            $returnTerritory["IdOnMap"] = $dbTerritory["IdOnMap"];
+            $returnTerritory["Points"] = Database::queryArray("select X, Y, PointNumber from TerritoryPoint where TerritoryId = ?", [$dbTerritory["Id"]]);
+            $returnTerritoryList[] = $returnTerritory;
         }
-            
-        return $dbPolygonList;
+        return $returnTerritoryList;
     }
     
     private static function getAdjacentPolygonsForFaction($factionId) {

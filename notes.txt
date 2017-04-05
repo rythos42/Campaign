@@ -1,17 +1,5 @@
-In theory, fixed race condition that was sometimes causing attacking user to not be loaded by Entry.js
-Can now "back" from InProgressCampaign
-Fixed "Add User" label on create campaign which should have read "Add Faction"
-Creator no longer auto-joins a created campaign.
-Fixed defect when navigation away from one campaign and into another.
-Removed faction legend for Simple campaigns.
-Made Simple campaign work.
-Added "More/Less" buttons for news items that are much much larger than 150 characters
-Put a scrollbar on the menu.
-Sidebar closes when you log out.
-
 Next:
-    - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
-    - page news list, or infinite scroll or something
+    - infinite scroll news list
     
 Future:
         
@@ -33,6 +21,7 @@ Credit:
 - https://github.com/sroze/PHP-Voronoi-algorithm
 
 Far Future:
+- is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple
 - something to allow players to switch factions in a campaign
 - sweet background on header
@@ -44,11 +33,6 @@ Far Future:
 - take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
     - little ! icon on profile until they fill in e-mail
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
-- spend TB to attack anywhere
-    - checkbox on entry map page "Attack anywhere for 1 territory bonus"
-    - greyed out if the current user doesn't have 1??
-        - then only current user can spend.
-    - or validate after we select who the attacking user is on the next page?
 - rename table indexes -- easier in mySQL 5.7
 - page campaign list
 - search campaigns by the user who created them

@@ -71,7 +71,6 @@ class InProgressCampaignViewModel {
             </ul>
             
             <div>
-                <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>            
                 <?php
                     $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
                     $inProgressCampaignMapWidget->render();

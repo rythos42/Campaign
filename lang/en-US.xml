@@ -96,5 +96,6 @@
         <attack>Attack</attack>
         <more>More</more>
         <less>Less</less>
+        <attackingNonAdjacentMustSpendOne>Attacking non-adjacent costs 1.</attackingNonAdjacentMustSpendOne>
     </strings>
 </translation>
