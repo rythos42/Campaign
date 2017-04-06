@@ -24,6 +24,7 @@
         <script src="js/lib/jquery.panzoom.js"></script>
         <script src="js/lib/DragDropTouch.js"></script>
         <script src="js/lib/jquery.dropdown.min.js"></script>
+        <script src="js/lib/stupidtable.min.js"></script>
 
         <script src="js/app/infrastructure/ExceptionCodes.js"></script>
         <script src="js/app/infrastructure/RequireObjectValidator.js"></script>
@@ -43,6 +44,7 @@
         <script src="js/app/infrastructure/CanvasClickToZoomOutCustomBinder.js"></script>
         <script src="js/app/infrastructure/CanvasClickToZoomInCustomBinder.js"></script>
         <script src="js/app/infrastructure/CanvasClickCustomBinder.js"></script>
+        <script src="js/app/infrastructure/StupidTableCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>

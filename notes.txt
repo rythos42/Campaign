@@ -5,11 +5,10 @@ Future:
         
 Before a general release:
 - "Contact us"
-- remove code that automatically gives permission to create map campaigns
-- can anyone access a map campaign, and only certain people create them?
-- promotion to allow creation of map campaigns by everyone
 - for buying: group buy, or individual buy? 
     Roll20: group buy, $5/month or $50/year.
+- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
+    - little ! icon on profile until they fill in e-mail
 
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
@@ -21,17 +20,18 @@ Credit:
 - https://github.com/sroze/PHP-Voronoi-algorithm
 
 Far Future:
+- Administrator interface:
+    - delete campaigns
+- Campaign Administrator interface:
+    - rename factions
+    - switch factions for a player
+- Purchase buys:
+    - create campaign customization: set height, width, number of sectors on map, pick background image
+    - choose colours for faction
+    - interface themes for you and your fellow gamers
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple
-- something to allow players to switch factions in a campaign
 - sweet background on header
-- factions can choose colours
-- admin can rename factions in their campaign
-- create campaign customization
-    - set height, width, number of sectors on map
-    - pick background image
-- take e-mail after successful login, with a note saying they won't be able to retrieval password until it's filled in.
-    - little ! icon on profile until they fill in e-mail
 - Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - rename table indexes -- easier in mySQL 5.7
 - page campaign list
@@ -39,20 +39,15 @@ Far Future:
 - deadline for campaign entries
 - maybe a custom binder to do "keypressACTION" instead of copying this code around
 - XP system
-- consider being able to add multiple users to a FactionEntry?
-    - would allow easier adding of multi-player games
-    - but if territory is player-owned, you'd still need to mark one as Attacker
+- consider being able to add multiple users to a FactionEntry to allow easier adding of multi-player games
 - allow user to select languages if we have a list
-- scenarios can have categories of VPs in them to break it down
 - lock in a particular army
 - tournaments, with specific people needing to be played
     - generate match-ups and rankings after each round
-
-    Stats:
-    - these would have to be game specific, is why they are far-future
-    - races played
+- Stats:
+    - races played (game-specific)
     - size of game
-    - number of dice for each player
+    - number of dice for each player (Antares-specific)
     - scenario
         - drop down list for known scenarios
         - free input for others

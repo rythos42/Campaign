@@ -3,11 +3,11 @@ class PlayerListWidget {
     public function render() {
         ?>
         <!-- ko with: playerListViewModel -->
-        <table>
+        <table data-bind="stupidtable: {}">
             <thead>
-                <th><?php echo Translation::getString("name"); ?></th>
-                <th><?php echo Translation::getString("faction"); ?></th>
-                <th><?php echo Translation::getString("attacks"); ?></th>
+                <th data-sort="string"><?php echo Translation::getString("name"); ?></th>
+                <th data-sort="string"><?php echo Translation::getString("faction"); ?></th>
+                <th data-sort="int"><?php echo Translation::getString("attacks"); ?></th>
             </thead>
             <tbody data-bind="foreach: players">
                 <tr>
