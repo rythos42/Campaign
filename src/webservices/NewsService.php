@@ -8,8 +8,15 @@ if(!User::isLoggedIn())
 $action = $_REQUEST["action"];
         
 switch($action) {
-    case "GetMainPageNews":
-        echo json_encode(NewsMapper::getMainPageNews());
+    case "GetMoreNews":
+        $lastLoadedDate = $_REQUEST["lastLoadedDate"];
+        $numberToLoad = $_REQUEST["numberToLoad"];
+        echo json_encode(NewsMapper::getMoreNews($lastLoadedDate, $numberToLoad));
+        break;
+        
+    case "GetNewNewsSince":
+        $since = $_REQUEST["since"];
+        echo json_encode(NewsMapper::getNewNewsSince($since));
         break;
         
     case "AddNews":

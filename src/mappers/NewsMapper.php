@@ -1,20 +1,37 @@
 <?php
 class NewsMapper {
-    public static function getMainPageNews() {
+    public static function getMoreNews($lastLoadedDate, $numberToLoad) {
         $currentUserId = User::getCurrentUser()->getId();
-        
+
         // Get news for the current logged in user's campaigns, and for admin messages.
         return Database::queryArray(
             "select campaignNews.*, User.Username as CreatedByUserName
                 from News campaignNews
                 left join User on User.Id = campaignNews.CreatedByUserId
-                where CampaignId in (select CampaignId from UserCampaignData where UserId = ?)
+                where CampaignId in (select CampaignId from UserCampaignData where UserId = ?) and campaignNews.CreatedOnDate < ?
                 union
                 select adminNews.*, User.Username as CreatedByUserName
                 from News adminNews
                 left join User on User.Id = adminNews.CreatedByUserId
-                where CampaignId is null
-                order by CreatedOnDate desc", [$currentUserId]);
+                where CampaignId is null and adminNews.CreatedOnDate < ?
+                order by CreatedOnDate desc
+                limit ?", [$currentUserId, $lastLoadedDate, $lastLoadedDate, $numberToLoad]);
+    }
+    
+    public static function getNewNewsSince($since) {
+        $currentUserId = User::getCurrentUser()->getId();
+        
+        return Database::queryArray(
+            "select campaignNews.*, User.Username as CreatedByUserName
+                from News campaignNews
+                left join User on User.Id = campaignNews.CreatedByUserId
+                where CampaignId in (select CampaignId from UserCampaignData where UserId = ?) and campaignNews.CreatedOnDate > ?
+                union
+                select adminNews.*, User.Username as CreatedByUserName
+                from News adminNews
+                left join User on User.Id = adminNews.CreatedByUserId
+                where CampaignId is null and adminNews.CreatedOnDate > ?
+                order by CreatedOnDate desc", [$currentUserId, $since, $since]);
     }
     
     public static function addNews($text, $campaignId,  $entryId, $createdByUserId) {

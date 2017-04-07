@@ -1,5 +1,4 @@
 Next:
-    - infinite scroll news list
     
 Future:
         

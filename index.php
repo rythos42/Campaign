@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
         <script src="js/lib/knockout-jqAutocomplete.min.js"></script>
         <script src="js/lib/jquery.panzoom.js"></script>
@@ -45,6 +46,7 @@
         <script src="js/app/infrastructure/CanvasClickToZoomInCustomBinder.js"></script>
         <script src="js/app/infrastructure/CanvasClickCustomBinder.js"></script>
         <script src="js/app/infrastructure/StupidTableCustomBinder.js"></script>
+        <script src="js/app/infrastructure/InfiniteScrollCustomBinder.js"></script>
         <script src="js/app/model/Campaign.js"></script>
         <script src="js/app/model/Faction.js"></script>
         <script src="js/app/model/User.js"></script>
