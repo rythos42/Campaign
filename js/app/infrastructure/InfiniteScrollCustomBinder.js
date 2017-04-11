@@ -1,14 +1,13 @@
-/*globals ko */
+/*globals ko, _ */
 ko.bindingHandlers.infiniteScroll = {
-	init: function(elementDom, valueAccessor) {
+    init: function(elementDom, valueAccessor) {
         var addMoreFunction = ko.utils.unwrapObservable(valueAccessor());
             
         (function() {
             var lastScrollTop = 0;
             
             $(window).scroll(_.throttle(function() {
-                var scrollElement = document.documentElement,
-                    scrollTop = window.pageYOffset || document.documentElement.scrollTop,
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop,
                     remaining = document.documentElement.scrollHeight - (window.innerHeight + scrollTop),
                     down = scrollTop > lastScrollTop;
                     
@@ -18,6 +17,6 @@ ko.bindingHandlers.infiniteScroll = {
                 }
             }, 100));
         })();
-	}
+    }
 };
 

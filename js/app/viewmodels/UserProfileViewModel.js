@@ -15,7 +15,7 @@ var UserProfileViewModel = function(user, navigation) {
     });
     
     self.noEmail = ko.computed(function() {
-        return !user.email()
+        return !user.email();
     });
     
     self.showProfileWarning = ko.computed(function() {
