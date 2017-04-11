@@ -1,8 +1,5 @@
 Next:
 Run @ home: alter table User add column Email varchar(320)  
-              
-- little ! icon on profile until they fill in e-mail
-- profile needs more left padding, to close to Campaigns button
     
 Future:
 - "tags" on territories? Like "dense woods", "industrial"?

@@ -19,6 +19,7 @@ class HeaderWidget {
             <!-- ko with: userProfileViewModel -->
             <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="click: requestUserProfile, visible: showUserProfileButton, tooltip: '<?php echo Translation::getString("profile"); ?>'">
                 <span class="icon-user"></span>
+                <span data-bind="visible: showProfileWarning" class="button-icon-warning-overlay"></span>
             </button>
             <!-- /ko -->
             <!-- ko with: logoutViewModel -->

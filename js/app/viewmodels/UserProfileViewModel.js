@@ -18,6 +18,10 @@ var UserProfileViewModel = function(user, navigation) {
         return !user.email()
     });
     
+    self.showProfileWarning = ko.computed(function() {
+        return !user.email();
+    });
+    
     self.requestUserProfile = function() {
         navigation.showUserProfile(true);
     };
