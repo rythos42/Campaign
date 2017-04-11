@@ -71,7 +71,8 @@ li.button-panel {
     width: 260px;
 }
 
-li.entry-field label {
+li.entry-field label,
+li.data-list label {
     text-align: right;
     display: inline-block;
     margin-bottom: 5px;
@@ -98,7 +99,7 @@ li.entry-field > span.validationMessage {
 li.data-list > span {
     font-weight: bold;
     display: inline-block;
-    width: 100px;
+    width: 140px;
 }
 
 table {
@@ -285,7 +286,8 @@ td.actions .button-icon {
     overflow-wrap: break-word;
 }
 
-.news-item .username {
+.news-item .username,
+.news-item .campaign-name {
     font-weight: bold;
 }
 

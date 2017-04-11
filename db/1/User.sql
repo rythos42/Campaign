@@ -6,5 +6,6 @@ CREATE TABLE User (
     PasswordHash VARCHAR(255) NOT NULL,
     CreatedOnDate datetime NOT NULL,
     LastLoginDate datetime,
+    Email VARCHAR(320),
     PRIMARY KEY (Id)
 ); 

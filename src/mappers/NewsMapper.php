@@ -5,14 +5,16 @@ class NewsMapper {
 
         // Get news for the current logged in user's campaigns, and for admin messages.
         return Database::queryArray(
-            "select campaignNews.*, User.Username as CreatedByUserName
+            "select campaignNews.*, User.Username as CreatedByUserName, Campaign.Name as CampaignName
                 from News campaignNews
                 left join User on User.Id = campaignNews.CreatedByUserId
+                left join Campaign on Campaign.Id = campaignNews.CampaignId
                 where CampaignId in (select CampaignId from UserCampaignData where UserId = ?) and campaignNews.CreatedOnDate < ?
                 union
-                select adminNews.*, User.Username as CreatedByUserName
+                select adminNews.*, User.Username as CreatedByUserName, Campaign.Name as CampaignName
                 from News adminNews
                 left join User on User.Id = adminNews.CreatedByUserId
+                left join Campaign on Campaign.Id = adminNews.CampaignId
                 where CampaignId is null and adminNews.CreatedOnDate < ?
                 order by CreatedOnDate desc
                 limit ?", [$currentUserId, $lastLoadedDate, $lastLoadedDate, $numberToLoad]);
@@ -22,14 +24,16 @@ class NewsMapper {
         $currentUserId = User::getCurrentUser()->getId();
         
         return Database::queryArray(
-            "select campaignNews.*, User.Username as CreatedByUserName
+            "select campaignNews.*, User.Username as CreatedByUserName, Campaign.Name as CampaignName
                 from News campaignNews
                 left join User on User.Id = campaignNews.CreatedByUserId
+                left join Campaign on Campaign.Id = campaignNews.CampaignId
                 where CampaignId in (select CampaignId from UserCampaignData where UserId = ?) and campaignNews.CreatedOnDate > ?
                 union
-                select adminNews.*, User.Username as CreatedByUserName
+                select adminNews.*, User.Username as CreatedByUserName, Campaign.Name as CampaignName
                 from News adminNews
                 left join User on User.Id = adminNews.CreatedByUserId
+                left join Campaign on Campaign.Id = adminNews.CampaignId
                 where CampaignId is null and adminNews.CreatedOnDate > ?
                 order by CreatedOnDate desc", [$currentUserId, $since, $since]);
     }

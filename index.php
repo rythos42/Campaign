@@ -96,10 +96,6 @@
                 var user = new User(),
                     navigation = new Navigation(user);
                     
-                ko.validation.registerExtenders();
-                var viewModel = new ApplicationViewModel(user, navigation);
-                ko.applyBindings(viewModel, document.getElementById('Everything'));
-                
                 <?php 
                 if(User::isLoggedIn()) {
                     UserMapper::updateLastLoginDate(User::getCurrentUser()->getId());
@@ -107,6 +103,10 @@
                     user.setFromJson(<?php echo json_encode(User::getCurrentUser()); ?>);
                     user.isLoggedIn(true);
                 <?php } ?>
+
+                ko.validation.registerExtenders();
+                var viewModel = new ApplicationViewModel(user, navigation);
+                ko.applyBindings(viewModel, document.getElementById('Everything'));
             });
         </script>
         

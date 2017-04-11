@@ -97,5 +97,8 @@
         <more>More</more>
         <less>Less</less>
         <attackingNonAdjacentMustSpendOne>Attacking non-adjacent costs 1.</attackingNonAdjacentMustSpendOne>
+        <in>in</in>
+        <email>E-mail</email>
+        <noEmailMessage>No account recovery without e-mail.</noEmailMessage>
     </strings>
 </translation>

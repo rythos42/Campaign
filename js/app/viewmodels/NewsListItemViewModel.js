@@ -31,6 +31,14 @@ var NewsListItemViewModel = function(serverNewsItem) {
         return '[' + (isShowingLess() ? Translation.getString('more') : Translation.getString('less')) + ']';
     });
     
+    self.isCampaignNews = ko.computed(function() {
+        return serverNewsItem.CampaignName !== null;
+    });
+    
+    self.campaignName = ko.computed(function() {
+        return serverNewsItem.CampaignName;
+    });
+    
     self.toggleMoreLess = function() {
         isShowingLess(!isShowingLess());
     };

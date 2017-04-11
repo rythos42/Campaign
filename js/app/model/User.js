@@ -5,6 +5,7 @@ var User = function(serverUser) {
 
     self.id = ko.observable(serverUser ? serverUser.Id : undefined);
     self.username = ko.observable(serverUser ? serverUser.Username : undefined);
+    self.email = ko.observable(serverUser ? serverUser.Email : undefined);
     self.isLoggedIn = ko.observable(false);
     self.permissions = ko.observableArray();
     self.territoryBonus = ko.observable(serverUser ? serverUser.TerritoryBonus : undefined);
@@ -26,6 +27,7 @@ var User = function(serverUser) {
         var user = new User();
         user.id(self.id());
         user.username(self.username());
+        user.email(self.email());
         user.territoryBonus(self.territoryBonus());
         user.attacks(self.attacks());
         user.factionId(self.factionId());
@@ -36,6 +38,7 @@ var User = function(serverUser) {
     self.setFromJson = function(jsonUser) {
         self.id(jsonUser.Id);
         self.username(jsonUser.Name);
+        self.email(jsonUser.Email);
         self.permissions($.map(jsonUser.Permissions, function(serverPermission) { return serverPermission.Id; }));
         self.territoryBonus(jsonUser.TerritoryBonus);
         self.attacks(jsonUser.Attacks);

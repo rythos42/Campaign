@@ -4,10 +4,12 @@ class User implements JsonSerializable {
     private $name;
     private $permissions;
     private $userCampaignData;
+    private $email;
     
-    function __construct($id, $name, $permissions = null, $userCampaignData = null) {
+    function __construct($id, $name, $email = null, $permissions = null, $userCampaignData = null) {
         $this->id = $id;
         $this->name = $name;
+        $this->email = $email;
         $this->permissions = $permissions;
         $this->userCampaignData = $userCampaignData;
     }
@@ -21,7 +23,8 @@ class User implements JsonSerializable {
             "Id" => $this->id, 
             "Name" => $this->name, 
             "Permissions" => $this->permissions,
-            "UserCampaignData" => $this->userCampaignData
+            "UserCampaignData" => $this->userCampaignData,
+            "Email" => $this->email
         );
     }
     
@@ -32,6 +35,10 @@ class User implements JsonSerializable {
         }
         
         return false;
+    }
+        
+    public function setEmail($email) {
+        $this->email = $email;
     }
     
     public static function setLoggedIn($user) {

@@ -20,7 +20,7 @@ class UserMapper {
     }
     
     public static function validateLogin($username, $password) {
-        $dbUser = Database::queryObject("SELECT Id, PasswordHash FROM User WHERE Username = ?", [$username]);
+        $dbUser = Database::queryObject("SELECT Id, Email, PasswordHash FROM User WHERE Username = ?", [$username]);
         if($dbUser && password_verify($password, $dbUser->PasswordHash)) {
             UserMapper::updateLastLoginDate($dbUser->Id);
             
@@ -31,7 +31,7 @@ class UserMapper {
                 
             $userCampaignData = Database::queryArray("SELECT CampaignId, TerritoryBonus, Attacks FROM UserCampaignData WHERE UserId = ?", [$dbUser->Id]);
            
-            return new User($dbUser->Id, $username, $permissions, $userCampaignData);
+            return new User($dbUser->Id, $username, $dbUser->Email, $permissions, $userCampaignData);
         }
         else {
             return null;
@@ -41,7 +41,7 @@ class UserMapper {
     public static function getUsersByFilter($term, $campaignId) {
         // Deliberately not retrieving PasswordHash here. Web client doesn't need it.
         return Database::queryArray(
-            "select User.Id, User.Username, UserCampaignData.TerritoryBonus, UserCampaignData.Attacks, UserCampaignData.FactionId 
+            "select User.Id, User.Username, User.Email, UserCampaignData.TerritoryBonus, UserCampaignData.Attacks, UserCampaignData.FactionId 
             from User 
             join UserCampaignData on UserCampaignData.UserId = User.Id 
             where Username like ? and CampaignId = ?", 
@@ -61,6 +61,12 @@ class UserMapper {
     public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
         Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus - ? where UserId = ? and CampaignId = ?", [$amount, User::getCurrentUser()->getId(), $campaignId]);
         Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$amount, $userId, $campaignId]);
+    }
+    
+    public static function saveUserProfile($user) {
+        User::getCurrentUser()->setEmail($user->email);
+        
+        Database::execute("update User set Email = ? where Id = ?", [$user->email, $user->id]);
     }
 }
 ?>

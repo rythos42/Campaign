@@ -55,6 +55,10 @@ switch($action) {
     case "GiveTerritoryBonusInCampaignTo":
         UserMapper::giveTerritoryBonusInCampaignTo($_REQUEST["userId"], $_REQUEST["campaignId"], $_REQUEST["amount"]);
         break;
+        
+    case "SaveUserProfile":
+        UserMapper::saveUserProfile(json_decode($_REQUEST["user"]));
+        break;
 }
 
 ?>
