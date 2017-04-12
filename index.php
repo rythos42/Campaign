@@ -82,6 +82,7 @@
         <script src="js/app/viewmodels/NewsListItemViewModel.js"></script>
         <script src="js/app/viewmodels/TextFieldDialogViewModel.js"></script>
         <script src="js/app/viewmodels/DropDownListDialogViewModel.js"></script>
+        <script src="js/app/viewmodels/EditTerritoryDialogViewModel.js"></script>
         
         <?php Translation::loadTranslationFiles($_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'] . "/lang"); ?>
         

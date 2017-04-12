@@ -1,21 +1,19 @@
 Next:
-Run @ home: alter table User add column Email varchar(320)  
+Run @ home: alter table User add column Email varchar(320)
+- put +/- buttons on Create Campaign map
+- tags set and added by campaign creator
+- clicking on a territory in InProgressCampaign brings up a dialog showing details about the territory:
+    - who owns it, tags
+    - attack button
+    
+Tags:
+- Heavy forests
+- regular forests
+- agricultural center
+- desert wasteland
+- ruins
     
 Future:
-- "tags" on territories? Like "dense woods", "industrial"?
-    - set and added by campaign creator
-        - replace "drag and drop" of factions with a "territory editor" panel
-    - hovering over a territory shows it's tags
-        - but what about mobile users?
-    
-    Tags:
-    - Heavy forests
-    - regular forests
-    - agricultural center
-    - desert wasteland
-    - super dense terrain
-    - ruins
-
         
 Before a general release:
 - "Contact us"

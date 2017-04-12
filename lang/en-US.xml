@@ -100,5 +100,7 @@
         <in>in</in>
         <email>E-mail</email>
         <noEmailMessage>No account recovery without e-mail.</noEmailMessage>
+        <editTerritory>Edit Territory</editTerritory>
+        <assignFactionsToTerritories>Assign Factions to Territories</assignFactionsToTerritories>
     </strings>
 </translation>

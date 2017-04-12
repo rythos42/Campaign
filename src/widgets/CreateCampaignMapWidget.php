@@ -4,28 +4,20 @@ class CreateCampaignMapWidget {
         ?>
         <!-- ko with: createCampaignMapViewModel -->
         <div class="map-grouping ui-widget ui-corners-all ui-widget-content" data-bind="visible: showMap">
-            <ul class="map-legend" data-bind="foreach: factions">
-                <li class="drag-drop-button ui-corner-all" draggable="true" data-bind="style: { 'background-color': colour }, event: { dragstart: $parent.dragFaction }">
-                    <span data-bind="text: name">
-                </li>
-            </ul>
             <span>
                 <input type="button" data-bind="click: saveMap" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <button class="ui-button ui-widget ui-corner-all button-icon" data-bind="visible: hasSelectedTerritory, click: deleteSelectedTerritory, tooltip: '<?php echo Translation::getString("removeFactionFromTerritory"); ?>'">
-                    <span class="icon-bin"></span>
-                </button>
             </span>
+            <h3><?php echo Translation::getString("assignFactionsToTerritories"); ?></h3>
             <span class="validationMessage" data-bind="validationMessage: factionTerritories"></span>
             <div class="map-panel">
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
-                <canvas id="CampaignMapCanvas" data-bind="
-                    canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                    drawPolygonOnCanvas: { polygon: highlightedTerritory, colour: draggingFactionColour },
-                    drawPolygonOnCanvas: { polygon: selectedTerritory },
-                    event: {drop: placeFactionInTerritory, dragover: highlightDraggingTerritory, dragleave: highlightDraggingTerritory, click: selectTerritory}">
-                </canvas>
+                <canvas id="CampaignMapCanvas" data-bind="canvas: { url: mapImageUrl, onLoad: storeImage }, event: { click: selectTerritory }"></canvas>
             </div>
         </div>
+        <?php
+            $editTerritoryDialogWidget = new EditTerritoryDialogWidget();
+            $editTerritoryDialogWidget->render();
+        ?>
         <!-- /ko -->
         <?php
     }

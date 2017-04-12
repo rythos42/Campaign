@@ -66,16 +66,12 @@ var CampaignListViewModel = function(user, navigation) {
             }
         });
     };
+        
+    if(user.isLoggedIn())
+        self.getCampaignList();
     
     navigation.showMain.subscribe(function(show) {
         if(!show)
-            return;
-        
-        self.getCampaignList();
-    });
-    
-    user.isLoggedIn.subscribe(function(isLoggedIn) {
-        if(!isLoggedIn)
             return;
         
         self.getCampaignList();
