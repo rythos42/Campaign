@@ -106,5 +106,6 @@
         <tagsExample>woods, 3000pts</tagsExample>
         <ownedBy>Owned by</ownedBy>
         <tagsMaxLengthValidation>You've only got 100 characters.</tagsMaxLengthValidation>
+        <unowned>(unowned)</unowned>
     </strings>
 </translation>

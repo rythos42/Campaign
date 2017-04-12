@@ -24,7 +24,8 @@ var TerritoryDetailsDialogViewModel = function(currentCampaign) {
         if(!campaign || !territory)
             return '';
         
-        return campaign.getFactionById(territory.OwningFactionId).name();
+        var faction = campaign.getFactionById(territory.OwningFactionId);
+        return faction ? faction.name() : Translation.getString('unowned');
     });
     
     self.attack = function() {    
