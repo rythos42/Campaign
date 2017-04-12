@@ -1,11 +1,13 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals ko, MapHelper, MapLegendViewModel */
+/*globals ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult */
 var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, userCampaignData) {
     var self = this,
         serverTerritories,
         reachableTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
 
+    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(currentCampaign);
+        
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable();
     self.showLoadingImage = ko.observable(true);
@@ -64,18 +66,19 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(reachableTerritories(), event));
     };
     
-    self.startChallenge = function() {
+    self.openTerritoryDetails = function() {
+        if(!self.drawingTerritory())
+            return;
+        
+        self.territoryDetailsDialogViewModel.territory(self.drawingTerritory());
+        self.territoryDetailsDialogViewModel.openDialog();
+    };
+    
+    self.startChallenge = function(territory) {
         if(self.currentUserOutOfAttacks())
             return;
 
-        if(currentCampaign().isMapCampaign()) {
-            if(!self.drawingTerritory())
-                return;
-            navigation.parameters({ territory: self.drawingTerritory(), attackingAnywhere: self.attackAnywhere() });
-        } else {
-            navigation.parameters({});
-        }
-        
+        navigation.parameters(currentCampaign().isMapCampaign() ? { territory: territory, attackingAnywhere: self.attackAnywhere() } : {});
         navigation.showCreateEntry(true);
     };
     
@@ -99,6 +102,12 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         else
             self.mapImageUrl(url);
     }
+    
+    self.territoryDetailsDialogViewModel.dialogResult.subscribe(function(dialogResult) {
+        if(dialogResult === DialogResult.Saved) {
+            self.startChallenge(self.territoryDetailsDialogViewModel.territory());
+        }
+    });
 
     navigation.showInProgressCampaign.subscribe(function(showInProgressCampaign) {
         if(!showInProgressCampaign || !currentCampaign())

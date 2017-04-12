@@ -1,20 +1,7 @@
 Next:
 Run @ home: 
     alter table User add column Email varchar(320)
-    alter table Territory add column Tags varchar(100)
-    
-- put +/- buttons on Create Campaign map
-- clicking on a territory in InProgressCampaign brings up a dialog showing details about the territory:
-    - who owns it, tags
-    - attack button
-- max char count of 100 on tags
-    
-Tags:
-- Heavy forests
-- regular forests
-- agricultural center
-- desert wasteland
-- ruins
+    alter table Territory add column Tags varchar(100)    
     
 Future:
         
@@ -28,6 +15,7 @@ Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
     - An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
     - TerritoryBonus is a generic term for "materials" in the current UI. I didn't want to update all of the code to say "materials", in case we theme this for another settings in the future.
+    - Tags can be used for any kind of information on territories - bonus', required points values, suggested terrain.
     - To insert administrative news: insert into News (News) VALUES ('Mores news');
 
 Credit: 

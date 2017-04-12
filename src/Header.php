@@ -54,6 +54,7 @@ include($installDirOnWebServer . "/src/widgets/NewsListWidget.php");
 include($installDirOnWebServer . "/src/widgets/TextFieldDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/DropDownListDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/EditTerritoryDialogWidget.php");
+include($installDirOnWebServer . "/src/widgets/TerritoryDetailsDialogWidget.php");
 
 session_start();
 Database::connect();

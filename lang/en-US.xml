@@ -101,8 +101,10 @@
         <email>E-mail</email>
         <noEmailMessage>No account recovery without e-mail.</noEmailMessage>
         <editTerritory>Edit Territory</editTerritory>
-        <assignFactionsToTerritories>Assign Factions to Territories</assignFactionsToTerritories>
+        <assignFactionsToTerritories>Click to assign factions to territories</assignFactionsToTerritories>
         <tags>Tags</tags>
         <tagsExample>woods, 3000pts</tagsExample>
+        <ownedBy>Owned by</ownedBy>
+        <tagsMaxLengthValidation>You've only got 100 characters.</tagsMaxLengthValidation>
     </strings>
 </translation>

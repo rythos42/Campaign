@@ -18,7 +18,7 @@ class InProgressCampaignMapWidget {
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
                     drawPolygonOnCanvas: { polygon: drawingTerritory }, 
                     event: { mousemove: drawTerritory },
-                    canvasClick: startChallenge">
+                    canvasClick: openTerritoryDetails">
                 </canvas>
                 <div class="map-buttons">
                     <button class="ui-button ui-corner-all button-icon" data-bind="clickToZoomIn: '#EntryMapCanvas'">
@@ -29,6 +29,10 @@ class InProgressCampaignMapWidget {
                     </button>
                 </div>
             </div>
+            <?php
+                $territoryDetailsDialog = new TerritoryDetailsDialogWidget();
+                $territoryDetailsDialog->render();
+            ?>
         </div>
         <button data-bind="visible: !showMap(), click: startChallenge" class="ui-button  ui-corner-all"><?php echo Translation::getString("attack"); ?></button>
         <!-- /ko -->

@@ -86,6 +86,7 @@ li.entry-field > span {
 
 li.entry-field > span.validationMessage {
     width: auto;
+    font-size: 0.9em;
 }
 
 .ui-dialog li.entry-field label {

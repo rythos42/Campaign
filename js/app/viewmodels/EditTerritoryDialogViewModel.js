@@ -7,15 +7,23 @@ var EditTerritoryDialogViewModel = function(entryCampaign) {
     self.dialogResult = ko.observable(DialogResult.None);
     self.selectedTerritory = ko.observable();
     self.selectedFaction = ko.observable();
-    self.tags = ko.observable();
     self.availableFactions = entryCampaign.factions;
+
+    self.tags = ko.observable().extend({
+        maxLength: { params: 100, message: Translation.getString('tagsMaxLengthValidation') }
+    });
     
     self.dialogTitle = ko.computed(function() {
         var selectedTerritory = self.selectedTerritory();
         return selectedTerritory ? Translation.getString('editTerritory') + ' ' + selectedTerritory.IdOnMap : '';
     });
     
-    self.save = function() {    
+    self.save = function() {
+        if(!self.tags.isValid()) {
+            self.tags.isModified(true);
+            return;
+        }
+        
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
     };
