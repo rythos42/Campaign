@@ -1,10 +1,13 @@
 Next:
-Run @ home: alter table User add column Email varchar(320)
+Run @ home: 
+    alter table User add column Email varchar(320)
+    alter table Territory add column Tags varchar(100)
+    
 - put +/- buttons on Create Campaign map
-- tags set and added by campaign creator
 - clicking on a territory in InProgressCampaign brings up a dialog showing details about the territory:
     - who owns it, tags
     - attack button
+- max char count of 100 on tags
     
 Tags:
 - Heavy forests

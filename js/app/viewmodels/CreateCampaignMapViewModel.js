@@ -3,7 +3,8 @@
 var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
     var self = this,
         mapHelper = new MapHelper('CampaignMapCanvas'),
-        territoryPolygons = ko.observable();
+        territoryPolygons = ko.observable(),
+        territoryTags = ko.observable({});
         
     self.editTerritoryDialogViewModel = new EditTerritoryDialogViewModel(entryCampaign);
     
@@ -40,38 +41,40 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
 
     self.selectTerritory = function(createCampaignMapViewModel, event) {
         var clickedTerritory = mapHelper.findPolygonUnderMouseEvent(territoryPolygons(), event);
-        
-        var territories = self.factionTerritories(),
-            owningFactionId = territories[clickedTerritory.Id];
-        if(owningFactionId) {
-            var owningFaction = entryCampaign.getFactionById(owningFactionId);
-            self.editTerritoryDialogViewModel.selectedFaction(owningFaction);
-        } else {
-            self.editTerritoryDialogViewModel.selectedFaction(undefined);
-        }           
-            
+        loadIntoTerritoryDialog(clickedTerritory);
         self.editTerritoryDialogViewModel.selectedTerritory(clickedTerritory);
         self.editTerritoryDialogViewModel.openDialog();
     };
     
+    function loadIntoTerritoryDialog(clickedTerritory) {
+        var territoryId = clickedTerritory.Id,
+            owningFactionId = self.factionTerritories()[territoryId],
+            tags = territoryTags()[territoryId];
+            
+        self.editTerritoryDialogViewModel.selectedFaction(owningFactionId ? entryCampaign.getFactionById(owningFactionId) : undefined);
+        self.editTerritoryDialogViewModel.tags(tags ? tags : undefined);
+    }
+    
     self.editTerritoryDialogViewModel.dialogResult.subscribe(function(dialogResult) {
         if(dialogResult === DialogResult.Saved) {
-            var selectedFaction = self.editTerritoryDialogViewModel.selectedFaction(),
-                selectedTerritory = self.editTerritoryDialogViewModel.selectedTerritory();
+            var selectedTerritory = self.editTerritoryDialogViewModel.selectedTerritory(),
+                selectedFaction = self.editTerritoryDialogViewModel.selectedFaction();
                 
             mapHelper.restoreOriginalImageForPolygon(selectedTerritory);
-            var territories = self.factionTerritories();
-            if(selectedFaction) {
+            if(selectedFaction)
                 mapHelper.drawTerritory(selectedTerritory, selectedFaction.colour);
-                territories[selectedTerritory.Id] = selectedFaction.id();
-            } else {
-                territories[selectedTerritory.Id] = undefined;
-            }
-
-            self.factionTerritories(territories);
+            saveFromTerritoryDialog(selectedTerritory.Id, selectedFaction);
             mapHelper.storeImage();
         }
     });
+    
+    function saveFromTerritoryDialog(selectedTerritoryId, selectedFaction) {
+        var territories = self.factionTerritories();
+        territories[selectedTerritoryId] = selectedFaction ? selectedFaction.id() : undefined;
+        self.factionTerritories(territories);
+        
+        territoryTags()[selectedTerritoryId] = self.editTerritoryDialogViewModel.tags();
+    }
     
     self.saveMap = function() {
         if(!self.factionTerritories.isValid()) {
@@ -84,7 +87,8 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
             datatype: 'JSON',
             data: {
                 action: 'SaveFactionTerritories',
-                factionTerritories: self.factionTerritories()
+                factionTerritories: self.factionTerritories(),
+                territoryTags: territoryTags()
             },
             success: function() {
                 navigation.showMain(true);

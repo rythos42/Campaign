@@ -102,5 +102,7 @@
         <noEmailMessage>No account recovery without e-mail.</noEmailMessage>
         <editTerritory>Edit Territory</editTerritory>
         <assignFactionsToTerritories>Assign Factions to Territories</assignFactionsToTerritories>
+        <tags>Tags</tags>
+        <tagsExample>woods, 3000pts</tagsExample>
     </strings>
 </translation>

@@ -7,6 +7,7 @@ var EditTerritoryDialogViewModel = function(entryCampaign) {
     self.dialogResult = ko.observable(DialogResult.None);
     self.selectedTerritory = ko.observable();
     self.selectedFaction = ko.observable();
+    self.tags = ko.observable();
     self.availableFactions = entryCampaign.factions;
     
     self.dialogTitle = ko.computed(function() {

@@ -56,7 +56,8 @@ switch($action) {
         
     case "SaveFactionTerritories":
         $factionTerritories = $_REQUEST["factionTerritories"];
-        MapMapper::saveFactionTerritories($factionTerritories);
+        $territoryTags = $_REQUEST["territoryTags"];
+        MapMapper::saveCampaignTerritories($factionTerritories, $territoryTags);
         break;
         
     case "ResetPhase":

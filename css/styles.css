@@ -92,7 +92,8 @@ li.entry-field > span.validationMessage {
     width: 70px;
 }
 
-.ui-dialog li.entry-field input {
+.ui-dialog li.entry-field input,
+.ui-dialog li.entry-field select {
     width: 170px;
 }
 
