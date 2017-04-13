@@ -1,10 +1,10 @@
 Next:
-Run @ home: 
-    alter table User add column Email varchar(320)
-    alter table Territory add column Tags varchar(100)    
+    - multi-line tags looks dumb
+    - star on territory with tag
 
-- multi-line tags looks dumb
-- star on territory with tag
+    Run @ home: 
+        alter table User add column Email varchar(320)
+        alter table Territory add column Tags varchar(100)    
     
 Future:
         
