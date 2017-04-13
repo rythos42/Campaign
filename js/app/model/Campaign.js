@@ -12,6 +12,7 @@ var Campaign = function(serverCampaign) {
     self.optionalAttacks = ko.observable();
     self.currentUserJoinedCampaign = ko.observable(serverCampaign ? serverCampaign.CurrentUserJoinedCampaign === 1 : undefined);
     self.players = ko.observableArray();
+    self.territories = ko.observableArray();
     
     if(serverCampaign) {
         self.factions($.map(serverCampaign.Factions, function(serverFaction) {

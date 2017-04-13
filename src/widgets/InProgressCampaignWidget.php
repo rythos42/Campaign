@@ -81,6 +81,7 @@ class InProgressCampaignViewModel {
                 <ul>
                     <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>
                     <li><a href="#PlayersTab"><?php echo Translation::getString("players"); ?></a></li>
+                    <li><a href="#TagsTab"><?php echo Translation::getString("tags"); ?></a></li>
                 </ul>
                 <div id="EntriesTab">
                     <?php
@@ -92,6 +93,12 @@ class InProgressCampaignViewModel {
                     <?php
                     $playerListWidget = new PlayerListWidget();
                     $playerListWidget->render();
+                    ?>
+                </div>
+                <div id="TagsTab">
+                    <?php
+                    $tagListWidget = new TagListWidget();
+                    $tagListWidget->render();
                     ?>
                 </div>
             </div>

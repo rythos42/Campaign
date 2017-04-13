@@ -23,5 +23,10 @@
     
     .map-legend {
         margin-top: 5px;
+        display: block; /* "Spend 1" on new line */
+    }
+    
+    .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+        padding: 0.5em 0.8em;   /* less left/right padding on tabs */
     }
 }

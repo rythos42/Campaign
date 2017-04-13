@@ -3,7 +3,8 @@ Run @ home:
     alter table User add column Email varchar(320)
     alter table Territory add column Tags varchar(100)    
 
-- dragging create entry map opens dialog
+- multi-line tags looks dumb
+- star on territory with tag
     
 Future:
         

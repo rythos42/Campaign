@@ -11,7 +11,7 @@ class CreateCampaignMapWidget {
             <span class="validationMessage" data-bind="validationMessage: factionTerritories"></span>
             <div class="map-panel">
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
-                <canvas id="CampaignMapCanvas" data-bind="canvas: { url: mapImageUrl, onLoad: storeImage }, event: { click: selectTerritory }"></canvas>
+                <canvas id="CampaignMapCanvas" data-bind="canvas: { url: mapImageUrl, onLoad: storeImage }, canvasClick: selectTerritory"></canvas>
                 <div class="map-buttons">
                     <button class="ui-button ui-corner-all button-icon" data-bind="clickToZoomIn: '#CampaignMapCanvas'">
                         <span class="icon-plus"></span>

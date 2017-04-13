@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -14,6 +14,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
+    self.tagListViewModel = new TagListViewModel(currentCampaign);
     
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();

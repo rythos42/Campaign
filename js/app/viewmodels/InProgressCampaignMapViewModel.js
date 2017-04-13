@@ -54,6 +54,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             success: function(territories) {
                 serverTerritories = territories;
                 reachableTerritories(self.attackAnywhere() ? serverTerritories.All : serverTerritories.Adjacent);
+                currentCampaign().territories(serverTerritories.All);
             }
         });
     }
