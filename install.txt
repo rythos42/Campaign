@@ -3,20 +3,17 @@ Run SQL:
         Database
         User
         Campaign
-        CampaignEntry
-        CampaignFaction
-        CampaignFactionEntry
-    2:
+        Entry
+        Faction
+        FactionEntry
         Permission
         PermissionGroup
-        Polygon
-        PolygonPoint
-        AlterTable_User_Add_PermissionGroup
-        AlterTable_Campaign_Add_CampaignType
-        AlterTable_CampaignFaction_Add_Colour
-        AlterTable_User_Add_TerritoryBonus
-        AlterTable_User_Add_LastLoginId
+        Phase
+        Territory
+        TerritoryPoint
+        UserCampaignData
         Insert_Permission_MapCampaign
+
     
 
 Install 
@@ -32,6 +29,12 @@ Build
         npm install grunt --save-dev
         npm install grunt-contrib-jshint --save-dev
         npm install grunt-ftp-deploy --save-dev
+        
+    Install Composer (https://getcomposer.org/doc/00-intro.md)
+    Install minify
+        composer install
+            
+        
     
 Give user CreateMapCampaign permission:
         INSERT INTO PermissionGroup (PermissionId, UserId) VALUES (1, ?)

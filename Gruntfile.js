@@ -41,7 +41,9 @@ module.exports = function (grunt) {
                 'install.txt',
                 'settings.sample.php',
                 'db',
-                'img/*.pdn'
+                'img/*.pdn',
+                'composer.json',
+                'vendor'
                 ]
             }
         }
