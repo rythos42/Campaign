@@ -1,0 +1,30 @@
+/* 
+Seperate so that Minify doesn't try to re-write the font URLs, because it does it badly. 
+Changes made in this file won't be picked up by clients, as there is no cache control applied.
+*/
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../font/icomoon.eot?kyqgz1');
+  src:  url('../font/icomoon.eot?kyqgz1#iefix') format('embedded-opentype'),
+    url('../font/icomoon.ttf?kyqgz1') format('truetype'),
+    url('../font/icomoon.woff?kyqgz1') format('woff'),
+    url('../font/icomoon.svg?kyqgz1#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

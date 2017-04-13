@@ -275,16 +275,6 @@ td.actions .button-icon {
     display: inline-block;
 }
 
-.drag-drop-button span::before {
-    content: " ";
-    display: inline-block;
-    background-image: url('../img/dragdrop.png');
-    width: 32px;
-    height: 32px;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
 .disabled-label {
     color: #888888;
     cursor: default !important;
