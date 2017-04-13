@@ -2,6 +2,6 @@
 var TagListItemViewModel = function(territory) {
     var self = this;
     
-    self.territoryId = territory.Id;
+    self.territoryId = territory.IdOnMap;
     self.tags = territory.Tags;
 };
