@@ -6,10 +6,10 @@ class TerritoryDetailsDialogWidget {
         <div data-bind="dialog: { title: dialogTitle, width: 300}, dialogOpenClose: dialogOpenClose">
             <ul>
                 <li class="data-list">
-                    <?php echo Translation::getString('tags'); ?>: <span data-bind="text: tags"></span>
+                    <label><?php echo Translation::getString('tags'); ?>:</label> <span data-bind="text: tags"></span>
                 </li>
                 <li class="data-list">
-                    <?php echo Translation::getString('ownedBy'); ?>: <span data-bind="text: ownedBy"></span>
+                    <label><?php echo Translation::getString('ownedBy'); ?>:</label> <span data-bind="text: ownedBy"></span>
                 </li>
                 <li class="button-panel">
                     <input type="button" data-bind="click: attack" value="<?php echo Translation::getString("attack"); ?>" class="ui-button ui-widget ui-corner-all" />
