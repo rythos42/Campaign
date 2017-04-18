@@ -5,7 +5,7 @@ class NewsWidget {
         <!-- ko with: newsListViewModel -->
         <div data-bind="visible: showNews, infiniteScroll: addMoreNewsItems, foreach: newsItems" class="grouping ui-widget ">
             <div class="news-item ui-corners-all ui-widget-content">
-                <span class="news" data-bind="text: news, css: {'smaller': smallerText, 'smallest': smallestText}"></span>
+                <span class="news" data-bind="html: news, css: {'smaller': smallerText, 'smallest': smallestText}"></span>
                 <button class="link-button" data-bind="visible: showMoreLessButtons, click: toggleMoreLess, text: showMoreLessButtonText"></button>
                 <span class="created-by" >
                     <?php echo Translation::getString("createdBy"); ?> <span class="username" data-bind="text: createdByUserName"></span>

@@ -13,10 +13,12 @@ var NewsListItemViewModel = function(serverNewsItem) {
     });
     
     self.news = ko.computed(function() {
-        if(self.showMoreLessButtons() && isShowingLess()) {
-            return newsText.substring(0, maxDisplayedLength);
-        }
-        return newsText;
+        var text = newsText.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+        if(self.showMoreLessButtons() && isShowingLess())
+            return text.substring(0, maxDisplayedLength);
+
+        return text;
     });
     
     self.smallestText = ko.computed(function() {
