@@ -1,20 +1,19 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, GiveTerritoryBonusToUserDialogViewModel, DateTimeFormatter, FactionEntrySummaryViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel */
+/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
         userCampaignData = ko.observable(),
         internalEntryList = ko.observableArray(),
-        currentlyLoadingEntryList = false,
-        finishedLoading = ko.observable(false);
+        currentlyLoadingEntryList = false;
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
-    self.giveTerritoryBonusToUserDialogViewModel = new GiveTerritoryBonusToUserDialogViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
     self.tagListViewModel = new TagListViewModel(currentCampaign);
+    self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();
@@ -24,46 +23,14 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.joinCampaignDialogViewModel = new DropDownListDialogViewModel(self.factions, 'name', Translation.getString('selectFaction'));
     
     self.showInProgressCampaign = ko.computed(function() {
-        return navigation.showInProgressCampaign() && finishedLoading();
+        return navigation.showInProgressCampaign();
     });
     
     self.isMapCampaign = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.isMapCampaign() : false;
     });
-    
-    self.availableTerritoryBonus = ko.computed(function() {
-        var userData = userCampaignData();
-        return userData ? userData.TerritoryBonus : 0;
-    });
-
-    self.mandatoryAttacks = ko.computed(function() {
-        var userData = userCampaignData();
-        if(!userData)
-            return '';
         
-        var attacks = userData.Attacks,
-            mandatoryAttacks = userData.MandatoryAttacks;
-            
-        return attacks > mandatoryAttacks 
-            ? (mandatoryAttacks + '/' + mandatoryAttacks) 
-            : (attacks + '/' + mandatoryAttacks);
-    });
-    
-    self.optionalAttacks = ko.computed(function() {
-        var userData = userCampaignData();
-        if(!userData)
-            return '';
-                
-        var attacks = userData.Attacks,
-            mandatoryAttacks = userData.MandatoryAttacks,
-            optionalAttacks = userData.OptionalAttacks;
-            
-        return (attacks > mandatoryAttacks)
-            ? ((attacks - mandatoryAttacks) + '/' + optionalAttacks)
-            : '0/' + optionalAttacks;
-    });
-    
     self.showAdminButton = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.createdByUserId() === user.id() : false;
@@ -71,14 +38,6 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     self.showResetPhaseButton = ko.computed(function() {
         return self.isMapCampaign();
-    });
-    
-    self.phaseStartDate = ko.computed(function() {
-        var userData = userCampaignData();
-        if(!userData || !userData.PhaseStartDate)
-            return '--';
-        
-        return DateTimeFormatter.formatDate(userData.PhaseStartDate);
     });
         
     self.hasJoinedCampaign = ko.computed(function() {
@@ -91,34 +50,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
         return currentCampaign();
     });
-    
-    self.factionEntrySummaries = ko.computed(function() {
-        var factionEntrySummaries = {};
-        $.each(internalEntryList(), function(i, entry) {
-            $.each(entry.factionEntries(), function(j, factionEntry) {
-                var factionId = factionEntry.faction().id();
-                if(!factionEntrySummaries[factionId])
-                    factionEntrySummaries[factionId] = new FactionEntrySummaryViewModel(factionEntry);
-                
-                var factionSummary = factionEntrySummaries[factionId];
-                factionSummary.addVictoryPoints(factionEntry.victoryPoints());
-            });
-        });
-        return $.map(factionEntrySummaries, function(factionEntrySummary) {
-            return factionEntrySummary;
-        });
-    });
-    
+        
     self.back = function() {
         userCampaignData(null);
         currentCampaign(null);
         user.clearCampaignData();
         
         navigation.showMain(true);
-    };
-            
-    self.showGiveTerritoryBonusDialog = function() {
-        self.giveTerritoryBonusToUserDialogViewModel.openDialog();
     };
             
     function getEntryList() {
@@ -153,7 +91,6 @@ var InProgressCampaignViewModel = function(user, navigation) {
         user.setFromCampaignData(userDataForCampaign);
         currentCampaign().mandatoryAttacks(userDataForCampaign.MandatoryAttacks);
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
-        finishedLoading(true);
     };
     
     self.resetPhase = function() {
@@ -169,19 +106,6 @@ var InProgressCampaignViewModel = function(user, navigation) {
                 setUserDataForCampaign(userDataForCampaign);
                 toastr.info(Translation.getString('nowOnNextPhase'));
             }
-        });
-    };
-
-    var refreshUserDataForCampaign = function() {
-        $.ajax({
-            url: 'src/webservices/UserService.php',
-            method: 'POST',
-            dataType: 'JSON',
-            data: { 
-                action: 'GetUserDataForCampaign', 
-                campaignId: currentCampaign().id() 
-            },
-            success: setUserDataForCampaign
         });
     };
     
@@ -225,36 +149,16 @@ var InProgressCampaignViewModel = function(user, navigation) {
         }
     });
     
-    navigation.showInProgressCampaign.subscribe(function(show) {
-        if(!show) {
-            finishedLoading(false);
-            return;
-        }
-
+    navigation.showInProgressCampaign.subscribe(function() {
         var newCampaign = navigation.parameters();
         navigation.parameters(null);
         
         if(newCampaign)
             currentCampaign(newCampaign);
         
-        refreshUserDataForCampaign();
-    });
-    
-    self.giveTerritoryBonusToUserDialogViewModel.dialogResult.subscribe(function(result) {
-        if(result === DialogResult.Saved) {
-            $.ajax({
-                url: 'src/webservices/UserService.php',
-                data: {
-                    action: 'GiveTerritoryBonusInCampaignTo',
-                    userId: self.giveTerritoryBonusToUserDialogViewModel.selectedUser().id(),
-                    campaignId: currentCampaign().id(),
-                    amount: 1
-                },
-                success: function() {
-                    refreshUserDataForCampaign();
-                }
-            });
-        }
+        UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {
+            setUserDataForCampaign(userDataForCampaign);
+        });
     });
     
     currentCampaign.subscribe(function() {

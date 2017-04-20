@@ -23,6 +23,14 @@ var UserManager = {
                 return new User(serverUser);
             }));
         });
+    },
+        
+    refreshUserDataForCampaign: function(campaignId) {
+        return $.ajax({
+            url: 'src/webservices/UserService.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { action: 'GetUserDataForCampaign', campaignId: campaignId }
+        });
     }
 };
-
