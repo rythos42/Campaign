@@ -4,14 +4,16 @@ class InProgressCampaignMapWidget {
         ?>
         <!-- ko with: inProgressCampaignMapViewModel -->
         <div data-bind="visible: showMap">
-            <ul class="map-legend" data-bind="foreach: legendFactions">
-                <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
-                    <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
-                    <span data-bind="text: name"></span>
-                </li>
-            </ul>
+            <div class="map-data">
+                <label><input type="checkbox" data-bind="checked: attackAnywhere, enable: hasAtLeastOneTerritoryBonus" />Spend 1 Material to attack anywhere</label>
+                <ul class="map-legend" data-bind="foreach: legendFactions">
+                    <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
+                        <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
+                        <span data-bind="text: name"></span>
+                    </li>
+                </ul>
+            </div>
             <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
-            <label><input type="checkbox" data-bind="checked: attackAnywhere, enable: hasAtLeastOneTerritoryBonus" />Spend 1 Material to attack anywhere</label>
             <div class="map-panel">
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="EntryMapCanvas" data-bind="

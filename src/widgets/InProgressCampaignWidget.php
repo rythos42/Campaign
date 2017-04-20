@@ -39,12 +39,7 @@ class InProgressCampaignViewModel {
                 ?>
                 <!-- /ko -->
             </div>
-            
-            <?php
-                $campaignSummaryStatsWidget = new CampaignSummaryStatsWidget();
-                $campaignSummaryStatsWidget->render();
-            ?>
-                                
+                                            
             <div>
                 <?php
                     $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
@@ -54,10 +49,17 @@ class InProgressCampaignViewModel {
             
             <div data-bind="tab: {}" class="ui-widget ui-corners-all ui-widget-content">
                 <ul>
+                    <li><a href="#SummaryTab">Summary</a></li>
                     <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>
                     <li><a href="#PlayersTab"><?php echo Translation::getString("players"); ?></a></li>
                     <li><a href="#TagsTab"><?php echo Translation::getString("tags"); ?></a></li>
                 </ul>
+                <div id="SummaryTab">
+                    <?php
+                    $campaignSummaryStatsWidget = new CampaignSummaryStatsWidget();
+                    $campaignSummaryStatsWidget->render();
+                    ?>
+                </div>
                 <div id="EntriesTab">
                     <?php
                     $entryListWidget = new EntryListWidget();

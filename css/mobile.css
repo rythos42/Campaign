@@ -6,6 +6,12 @@
     .map-grouping {
         width: 85%;
     }
+        
+    .map-data {
+        position: relative;
+        top: 0;
+        right: 0;
+    }
 }
 
 @media (max-width: 400px) {
@@ -27,6 +33,20 @@
     }
     
     .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
-        padding: 0.5em 0.8em;   /* less left/right padding on tabs */
+        padding: 0.5em 0.5em;   /* less left/right padding on tabs */
+        font-size: 0.8em;       /* smaller text so all 4 tabs fit on same line */
+    }
+    
+    .ui-tabs li.data-list {
+        font-size: 0.8em;
+        width: 260px;
+    }
+    
+    .ui-tabs li.data-list label {
+        width: 140px;
+    }    
+    
+    .ui-tabs li.data-list span {
+        width: 110px;
     }
 }

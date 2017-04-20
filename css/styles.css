@@ -101,7 +101,7 @@ li.entry-field > span.validationMessage {
 
 .ui-dialog li.entry-field input,
 .ui-dialog li.entry-field select {
-    width: 170px;
+    width: 163px;
 }
 
 .ui-dialog li.data-list > span {
@@ -146,8 +146,8 @@ td.actions .button-icon {
 }
 
 .inline-icon-button {
-    font-size: 0.8em;
-    padding: 0.15em;
+    font-size: 0.8em !important;
+    padding: 0.3em !important;
 }
 
 .link-button {
@@ -225,6 +225,7 @@ td.actions .button-icon {
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    position: relative;
 }
 
 .map-buttons {
@@ -232,6 +233,12 @@ td.actions .button-icon {
     top: 5px;
     left: 5px;
 }
+
+.map-data {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}    
 
 .grouping {
     width: 320px;
@@ -329,6 +336,14 @@ td.actions .button-icon {
     padding: 0px; 
     background: none; 
     border: 0 !important;
+}
+
+.ui-tabs li.data-list {
+    width: 315px;
+}
+
+.ui-tabs li.data-list label {
+    width: 165px;
 }
 
 .ui-tabs .ui-tabs-nav { 
