@@ -1,5 +1,7 @@
 Next:
     - star on territory with tag
+    - try a blue/grey background on map, more sleek.
+    - allow user to select theme?
 
     Run @ home: 
         alter table User add column Email varchar(320)

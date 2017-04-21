@@ -85,7 +85,7 @@ class MapMapper {
         imagealphablending($image, true);
         imagesavealpha($image, true);
         
-        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/stars_pink_light_galaxy_1471_1024x768.jpg");
+        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/1024x768/stars_pink_light_galaxy_1471.jpg");
         imagecopy($image, $starmap, 0, 0, 0, 0, $width, $height);
                     
         $sectorImage = imagecreatefrompng(MapMapper::getMapFileNameForCampaign($campaignId));
