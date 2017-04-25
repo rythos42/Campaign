@@ -1,7 +1,4 @@
 Next:
-    - allow user to select map?
-        - different map per campaign
-        - only users with certain permission can change map
     - able to click on any territory to see it's tags (but not attack)
         - maybe have attackable territories in red vs white?
         - or maybe hover to see tags?
@@ -41,6 +38,7 @@ Far Future:
     - create campaign customization: set height, width, number of sectors on map, pick background image
     - choose colours for faction
     - interface themes for you and your fellow gamers
+    - allow campaign creator to try different map images and select one as the default for the campaign
 - star on territory with tag when creating campaign
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple

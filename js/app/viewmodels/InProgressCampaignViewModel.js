@@ -149,7 +149,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
         }
     });
     
-    navigation.showInProgressCampaign.subscribe(function() {
+    navigation.showInProgressCampaign.subscribe(function(showInProgressCampaign) {
+        if(!showInProgressCampaign)
+            return;
+        
         var newCampaign = navigation.parameters();
         navigation.parameters(null);
         
