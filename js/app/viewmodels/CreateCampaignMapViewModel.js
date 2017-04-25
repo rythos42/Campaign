@@ -98,6 +98,6 @@ var CreateCampaignMapViewModel = function(navigation, entryCampaign) {
 
     entryCampaign.id.subscribe(function(newCampaignId) {
         if(entryCampaign.isMapCampaign())
-            self.mapImageUrl('src/webservices/CampaignService.php?action=GetMap&campaignId=' + newCampaignId);
+            self.mapImageUrl(mapHelper.createGetMapServiceCallUrl(newCampaignId, entryCampaign.mapImageWidth(), entryCampaign.mapImageHeight(), entryCampaign.mapImageName()));
     });
 };

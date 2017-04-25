@@ -97,7 +97,8 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     };
     
     function loadMapImage() {
-        var url = 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + currentCampaign().id();
+        var campaign = currentCampaign(),
+            url = mapHelper.createGetMapServiceCallUrl(campaign.id(), campaign.mapImageWidth(), campaign.mapImageHeight(), campaign.mapImageName());
         if(self.mapImageUrl() === url)
             self.mapImageUrl.notifySubscribers(url);
         else

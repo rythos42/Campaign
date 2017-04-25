@@ -41,8 +41,11 @@ switch($action) {
         
     case "GetMap":
         $campaignId = $_REQUEST["campaignId"];
+        $mapImageWidth = $_REQUEST["width"];
+        $mapImageHeight = $_REQUEST["height"];
+        $mapImageName = $_REQUEST["name"];
         header("Content-Type: image/jpeg");
-        MapMapper::outputMapForCampaign($campaignId);
+        MapMapper::outputMapForCampaign($campaignId, $mapImageWidth, $mapImageHeight, $mapImageName);
         break;
         
     case "GetAdjacentTerritoriesForFaction":

@@ -82,6 +82,10 @@ var MapHelper = function(mapIdOrCanvas) {
         return foundTerritory;
     };
     
+    self.createGetMapServiceCallUrl = function(campaignId, width, height, name) {
+        return 'src/webservices/CampaignService.php?action=GetMap&campaignId=' + campaignId + '&width=' + width + '&height=' + height + '&name=' + name;
+    };
+    
     function getMousePositionInCanvas(evt) {
         // http://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
         var canvas = getCanvas(),

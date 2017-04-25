@@ -13,6 +13,9 @@ var Campaign = function(serverCampaign) {
     self.currentUserJoinedCampaign = ko.observable(serverCampaign ? serverCampaign.CurrentUserJoinedCampaign === 1 : undefined);
     self.players = ko.observableArray();
     self.territories = ko.observableArray();
+    self.mapImageName = ko.observable('space_blue.jpg');
+    self.mapImageWidth = ko.observable(1024);
+    self.mapImageHeight = ko.observable(768);
     
     if(serverCampaign) {
         self.factions($.map(serverCampaign.Factions, function(serverFaction) {

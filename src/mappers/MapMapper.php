@@ -78,14 +78,15 @@ class MapMapper {
         return $polygonList;
     }
     
-    public static function outputMapForCampaign($campaignId) {
+    public static function outputMapForCampaign($campaignId, $mapImageWidth, $mapImageHeight, $mapImageName) {
         $width = 1024;
         $height = 768;
         $image = imagecreatetruecolor($width, $height);
         imagealphablending($image, true);
         imagesavealpha($image, true);
         
-        $starmap = imagecreatefromjpeg(Server::getFullPath() . "/img/1024x768/stars_pink_light_galaxy_1471.jpg");
+        $mapImageLocation = "/img/" . $mapImageWidth . "x" . $mapImageHeight . "/" . $mapImageName;
+        $starmap = imagecreatefromjpeg(Server::getFullPath() . $mapImageLocation);
         imagecopy($image, $starmap, 0, 0, 0, 0, $width, $height);
                     
         $sectorImage = imagecreatefrompng(MapMapper::getMapFileNameForCampaign($campaignId));

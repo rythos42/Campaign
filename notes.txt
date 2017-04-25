@@ -1,14 +1,16 @@
 Next:
-    - star on territory with tag
-    - try a blue/grey background on map, more sleek.
-    - allow user to select theme?
+    - allow user to select map?
+        - different map per campaign
+        - only users with certain permission can change map
+    - able to click on any territory to see it's tags (but not attack)
+        - maybe have attackable territories in red vs white?
+        - or maybe hover to see tags?
+    - make "Join" button more notable
 
     Run @ home: 
         alter table User add column Email varchar(320)
         alter table Territory add column Tags varchar(100)    
-    
-Future:
-        
+            
 Before a general release:
 - "Contact us"
 - Account recovery, since we mention it on the e-mail thing.
@@ -23,7 +25,10 @@ Terms and Admin Help:
     - To insert administrative news: insert into News (News) VALUES ('Mores news');
 
 Credit: 
-- https://github.com/sroze/PHP-Voronoi-algorithm
+- Random map algorithm: https://github.com/sroze/PHP-Voronoi-algorithm
+- Background: https://www.wallpapersafari.com/w/2u7eq0
+- Background: http://www.wallpapersxl.com/wallpaper/1024x768/red-stars-full-hd-space-blue-635630.html
+    
 
 Far Future:
 - Administrator interface:
@@ -31,10 +36,12 @@ Far Future:
 - Campaign Administrator interface:
     - rename factions
     - switch factions for a player
+    - update tags
 - Purchase buys:
     - create campaign customization: set height, width, number of sectors on map, pick background image
     - choose colours for faction
     - interface themes for you and your fellow gamers
+- star on territory with tag when creating campaign
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple
 - sweet background on header
