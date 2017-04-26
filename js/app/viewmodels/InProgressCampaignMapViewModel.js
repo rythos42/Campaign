@@ -67,6 +67,11 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(currentCampaign().territories(), event));
     };
     
+    self.clearTerritory = function() {
+        mapHelper.restoreImage();
+        self.drawingTerritory(null);
+    };
+    
     function isDrawingReachable() {
         if(self.drawingTerritory() === null)
             return false;

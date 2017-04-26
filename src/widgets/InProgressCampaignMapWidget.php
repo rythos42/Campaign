@@ -19,7 +19,7 @@ class InProgressCampaignMapWidget {
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
                     drawPolygonOnCanvas: { polygon: drawingTerritory, colour: isReachableColour }, 
-                    event: { mousemove: drawTerritory },
+                    event: { mousemove: drawTerritory, mouseout: clearTerritory },
                     canvasClick: openTerritoryDetails">
                 </canvas>
                 <div class="map-buttons">
