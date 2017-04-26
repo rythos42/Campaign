@@ -1,42 +1,38 @@
 @media (max-width: 875px) {
-    #Main {
-        padding-top: 7em;
-    }
-    
-    .map-grouping {
-        width: 85%;
-    }
-        
     .map-data {
         position: relative;
         top: 0;
         right: 0;
     }
+            
+    .map-panel {
+        width: 100%;
+    }
+        
+    #InProgressCampaign .row {
+        flex-direction: column;
+    }
+    
+    #InProgressCampaign .column {
+        height: auto;
+    }
+    
+    #InProgressCampaign .ui-tabs {
+        overflow: visible;
+        width: auto;
+    }
 }
 
 @media (max-width: 400px) {
-    #Main {
-        padding-top: 7em;
-    }
-
     .map-grouping {
         width: 95%;
     }
-    
-    .map-panel {
-        height: 350px;
-    }
-    
+
     .map-legend {
         margin-top: 5px;
         display: block; /* "Spend 1" on new line */
     }
-    
-    .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
-        padding: 0.5em 0.5em;   /* less left/right padding on tabs */
-        font-size: 0.8em;       /* smaller text so all 4 tabs fit on same line */
-    }
-    
+
     .ui-tabs li.data-list {
         font-size: 0.8em;
         width: 260px;

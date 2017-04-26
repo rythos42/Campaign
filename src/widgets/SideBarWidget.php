@@ -15,9 +15,6 @@ class SideBarWidget {
             ?>
         </div>
         <input data-bind="visible: showOpenSideBarButton, checked: isSideBarOpen" type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label data-bind="visible: showOpenSideBarButton" for="nav-trigger">
-            <div class="ui-button ui-widget ui-corner-all"><?php echo Translation::getString("campaigns"); ?></div>
-        </label>
         <?php
     }
 }

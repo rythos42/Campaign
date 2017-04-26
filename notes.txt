@@ -1,5 +1,5 @@
 Next:
-    - make "Join" button more notable
+    - check what UI looks like for un-Joined, but active campaign
 
     Run @ home: 
         alter table User add column Email varchar(320)

@@ -20,8 +20,21 @@
     margin-bottom: 10px;
 }
 
-#InProgressCampaign > div {
-    margin-top: 10px;
+#InProgressCampaign .row {
+    display: flex;
+}
+
+#InProgressCampaign .column {
+    flex: 1;
+    height: 768px;
+    width: 100%;
+}
+
+#InProgressCampaign .ui-tabs {
+    width: 346px;
+    vertical-align: top;
+    overflow: auto;
+    margin-left: 5px;
 }
 
 input[type="text"], input[type="password"], input[type="number"], select {
@@ -221,10 +234,10 @@ td.actions .button-icon {
 }
 
 .map-grouping {
-    width: 50%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     position: relative;
 }
 
@@ -262,6 +275,7 @@ td.actions .button-icon {
     margin-top: 5px;
     border: 3px ridge grey;
     position: relative;
+    width: 1024px;
 }
 
 .map-panel .loading-image {
@@ -355,8 +369,12 @@ td.actions .button-icon {
     border-radius: 0px; 
 }
 
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    padding: 0.5em 0.5em;   /* less left/right padding on tabs */
+    font-size: 0.8em;       /* smaller text so all 4 tabs fit on same line */
+}
+
 .ui-tabs .ui-tabs-panel { 
     border-width: 0px 1px 1px 1px; 
     padding: 10px 3px;
 }
-

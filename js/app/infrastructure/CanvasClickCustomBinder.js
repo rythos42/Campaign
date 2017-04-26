@@ -14,9 +14,9 @@ ko.bindingHandlers.canvasClick = {
                     isDragging = true;
                 }
             })
-            .mouseup(function () {
+            .mouseup(function (evt) {
                 if (!isDragging)
-                    clickHandler();
+                    clickHandler(null, evt);
                 isDragging = false;
                 startingPos = [];
             });

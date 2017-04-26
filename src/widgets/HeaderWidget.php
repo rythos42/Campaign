@@ -3,6 +3,9 @@ class HeaderWidget {
     public function render() {
         ?>
         <div id="Header">
+            <label data-bind="visible: showOpenSideBarButton" for="nav-trigger">
+                <div class="ui-button ui-widget ui-corner-all"><?php echo Translation::getString("campaigns"); ?></div>
+            </label>
             <!-- ko with: campaignListViewModel -->
             <button data-jq-dropdown="#JoinedCampaignsMenu" class="ui-button ui-widget ui-corner-all button-icon" data-bind="tooltip: '<?php echo Translation::getString("joinedCampaigns"); ?>', visible: showJoinedCampaignsButton">
                 <span class="icon-star-full"></span>

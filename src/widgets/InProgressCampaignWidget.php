@@ -8,7 +8,10 @@ class InProgressCampaignViewModel {
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
-                <input type="button" data-bind="click: joinCampaign, visible: !hasJoinedCampaign()" value="<?php echo Translation::getString("join"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <button data-bind="click: joinCampaign, visible: !hasJoinedCampaign()" class="ui-button ui-widget ui-corner-all">
+                    <span><?php echo Translation::getString("join"); ?></span>
+                    <span class="button-icon-warning-overlay"></span>
+                </button>
                 <!-- ko with: joinCampaignDialogViewModel -->
                 <?php
                     $joinCampaignDialogWidget = new DropDownListDialogWidget();
@@ -39,46 +42,47 @@ class InProgressCampaignViewModel {
                 ?>
                 <!-- /ko -->
             </div>
-                                            
-            <div>
-                <?php
-                    $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
-                    $inProgressCampaignMapWidget->render();
-                ?>
-            </div>
-            
-            <div data-bind="tab: {}" class="ui-widget ui-corners-all ui-widget-content">
-                <ul>
-                    <li><a href="#SummaryTab">Summary</a></li>
-                    <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>
-                    <li><a href="#PlayersTab"><?php echo Translation::getString("players"); ?></a></li>
-                    <li><a href="#TagsTab"><?php echo Translation::getString("tags"); ?></a></li>
-                </ul>
-                <div id="SummaryTab">
+            <div class="row">
+                <div class="column">
                     <?php
-                    $campaignSummaryStatsWidget = new CampaignSummaryStatsWidget();
-                    $campaignSummaryStatsWidget->render();
+                        $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
+                        $inProgressCampaignMapWidget->render();
                     ?>
                 </div>
-                <div id="EntriesTab">
-                    <?php
-                    $entryListWidget = new EntryListWidget();
-                    $entryListWidget->render();
-                    ?>
+                
+                <div data-bind="tab: {}" class="column ui-widget ui-corners-all ui-widget-content">
+                    <ul>
+                        <li><a href="#SummaryTab">Summary</a></li>
+                        <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>
+                        <li><a href="#PlayersTab"><?php echo Translation::getString("players"); ?></a></li>
+                        <li><a href="#TagsTab"><?php echo Translation::getString("tags"); ?></a></li>
+                    </ul>
+                    <div id="SummaryTab">
+                        <?php
+                        $campaignSummaryStatsWidget = new CampaignSummaryStatsWidget();
+                        $campaignSummaryStatsWidget->render();
+                        ?>
+                    </div>
+                    <div id="EntriesTab">
+                        <?php
+                        $entryListWidget = new EntryListWidget();
+                        $entryListWidget->render();
+                        ?>
+                    </div>
+                    <div id="PlayersTab">
+                        <?php
+                        $playerListWidget = new PlayerListWidget();
+                        $playerListWidget->render();
+                        ?>
+                    </div>
+                    <div id="TagsTab">
+                        <?php
+                        $tagListWidget = new TagListWidget();
+                        $tagListWidget->render();
+                        ?>
+                    </div>
                 </div>
-                <div id="PlayersTab">
-                    <?php
-                    $playerListWidget = new PlayerListWidget();
-                    $playerListWidget->render();
-                    ?>
-                </div>
-                <div id="TagsTab">
-                    <?php
-                    $tagListWidget = new TagListWidget();
-                    $tagListWidget->render();
-                    ?>
-                </div>
-            </div>          
+            </div>            
         </div>
         
         <?php
