@@ -1,5 +1,5 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult */
+/*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour */
 var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, userCampaignData) {
     var self = this,
         serverTerritories,
@@ -9,7 +9,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(currentCampaign);
         
     self.mapImageUrl = ko.observable();
-    self.drawingTerritory = ko.observable();
+    self.drawingTerritory = ko.observable(null);
     self.showLoadingImage = ko.observable(true);
     self.attackAnywhere = ko.observable(false);
 
@@ -64,14 +64,28 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             return;
         
         mapHelper.restoreImage();
-        self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(reachableTerritories(), event));
+        self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(currentCampaign().territories(), event));
     };
+    
+    function isDrawingReachable() {
+        if(self.drawingTerritory() === null)
+            return false;
+        
+        return _.find(reachableTerritories(), function(territory) {
+            return territory.Id === self.drawingTerritory().Id;
+        });
+    }
+    
+    self.isReachableColour = ko.computed(function() {
+        return isDrawingReachable() ? new Colour(200, 100, 100)  : new Colour(200, 200, 200);
+    });
     
     self.openTerritoryDetails = function() {
         if(!self.drawingTerritory())
             return;
         
         self.territoryDetailsDialogViewModel.territory(self.drawingTerritory());
+        self.territoryDetailsDialogViewModel.isReachable(isDrawingReachable());
         self.territoryDetailsDialogViewModel.openDialog();
     };
     

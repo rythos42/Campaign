@@ -18,7 +18,7 @@ class InProgressCampaignMapWidget {
                 <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
-                    drawPolygonOnCanvas: { polygon: drawingTerritory }, 
+                    drawPolygonOnCanvas: { polygon: drawingTerritory, colour: isReachableColour }, 
                     event: { mousemove: drawTerritory },
                     canvasClick: openTerritoryDetails">
                 </canvas>

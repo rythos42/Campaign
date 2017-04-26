@@ -1,7 +1,4 @@
 Next:
-    - able to click on any territory to see it's tags (but not attack)
-        - maybe have attackable territories in red vs white?
-        - or maybe hover to see tags?
     - make "Join" button more notable
 
     Run @ home: 

@@ -6,10 +6,11 @@ var TerritoryDetailsDialogViewModel = function(currentCampaign) {
     self.dialogOpenClose = ko.observable(false);
     self.dialogResult = ko.observable(DialogResult.None);
     self.territory = ko.observable();
+    self.isReachable = ko.observable();
     
     self.dialogTitle = ko.computed(function() {
         var territory = self.territory();
-        return territory ? Translation.getString('territory') + ' ' + territory.Id : '';
+        return territory ? Translation.getString('territory') + ' ' + territory.IdOnMap : '';
     });
     
     self.tags = ko.computed(function() {
