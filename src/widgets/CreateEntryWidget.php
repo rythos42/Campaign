@@ -4,7 +4,8 @@ class CreateEntryWidget {
         ?>
         <!-- ko with: createEntryViewModel-->
         <div data-bind="visible: showCreateEntry" class="grouping ui-widget ui-corners-all ui-widget-content">
-            <div data-bind="visible: isReadOnly"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
+            <div data-bind="visible: isFinished"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
+            <div data-bind="visible: !hasJoinedCampaign()"><?php echo Translation::getString("entryJoinToEdit"); ?></div>
             <ul data-bind="visible: !isReadOnly()">
                 <li class="entry-field" data-bind="visible: isMapCampaign">
                     <label for="IdOnmap"><?php echo Translation::getString("territory"); ?>: </label>

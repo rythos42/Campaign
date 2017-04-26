@@ -107,5 +107,7 @@
         <ownedBy>Owned by</ownedBy>
         <tagsMaxLengthValidation>You've only got 100 characters.</tagsMaxLengthValidation>
         <unowned>(unowned)</unowned>
+        <joinToSee>Join this campaign to view!</joinToSee>
+        <entryJoinToEdit>You can't edit entries until you join the campaign.</entryJoinToEdit>
     </strings>
 </translation>

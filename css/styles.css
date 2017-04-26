@@ -305,6 +305,10 @@ td.actions .button-icon {
     cursor: default !important;
 }
 
+.join-to-see {
+    padding: 10px;
+}
+
 .news-item {
     padding: 1em;
     margin-bottom: 1em;

@@ -7,12 +7,12 @@ var InProgressCampaignViewModel = function(user, navigation) {
         internalEntryList = ko.observableArray(),
         currentlyLoadingEntryList = false;
 
-    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign);
+    self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
-    self.tagListViewModel = new TagListViewModel(currentCampaign);
+    self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     
     self.factions = ko.computed(function() {

@@ -32,6 +32,9 @@ class CampaignSummaryStatsWidget {
             </li>
             <!-- /ko -->
         </ul>
+        <div class="join-to-see" data-bind="visible: !hasJoinedCampaign()">
+            <?php echo Translation::getString('joinToSee'); ?>
+        </div>
         
         <?php
         $giveTerritoryBonusToUserDialogWidget = new GiveTerritoryBonusToUserDialogWidget();

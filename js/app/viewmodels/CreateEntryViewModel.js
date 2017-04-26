@@ -1,6 +1,6 @@
 /*exported CreateEntryViewModel */
 /*globals ko, FactionEntryListItemViewModel, Entry, FactionEntry, Translation, DialogResult, ConfirmationDialogViewModel, UserManager */
-var CreateEntryViewModel = function(user, navigation, currentCampaign) {
+var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampaignData) {
     var self = this,
         currentEntry = new Entry(user),
         factionEntry = new FactionEntry(),
@@ -60,8 +60,16 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign) {
         return campaignObj ? campaignObj.isMapCampaign() : false;
     });
     
-    self.isReadOnly = ko.computed(function() {
+    self.hasJoinedCampaign = ko.computed(function() {
+        return !!userCampaignData();
+    });
+    
+    self.isFinished = ko.computed(function() {
         return currentEntry.isFinished();
+    });
+    
+    self.isReadOnly = ko.computed(function() {
+        return self.isFinished() || !self.hasJoinedCampaign();
     });
     
     self.showFinishButton = ko.computed(function() {

@@ -1,6 +1,6 @@
 /*exported TagListViewModel */
 /*globals ko, TagListItemViewModel */
-var TagListViewModel = function(currentCampaign) {
+var TagListViewModel = function(currentCampaign, userCampaignData) {
     var self = this;
     
     self.territories = ko.computed(function() {
@@ -11,5 +11,9 @@ var TagListViewModel = function(currentCampaign) {
         return $.map(campaign.territories(), function(territory) {
             return new TagListItemViewModel(territory);
         });
+    });
+    
+    self.hasJoinedCampaign = ko.computed(function() {
+        return !!userCampaignData();
     });
 };
