@@ -1,12 +1,11 @@
 Next:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
-    - allow multiple admins for a campaign
 
     Run @ home: 
         alter table User add column Email varchar(320)
         alter table Territory add column Tags varchar(100)
-        alter table UserCampaignData add column IsAdmin bit
+        alter table UserCampaignData add column IsAdmin tinyint(1)
             
 Before a general release:
 - "Contact us"

@@ -68,5 +68,10 @@ class UserMapper {
         
         Database::execute("update User set Email = ? where Id = ?", [$user->email, $user->id]);
     }
+    
+    public static function setUserAdminForCampaign($campaignId, $userId, $isAdminForCurrentCampaign) {
+        $isAdmin = $isAdminForCurrentCampaign === 'true' ? 1 : 0;
+        Database::execute("update UserCampaignData set IsAdmin = ? where UserId = ? and CampaignId = ?", [$isAdmin, $userId, $campaignId]);
+    }
 }
 ?>

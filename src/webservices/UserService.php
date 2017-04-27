@@ -59,6 +59,13 @@ switch($action) {
     case "SaveUserProfile":
         UserMapper::saveUserProfile(json_decode($_REQUEST["user"]));
         break;
+        
+    case "SetUserAdminForCampaign":
+        $campaignId = $_REQUEST["campaignId"];
+        $userId = $_REQUEST["userId"];
+        $isAdminForCurrentCampaign = $_REQUEST["isAdminForCurrentCampaign"];
+        UserMapper::setUserAdminForCampaign($campaignId, $userId, $isAdminForCurrentCampaign);
+        break;
 }
 
 ?>

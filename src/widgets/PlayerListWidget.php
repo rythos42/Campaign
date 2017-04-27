@@ -15,7 +15,14 @@ class PlayerListWidget {
                     <td data-bind="text: username" />
                     <td data-bind="text: factionName" />
                     <td data-bind="text: attacks" />
-                    <td data-bind="css: { 'icon-cross': !isAdmin(), 'icon-checkmark': isAdmin }" />
+                    <td>
+                        <!-- ko if: canChangeAdminStatus -->
+                        <input type="checkbox" data-bind="checked: isPlayerAdmin" />
+                        <!-- /ko -->
+                        <!-- ko ifnot: canChangeAdminStatus -->
+                        <span data-bind="css: { 'icon-cross': !isPlayerAdmin(), 'icon-checkmark': isPlayerAdmin }"></span>
+                        <!-- /ko -->
+                    </td>
                 <tr>
             </tbody>
         </table>
