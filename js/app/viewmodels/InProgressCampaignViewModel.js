@@ -33,8 +33,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
     });
         
     self.showAdminButton = ko.computed(function() {
-        var campaign = currentCampaign();
-        return campaign ? campaign.createdByUserId() === user.id() : false;
+        var data = userCampaignData();
+        return data ? data.IsAdmin : false;        
     });
     
     self.showResetPhaseButton = ko.computed(function() {

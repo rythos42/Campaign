@@ -7,6 +7,7 @@ CREATE TABLE UserCampaignData (
     TerritoryBonus INT DEFAULT 0,
     Attacks INT DEFAULT 0,
     FactionId INT,
+    IsAdmin BIT,
     PRIMARY KEY (Id),
     FOREIGN KEY UserCampaignData_Campaign (CampaignId) REFERENCES Campaign(Id),
     FOREIGN KEY UserCampaignData_User (UserId) REFERENCES User(Id)
