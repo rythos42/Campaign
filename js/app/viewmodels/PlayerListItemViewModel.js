@@ -14,4 +14,8 @@ var PlayerListItemViewModel = function(user, currentCampaign) {
         var faction = campaign.getFactionById(user.factionId());
         return faction ? faction.name() : '';
     });
+    
+    self.isAdmin = ko.computed(function() {
+        return user.isAdminForCurrentCampaign();
+    });
 };

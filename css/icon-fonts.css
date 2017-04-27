@@ -22,6 +22,12 @@
 .icon-minus:before {
   content: "\ea0b";
 }
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
 .icon-exit:before {
   content: "\ea14";
 }

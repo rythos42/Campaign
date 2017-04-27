@@ -10,7 +10,8 @@ var User = function(serverUser) {
     self.permissions = ko.observableArray();
     self.territoryBonus = ko.observable(serverUser ? serverUser.TerritoryBonus : undefined);
     self.attacks = ko.observable(serverUser ? serverUser.Attacks : undefined);  
-    self.factionId = ko.observable(serverUser ? serverUser.FactionId : undefined);  
+    self.factionId = ko.observable(serverUser ? serverUser.FactionId : undefined); 
+    self.isAdminForCurrentCampaign = ko.observable(serverUser ? serverUser.IsAdmin : undefined);
 
     // used in the autocomplete, because it apparently can't read observables
     self.name = self.username();
@@ -32,6 +33,7 @@ var User = function(serverUser) {
         user.attacks(self.attacks());
         user.factionId(self.factionId());
         user.isLoggedIn(self.isLoggedIn());
+        user.isAdminForCurrentCampaign(self.isAdminForCurrentCampaign());
         return user;
     };
     
@@ -43,17 +45,20 @@ var User = function(serverUser) {
         self.territoryBonus(jsonUser.TerritoryBonus);
         self.attacks(jsonUser.Attacks);
         self.factionId(jsonUser.FactionId);
+        self.isAdminForCurrentCampaign(jsonUser.IsAdmin);
     };
 
     self.setFromCampaignData = function(jsonCampaignData) {
         self.territoryBonus(jsonCampaignData.TerritoryBonus);
         self.attacks(jsonCampaignData.Attacks);
         self.factionId(jsonCampaignData.FactionId);
+        self.isAdminForCurrentCampaign(jsonCampaignData.IsAdmin);
     };
     
     self.clearCampaignData = function() {
         self.factionId(undefined);
         self.territoryBonus(undefined);
         self.attacks(undefined);
+        self.isAdminForCurrentCampaign(undefined);
     };
 };
