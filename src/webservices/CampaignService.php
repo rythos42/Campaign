@@ -77,6 +77,12 @@ switch($action) {
         echo json_encode(UserMapper::getUserDataForCampaign($currentUserId, $campaignId));
         break;
         
+    case "RenameFaction":
+        $factionId = $_REQUEST["factionId"];
+        $newFactionName = $_REQUEST["newFactionName"];
+        CampaignMapper::renameFaction($factionId, $newFactionName);
+        break;
+        
 }
 
 ?>

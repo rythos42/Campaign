@@ -57,6 +57,7 @@ include($installDirOnWebServer . "/src/widgets/EditTerritoryDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/TerritoryDetailsDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/TagListWidget.php");
 include($installDirOnWebServer . "/src/widgets/CampaignSummaryStatsWidget.php");
+include($installDirOnWebServer . "/src/widgets/RenameFactionDialogWidget.php");
 
 session_start();
 Database::connect();

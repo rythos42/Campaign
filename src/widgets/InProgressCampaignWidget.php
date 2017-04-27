@@ -29,6 +29,7 @@ class InProgressCampaignViewModel {
                     <ul class="jq-dropdown-menu">
                         <li data-bind="visible: showResetPhaseButton"><input type="button" data-bind="click: resetPhase" value="<?php echo Translation::getString("newPhase"); ?>" /></li>
                         <li><input type="button" data-bind="click: addNews" value="<?php echo Translation::getString("addNews"); ?>" /></li>
+                        <li><input type="button" data-bind="click: renameFaction" value="<?php echo Translation::getString("renameFaction"); ?>" /></li>
                     </ul>
                 </div>
                 <!-- ko with: addNewsDialogViewModel -->
@@ -41,6 +42,10 @@ class InProgressCampaignViewModel {
                     );
                 ?>
                 <!-- /ko -->
+                <?php
+                    $renameFactionDialogWidget = new RenameFactionDialogWidget();
+                    $renameFactionDialogWidget->render();
+                ?>
             </div>
             <div class="row">
                 <div class="column">

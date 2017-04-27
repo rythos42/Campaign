@@ -22,6 +22,7 @@
 
 #InProgressCampaign .row {
     display: flex;
+    align-items: flex-start;
 }
 
 #InProgressCampaign .column {
@@ -32,7 +33,6 @@
 
 #InProgressCampaign .ui-tabs {
     width: 346px;
-    vertical-align: top;
     overflow: auto;
     margin-left: 5px;
 }

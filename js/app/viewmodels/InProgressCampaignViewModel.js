@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager */
+/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -14,6 +14,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
     self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
+    self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();
@@ -116,6 +117,37 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.addNews = function() {
         self.addNewsDialogViewModel.openDialog();
     };
+    
+    self.renameFaction = function() {
+        self.renameFactionDialogViewModel.openDialog();
+    };
+    
+    self.renameFactionDialogViewModel.dialogResult.subscribe(function(result) {
+        if(result === DialogResult.Saved) {
+            var factionId = self.renameFactionDialogViewModel.selectedFaction().id(),
+                newFactionName = self.renameFactionDialogViewModel.newFactionName();
+            
+            $.ajax({
+                url: 'src/webservices/CampaignService.php',
+                data: { 
+                    action: 'RenameFaction', 
+                    factionId: factionId,
+                    newFactionName: newFactionName
+                }
+            }).then(function() {
+                var faction = currentCampaign().getFactionById(factionId);
+                faction.name(newFactionName);
+                
+                _.each(internalEntryList, function(entry) {
+                    if(entry.faction().id() === factionId) {
+                        entry.faction().name(newFactionName);
+                        return false;
+                    }
+                    return true;
+                });
+            });
+        }
+    });
     
     self.joinCampaignDialogViewModel.dialogResult.subscribe(function(result) {
         if(result === DialogResult.Saved) {

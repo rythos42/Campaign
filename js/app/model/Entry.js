@@ -1,5 +1,5 @@
 /*exported Entry */
-/*globals ko, Faction, User, FactionEntry */
+/*globals ko, User, FactionEntry */
 var Entry = function(user, campaign, serverEntry) {
     var self = this;
     
@@ -23,9 +23,10 @@ var Entry = function(user, campaign, serverEntry) {
         });
         
         $.each(serverEntry.FactionEntries, function(index, serverFactionEntry) {
-            var faction = new Faction(serverFactionEntry.FactionName, serverFactionEntry.FactionId);
-            var user = new User(serverFactionEntry);
+            var faction = campaign.getFactionById(serverFactionEntry.FactionId),
+                user = new User(serverFactionEntry);
             user.id(serverFactionEntry.UserId);
+            
             var factionEntry = new FactionEntry(faction, user, serverFactionEntry);
             factionEntry.id(serverFactionEntry.Id);
             self.factionEntries.push(factionEntry);

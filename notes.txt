@@ -1,4 +1,7 @@
 Next:
+    - hide Attack button for Simple until joined
+    - hide map area for Simple, entirely
+
     Run @ home: 
         alter table User add column Email varchar(320)
         alter table Territory add column Tags varchar(100)    

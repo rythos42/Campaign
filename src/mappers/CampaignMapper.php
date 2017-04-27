@@ -179,6 +179,10 @@ class CampaignMapper {
         Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId, FactionId) VALUES (?, ?, ?)", [$userId, $campaignId, $factionId]);
     }
     
+    public static function renameFaction($factionId, $newFactionName) {
+        Database::execute("update Faction set Name = ? where Id = ?", [$newFactionName, $factionId]);
+    }
+    
     private static function isMapCampaign($campaignId) {
         return Database::queryScalar("select CampaignType from Campaign where Id = ?", [$campaignId]) === CampaignType::Map;
     }
