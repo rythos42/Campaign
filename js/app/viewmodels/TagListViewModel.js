@@ -16,4 +16,9 @@ var TagListViewModel = function(currentCampaign, userCampaignData) {
     self.hasJoinedCampaign = ko.computed(function() {
         return !!userCampaignData();
     });
+    
+    self.isAdmin = ko.computed(function() {
+        var data = userCampaignData();
+        return data ? data.IsAdmin : false;        
+    });
 };

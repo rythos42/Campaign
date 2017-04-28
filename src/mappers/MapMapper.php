@@ -3,6 +3,10 @@ require_once Server::getFullPath() . '/lib/Nurbs/Voronoi.php';
 require_once Server::getFullPath() . '/lib/Nurbs/Point.php';
 
 class MapMapper {
+    public static function updateTags($territoryId, $newTags) {
+        Database::execute("update Territory set Tags = ? where Id = ?", [$newTags, $territoryId]); 
+    }
+    
     public static function saveCampaignTerritories($factionTerritories, $territoryTags) {
         foreach($factionTerritories as $territoryId => $factionId) {
             Database::execute("update Territory set OwningFactionId = ? where Id = ?", [$factionId, $territoryId]); 

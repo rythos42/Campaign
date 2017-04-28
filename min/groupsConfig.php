@@ -22,6 +22,7 @@ return array(
         '//js/app/infrastructure/CanvasClickCustomBinder.js',
         '//js/app/infrastructure/StupidTableCustomBinder.js',
         '//js/app/infrastructure/InfiniteScrollCustomBinder.js',
+        '//js/app/infrastructure/OnEnterCustomBinder.js',
         '//js/app/model/Campaign.js',
         '//js/app/model/Faction.js',
         '//js/app/model/User.js',

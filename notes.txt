@@ -1,6 +1,12 @@
 Next:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
+    - put Simple Attack button just on its own?
+    - hide parts/all of InProgressCampaign while waiting for it to load
+    - favicon
+    - first person to join campaign is admin
+    - use OnEnterCustomBinder where we use keypressACTION
+    - might be able to get rid of TerritoryDetailsDialog
 
     Run @ home: 
         alter table User add column Email varchar(320)
@@ -30,9 +36,7 @@ Far Future:
 - Administrator interface:
     - delete campaigns
 - Campaign Administrator interface:
-    - rename factions
-    - switch factions for a player
-    - update tags
+    - switch factions for a player  - drop down list in the PlayerListWidget
 - Purchase buys:
     - create campaign customization: set height, width, number of sectors on map, pick background image
     - choose colours for faction
@@ -47,7 +51,6 @@ Far Future:
 - page campaign list
 - search campaigns by the user who created them
 - deadline for campaign entries
-- maybe a custom binder to do "keypressACTION" instead of copying this code around
 - XP system
 - consider being able to add multiple users to a FactionEntry to allow easier adding of multi-player games
 - allow user to select languages if we have a list

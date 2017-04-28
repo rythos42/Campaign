@@ -1,3 +1,6 @@
+.icon-pencil:before {
+  content: "\e905";
+}
 .icon-upload:before {
   content: "\e961";
 }

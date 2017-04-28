@@ -112,5 +112,6 @@
         <renameFaction>Rename Faction</renameFaction>
         <newFactionName>Name</newFactionName>
         <enterNewName>Enter a new name.</enterNewName>
+        <edit>Edit</edit>
     </strings>
 </translation>

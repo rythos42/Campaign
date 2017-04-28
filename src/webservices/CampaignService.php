@@ -83,6 +83,11 @@ switch($action) {
         CampaignMapper::renameFaction($factionId, $newFactionName);
         break;
         
+    case "UpdateTags":
+        $territoryId = $_REQUEST["territoryId"];
+        $newTags = $_REQUEST["newTags"];
+        MapMapper::updateTags($territoryId, $newTags);
+        
 }
 
 ?>
