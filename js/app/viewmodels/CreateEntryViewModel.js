@@ -108,12 +108,6 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
     self.back = function() {
         navigation.showInProgressCampaign(true);
     };
-    
-    self.keyPressAddUser = function(viewModel, event) {
-        if(event.keyCode === 13)
-            self.addUser();  
-        return true;
-    };    
         
     var factionEntryValidationViewModel = ko.validatedObservable([
         self.selectedUser,

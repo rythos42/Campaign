@@ -25,7 +25,7 @@ class CreateCampaignWidget {
                     </li>
                     <li class="entry-field">
                         <label for="CampaignFactionNameEntry"><?php echo Translation::getString("factionName"); ?>:</label>
-                        <input id="CampaignFactionNameEntry" type="text" data-bind="textInput: factionNameEntry, event: {keypress: keyPressAddFaction}, hasFocus: factionNameEntryHasFocus" />
+                        <input id="CampaignFactionNameEntry" type="text" data-bind="textInput: factionNameEntry, onEnter: addFaction, hasFocus: factionNameEntryHasFocus" />
                         <span class="validationMessage" data-bind="validationMessage: factions"></span>
                     </li>
                     <li class="button-panel">

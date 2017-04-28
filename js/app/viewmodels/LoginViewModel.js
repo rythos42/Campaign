@@ -44,18 +44,6 @@ var LoginViewModel = function(user, navigation) {
         self.verifyPassword
     ]);
     
-    self.keyPressLogin = function(viewModel, event) {
-        if(event.keyCode === 13)
-            self.login();  
-        return true;
-    };  
-    
-    self.keyPressRegister = function(viewModel, event) {
-        if(event.keyCode === 13)
-            self.register();  
-        return true;
-    };
-    
     self.login = function() {
         var params = { 
             action: 'Login',

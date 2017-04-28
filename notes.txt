@@ -5,8 +5,8 @@ Next:
     - hide parts/all of InProgressCampaign while waiting for it to load
     - favicon
     - first person to join campaign is admin
-    - use OnEnterCustomBinder where we use keypressACTION
     - might be able to get rid of TerritoryDetailsDialog
+    - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
 
     Run @ home: 
         alter table User add column Email varchar(320)

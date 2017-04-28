@@ -108,12 +108,6 @@ var CreateCampaignViewModel = function(user, navigation) {
         navigation.showMain(true);
     };
     
-    self.keyPressAddFaction = function(viewModel, event) {
-        if(event.keyCode === 13)
-            self.addFaction();  
-        return true;
-    };
-    
     self.addFaction = function() {
         if(!self.factionNameEntry.isValid()) {
             self.factionNameEntry.isModified(true);
