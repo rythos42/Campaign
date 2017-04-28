@@ -3,7 +3,7 @@ class CreateEntryWidget {
     public function render() {
         ?>
         <!-- ko with: createEntryViewModel-->
-        <div data-bind="visible: showCreateEntry" class="grouping ui-widget ui-corners-all ui-widget-content">
+        <div data-bind="visible: showCreateEntry" class="grouping ui-widget ui-corners-all ui-widget-content" style="display: none;" >
             <div data-bind="visible: isFinished"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
             <div data-bind="visible: !hasJoinedCampaign()"><?php echo Translation::getString("entryJoinToEdit"); ?></div>
             <ul data-bind="visible: !isReadOnly()">

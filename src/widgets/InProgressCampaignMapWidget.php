@@ -15,7 +15,6 @@ class InProgressCampaignMapWidget {
             </div>
             <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
             <div class="map-panel">
-                <div class="loading-image" data-bind="visible: showLoadingImage"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 
                     drawPolygonOnCanvas: { polygon: drawingTerritory, colour: isReachableColour }, 

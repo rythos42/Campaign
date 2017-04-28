@@ -10,7 +10,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable(null);
-    self.showLoadingImage = ko.observable(true);
+    self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
 
     self.showMap = ko.computed(function() {
@@ -107,15 +107,15 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         self.drawingTerritory(null);
         reachableTerritories(null);
         mapHelper.clearImageData();
-        self.showLoadingImage(true);
     };
     
     self.storeImage = function() {
         mapHelper.storeImage();
-        self.showLoadingImage(false);
+        self.isLoadingMap(false);
     };
     
     function loadMapImage() {
+        self.isLoadingMap(true);
         var campaign = currentCampaign(),
             url = mapHelper.createGetMapServiceCallUrl(campaign.id(), campaign.mapImageWidth(), campaign.mapImageHeight(), campaign.mapImageName());
         if(self.mapImageUrl() === url)

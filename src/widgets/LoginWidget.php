@@ -3,7 +3,7 @@ class LoginWidget {
     public function render() {
         ?>
         <!-- ko with: loginViewModel -->
-        <div class="grouping" data-bind="visible: showLogin">
+        <div class="grouping" style="display: none;" data-bind="visible: showLogin">
             <ul>
                 <li class="entry-field">
                     <label><?php echo Translation::getString("user"); ?>:</label>

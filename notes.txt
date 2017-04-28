@@ -2,9 +2,7 @@ Next:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
-    - hide parts/all of InProgressCampaign while waiting for it to load
-    - first person to join campaign is admin
-    - might be able to get rid of TerritoryDetailsDialog
+    - when creator joins campaign, make that person admin
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
 
     Run @ home: 
@@ -17,6 +15,7 @@ Before a general release:
 - Account recovery, since we mention it on the e-mail thing.
 - for buying: group buy, or individual buy? 
     Roll20: group buy, $5/month or $50/year.
+- Facebook OpenGraph image
 
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
@@ -42,6 +41,7 @@ Far Future:
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
+- might be able to get rid of TerritoryDetailsDialog
 - star on territory with tag when creating campaign
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple

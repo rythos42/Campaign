@@ -3,7 +3,7 @@ class UserProfileWidget {
     public function render() {
         ?>
         <!-- ko with: userProfileViewModel -->
-        <div class="grouping" data-bind="visible: showUserProfile">
+        <div class="grouping" data-bind="visible: showUserProfile" style="display: none;">
             <ul>
                 <li class="data-list">
                     <label><?php echo Translation::getString('user'); ?>:</label>

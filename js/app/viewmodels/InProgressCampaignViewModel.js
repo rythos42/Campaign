@@ -5,7 +5,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentCampaign = ko.observable(null),
         userCampaignData = ko.observable(),
         internalEntryList = ko.observableArray(),
-        currentlyLoadingEntryList = false;
+        currentlyLoadingEntryList = ko.observable(false);
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
@@ -16,6 +16,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     
+    self.showLoadingImage = ko.computed(function() {
+        return currentlyLoadingEntryList() || self.inProgressCampaignMapViewModel.isLoadingMap() || !userCampaignData();
+    });
+     
     self.factions = ko.computed(function() {
         var campaign = currentCampaign();
         return campaign ? campaign.factions() : [];
@@ -64,10 +68,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
         var campaign = currentCampaign();
         
         // Don't do it again if we're already doing it.
-        if(!campaign || currentlyLoadingEntryList)
+        if(!campaign || currentlyLoadingEntryList())
             return;
         
-        currentlyLoadingEntryList = true;
+        currentlyLoadingEntryList(true);
         var params = { action: 'GetEntryList', campaignId: campaign.id() };
         
         $.when(
@@ -83,7 +87,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
             internalEntryList($.map(serverEntryList, function(serverEntry) {
                 return new Entry(user, campaign, serverEntry);
             }));
-            currentlyLoadingEntryList = false;
+            currentlyLoadingEntryList(false);
         });
     }
     

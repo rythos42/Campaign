@@ -3,7 +3,7 @@ class CreateCampaignWidget {
     public function render() {
         ?>
         <!-- ko with: createCampaignViewModel-->
-        <div id="CreateCampaign" data-bind="visible: showCreateCampaign">
+        <div id="CreateCampaign" style="display: none;" data-bind="visible: showCreateCampaign">
             <div data-bind="visible: showCreateCampaignEntry" class="grouping ui-widget ui-corners-all ui-widget-content">
                 <ul>
                     <li class="title">

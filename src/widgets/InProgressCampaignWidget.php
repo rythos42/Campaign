@@ -3,7 +3,10 @@ class InProgressCampaignViewModel {
     public function render() {
         ?>
         <!-- ko with: inProgressCampaignViewModel-->
-        <div id="InProgressCampaign" data-bind="visible: showInProgressCampaign" class="map-grouping ui-widget-content ui-corner-all">
+        <div id="InProgressCampaign" data-bind="visible: showInProgressCampaign" class="map-grouping ui-widget-content ui-corner-all" style="display: none;">
+            <div class="ui-widget-overlay ui-front" data-bind="visible: showLoadingImage">
+                <div class="loading-image"><?php $loading = new LoadingImageWidget(); $loading->render(); ?></div>
+            </div>
             <div class="top-button-panel">
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
