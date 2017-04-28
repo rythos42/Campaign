@@ -3,7 +3,6 @@ Next:
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
     - hide parts/all of InProgressCampaign while waiting for it to load
-    - favicon
     - first person to join campaign is admin
     - might be able to get rid of TerritoryDetailsDialog
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
@@ -30,6 +29,7 @@ Credit:
 - Random map algorithm: https://github.com/sroze/PHP-Voronoi-algorithm
 - Background: https://www.wallpapersafari.com/w/2u7eq0
 - Background: http://www.wallpapersxl.com/wallpaper/1024x768/red-stars-full-hd-space-blue-635630.html
+- RealFaviconGenerator: http://realfavicongenerator.net/
     
 
 Far Future:
