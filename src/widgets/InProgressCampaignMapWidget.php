@@ -14,6 +14,7 @@ class InProgressCampaignMapWidget {
                 </ul>
             </div>
             <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
+            <span class="validationMessage" data-bind="visible: currentUserAttackedWithin24Hours"><?php echo Translation::getString("youCannotAttackTwiceIn24Hours"); ?></span>
             <div class="map-panel">
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 

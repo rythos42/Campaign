@@ -28,7 +28,22 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         
         return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
     });
+       
+    self.currentUserAttackedWithin24Hours = ko.computed(function() {
+        var userData = userCampaignData();
+        if(!userData)
+            return false;
         
+        var lastCreatedDate = new Date(userData.LastCreatedEntryDate);
+        lastCreatedDate.setDate(lastCreatedDate.getDate() + 1);
+                
+        return lastCreatedDate > new Date();        
+    });
+    
+    var canCurrentUserAttack = ko.computed(function() {
+        return !self.currentUserOutOfAttacks() && !self.currentUserAttackedWithin24Hours();
+    });
+    
     self.legendFactions = ko.computed(function() {
         var campaign = currentCampaign();
         if(!campaign)
@@ -60,9 +75,6 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     }
                
     self.drawTerritory = function(viewModel, event) {
-        if(self.currentUserOutOfAttacks())
-            return;
-        
         mapHelper.restoreImage();
         self.drawingTerritory(mapHelper.findPolygonUnderMouseEvent(currentCampaign().territories(), event));
     };
@@ -90,7 +102,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             return;
         
         self.territoryDetailsDialogViewModel.territory(self.drawingTerritory());
-        self.territoryDetailsDialogViewModel.isReachable(isDrawingReachable());
+        self.territoryDetailsDialogViewModel.canBeAttacked(isDrawingReachable() && canCurrentUserAttack());
         self.territoryDetailsDialogViewModel.openDialog();
     };
     

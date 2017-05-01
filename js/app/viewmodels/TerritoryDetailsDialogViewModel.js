@@ -6,7 +6,7 @@ var TerritoryDetailsDialogViewModel = function(currentCampaign) {
     self.dialogOpenClose = ko.observable(false);
     self.dialogResult = ko.observable(DialogResult.None);
     self.territory = ko.observable();
-    self.isReachable = ko.observable();
+    self.canBeAttacked = ko.observable();
     
     self.dialogTitle = ko.computed(function() {
         var territory = self.territory();

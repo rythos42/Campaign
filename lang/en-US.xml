@@ -113,5 +113,6 @@
         <newFactionName>Name</newFactionName>
         <enterNewName>Enter a new name.</enterNewName>
         <edit>Edit</edit>
+        <youCannotAttackTwiceIn24Hours>You cannot attack twice in 24 hours.</youCannotAttackTwiceIn24Hours>
     </strings>
 </translation>

@@ -5,7 +5,23 @@ Next:
     - when creator joins campaign, make that person admin
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
     - loading UI always shown on Simple campaign, because it never loads the map
+    - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
+    - font for "Spend 1 Material" is wrong
+    - "delete entry" button for users
+    - don't allow Finishing territories adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
+   
+    
+    
+    I think I want to make 3 changes:
+(1) Rules change: A person can only Attack once every 24 hours. There's no reason someone should be able to attack even twice in a single day, and this will prevent one team from taking the entire board because they happened to all be sitting at their PCs.
+(2) System change: Cannot Finish a territory that is controlled, or adjacent to a controlled territory, until there are 2 players in the entry. 
+(3) Systme change: As you say, I'll add a new colour and let people sign up to be defenders of contested territories and make it more visible.
 
+    for #2 - allow admins to approve a territory grab in the event that no one contests the claim.
+at the end of the phase the person can get the territory
+it'll be like concession wins in blood bowl that way
+
+--I'll wait before I click finish.  The " victory points" and " materials used" should have something in them?
             
 Before a general release:
 - "Contact us"

@@ -50,12 +50,13 @@ class UserMapper {
     
     public static function getUserDataForCampaign($userId, $campaignId) {
         return Database::queryObject(
-            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate, FactionId, IsAdmin
+            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate, FactionId, IsAdmin, LastEntry.CreatedOnDate as LastCreatedEntryDate
             from UserCampaignData 
             join Campaign on Campaign.Id = UserCampaignData.CampaignId 
             left outer join Phase on Phase.CampaignId = Campaign.Id
+            left outer join (select max(CreatedOnDate) as CreatedOnDate, CreatedByUserId  from Entry where CreatedByUserId = ?) LastEntry on LastEntry.CreatedByUserId = UserCampaignData.UserId
             where UserId = ? and UserCampaignData.CampaignId = ?", 
-            [$userId, $campaignId]);
+            [$userId, $userId, $campaignId]);
     }
     
     public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
