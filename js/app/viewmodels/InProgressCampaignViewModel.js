@@ -5,7 +5,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentCampaign = ko.observable(null),
         userCampaignData = ko.observable(),
         internalEntryList = ko.observableArray(),
-        currentlyLoadingEntryList = ko.observable(false);
+        currentlyLoadingEntryList = ko.observable(false),
+        currentlyLoadingUserData = ko.observable(false);
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
@@ -17,7 +18,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     
     self.showLoadingImage = ko.computed(function() {
-        return currentlyLoadingEntryList() || self.inProgressCampaignMapViewModel.isLoadingMap() || !userCampaignData();
+        return currentlyLoadingEntryList() || self.inProgressCampaignMapViewModel.isLoadingMap() || currentlyLoadingUserData();
     });
      
     self.factions = ko.computed(function() {
@@ -195,7 +196,9 @@ var InProgressCampaignViewModel = function(user, navigation) {
         if(newCampaign)
             currentCampaign(newCampaign);
         
+        currentlyLoadingUserData(true);
         UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {
+            currentlyLoadingUserData(false);
             setUserDataForCampaign(userDataForCampaign);
         });
     });

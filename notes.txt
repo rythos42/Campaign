@@ -4,11 +4,8 @@ Next:
     - put Simple Attack button just on its own?
     - when creator joins campaign, make that person admin
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
+    - loading UI always shown on Simple campaign, because it never loads the map
 
-    Run @ home: 
-        alter table User add column Email varchar(320)
-        alter table Territory add column Tags varchar(100)
-        alter table UserCampaignData add column IsAdmin tinyint(1)
             
 Before a general release:
 - "Contact us"
