@@ -140,9 +140,10 @@ class CampaignMapper {
                     [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap]);
             }
             
-            Database::execute(
-                "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
-                [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
+            if(sizeof($campaignEntry->factionEntries) > 1)
+                Database::execute(
+                    "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
+                    [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
         }
         Database::execute("update Entry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
     }
