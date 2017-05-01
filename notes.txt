@@ -8,20 +8,16 @@ Next:
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - font for "Spend 1 Material" is wrong
     - "delete entry" button for users
-    - don't allow Finishing territories adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
-   
+    - allow admins to approve a territory grab in case no one contests the claim before the end of the month.
     
+    - don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
     
-    I think I want to make 3 changes:
-(1) Rules change: A person can only Attack once every 24 hours. There's no reason someone should be able to attack even twice in a single day, and this will prevent one team from taking the entire board because they happened to all be sitting at their PCs.
-(2) System change: Cannot Finish a territory that is controlled, or adjacent to a controlled territory, until there are 2 players in the entry. 
-(3) Systme change: As you say, I'll add a new colour and let people sign up to be defenders of contested territories and make it more visible.
-
-    for #2 - allow admins to approve a territory grab in the event that no one contests the claim.
-at the end of the phase the person can get the territory
-it'll be like concession wins in blood bowl that way
-
---I'll wait before I click finish.  The " victory points" and " materials used" should have something in them?
+    - show who is currently attacking a territory
+        - blue and tan striped
+    - allow another player to "defend" an attack
+    - need to allow saving a FactionEntry without VPs so players can sign up for a game and enter VPs later
+        - this would also solve the confusion around whether to end VPs/materials when attacking
+    
             
 Before a general release:
 - "Contact us"
