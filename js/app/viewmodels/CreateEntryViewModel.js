@@ -73,7 +73,11 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
     });
     
     self.showFinishButton = ko.computed(function() {
-        return !self.isReadOnly();
+        var userData = userCampaignData();
+        if(!userData)
+            return false;
+        
+        return !self.isReadOnly() && userData.IsAdmin;
     });
     
     self.finish = function() {

@@ -41,8 +41,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     });
     
     var canCurrentUserAttack = ko.computed(function() {
-        // disable attacks until I fix the UI a bit
-        return false;//!self.currentUserOutOfAttacks() && !self.currentUserAttackedWithin24Hours();
+        return !self.currentUserOutOfAttacks() && !self.currentUserAttackedWithin24Hours();
     });
     
     self.legendFactions = ko.computed(function() {

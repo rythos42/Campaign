@@ -1,5 +1,4 @@
 Next:
-    - only have Admins access to Finish button
     - allow another player to "defend" an attack from the map UI
     - need to allow saving a FactionEntry without VPs so players can sign up for a game and enter VPs later
         - this would also solve the confusion around whether to end VPs/materials when attacking
