@@ -117,6 +117,6 @@
         <defendedBy>Defended by</defendedBy>
         <defend>Defend</defend>
         <played>Played</played>
-        <youCannotAttackTwiceIn24Hours>You cannot attack twice in 24 hours.</youCannotAttackTwiceIn24Hours>
+        <youCannotAttackOrDefendTwiceIn24Hours>Wait 24 hours to attack, or defend unclaimed territory.</youCannotAttackOrDefendTwiceIn24Hours>
     </strings>
 </translation>

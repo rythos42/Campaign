@@ -1,9 +1,11 @@
 Next:
-    - Use attack to defend contested territory
-        - can't defend if you have no attacks left
+    - can't defend unclaimed territory if you have no attacks left
+    - add 1 attack to a person who tries to defend an unclaimed territory
+        
     - "You can't attack more than once in 24 hours" showing for multiple campaigns
         - makes it hard to troubleshoot!
 
+    Territory 13 has 3 attackers
             
 Before a general release:
 - "Contact us"
@@ -34,7 +36,12 @@ Future:
     - note on create entry if no faction entries
     - reload player list after joining
     - "Played" table on CreateEntry is too small when using actual names
-
+    - prevent player from defending or attacking multiple times
+    - "defended by" and "attacked by" seems to be dependant on who the "current user" is, rather than who is attacking :(
+    - Clarks defense didn't appear on page fast enough for him
+    - countdown to next move.
+    - Clark can't see side tabs on 1400x1050
+    - track "declared attacks" rather than "completed attacks"
     
 - Map won't exapnd or contract after I zoom in our out once, So I get stuck at one size
 

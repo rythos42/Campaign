@@ -76,7 +76,16 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
 
     self.canBeDefended = ko.computed(function() {
         var userData = userCampaignData();
-        if(!userData || !isBeingAttacked() || (!self.isReachable() && self.territory().OwningFactionId !== userData.FactionId))
+        if(!userData || !isBeingAttacked())
+            return false;
+        
+        // Can't defend unreachable, unless it's your own territory
+        if(!self.isReachable() && self.territory().OwningFactionId !== userData.FactionId)
+            return false;
+        
+        // Can't defend unclaimed territory if you have no attacks
+        var territory = self.territory();
+        if(!territory.OwningFactionId && !self.isCurrentUserAbleToAttack())
             return false;
 
         return self.territory().AttackingFactionId !== userData.FactionId;
