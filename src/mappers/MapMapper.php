@@ -32,7 +32,7 @@ class MapMapper {
                 and Entry.CampaignId = Territory.CampaignId
                 and Entry.FinishDate is null
             left join User on User.Id = Entry.AttackingUserId
-            left join UserCampaignData on UserCampaignData.UserId = User.Id
+            left join UserCampaignData on UserCampaignData.UserId = User.Id and UserCampaignData.CampaignId = Territory.CampaignId
             where Territory.CampaignId = ?", [$campaignId]);
         return MapMapper::getTerritoryPointsListFromTerritoryList($dbTerritoryListForCampaign);
     }

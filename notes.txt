@@ -1,7 +1,4 @@
 Next:
-    - Clarks defense didn't appear on page after clicking Defend, even though it's reloaded
-    - "defended by" and "attacked by" seems to be dependant on who the "current user" is, rather than who is attacking :(
-        Greg on 19 is weird, why does it say Defend?
     - prevent player from defending or attacking multiple times
     - remove delete button from CreateEntry page
         
