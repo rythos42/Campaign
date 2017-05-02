@@ -136,7 +136,7 @@ class MapMapper {
                 join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
                 join Entry on Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap and Entry.CampaignId = Territory.CampaignId and Entry.FinishDate is null
                 left join User on User.Id = Entry.AttackingUserId
-                left join UserCampaignData on UserCampaignData.UserId = User.Id
+                left join UserCampaignData on UserCampaignData.UserId = User.Id and UserCampaignData.CampaignId = Territory.CampaignId
                 left join Faction on Faction.Id = UserCampaignData.FactionId
                 where Territory.CampaignId = ?
                 order by TerritoryPoint.TerritoryId, TerritoryPoint.PointNumber",
