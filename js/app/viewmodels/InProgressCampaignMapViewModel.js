@@ -141,7 +141,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     self.territoryDetailsDialogViewModel.dialogResult.subscribe(function(dialogResult) {
         if(dialogResult === DialogResult.Saved) {
             $.ajax({
-                url: '/src/webservices/CampaignService.php',
+                url: 'src/webservices/CampaignService.php',
                 data: {
                     action: 'CreateFactionEntry',
                     campaignId: currentCampaign().id(),
