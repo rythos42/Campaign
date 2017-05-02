@@ -23,7 +23,14 @@ class MapMapper {
     }
     
     public static function getAllTerritoriesForCampaign($campaignId) {
-        $dbTerritoryListForCampaign = Database::queryArray("select Id, IdOnMap, OwningFactionId, Tags from Territory where CampaignId = ?", [$campaignId]);
+        $dbTerritoryListForCampaign = Database::queryArray(
+            "select Territory.Id, Territory.IdOnMap, Territory.OwningFactionId, Tags, Entry.AttackingUserId, User.Username
+            from Territory
+            left join Entry on 
+                Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap 
+                and Entry.CampaignId = Territory.CampaignId
+            left join User on User.Id = Entry.AttackingUserId
+            where Territory.CampaignId = ?", [$campaignId]);
         return MapMapper::getTerritoryPointsListFromTerritoryList($dbTerritoryListForCampaign);
     }
     
@@ -35,6 +42,8 @@ class MapMapper {
             $returnTerritory["IdOnMap"] = $dbTerritory["IdOnMap"];
             $returnTerritory["Tags"] = $dbTerritory["Tags"];
             $returnTerritory["OwningFactionId"] = $dbTerritory["OwningFactionId"];
+            $returnTerritory["AttackingUserId"] = $dbTerritory["AttackingUserId"];
+            $returnTerritory["AttackingUsername"] = $dbTerritory["Username"];
             $returnTerritory["Points"] = Database::queryArray("select X, Y, PointNumber from TerritoryPoint where TerritoryId = ?", [$dbTerritory["Id"]]);
             $returnTerritoryList[] = $returnTerritory;
         }
@@ -44,7 +53,7 @@ class MapMapper {
     private static function getAdjacentPolygonsForFaction($factionId) {
         // get all polygons adjacent (within -2 to +2 pixels) to the given faction
         return Database::queryArray(
-            "select adjacentPolygon.Id, adjacentPolygon.IdOnMap, adjacentPolygon.OwningFactionId, adjacentPolygon.Tags
+            "select adjacentPolygon.Id, adjacentPolygon.IdOnMap, adjacentPolygon.OwningFactionId, adjacentPolygon.Tags, Entry.AttackingUserId, User.Username
                 from Territory ownedPolygon
                 join TerritoryPoint ownedPoint on ownedPoint.TerritoryId = ownedPolygon.Id
                 join TerritoryPoint adjacentPoint on 
@@ -55,6 +64,10 @@ class MapMapper {
                     adjacentPolygon.Id = adjacentPoint.TerritoryId 
                     and ifnull(adjacentPolygon.OwningFactionId, -1) <> ifnull(ownedPolygon.OwningFactionId, -1)
                     and adjacentPolygon.CampaignId = ownedPolygon.CampaignId
+                left join Entry on 
+                    Entry.TerritoryBeingAttackedIdOnMap = ownedPolygon.IdOnMap 
+                    and Entry.CampaignId = ownedPolygon.CampaignId
+                left join User on User.Id = Entry.AttackingUserId
                 where ownedPolygon.OwningFactionId = ?
                 group by ownedPolygon.OwningFactionId, adjacentPolygon.Id", [$factionId]);
     }

@@ -11,6 +11,9 @@ class TerritoryDetailsDialogWidget {
                 <li class="data-list">
                     <label><?php echo Translation::getString('ownedBy'); ?>:</label> <span data-bind="text: ownedBy"></span>
                 </li>
+                <li class="data-list" data-bind="visible: isBeingAttacked">
+                    <label><?php echo Translation::getString('attackedBy'); ?>:</label> <span data-bind="text: attackedBy"></span>
+                </li>
                 <li class="button-panel">
                     <input type="button" data-bind="click: attack, visible: canBeAttacked" value="<?php echo Translation::getString("attack"); ?>" class="ui-button ui-widget ui-corner-all" />
                     <input type="button" data-bind="click: cancel" value="<?php echo Translation::getString("cancel"); ?>" class="ui-button ui-widget ui-corner-all" />

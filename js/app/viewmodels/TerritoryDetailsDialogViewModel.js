@@ -29,6 +29,16 @@ var TerritoryDetailsDialogViewModel = function(currentCampaign) {
         return faction ? faction.name() : Translation.getString('unowned');
     });
     
+    self.isBeingAttacked = ko.computed(function() {
+        var territory = self.territory();
+        return territory ? territory.AttackingUsername : false;
+    });
+    
+    self.attackedBy = ko.computed(function() {
+        var territory = self.territory();
+        return territory ? territory.AttackingUsername : '';
+    });
+    
     self.attack = function() {    
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
