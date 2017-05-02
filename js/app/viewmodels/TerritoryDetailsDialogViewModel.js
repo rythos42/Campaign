@@ -64,8 +64,14 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     });
 
     self.canBeAttacked = ko.computed(function() {
-        var userData = userCampaignData();
-        if(!userData || !self.isReachable() || !self.isCurrentUserAbleToAttack())
+        var userData = userCampaignData(),
+            entry = territoryEntry();
+            
+        if(!userData || !entry || !self.isReachable() || !self.isCurrentUserAbleToAttack())
+            return false;
+        
+        // Can't attack if you're already in the entry
+        if(entry.hasUser(user.id()))
             return false;
 
         if(!isBeingAttacked())
@@ -75,14 +81,20 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     });
 
     self.canBeDefended = ko.computed(function() {
-        var userData = userCampaignData();
-        if(!userData || !isBeingAttacked())
+        var userData = userCampaignData(),
+            entry = territoryEntry();
+            
+        if(!userData || !entry || !isBeingAttacked())
             return false;
         
         // Can't defend unreachable, unless it's your own territory
         if(!self.isReachable() && self.territory().OwningFactionId !== userData.FactionId)
             return false;
         
+        // Can't defend if you're already in the entry
+        if(entry.hasUser(user.id()))
+            return false;
+
         // Can't defend unclaimed territory if you have no attacks
         var territory = self.territory();
         if(!territory.OwningFactionId && !self.isCurrentUserAbleToAttack())

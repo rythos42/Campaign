@@ -1,6 +1,6 @@
 Next:
-    - prevent player from defending or attacking multiple times
     - remove delete button from CreateEntry page
+    - hide Played button if no attacking happening
         
     - "You can't attack more than once in 24 hours" showing for multiple campaigns
         - makes it hard to troubleshoot!
@@ -40,6 +40,7 @@ Future:
     - Clark can't see side tabs on 1400x1050
     - track "declared attacks" rather than "completed attacks"
     - CampaignMapper line 162, 171 $winningFactionEntry empty for draw
+    - clear the map when moving between campaigns - looks weird to have the old map still up
     
     
 - Map won't exapnd or contract after I zoom in our out once, So I get stuck at one size
