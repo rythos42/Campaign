@@ -1,4 +1,29 @@
 Next:
+    - only have Admins access to Finish button
+    - allow another player to "defend" an attack from the map UI
+    - need to allow saving a FactionEntry without VPs so players can sign up for a game and enter VPs later
+        - this would also solve the confusion around whether to end VPs/materials when attacking
+        - maybe "entry" is only for entering VPs and materials.
+        - attack and defend using the map
+        - so you can add yourself as an entry by clicking on the territory and clicking Attack or Defend
+        - need another button for "Finish Game" or something to bring you to the entry page
+    - show who is attacking a territory on the TerritoryDetailsDialog
+        - show who is defending too!
+        
+    - "delete entry" button for users
+    - allow admins to approve a territory grab in case no one contests the claim before the end of the month.
+    - show "being attacked" on map legend
+    - ability for admins to give TB to players
+
+            
+Before a general release:
+- "Contact us"
+- Account recovery, since we mention it on the e-mail thing.
+- for buying: group buy, or individual buy? 
+    Roll20: group buy, $5/month or $50/year.
+- Facebook OpenGraph image
+
+Future:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
@@ -7,24 +32,9 @@ Next:
     - loading UI always shown on Simple campaign, because it never loads the map
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - font for "Spend 1 Material" is wrong
-    - "delete entry" button for users
-    - allow admins to approve a territory grab in case no one contests the claim before the end of the month.
-    
     - don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
-    
-    - show who is currently attacking a territory
-        - blue and tan striped
-    - allow another player to "defend" an attack
-    - need to allow saving a FactionEntry without VPs so players can sign up for a game and enter VPs later
-        - this would also solve the confusion around whether to end VPs/materials when attacking
-    
-            
-Before a general release:
-- "Contact us"
-- Account recovery, since we mention it on the e-mail thing.
-- for buying: group buy, or individual buy? 
-    Roll20: group buy, $5/month or $50/year.
-- Facebook OpenGraph image
+        - currently only allowing admins to Finish entries, so this idea might not survive.
+
 
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.

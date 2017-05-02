@@ -92,10 +92,31 @@ class MapMapper {
         $mapImageLocation = "/img/" . $mapImageWidth . "x" . $mapImageHeight . "/" . $mapImageName;
         $starmap = imagecreatefromjpeg(Server::getFullPath() . $mapImageLocation);
         imagecopy($image, $starmap, 0, 0, 0, 0, $width, $height);
-                    
-        $sectorImage = imagecreatefrompng(MapMapper::getMapFileNameForCampaign($campaignId));
-        imagecopy($image, $sectorImage, 0, 0, 0, 0, $width, $height);
-               
+        
+        $dbAttackedTerritoryList = Database::queryArray(
+            "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y
+                from Territory
+                join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
+                join Entry on Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap
+                left join User on User.Id = Entry.AttackingUserId
+                left join UserCampaignData on UserCampaignData.UserId = User.Id
+                left join Faction on Faction.Id = UserCampaignData.FactionId
+                where Territory.CampaignId = ? and Entry.CampaignId = ? and Entry.FinishDate is null",
+                [$campaignId, $campaignId]);
+                
+        $attackedTile = imagecreatefrompng(Server::getFullPath() . '/img/attacked.png');
+        imageSetTile($image, $attackedTile);
+        foreach(self::getPolygonListFromDatabasePolygonList($dbAttackedTerritoryList) as $polygon) {
+            // skip unwanted polygons
+            if(!array_key_exists("Colour", $polygon) || $polygon["Colour"] === null)
+                continue;
+
+            list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
+            $colour = imagecolorallocatealpha($image, $red, $green, $blue, 80);
+            imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
+            imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, IMG_COLOR_TILED);
+        }
+                                   
         $dbTerritoryList = Database::queryArray(
             "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y 
             from Territory 
@@ -114,19 +135,8 @@ class MapMapper {
             imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
         }
         
-        $dbAttackedTerritoryList = Database::queryArray(
-            "select IdOnMap, TerritoryPoint.X, TerritoryPoint.Y
-                from Territory
-                join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
-                join Entry on Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap 
-                where Territory.CampaignId = ? and Entry.CampaignId = ? and Entry.FinishDate is null",
-                [$campaignId, $campaignId]);
-                
-        $attackedTile = imagecreatefrompng(Server::getFullPath() . '/img/attacked.png');
-        imageSetTile($image, $attackedTile);
-        foreach(self::getPolygonListFromDatabasePolygonList($dbAttackedTerritoryList) as $polygon) {
-            imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, IMG_COLOR_TILED);
-        }
+        $sectorImage = imagecreatefrompng(MapMapper::getMapFileNameForCampaign($campaignId));
+        imagecopy($image, $sectorImage, 0, 0, 0, 0, $width, $height);
         
         imagepng($image);
     }
