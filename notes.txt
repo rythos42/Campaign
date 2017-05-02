@@ -6,13 +6,13 @@ Next:
         - attack and defend using the map
         - so you can add yourself as an entry by clicking on the territory and clicking Attack or Defend
         - need another button for "Finish Game" or something to bring you to the entry page
-    - show who is attacking a territory on the TerritoryDetailsDialog
-        - show who is defending too!
         
     - "delete entry" button for users
-    - allow admins to approve a territory grab in case no one contests the claim before the end of the month.
     - show "being attacked" on map legend
     - ability for admins to give TB to players
+    
+Run @ work: 
+    alter table FactionEntry modify column VictoryPointsScored int
 
             
 Before a general release:
