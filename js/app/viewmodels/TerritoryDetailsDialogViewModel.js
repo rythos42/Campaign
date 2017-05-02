@@ -103,6 +103,10 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         return self.territory().AttackingFactionId !== userData.FactionId;
     });
     
+    self.canBePlayed = ko.computed(function() {
+        return isBeingAttacked();
+    });
+    
     self.dialogTitle = ko.computed(function() {
         var territory = self.territory();
         return territory ? Translation.getString('territory') + ' ' + territory.IdOnMap : '';

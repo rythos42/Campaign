@@ -1,7 +1,4 @@
 Next:
-    - remove delete button from CreateEntry page
-    - hide Played button if no attacking happening
-        
     - "You can't attack more than once in 24 hours" showing for multiple campaigns
         - makes it hard to troubleshoot!
 
@@ -71,6 +68,11 @@ Clean up everything here:
                     <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </li>
             </ul>
+            
+                <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">
+                    <span class="icon-bin"></span>
+                </button>
+
 And in CreateEntryViewModel:
             var territory = parameter.territory;
             attackingAnywhere(parameter.attackingAnywhere);

@@ -42,7 +42,13 @@ var Entry = function(user, campaign, serverEntry) {
         return $.grep(self.factionEntries(), function(factionEntry) {
             return factionEntry.user().id() === self.attackingUser().id();
         }).length > 0;
-    });
+    });    
+    
+    self.hasUser = function(userId) {
+        return $.grep(self.factionEntries(), function(factionEntry) {
+            return factionEntry.user().id() === userId;
+        }).length > 0;
+    };
 
     self.clear = function() {
         self.factionEntries.removeAll();

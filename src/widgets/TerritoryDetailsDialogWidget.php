@@ -22,7 +22,7 @@ class TerritoryDetailsDialogWidget {
                 </li>
                 <!-- /ko -->
                 <li class="button-panel">
-                    <input type="button" data-bind="click: played" value="<?php echo Translation::getString("played"); ?>" class="ui-button ui-widget ui-corner-all" />
+                    <input type="button" data-bind="click: played, visible: canBePlayed" value="<?php echo Translation::getString("played"); ?>" class="ui-button ui-widget ui-corner-all" />
                     <input type="button" data-bind="click: attack, visible: canBeAttacked" value="<?php echo Translation::getString("attack"); ?>" class="ui-button ui-widget ui-corner-all" />
                     <input type="button" data-bind="click: defend, visible: canBeDefended" value="<?php echo Translation::getString("defend"); ?>" class="ui-button ui-widget ui-corner-all" />
                     <input type="button" data-bind="click: cancel" value="<?php echo Translation::getString("cancel"); ?>" class="ui-button ui-widget ui-corner-all" />
