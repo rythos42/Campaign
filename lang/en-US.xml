@@ -114,6 +114,9 @@
         <enterNewName>Enter a new name.</enterNewName>
         <edit>Edit</edit>
         <attackedBy>Attacked by</attackedBy>
+        <defendedBy>Defended by</defendedBy>
+        <defend>Defend</defend>
+        <played>Played</played>
         <youCannotAttackTwiceIn24Hours>You cannot attack twice in 24 hours.</youCannotAttackTwiceIn24Hours>
     </strings>
 </translation>

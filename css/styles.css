@@ -133,6 +133,10 @@ table [class^="icon-"], table [class*=" icon-"] {
     color: #2779aa;
 }
 
+table input[type="number"] {
+    width: 3em;
+}
+
 thead th {
    text-align: left;
    font-size: 0.9em;

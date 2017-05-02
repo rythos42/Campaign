@@ -12,7 +12,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
-    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, userCampaignData);
+    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, internalEntryList, userCampaignData);
     self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
@@ -213,5 +213,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
             internalEntryList.removeAll();
         else // when we come here after creating an entry, update the entry list
             getEntryList();
+    });
+    
+    self.inProgressCampaignMapViewModel.reloadEntryList(function(reload) {
+        if(!reload)
+            return;
+        
+        getEntryList();
+        self.inProgressCampaignMapViewModel.reloadEntryList(false);
     });
 };

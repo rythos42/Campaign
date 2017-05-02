@@ -33,6 +33,13 @@ switch($action) {
             CampaignMapper::finishEntry($campaignEntry);
         
         break;
+        
+    case "CreateFactionEntry":
+        $campaignId = $_REQUEST["campaignId"];
+        $territoryBeingAttackedIdOnMap = $_REQUEST["territoryBeingAttackedIdOnMap"];
+        $factionId = $_REQUEST["factionId"];
+        CampaignMapper::createFactionEntry($campaignId, $territoryBeingAttackedIdOnMap, $factionId);
+        break;
     
     case "GetEntryList":
         $campaignId = $_REQUEST["campaignId"];

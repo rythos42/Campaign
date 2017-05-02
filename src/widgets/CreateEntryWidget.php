@@ -6,29 +6,6 @@ class CreateEntryWidget {
         <div data-bind="visible: showCreateEntry" class="grouping ui-widget ui-corners-all ui-widget-content" style="display: none;" >
             <div data-bind="visible: isFinished"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
             <div data-bind="visible: !hasJoinedCampaign()"><?php echo Translation::getString("entryJoinToEdit"); ?></div>
-            <ul data-bind="visible: !isReadOnly()">
-                <li class="entry-field" data-bind="visible: isMapCampaign">
-                    <label for="IdOnmap"><?php echo Translation::getString("territory"); ?>: </label>
-                    <span data-bind="text: territoryBeingAttackedIdOnMap"></span>
-                </li>
-                <li class="entry-field">
-                    <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, onEnter: addUser, enable: hasAttackingUser, hasfocus: usernameHasFocus"></select>
-                    <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
-                </li>
-                <li class="entry-field">
-                    <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
-                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, onEnter: addUser, hasfocus: victoryPointsHasFocus" />
-                </li>
-                <li class="entry-field" data-bind="visible: isMapCampaign">
-                    <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
-                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, onEnter: addUser" />
-                </li>
-                <li class="button-panel">
-                    <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
-                    <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
-                </li>
-            </ul>
             <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">
                 <thead>
                     <tr>
@@ -43,8 +20,12 @@ class CreateEntryWidget {
                     <tr>
                         <td data-bind="text: factionName" />
                         <td data-bind="text: username" />
-                        <td data-bind="text: victoryPoints" />
-                        <td data-bind="text: territoryBonusSpent, visible: $parent.isMapCampaign" />
+                        <td>
+                            <input type="number" data-bind="textInput: victoryPoints" />
+                        </td>
+                        <td data-bind="visible: $parent.isMapCampaign">
+                            <input type="number" data-bind="textInput: territoryBonusSpent" />
+                        </td>
                         <td class="actions">
                             <span data-bind="visible: isAttackingUser, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>
                             <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">

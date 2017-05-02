@@ -1,17 +1,18 @@
 /*exported InProgressCampaignMapViewModel */
 /*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour */
-var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, userCampaignData) {
+var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, internalEntryList, userCampaignData) {
     var self = this,
         serverTerritories,
         reachableTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
 
-    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(currentCampaign);
+    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData);
         
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable(null);
     self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
+    self.reloadEntryList = ko.observable(false);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -102,7 +103,8 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             return;
         
         self.territoryDetailsDialogViewModel.territory(self.drawingTerritory());
-        self.territoryDetailsDialogViewModel.canBeAttacked(isDrawingReachable() && canCurrentUserAttack());
+        self.territoryDetailsDialogViewModel.isReachable(!!isDrawingReachable());
+        self.territoryDetailsDialogViewModel.isCurrentUserAbleToAttack(canCurrentUserAttack());
         self.territoryDetailsDialogViewModel.openDialog();
     };
     
@@ -138,7 +140,30 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     
     self.territoryDetailsDialogViewModel.dialogResult.subscribe(function(dialogResult) {
         if(dialogResult === DialogResult.Saved) {
-            self.startChallenge(self.territoryDetailsDialogViewModel.territory());
+            $.ajax({
+                url: '/src/webservices/CampaignService.php',
+                data: {
+                    action: 'CreateFactionEntry',
+                    campaignId: currentCampaign().id(),
+                    territoryBeingAttackedIdOnMap: self.territoryDetailsDialogViewModel.territory().IdOnMap,
+                    factionId: userCampaignData().FactionId
+                }
+            }).then(function() {
+                // reload map and entry list
+                loadMapImage();
+                self.reloadEntryList(true);
+            });
+        }
+        
+        if(dialogResult === DialogResult.Navigate) {
+            var territoryIdOnMap = self.territoryDetailsDialogViewModel.territory().IdOnMap;
+            
+            var entry = $.grep(internalEntryList(), function(entry) {
+                return entry.territoryBeingAttackedIdOnMap() === territoryIdOnMap;
+            })[0];            
+                
+            navigation.parameters(entry);
+            navigation.showCreateEntry(true);
         }
     });
 

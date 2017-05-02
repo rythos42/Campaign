@@ -1,18 +1,6 @@
 Next:
-    - allow another player to "defend" an attack from the map UI
-    - need to allow saving a FactionEntry without VPs so players can sign up for a game and enter VPs later
-        - this would also solve the confusion around whether to end VPs/materials when attacking
-        - maybe "entry" is only for entering VPs and materials.
-        - attack and defend using the map
-        - so you can add yourself as an entry by clicking on the territory and clicking Attack or Defend
-        - need another button for "Finish Game" or something to bring you to the entry page
-        
-    - "delete entry" button for users
-    - show "being attacked" on map legend
-    - ability for admins to give TB to players
-    
-Run @ work: 
-    alter table FactionEntry modify column VictoryPointsScored int
+    - Use attack to defend contested territory
+        - can't defend if you have no attacks left
 
             
 Before a general release:
@@ -23,16 +11,64 @@ Before a general release:
 - Facebook OpenGraph image
 
 Future:
-    - hide Attack button for Simple until joined
-    - hide map area for Simple, entirely
-    - put Simple Attack button just on its own?
-    - when creator joins campaign, make that person admin
+    Simple:
+        - hide Attack button for Simple until joined
+        - hide map area for Simple, entirely
+        - put Simple Attack button just on its own?
+        - loading UI always shown on Simple campaign, because it never loads the map
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
-    - loading UI always shown on Simple campaign, because it never loads the map
+    - when creator joins campaign, make that person admin
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - font for "Spend 1 Material" is wrong
-    - don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
-        - currently only allowing admins to Finish entries, so this idea might not survive.
+    - "delete entry" button for users
+    - "remove myself from this entry" button for users
+    - show "being attacked" on map legend
+    - ability for admins to give TB to players
+    - Why was Dan able to attack twice this morning?
+    - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
+    - display none on header
+    - Tab table width 100% mobile 
+    - tooltip on "Played" button
+    - note on create entry if no faction entries
+    - reload player list after joining
+    
+
+Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore
+    
+Clean up everything here:
+            <ul data-bind="visible: !isReadOnly()">
+                <li class="entry-field" data-bind="visible: isMapCampaign">
+                    <label for="IdOnmap"><?php echo Translation::getString("territory"); ?>: </label>
+                    <span data-bind="text: territoryBeingAttackedIdOnMap"></span>
+                </li>
+                <li class="entry-field">
+                    <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
+                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, onEnter: addUser, enable: hasAttackingUser, hasfocus: usernameHasFocus"></select>
+                    <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
+                </li>
+                <li class="entry-field">
+                    <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
+                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, onEnter: addUser, hasfocus: victoryPointsHasFocus" />
+                </li>
+                <li class="entry-field" data-bind="visible: isMapCampaign">
+                    <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
+                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, onEnter: addUser" />
+                </li>
+                <li class="button-panel">
+                    <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
+                    <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
+                </li>
+            </ul>
+And in CreateEntryViewModel:
+            var territory = parameter.territory;
+            attackingAnywhere(parameter.attackingAnywhere);
+            minimumTerritoryBonusSpent(attackingAnywhere() ? 1 : 0);
+            self.territoryBonusSpent(attackingAnywhere() ? 1 : undefined);
+            
+            currentEntry.clear();        
+            currentEntry.territoryBeingAttackedIdOnMap(territory.IdOnMap);
+            currentEntry.attackingUser(user);
+            self.selectedUser(user);
 
 
 Terms and Admin Help:
@@ -50,6 +86,10 @@ Credit:
     
 
 Far Future:
+- Fixed header looks weird on Android Chrome
+- mobile - press on territory under the dialogs "Cancel" button closes the dialog right away!
+- don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
+    - currently only allowing admins to Finish entries, so this idea might not survive.
 - Administrator interface:
     - delete campaigns
 - Campaign Administrator interface:

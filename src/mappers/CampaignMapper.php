@@ -107,6 +107,26 @@ class CampaignMapper {
         }
     }
     
+    public static function createFactionEntry($campaignId, $territoryBeingAttackedIdOnMap, $factionId) {
+        $createdByUserId = User::getCurrentUser()->getId();
+        $attackingUserId = $createdByUserId;
+        $createdOnDate = date('Y-m-d H:i:s');
+
+        // Exists if this territory is being attacked
+        $attackingEntryId = Database::queryScalar(
+            "select Id from Entry where CampaignId = ? and FinishDate is null and TerritoryBeingAttackedIdOnMap = ?",
+            [$campaignId, $territoryBeingAttackedIdOnMap]);
+
+        if(!isset($attackingEntryId)) {
+            Database::execute(
+                "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingUserId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)",
+                [$campaignId, $createdByUserId, $createdOnDate, $attackingUserId, $territoryBeingAttackedIdOnMap]);
+            $attackingEntryId = Database::getLastInsertedId();
+        }
+
+        Database::execute("insert into FactionEntry (EntryId, FactionId, UserId) values (?, ?, ?)", [$attackingEntryId, $factionId, $createdByUserId]);
+    }
+
     public static function finishEntry($campaignEntry) {
         if(self::isMapCampaign($campaignEntry->campaignId)) {            
             $winningFactionEntry = null;
