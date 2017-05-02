@@ -215,7 +215,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
             getEntryList();
     });
     
-    self.inProgressCampaignMapViewModel.reloadEntryList(function(reload) {
+    self.inProgressCampaignMapViewModel.reloadEntryList.subscribe(function(reload) {
         if(!reload)
             return;
         

@@ -151,7 +151,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
             }).then(function() {
                 // reload map and entry list
                 loadMapImage();
-                self.reloadEntryList(true);
+                self.reloadEntryList.notifySubscribers(true);
             });
         }
         
