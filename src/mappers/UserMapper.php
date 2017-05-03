@@ -54,9 +54,12 @@ class UserMapper {
             from UserCampaignData 
             join Campaign on Campaign.Id = UserCampaignData.CampaignId 
             left outer join Phase on Phase.CampaignId = Campaign.Id
-            left outer join (select max(CreatedOnDate) as CreatedOnDate, CreatedByUserId  from Entry where CreatedByUserId = ?) LastEntry on LastEntry.CreatedByUserId = UserCampaignData.UserId
+            left outer join (
+                    select max(CreatedOnDate) as CreatedOnDate, CreatedByUserId  
+                    from Entry where CreatedByUserId = ? and CampaignId = ?
+                ) LastEntry on LastEntry.CreatedByUserId = UserCampaignData.UserId
             where UserId = ? and UserCampaignData.CampaignId = ?", 
-            [$userId, $userId, $campaignId]);
+            [$userId, $campaignId, $userId, $campaignId]);
     }
     
     public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
