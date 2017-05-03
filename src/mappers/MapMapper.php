@@ -91,6 +91,9 @@ class MapMapper {
                 if(array_key_exists("OwningFactionId", $dbPolygon))
                     $polygonList[$polygonIdOnMap]["OwningFactionId"] = $dbPolygon["OwningFactionId"];
                 
+                if(array_key_exists("HasOpponents", $dbPolygon))
+                    $polygonList[$polygonIdOnMap]["HasOpponents"] = $dbPolygon["HasOpponents"];
+                
                 $polygonList[$polygonIdOnMap]["Points"] = array();
             }
             
@@ -131,7 +134,11 @@ class MapMapper {
         }
 
         $dbAttackedTerritoryList = Database::queryArray(
-            "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y
+            "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y,
+                (select case count(*) when 0 then 0 else 1 end
+                    from FactionEntry fe1 
+                    join FactionEntry fe2 on fe2.EntryId = fe1.EntryId and fe2.FactionId != fe1.FactionId 
+                    where fe1.EntryId=Entry.Id) as HasOpponents
                 from Territory
                 join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
                 join Entry on Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap and Entry.CampaignId = Territory.CampaignId and Entry.FinishDate is null
@@ -149,9 +156,18 @@ class MapMapper {
             if(!array_key_exists("Colour", $polygon) || $polygon["Colour"] === null)
                 continue;
 
-            list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
-            $colour = imagecolorallocatealpha($image, $red, $green, $blue, 80);
-            imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, $colour);
+            $attackedTile = imagecreatefrompng(Server::getFullPath() . '/img/attacked.png');
+            imageSetTile($image, $attackedTile);
+            
+            if($polygon["HasOpponents"]) {
+                $red = 255;
+                $green = 0;
+                $blue = 0;
+            } else {
+                list($red, $green, $blue) = sscanf($polygon["Colour"], "%02x%02x%02x");
+            }
+
+            imagefilter($attackedTile, IMG_FILTER_COLORIZE, $red, $green, $blue, 40);
             imagefilledpolygon($image, $polygon["Points"], count($polygon["Points"]) / 2, IMG_COLOR_TILED);
         }
         
@@ -160,7 +176,7 @@ class MapMapper {
         
         imagepng($image);
     }
-    
+
     public static function getMapFileNameForCampaign($campaignId) {
         $installDirOnWebServer = Server::getFullPath();
         return "$installDirOnWebServer/img/maps/$campaignId.png";

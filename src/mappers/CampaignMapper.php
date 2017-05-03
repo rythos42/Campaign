@@ -163,13 +163,13 @@ class CampaignMapper {
             }
 
             // If the winner was attacking, give them the territory
-            if($winningFactionEntry->user->id === $campaignEntry->attackingUser->id) {
+            if(isset($winningFactionEntry) && $winningFactionEntry->user->id === $campaignEntry->attackingUser->id) {
                 Database::execute(
                     "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
                     [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap]);
             }
             
-            if(sizeof($campaignEntry->factionEntries) > 1)
+            if(isset($winningFactionEntry) && sizeof($campaignEntry->factionEntries) > 1)
                 Database::execute(
                     "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
                     [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
