@@ -27,7 +27,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     
     self.attackingPlayers = ko.computed(function() {
         var theTerritoryEntry = territoryEntry();
-        if(!theTerritoryEntry)
+        if(!theTerritoryEntry || theTerritoryEntry.finishDate())
             return null;
         
         return $.map(
@@ -41,7 +41,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     
     self.defendingPlayers = ko.computed(function() {
         var theTerritoryEntry = territoryEntry();
-        if(!theTerritoryEntry)
+        if(!theTerritoryEntry || theTerritoryEntry.finishDate())
             return null;
         
         return $.map(
