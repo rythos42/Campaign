@@ -118,5 +118,7 @@
         <defend>Defend</defend>
         <played>Played</played>
         <youCannotAttackOrDefendTwiceIn24Hours>Wait 24 hours to attack, or defend unclaimed territory.</youCannotAttackOrDefendTwiceIn24Hours>
+        <youAttacked>Attacked #{0}!</youAttacked>
+        <youDefended>Defended #{0}</youDefended>
     </strings>
 </translation>

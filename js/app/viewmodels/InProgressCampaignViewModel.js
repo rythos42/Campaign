@@ -99,6 +99,14 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentCampaign().optionalAttacks(userDataForCampaign.OptionalAttacks);
     };
     
+    function getUserDataForCampaign() {
+        currentlyLoadingUserData(true);
+        UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {
+            currentlyLoadingUserData(false);
+            setUserDataForCampaign(userDataForCampaign);
+        });
+    }
+    
     self.resetPhase = function() {
         $.ajax({
             url: 'src/webservices/CampaignService.php',
@@ -196,11 +204,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
         if(newCampaign)
             currentCampaign(newCampaign);
         
-        currentlyLoadingUserData(true);
-        UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {
-            currentlyLoadingUserData(false);
-            setUserDataForCampaign(userDataForCampaign);
-        });
+        getUserDataForCampaign();
     });
     
     currentCampaign.subscribe(function() {
@@ -221,5 +225,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
         
         getEntryList();
         self.inProgressCampaignMapViewModel.reloadEntryList(false);
+    });
+    
+    self.inProgressCampaignMapViewModel.reloadSummary.subscribe(function(reload) {
+        if(!reload)
+            return;
+        
+        getUserDataForCampaign();
+        self.inProgressCampaignMapViewModel.reloadSummary(false);
     });
 };

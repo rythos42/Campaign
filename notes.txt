@@ -1,13 +1,7 @@
 Next:
-    - CampaignMapper line 162, 171 $winningFactionEntry empty for draw
     - Map won't exapnd or contract after zoom in our out once, So I get stuck at one size
-    - track "declared attacks" rather than "completed attacks"
-
-    - "delete entry" button for user who created attack
-
     - ability for admins to give TB to players
     - reload player list after joining
-    - So if we're thinking in layers, solid color over the whole territory is the owner, dashed lines indicate an attack, red lines indicate a match is arranged.
 
     Territory 13 has 3 attackers.
             
@@ -25,6 +19,9 @@ Future:
     - Clark can't see side tabs on 1400x1050
     - clear the map when moving between campaigns - looks weird to have the old map still up
     - don't let people attack if they have an outstanding attack
+    - removing everyone from a challenge -- what does this mean?
+    - "delete entry" button for user who created attack
+        - need to think more about what this means for the campaign
         
 
 Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore
@@ -72,6 +69,7 @@ Before a general release:
     Roll20: group buy, $5/month or $50/year.
 - Facebook OpenGraph image
 - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
+- In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
             
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
@@ -113,7 +111,6 @@ Simple defects:
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple
 - sweet background on header
-- Attacks a computed value? We can calculate it once we have Phases - it's the number of times that player was an Attacker in that Phase.
 - rename table indexes -- easier in mySQL 5.7
 - page campaign list
 - search campaigns by the user who created them

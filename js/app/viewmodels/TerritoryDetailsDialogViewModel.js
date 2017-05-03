@@ -1,5 +1,5 @@
 /*exported TerritoryDetailsDialogViewModel */
-/*globals ko, DialogResult, Translation, FactionEntryListItemViewModel */
+/*globals ko, toastr, DialogResult, Translation, FactionEntryListItemViewModel */
 var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData) {
     var self = this;
     
@@ -131,11 +131,13 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     self.defend = function() {  // defend is the same as being a second attacker, from a server perspective
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
+        toastr.info(Translation.getString('youDefended').replace('{0}', self.territory().IdOnMap));
     };
     
     self.attack = function() {    
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
+        toastr.info(Translation.getString('youAttacked').replace('{0}', self.territory().IdOnMap));
     };
     
     self.played = function() {

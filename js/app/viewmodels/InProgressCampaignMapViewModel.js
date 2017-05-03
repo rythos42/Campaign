@@ -13,6 +13,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
     self.reloadEntryList = ko.observable(false);
+    self.reloadSummary = ko.observable(false);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -152,6 +153,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
                 // reload map and entry list
                 loadMapImage();
                 self.reloadEntryList.notifySubscribers(true);
+                self.reloadSummary.notifySubscribers(true);
             });
         }
         
