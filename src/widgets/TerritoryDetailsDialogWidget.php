@@ -13,12 +13,24 @@ class TerritoryDetailsDialogWidget {
                 </li>
                 <!-- ko foreach: attackingPlayers -->
                 <li class="data-list">
-                    <label><?php echo Translation::getString('attackedBy'); ?>:</label> <span data-bind="text: playerName"></span>
+                    <label><?php echo Translation::getString('attackedBy'); ?>:</label>
+                    <span>
+                        <span data-bind="text: username"></span>
+                        <button data-bind="click: removeFactionEntry, tooltip: Translation.getString('delete')" class="ui-button ui-widget ui-corner-all inline-icon-button">
+                            <span class="icon-bin"></span>
+                        </button>
+                    </span>
                 </li>
                 <!-- /ko -->
                 <!-- ko foreach: defendingPlayers -->
                 <li class="data-list">
-                    <label><?php echo Translation::getString('defendedBy'); ?>:</label> <span data-bind="text: playerName"></span>
+                    <label><?php echo Translation::getString('defendedBy'); ?>:</label> 
+                    <span>
+                        <span data-bind="text: username"></span>
+                        <button data-bind="click: removeFactionEntry, tooltip: Translation.getString('delete')" class="ui-button ui-widget ui-corner-all inline-icon-button">
+                            <span class="icon-bin"></span>
+                        </button>
+                    </span>
                 </li>
                 <!-- /ko -->
                 <li class="button-panel">

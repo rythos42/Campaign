@@ -39,6 +39,11 @@ switch($action) {
         $territoryBeingAttackedIdOnMap = $_REQUEST["territoryBeingAttackedIdOnMap"];
         $factionId = $_REQUEST["factionId"];
         CampaignMapper::createFactionEntry($campaignId, $territoryBeingAttackedIdOnMap, $factionId);
+        break;  
+        
+    case "DeleteFactionEntry":
+        $factionEntryId = $_REQUEST["factionEntryId"];
+        CampaignMapper::deleteFactionEntry($factionEntryId);
         break;
     
     case "GetEntryList":

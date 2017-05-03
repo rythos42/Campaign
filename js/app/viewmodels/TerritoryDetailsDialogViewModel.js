@@ -1,5 +1,5 @@
 /*exported TerritoryDetailsDialogViewModel */
-/*globals ko, DialogResult, Translation */
+/*globals ko, DialogResult, Translation, FactionEntryListItemViewModel */
 var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData) {
     var self = this;
     
@@ -35,7 +35,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() === attackedByFactionId();
             }),
             function(factionEntry) {
-                return { playerName: factionEntry.user().username() };
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry);
             });
     });    
     
@@ -49,7 +49,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() !== attackedByFactionId();
             }),
             function(factionEntry) {
-                return { playerName: factionEntry.user().username() };
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry);
             });
     });
     

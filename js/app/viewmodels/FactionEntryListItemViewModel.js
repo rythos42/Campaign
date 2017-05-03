@@ -31,5 +31,13 @@ var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry)
             
         if(factionEntryIndex !== -1)
             currentCampaignEntry.factionEntries.splice(factionEntryIndex, 1);
+        
+        $.ajax({
+            url: 'src/webservices/CampaignService.php',
+            data: {
+                action: 'DeleteFactionEntry',
+                factionEntryId: factionEntry.id()
+            }
+        });
     };
 };

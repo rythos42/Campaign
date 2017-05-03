@@ -1,46 +1,31 @@
 Next:
-    - "You can't attack more than once in 24 hours" showing for multiple campaigns
-        - makes it hard to troubleshoot!
+    - CampaignMapper line 162, 171 $winningFactionEntry empty for draw
+    - Map won't exapnd or contract after zoom in our out once, So I get stuck at one size
+    - track "declared attacks" rather than "completed attacks"
 
-    Territory 13 has 3 attackers
+    - "delete entry" button for user who created attack
+
+    - ability for admins to give TB to players
+    - reload player list after joining
+    - So if we're thinking in layers, solid color over the whole territory is the owner, dashed lines indicate an attack, red lines indicate a match is arranged.
+
+    Territory 13 has 3 attackers.
             
-Before a general release:
-- "Contact us"
-- Account recovery, since we mention it on the e-mail thing.
-- for buying: group buy, or individual buy? 
-    Roll20: group buy, $5/month or $50/year.
-- Facebook OpenGraph image
-
 Future:
-    Simple:
-        - hide Attack button for Simple until joined
-        - hide map area for Simple, entirely
-        - put Simple Attack button just on its own?
-        - loading UI always shown on Simple campaign, because it never loads the map
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
     - when creator joins campaign, make that person admin
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - font for "Spend 1 Material" is wrong
-    - "delete entry" button for users
-    - "remove myself from this entry" button for users
     - show "being attacked" on map legend
-    - ability for admins to give TB to players
-    - Why was Dan able to attack twice this morning?
-    - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
     - display none on header
     - Tab table width 100% mobile 
     - tooltip on "Played" button
-    - note on create entry if no faction entries
-    - reload player list after joining
     - "Played" table on CreateEntry is too small when using actual names
     - countdown to next move.
     - Clark can't see side tabs on 1400x1050
-    - track "declared attacks" rather than "completed attacks"
-    - CampaignMapper line 162, 171 $winningFactionEntry empty for draw
     - clear the map when moving between campaigns - looks weird to have the old map still up
-    
-    
-- Map won't exapnd or contract after I zoom in our out once, So I get stuck at one size
+    - don't let people attack if they have an outstanding attack
+        
 
 Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore
     
@@ -68,10 +53,6 @@ Clean up everything here:
                     <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
                 </li>
             </ul>
-            
-                <button class="button-icon" data-bind="click: removeFactionEntry, tooltip: '<?php echo Translation::getString("remove"); ?>', visible: !$parent.isReadOnly()">
-                    <span class="icon-bin"></span>
-                </button>
 
 And in CreateEntryViewModel:
             var territory = parameter.territory;
@@ -84,7 +65,14 @@ And in CreateEntryViewModel:
             currentEntry.attackingUser(user);
             self.selectedUser(user);
 
-
+Before a general release:
+- "Contact us"
+- Account recovery, since we mention it on the e-mail thing.
+- for buying: group buy, or individual buy? 
+    Roll20: group buy, $5/month or $50/year.
+- Facebook OpenGraph image
+- some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
+            
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
     - An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
@@ -100,6 +88,13 @@ Credit:
     
 
 Far Future:
+- probably could delete "AttackingUserId", as territories now have multiple attackers. It's also a complete duplicate of CreatedByUserId right now.
+Simple defects:
+    - hide Attack button for Simple until joined
+    - hide map area for Simple, entirely
+    - put Simple Attack button just on its own?
+    - loading UI always shown on Simple campaign, because it never loads the map
+
 - Fixed header looks weird on Android Chrome
 - mobile - press on territory under the dialogs "Cancel" button closes the dialog right away!
 - don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)

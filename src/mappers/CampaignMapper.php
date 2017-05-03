@@ -126,6 +126,10 @@ class CampaignMapper {
 
         Database::execute("insert into FactionEntry (EntryId, FactionId, UserId) values (?, ?, ?)", [$attackingEntryId, $factionId, $createdByUserId]);
     }
+    
+    public static function deleteFactionEntry($factionEntryId) {
+        Database::execute("delete from FactionEntry where Id = ?", [$factionEntryId]);
+    }        
 
     public static function finishEntry($campaignEntry) {
         if(self::isMapCampaign($campaignEntry->campaignId)) {            
