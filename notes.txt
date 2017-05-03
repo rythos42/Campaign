@@ -1,10 +1,7 @@
 Next:
-    - Map won't exapnd or contract after zoom in our out once, So I get stuck at one size
     - ability for admins to give TB to players
     - reload player list after joining
-
-    Territory 13 has 3 attackers.
-            
+           
 Future:
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
     - when creator joins campaign, make that person admin
@@ -92,11 +89,7 @@ Simple defects:
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
     - loading UI always shown on Simple campaign, because it never loads the map
-
-- Fixed header looks weird on Android Chrome
 - mobile - press on territory under the dialogs "Cancel" button closes the dialog right away!
-- don't allow Finishing territories owned by or adjacent to another faction without multiple people in the entry (ie, you can't take territory adjacent without contesting)
-    - currently only allowing admins to Finish entries, so this idea might not survive.
 - Administrator interface:
     - delete campaigns
 - Campaign Administrator interface:
