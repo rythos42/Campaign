@@ -67,11 +67,11 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         var userData = userCampaignData(),
             entry = territoryEntry();
             
-        if(!userData || !entry || !self.isReachable() || !self.isCurrentUserAbleToAttack())
+        if(!userData || !self.isReachable() || !self.isCurrentUserAbleToAttack())
             return false;
         
         // Can't attack if you're already in the entry
-        if(entry.hasUser(user.id()))
+        if(entry && entry.hasUser(user.id()))
             return false;
 
         if(!isBeingAttacked())

@@ -19,6 +19,10 @@ Future:
     - removing everyone from a challenge -- what does this mean?
     - "delete entry" button for user who created attack
         - need to think more about what this means for the campaign
+    - "You must be logged in to use this service" from NewsService GetMoreNews
+    - make sure each user has enough Materials to use in CreateEntry
+    - Materials on CreateEntry is for "spending", so should be more clear
+    - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
         
 
 Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore
