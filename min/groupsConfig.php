@@ -32,6 +32,7 @@ return array(
         '//js/app/model/Colour.js',
         '//js/app/model/DialogResult.js',
         '//js/app/model/CampaignType.js',
+        '//js/app/model/CampaignReloadEvents.js',
         '//js/app/managers/UserManager.js',
         '//js/app/viewmodels/ApplicationViewModel.js',
         '//js/app/viewmodels/LoginViewModel.js',

@@ -42,8 +42,9 @@ switch($action) {
         break;  
         
     case "DeleteFactionEntry":
+        $campaignId = $_REQUEST["campaignId"];
         $factionEntryId = $_REQUEST["factionEntryId"];
-        CampaignMapper::deleteFactionEntry($factionEntryId);
+        CampaignMapper::deleteFactionEntry($campaignId, $factionEntryId);
         break;
     
     case "GetEntryList":

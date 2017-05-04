@@ -133,7 +133,17 @@ class CampaignMapper {
         Database::execute("insert into FactionEntry (EntryId, FactionId, UserId) values (?, ?, ?)", [$attackingEntryId, $factionId, $createdByUserId]);
     }
     
-    public static function deleteFactionEntry($factionEntryId) {
+    public static function deleteFactionEntry($campaignId, $factionEntryId) {
+        $owningFactionId = Database::queryScalar(
+            "select Territory.OwningFactionId 
+                from FactionEntry
+                join Entry on Entry.Id = FactionEntry.EntryId
+                join Territory on Territory.IdOnMap = Entry.TerritoryBeingAttackedIdOnMap and Territory.CampaignId = Entry.CampaignId
+                where FactionEntry.Id = ?", [$factionEntryId]);
+        $factionEntry = Database::queryObject("select FactionId, UserId from FactionEntry where Id = ?", [$factionEntryId]);
+        if(!(isset($owningFactionId) && $owningFactionId == $factionEntry->FactionId))
+            Database::execute("update UserCampaignData set Attacks = Attacks - 1 where UserId = ? and CampaignId = ?", [$factionEntry->UserId, $campaignId]);
+
         Database::execute("delete from FactionEntry where Id = ?", [$factionEntryId]);
     }        
 

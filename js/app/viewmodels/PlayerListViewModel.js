@@ -15,17 +15,22 @@ var PlayerListViewModel = function(user, currentCampaign) {
     
     self.loadedPlayersPromise = null;
     
-    currentCampaign.subscribe(function(campaign) {
+    self.reloadPlayerList = function() {
+        var campaign = currentCampaign();
         if(!campaign)
             return;
         
         self.loadedPlayersPromise = $.Deferred();
-        
+
         UserManager.getUsersForCampaign(campaign.id()).done(function(results) {
             currentCampaign().players($.map(results, function(serverUser) {
                 return new User(serverUser);
             }));
             self.loadedPlayersPromise.resolve();            
         });
+    };
+    
+    currentCampaign.subscribe(function() {
+        self.reloadPlayerList();
     });
 };

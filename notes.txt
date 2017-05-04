@@ -1,6 +1,6 @@
 Next:
     - ability for admins to give TB to players
-    - reload player list after joining
+        - use give TB dialog here
            
 Future:
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
@@ -17,12 +17,16 @@ Future:
     - clear the map when moving between campaigns - looks weird to have the old map still up
     - don't let people attack if they have an outstanding attack
     - removing everyone from a challenge -- what does this mean?
-    - "delete entry" button for user who created attack
-        - need to think more about what this means for the campaign
     - "You must be logged in to use this service" from NewsService GetMoreNews
     - make sure each user has enough Materials to use in CreateEntry
     - Materials on CreateEntry is for "spending", so should be more clear
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
+    - attacking uncontrolled territories shouldn't be able to be finished for 24 hours after creation.
+    - Clark has to login every time it reloads.
+    - make IdOnMap an index
+    - "delete entry" button for user who created attack
+        - need to think more about what this means for the campaign
+        - or when all players are removed from an entry, delete it?
         
 
 Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore

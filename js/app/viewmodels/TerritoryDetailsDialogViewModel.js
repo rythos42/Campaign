@@ -1,6 +1,6 @@
 /*exported TerritoryDetailsDialogViewModel */
 /*globals ko, toastr, DialogResult, Translation, FactionEntryListItemViewModel */
-var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData) {
+var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents) {
     var self = this;
     
     self.dialogOpenClose = ko.observable(false);
@@ -35,7 +35,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() === attackedByFactionId();
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry);
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents);
             });
     });    
     
@@ -49,7 +49,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() !== attackedByFactionId();
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry);
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents);
             });
     });
     

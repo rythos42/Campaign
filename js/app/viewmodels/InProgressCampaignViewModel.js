@@ -1,18 +1,19 @@
 /*exported InProgressCampaignViewModel */
-/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel */
+/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel, CampaignReloadEvents */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
         userCampaignData = ko.observable(),
         internalEntryList = ko.observableArray(),
         currentlyLoadingEntryList = ko.observable(false),
-        currentlyLoadingUserData = ko.observable(false);
+        currentlyLoadingUserData = ko.observable(false),
+        reloadEvents = new CampaignReloadEvents();
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
     self.playerListViewModel = new PlayerListViewModel(user, currentCampaign);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
-    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, internalEntryList, userCampaignData);
+    self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents);
     self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
@@ -172,8 +173,10 @@ var InProgressCampaignViewModel = function(user, navigation) {
                     action: 'JoinCampaign', 
                     campaignId: currentCampaign().id(),
                     factionId: self.joinCampaignDialogViewModel.selectedValue().id()
-                },
-                success: setUserDataForCampaign
+                }
+            }).then(function(userDataForCampaign) {
+                setUserDataForCampaign(userDataForCampaign);
+                self.playerListViewModel.reloadPlayerList();
             });
         }
     });
@@ -219,19 +222,11 @@ var InProgressCampaignViewModel = function(user, navigation) {
             getEntryList();
     });
     
-    self.inProgressCampaignMapViewModel.reloadEntryList.subscribe(function(reload) {
-        if(!reload)
-            return;
-        
+    reloadEvents.reloadEntryListRequested.subscribe(function() {
         getEntryList();
-        self.inProgressCampaignMapViewModel.reloadEntryList(false);
     });
     
-    self.inProgressCampaignMapViewModel.reloadSummary.subscribe(function(reload) {
-        if(!reload)
-            return;
-        
+    reloadEvents.reloadSummaryRequested.subscribe(function() {
         getUserDataForCampaign();
-        self.inProgressCampaignMapViewModel.reloadSummary(false);
     });
 };

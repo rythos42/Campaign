@@ -1,6 +1,6 @@
 /*exported FactionEntryListItemViewModel */
 /*globals ko */
-var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry) {
+var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents) {
     var self = this;
     
     self.factionName = ko.computed(function() {
@@ -21,23 +21,26 @@ var FactionEntryListItemViewModel = function(currentCampaignEntry, factionEntry)
     self.territoryBonusSpent = factionEntry.territoryBonusSpent;
     
     self.isAttackingUser = ko.computed(function() {
-        var attackingUser = currentCampaignEntry.attackingUser();
-        return attackingUser ? currentCampaignEntry.attackingUser().id() === factionEntry.user().id() : false;
+        var attackingUser = currentEntry.attackingUser();
+        return attackingUser ? currentEntry.attackingUser().id() === factionEntry.user().id() : false;
     });
     
     self.removeFactionEntry = function() {
-        var factionEntries = currentCampaignEntry.factionEntries(),
+        var factionEntries = currentEntry.factionEntries(),
             factionEntryIndex = factionEntries.indexOf(factionEntry);
             
         if(factionEntryIndex !== -1)
-            currentCampaignEntry.factionEntries.splice(factionEntryIndex, 1);
+            currentEntry.factionEntries.splice(factionEntryIndex, 1);
         
         $.ajax({
             url: 'src/webservices/CampaignService.php',
             data: {
                 action: 'DeleteFactionEntry',
-                factionEntryId: factionEntry.id()
+                factionEntryId: factionEntry.id(),
+                campaignId: currentEntry.campaignId()
             }
+        }).then(function() {
+            reloadEvents.reloadSummary();
         });
     };
 };

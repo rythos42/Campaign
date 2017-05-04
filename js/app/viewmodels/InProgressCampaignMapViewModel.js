@@ -1,19 +1,17 @@
 /*exported InProgressCampaignMapViewModel */
 /*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour */
-var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, internalEntryList, userCampaignData) {
+var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents) {
     var self = this,
         serverTerritories,
         reachableTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
 
-    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData);
+    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents);
         
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable(null);
     self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
-    self.reloadEntryList = ko.observable(false);
-    self.reloadSummary = ko.observable(false);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -150,10 +148,9 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
                     factionId: userCampaignData().FactionId
                 }
             }).then(function() {
-                // reload map and entry list
                 loadMapImage();
-                self.reloadEntryList.notifySubscribers(true);
-                self.reloadSummary.notifySubscribers(true);
+                reloadEvents.reloadEntryList(true);
+                reloadEvents.reloadSummary(true);
             });
         }
         
