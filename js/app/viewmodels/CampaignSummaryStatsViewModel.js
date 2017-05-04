@@ -90,7 +90,8 @@ var CampaignSummaryStatsViewModel = function(user, currentCampaign, entryList, u
                     action: 'GiveTerritoryBonusInCampaignTo',
                     userId: self.giveTerritoryBonusToUserDialogViewModel.selectedUser().id(),
                     campaignId: currentCampaign().id(),
-                    amount: 1
+                    amount: 1,
+                    takeFromMe: true
                 }
             }).then(function() {
                 UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {

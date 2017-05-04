@@ -11,7 +11,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
 
     self.createEntryViewModel = new CreateEntryViewModel(user, navigation, currentCampaign, userCampaignData);
     self.entryListViewModel = new EntryListViewModel(navigation, currentCampaign, internalEntryList, userCampaignData);
-    self.playerListViewModel = new PlayerListViewModel(user, currentCampaign);
+    self.playerListViewModel = new PlayerListViewModel(user, currentCampaign, reloadEvents);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents);
     self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);

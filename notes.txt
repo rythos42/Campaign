@@ -1,6 +1,6 @@
 Next:
-    - ability for admins to give TB to players
-        - use give TB dialog here
+    - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
+
            
 Future:
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
@@ -20,7 +20,6 @@ Future:
     - "You must be logged in to use this service" from NewsService GetMoreNews
     - make sure each user has enough Materials to use in CreateEntry
     - Materials on CreateEntry is for "spending", so should be more clear
-    - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
     - attacking uncontrolled territories shouldn't be able to be finished for 24 hours after creation.
     - Clark has to login every time it reloads.
     - make IdOnMap an index

@@ -1,11 +1,12 @@
 /*exported PlayerListItemViewModel */
 /*globals ko */
-var PlayerListItemViewModel = function(user, playerUser, currentCampaign) {
+var PlayerListItemViewModel = function(user, playerUser, currentCampaign, reloadEvents) {
     var self = this;
     
     self.username = playerUser.username;
     self.attacks = playerUser.attacks;    
     self.isPlayerAdmin = playerUser.isAdminForCurrentCampaign;
+    self.isUserAdmin = user.isAdminForCurrentCampaign;
     
     self.canChangeAdminStatus = ko.computed(function() {
         // Only change if you're an admin, and you can't change yourself.
@@ -20,6 +21,21 @@ var PlayerListItemViewModel = function(user, playerUser, currentCampaign) {
         var faction = campaign.getFactionById(playerUser.factionId());
         return faction ? faction.name() : '';
     });
+    
+    self.giveTerritoryBonus = function() {
+        $.ajax({
+            url: 'src/webservices/UserService.php',
+            data: {
+                action: 'GiveTerritoryBonusInCampaignTo',
+                userId: playerUser.id(),
+                campaignId: currentCampaign().id(),
+                amount: 1,
+                takeFromMe: false
+            }
+        }).then(function() {
+            reloadEvents.reloadSummary();
+        });
+    };
     
     playerUser.isAdminForCurrentCampaign.subscribe(function(isAdminForCurrentCampaign) {
         $.ajax({

@@ -62,8 +62,10 @@ class UserMapper {
             [$userId, $campaignId, $userId, $campaignId]);
     }
     
-    public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount) {
-        Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus - ? where UserId = ? and CampaignId = ?", [$amount, User::getCurrentUser()->getId(), $campaignId]);
+    public static function giveTerritoryBonusInCampaignTo($userId, $campaignId, $amount, $takeFromMe) {
+        if($takeFromMe)
+            Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus - ? where UserId = ? and CampaignId = ?", [$amount, User::getCurrentUser()->getId(), $campaignId]);
+        
         Database::execute("update UserCampaignData set TerritoryBonus = TerritoryBonus + ? where UserId = ? and CampaignId = ?", [$amount, $userId, $campaignId]);
     }
     

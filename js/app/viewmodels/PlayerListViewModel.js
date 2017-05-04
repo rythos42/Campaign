@@ -1,7 +1,9 @@
 /*exported PlayerListViewModel */
 /*globals ko, PlayerListItemViewModel, UserManager, User */
-var PlayerListViewModel = function(user, currentCampaign) {
+var PlayerListViewModel = function(user, currentCampaign, reloadEvents) {
     var self = this;
+    
+    self.isUserAdmin = user.isAdminForCurrentCampaign;
             
     self.players = ko.computed(function() {
         var campaign = currentCampaign();
@@ -9,7 +11,7 @@ var PlayerListViewModel = function(user, currentCampaign) {
             return;
         
         return $.map(campaign.players(), function(playerUser) {
-            return new PlayerListItemViewModel(user, playerUser, currentCampaign);
+            return new PlayerListItemViewModel(user, playerUser, currentCampaign, reloadEvents);
         });
     });
     

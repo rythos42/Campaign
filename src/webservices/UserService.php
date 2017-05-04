@@ -53,7 +53,8 @@ switch($action) {
         break;
         
     case "GiveTerritoryBonusInCampaignTo":
-        UserMapper::giveTerritoryBonusInCampaignTo($_REQUEST["userId"], $_REQUEST["campaignId"], $_REQUEST["amount"]);
+        $takeFromMe = $_REQUEST["takeFromMe"] === 'true';
+        UserMapper::giveTerritoryBonusInCampaignTo($_REQUEST["userId"], $_REQUEST["campaignId"], $_REQUEST["amount"], $takeFromMe);
         break;
         
     case "SaveUserProfile":
