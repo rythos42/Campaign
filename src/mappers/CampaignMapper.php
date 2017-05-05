@@ -174,8 +174,8 @@ class CampaignMapper {
                 "select FactionEntry.*, User.Username, Faction.Name as FactionName, UserCampaignData.TerritoryBonus 
                     from FactionEntry 
                     join User on User.Id = FactionEntry.UserId
-                    join UserCampaignData on UserCampaignData.UserId = User.Id
                     join Faction on Faction.Id = FactionEntry.FactionId
+                    join UserCampaignData on UserCampaignData.UserId = User.Id and UserCampaignData.CampaignId = Faction.CampaignId
                     where EntryId = ?", [$entry->Id]);
             foreach($dbFactionEntryRow as $factionEntryRow) {
                 $entry->FactionEntries[] = $factionEntryRow;
