@@ -7,6 +7,9 @@
 .icon-user:before {
   content: "\e971";
 }
+.icon-user-tie:before {
+  content: "\e976";
+}
 .icon-cog:before {
   content: "\e994";
 }

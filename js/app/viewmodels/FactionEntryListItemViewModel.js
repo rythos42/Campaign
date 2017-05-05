@@ -1,6 +1,6 @@
 /*exported FactionEntryListItemViewModel */
-/*globals ko */
-var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents) {
+/*globals ko, Translation */
+var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere) {
     var self = this;
     
     self.factionName = ko.computed(function() {
@@ -17,8 +17,23 @@ var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadE
         return factionEntry.user();
     });
     
-    self.victoryPoints = factionEntry.victoryPoints;
-    self.territoryBonusSpent = factionEntry.territoryBonusSpent;
+    self.victoryPoints = factionEntry.victoryPoints.extend({
+        required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
+    });
+    
+    self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
+        min: { 
+            params: ko.computed(function() { return attackingAnywhere() ? 1 : 0; }), 
+            message: function() { return attackingAnywhere() ? Translation.getString('attackingNonAdjacentMustSpendOne') : Translation.getString('atLeastZero'); }
+        },
+        max: { 
+            params: ko.computed(function() {
+                var user = factionEntry.user();
+                return typeof(user) === 'object' ? user.territoryBonus() : 0;
+            }), 
+            message: Translation.getString('cannotSpendMoreThan') 
+        }
+    });
     
     self.isAttackingUser = ko.computed(function() {
         var attackingUser = currentEntry.attackingUser();

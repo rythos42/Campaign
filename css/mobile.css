@@ -45,4 +45,8 @@
     .ui-tabs li.data-list span {
         width: 110px;
     }
+    
+    .grouping {
+        width: 320px;
+    }
 }

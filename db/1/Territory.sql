@@ -8,5 +8,6 @@ CREATE TABLE Territory (
     Tags VARCHAR(100),
     PRIMARY KEY (Id),
     FOREIGN KEY Territory_Campaign (CampaignId) REFERENCES Campaign(Id),
-    FOREIGN KEY Territory_Faction (OwningFactionId) REFERENCES Faction(Id)
+    FOREIGN KEY Territory_Faction (OwningFactionId) REFERENCES Faction(Id),
+    INDEX IdOnMap_Index (IdOnMap)
 ) 

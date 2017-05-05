@@ -10,5 +10,6 @@ CREATE TABLE Entry (
     TerritoryBeingAttackedIdOnMap int,
     PRIMARY KEY (Id),
     FOREIGN KEY Entry_User (CreatedByUserId) REFERENCES User(Id),
-    FOREIGN KEY Entry_Campaign (CampaignId) REFERENCES Campaign(Id)
+    FOREIGN KEY Entry_Campaign (CampaignId) REFERENCES Campaign(Id),
+    INDEX TerritoryBeingAttackedIdOnMap_Index (TerritoryBeingAttackedIdOnMap)
 ) 

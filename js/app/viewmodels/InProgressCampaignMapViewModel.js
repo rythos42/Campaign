@@ -6,12 +6,13 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         reachableTerritories = ko.observableArray(),
         mapHelper = new MapHelper('EntryMapCanvas');    // Putting DOM stuff into ViewModels is bad, but I think this is less bad than several alternatives.
 
-    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents);
         
     self.mapImageUrl = ko.observable();
     self.drawingTerritory = ko.observable(null);
     self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
+
+    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, self.attackAnywhere);
 
     self.showMap = ko.computed(function() {
         var campaign = currentCampaign();
@@ -107,11 +108,10 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         self.territoryDetailsDialogViewModel.openDialog();
     };
     
-    self.startChallenge = function(territory) {
+    self.startChallenge = function() {
         if(self.currentUserOutOfAttacks())
             return;
 
-        navigation.parameters(currentCampaign().isMapCampaign() ? { territory: territory, attackingAnywhere: self.attackAnywhere() } : {});
         navigation.showCreateEntry(true);
     };
     

@@ -44,24 +44,9 @@ class CampaignMapper {
     }
     
     public static function saveCampaignEntry($campaignEntry) {
-        $attackingUserId = isset($campaignEntry->attackingUser->id) ? $campaignEntry->attackingUser->id : null;
-        $territoryBeingAttackedIdOnMap = isset($campaignEntry->territoryBeingAttackedIdOnMap) ? $campaignEntry->territoryBeingAttackedIdOnMap : null;
         $createdByUserId = User::getCurrentUser()->getId();
         $createdOnDate = date('Y-m-d H:i:s');
-        
-        if(isset($campaignEntry->id)) {
-            Database::execute(
-                "update Entry set AttackingUserId = ?, TerritoryBeingAttackedIdOnMap = ? where Id = ?",
-                [$attackingUserId, $territoryBeingAttackedIdOnMap, $campaignEntry->id]);
-            $campaignEntryId = $campaignEntry->id;
-        } else {        
-            Database::execute(
-                "insert into Entry (CampaignId, CreatedByUserId, CreatedOnDate, AttackingUserId, TerritoryBeingAttackedIdOnMap) values (?, ?, ?, ?, ?)", 
-                [$campaignEntry->campaignId, $createdByUserId, $createdOnDate, $attackingUserId, $territoryBeingAttackedIdOnMap]);
-            $campaignEntryId = Database::getLastInsertedId();
-            $campaignEntry->id = $campaignEntryId;
-        }
-            
+                    
         // Add/update new CampaignEntries
         foreach($campaignEntry->factionEntries as $factionEntry) {
             $territoryBonusSpent = isset($factionEntry->territoryBonusSpent) ? $factionEntry->territoryBonusSpent : null;
@@ -76,22 +61,6 @@ class CampaignMapper {
                     [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpent]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
-        }
-        
-        // Delete any that were removed
-        $existingFactionEntries = Database::queryArray("select Id from FactionEntry where EntryId = ?", [$campaignEntryId]);
-        foreach($existingFactionEntries as $dbFactionEntry) {
-            $found = false;
-            foreach($campaignEntry->factionEntries as $factionEntry) {
-                if($dbFactionEntry["Id"] != $factionEntry->id)
-                    continue;
-                
-                $found = true;
-                break;
-            }
-            
-            if(!$found)
-                Database::execute("delete from FactionEntry where Id = ?", [$dbFactionEntry["Id"]]);
         }
 
         // Save the narrative
@@ -202,10 +171,12 @@ class CampaignMapper {
             $entryList[] = $entry;
 
             $dbFactionEntryRow = Database::queryArray(
-                "SELECT FactionEntry.*, User.Username, Faction.Name as FactionName FROM FactionEntry 
-                    JOIN User on User.Id = FactionEntry.UserId
-                    JOIN Faction on Faction.Id = FactionEntry.FactionId
-                    WHERE EntryId = ?", [$entry->Id]);
+                "select FactionEntry.*, User.Username, Faction.Name as FactionName, UserCampaignData.TerritoryBonus 
+                    from FactionEntry 
+                    join User on User.Id = FactionEntry.UserId
+                    join UserCampaignData on UserCampaignData.UserId = User.Id
+                    join Faction on Faction.Id = FactionEntry.FactionId
+                    where EntryId = ?", [$entry->Id]);
             foreach($dbFactionEntryRow as $factionEntryRow) {
                 $entry->FactionEntries[] = $factionEntryRow;
             }
@@ -215,7 +186,10 @@ class CampaignMapper {
     }
             
     public static function joinCampaign($userId, $campaignId, $factionId) {
-        Database::execute("INSERT INTO UserCampaignData (UserId, CampaignId, FactionId) VALUES (?, ?, ?)", [$userId, $campaignId, $factionId]);
+        $campaignCreatedByUserId = Database::queryScalar("select CreatedByUserId from Campaign where Id = ?", [$campaignId]);
+        $isAdmin = ($campaignCreatedByUserId == $userId) ? 1 : 0;
+
+        Database::execute("insert into UserCampaignData (UserId, CampaignId, FactionId, IsAdmin) values (?, ?, ?, ?)", [$userId, $campaignId, $factionId, $isAdmin]);
     }
     
     public static function renameFaction($factionId, $newFactionName) {

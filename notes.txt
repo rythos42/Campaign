@@ -1,71 +1,36 @@
+When user who created campaign joins it, they are made admin.
+Trying to fix Clark's 1400px wide monitor.
+Made IdOnMap an TerritoryBeingAttackIdOnMap database indexes.
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
 
-           
+
+Run @ work: 
+ALTER TABLE Territory ADD INDEX IdOnMap_Index (IdOnMap)
+ALTER TABLE Entry ADD INDEX TerritoryBeingAttackedIdOnMap_Index (TerritoryBeingAttackedIdOnMap)
+    
 Future:
     - login weird -- if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
-    - when creator joins campaign, make that person admin
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - font for "Spend 1 Material" is wrong
     - show "being attacked" on map legend
-    - display none on header
     - Tab table width 100% mobile 
     - tooltip on "Played" button
-    - "Played" table on CreateEntry is too small when using actual names
     - countdown to next move.
-    - Clark can't see side tabs on 1400x1050
     - clear the map when moving between campaigns - looks weird to have the old map still up
     - don't let people attack if they have an outstanding attack
     - removing everyone from a challenge -- what does this mean?
     - "You must be logged in to use this service" from NewsService GetMoreNews
-    - make sure each user has enough Materials to use in CreateEntry
     - Materials on CreateEntry is for "spending", so should be more clear
     - attacking uncontrolled territories shouldn't be able to be finished for 24 hours after creation.
     - Clark has to login every time it reloads.
-    - make IdOnMap an index
     - "delete entry" button for user who created attack
         - need to think more about what this means for the campaign
         - or when all players are removed from an entry, delete it?
+    - put focus on first VP on CreateEntry
+    - CreateEntry validation messages are ugly
+    - Make sure read-only entry still read only
         
-
-Clean up createCampaignEntry in CampaignMapper -- it doesn't need to be able to "delete" entries anymore
-    
-Clean up everything here:
-            <ul data-bind="visible: !isReadOnly()">
-                <li class="entry-field" data-bind="visible: isMapCampaign">
-                    <label for="IdOnmap"><?php echo Translation::getString("territory"); ?>: </label>
-                    <span data-bind="text: territoryBeingAttackedIdOnMap"></span>
-                </li>
-                <li class="entry-field">
-                    <label for="UserSelection"><?php echo Translation::getString("user"); ?>:</label>
-                    <input type="text" id="UserSelection" data-bind="jqAuto: { value: selectedUser, source: getUsers, labelProp: 'name' }, validationElement: selectedUser, onEnter: addUser, enable: hasAttackingUser, hasfocus: usernameHasFocus"></select>
-                    <span class="validationMessage" data-bind="validationMessage: selectedUser"></span>
-                </li>
-                <li class="entry-field">
-                    <label for="VictoryPoints"><?php echo Translation::getString("victoryPoints"); ?>:</label>
-                    <input type="number" id="VictoryPoints" data-bind="textInput: victoryPoints, onEnter: addUser, hasfocus: victoryPointsHasFocus" />
-                </li>
-                <li class="entry-field" data-bind="visible: isMapCampaign">
-                    <label for="TerritoryBonusSpent"><?php echo Translation::getString("territoryBonusSpent"); ?>:</label>
-                    <input type="number" id="TerritoryBonusSpent" data-bind="textInput: territoryBonusSpent, onEnter: addUser" />
-                </li>
-                <li class="button-panel">
-                    <span class="validationMessage" data-bind="validationMessage: factionEntries"></span>
-                    <input type="button" data-bind="click: addUser" value="<?php echo Translation::getString("addUser"); ?>" class="ui-button ui-widget ui-corner-all" />
-                </li>
-            </ul>
-
-And in CreateEntryViewModel:
-            var territory = parameter.territory;
-            attackingAnywhere(parameter.attackingAnywhere);
-            minimumTerritoryBonusSpent(attackingAnywhere() ? 1 : 0);
-            self.territoryBonusSpent(attackingAnywhere() ? 1 : undefined);
-            
-            currentEntry.clear();        
-            currentEntry.territoryBeingAttackedIdOnMap(territory.IdOnMap);
-            currentEntry.attackingUser(user);
-            self.selectedUser(user);
-
 Before a general release:
 - "Contact us"
 - Account recovery, since we mention it on the e-mail thing.

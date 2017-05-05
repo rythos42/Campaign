@@ -29,8 +29,7 @@
         <loginPageAbout>Campaign is a simple &lt;a href="https://github.com/rythos42/Campaign"&gt;open source&lt;/a&gt; web app to help you manage gaming campaigns.</loginPageAbout>
         <userEntryRequiredValidation>You need to enter a user.</userEntryRequiredValidation>
         <userEntryInvalidAccountValidation>User is not in this campaign.</userEntryInvalidAccountValidation>
-        <victoryPointsEntryRequiredValidation>Put a 0 if there was no score!</victoryPointsEntryRequiredValidation>
-        <minimumOneFactionValidation>You need at least one faction.</minimumOneFactionValidation>
+        <victoryPointsEntryRequiredValidation>Enter a score.</victoryPointsEntryRequiredValidation>
         <campaignNameRequiredValidation>Your campaign needs a name.</campaignNameRequiredValidation>
         <factionNameRequiredValidation>Each faction needs a name.</factionNameRequiredValidation>
         <minimumOneFactionRequiredValidator>You need at least one faction.</minimumOneFactionRequiredValidator>
