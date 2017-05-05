@@ -120,5 +120,6 @@
         <youAttacked>Attacked #{0}!</youAttacked>
         <youDefended>Defended #{0}</youDefended>
         <giveOneTerritoryBonusTooltip>Give 1 material to user.</giveOneTerritoryBonusTooltip>
+        <attackAnywhere>1 Material to attack anywhere</attackAnywhere>
     </strings>
 </translation>

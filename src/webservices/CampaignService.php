@@ -27,9 +27,10 @@ switch($action) {
         
     case "SaveCampaignEntry":
         $campaignEntry = json_decode($_REQUEST["campaignEntry"]);
-        CampaignMapper::saveCampaignEntry($campaignEntry);
+        $finish = $_REQUEST["finish"] === 'true';
+        CampaignMapper::saveCampaignEntry($campaignEntry, $finish);
         
-        if($_REQUEST["finish"] === 'true')
+        if($finish)
             CampaignMapper::finishEntry($campaignEntry);
         
         break;

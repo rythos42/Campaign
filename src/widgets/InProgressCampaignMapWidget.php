@@ -3,9 +3,11 @@ class InProgressCampaignMapWidget {
     public function render() {
         ?>
         <!-- ko with: inProgressCampaignMapViewModel -->
-        <div data-bind="visible: showMap">
+        <div data-bind="visible: showMap" class="ui-widget">
             <div class="map-data">
-                <label><input type="checkbox" data-bind="checked: attackAnywhere, enable: hasAtLeastOneTerritoryBonus" />Spend 1 Material to attack anywhere</label>
+                <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
+                <span class="validationMessage" data-bind="visible: currentUserAttackedWithin24Hours"><?php echo Translation::getString("youCannotAttackOrDefendTwiceIn24Hours"); ?></span>
+                <label><input type="checkbox" data-bind="checked: attackAnywhere, enable: hasAtLeastOneTerritoryBonus" /><?php echo Translation::getString("attackAnywhere"); ?></label>
                 <ul class="map-legend" data-bind="foreach: legendFactions">
                     <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
                         <span data-bind="css: { 'icon-star-full': isMyFaction }"></span>
@@ -13,8 +15,6 @@ class InProgressCampaignMapWidget {
                     </li>
                 </ul>
             </div>
-            <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
-            <span class="validationMessage" data-bind="visible: currentUserAttackedWithin24Hours"><?php echo Translation::getString("youCannotAttackOrDefendTwiceIn24Hours"); ?></span>
             <div class="map-panel">
                 <canvas id="EntryMapCanvas" data-bind="
                     canvas: { url: mapImageUrl, onLoad: storeImage }, 

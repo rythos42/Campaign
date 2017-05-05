@@ -231,7 +231,6 @@ td.actions .button-icon {
 }
 
 .validationMessage {
-    display: block;
     color: red;
 }
 

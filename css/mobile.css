@@ -46,6 +46,10 @@
         width: 110px;
     }
     
+    .ui-tabs-panel {
+        width: 100%;
+    }
+    
     .grouping {
         width: 320px;
     }

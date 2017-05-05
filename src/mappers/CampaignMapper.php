@@ -43,7 +43,7 @@ class CampaignMapper {
         return $campaignList;
     }
     
-    public static function saveCampaignEntry($campaignEntry) {
+    public static function saveCampaignEntry($campaignEntry, $finish) {
         $createdByUserId = User::getCurrentUser()->getId();
         $createdOnDate = date('Y-m-d H:i:s');
                     
@@ -64,7 +64,7 @@ class CampaignMapper {
         }
 
         // Save the narrative
-        if(isset($campaignEntry->narrative)) {
+        if(isset($campaignEntry->narrative) && !$finish) {
             $hasNarrative = Database::queryScalar("select count(*) from News where EntryId = ?", [$campaignEntry->id]);
             if($hasNarrative === 0) {
                 Database::execute("insert into News (News, CampaignId, EntryId, CreatedByUserId, CreatedOnDate) values (?, ?, ?, ?, ?)",
