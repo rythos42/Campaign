@@ -15,8 +15,11 @@ ko.bindingHandlers.canvasClick = {
                 }
             })
             .mouseup(function (evt) {
-                if (!isDragging)
+                if (!isDragging) {
                     clickHandler(null, evt);
+                    evt.preventDefault();
+                    //evt.stopPropagation();
+                }
                 isDragging = false;
                 startingPos = [];
             });
