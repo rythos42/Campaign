@@ -38,8 +38,11 @@ ko.bindingHandlers.canvas = {
                     $(canvas).panzoom('zoom', zoom);
                     
                     // Positioning is doing weird things initially, move the canvas so it's in the corner.
-                    var position = $(canvas).position();
-                    $(canvas).panzoom('setMatrix', [zoom, 0, 0, zoom, -1 * position.left, -1 * position.top]);
+                    // But it's fine when the canvas is reloaded after coming back from an entry. >.<
+                    var position = $(canvas).position(),
+                        acceptableOffset = 50;
+                    if(position.left > acceptableOffset && position.top > acceptableOffset)
+                        $(canvas).panzoom('setMatrix', [zoom, 0, 0, zoom, -1 * position.left, -1 * position.top]);
                 }, 0);             
             };
         }

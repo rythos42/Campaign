@@ -4,6 +4,10 @@
         top: 0;
         right: 0;
     }
+        
+    .map-data > span, .map-data > label {
+        display: block;
+    }
             
     .map-panel {
         width: 100%;
@@ -19,11 +23,11 @@
     
     #InProgressCampaign .ui-tabs {
         overflow: visible;
-        width: auto;
+        width: 100%;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .map-grouping {
         width: 95%;
     }
@@ -45,11 +49,7 @@
     .ui-tabs li.data-list span {
         width: 110px;
     }
-    
-    .ui-tabs-panel {
-        width: 100%;
-    }
-    
+
     .grouping {
         width: 320px;
     }

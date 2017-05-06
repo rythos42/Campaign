@@ -15,7 +15,6 @@ Future:
     - CreateEntry validation messages are ugly
     - change "Tags" to "Territories" and add "Owned by" column
     - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
-    
         
 Before a general release:
 - "Contact us"
@@ -41,14 +40,13 @@ Credit:
     
 
 Far Future:
-Multiple Campaigns:
+- Multiple Campaigns:
     - clear the map when moving between campaigns - looks weird to have the old map still up
-Simple defects:
+- Simple defects:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
     - loading UI always shown on Simple campaign, because it never loads the map
-- mobile - press on territory under the dialogs "Cancel" button closes the dialog right away!
 - Administrator interface:
     - delete campaigns
 - Campaign Administrator interface:
