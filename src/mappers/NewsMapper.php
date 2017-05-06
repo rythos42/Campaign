@@ -2,7 +2,6 @@
 class NewsMapper {
     public static function getMoreNews($lastLoadedDate, $numberToLoad) {
         $currentUserId = User::getCurrentUser()->getId();
-        $lastLoadedDate = $lastLoadedDate . '23:59:59'; // end of day
 
         // Get news for the current logged in user's campaigns, and for admin messages.
         return Database::queryArray(

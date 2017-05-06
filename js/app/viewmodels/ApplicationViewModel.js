@@ -9,7 +9,7 @@ var ApplicationViewModel = function(user, navigation) {
     self.inProgressCampaignViewModel = new InProgressCampaignViewModel(user, navigation);
     self.campaignListViewModel = new CampaignListViewModel(user, navigation);
     self.userProfileViewModel = new UserProfileViewModel(user, navigation);
-    self.newsListViewModel = new NewsListViewModel(navigation);
+    self.newsListViewModel = new NewsListViewModel(user, navigation);
     
     self.showOpenSideBarButton = ko.computed(function() {
         return user.isLoggedIn();

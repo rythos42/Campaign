@@ -1,6 +1,6 @@
 /*exported FactionEntryListItemViewModel */
 /*globals ko, Translation */
-var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere) {
+var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere, territory) {
     var self = this;
     
     self.factionName = ko.computed(function() {
@@ -56,6 +56,13 @@ var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadE
             }
         }).then(function() {
             reloadEvents.reloadSummary();
+            
+            if(currentEntry.factionEntries().length === 0) {
+                reloadEvents.reloadMap();
+                territory().attackingUsername(undefined);
+                territory().attackingUserId(undefined);
+                territory().attackingFactionId(undefined);
+            }
         });
     };
 };

@@ -109,11 +109,16 @@ class CampaignMapper {
                 join Entry on Entry.Id = FactionEntry.EntryId
                 join Territory on Territory.IdOnMap = Entry.TerritoryBeingAttackedIdOnMap and Territory.CampaignId = Entry.CampaignId
                 where FactionEntry.Id = ?", [$factionEntryId]);
-        $factionEntry = Database::queryObject("select FactionId, UserId from FactionEntry where Id = ?", [$factionEntryId]);
+        $factionEntry = Database::queryObject("select EntryId, FactionId, UserId from FactionEntry where Id = ?", [$factionEntryId]);
         if(!(isset($owningFactionId) && $owningFactionId == $factionEntry->FactionId))
             Database::execute("update UserCampaignData set Attacks = Attacks - 1 where UserId = ? and CampaignId = ?", [$factionEntry->UserId, $campaignId]);
 
         Database::execute("delete from FactionEntry where Id = ?", [$factionEntryId]);
+
+        // If there are no FactionEntries remaining, remove the entry.
+        $remainingFactionEntries = Database::queryScalar("select count(*) from FactionEntry where EntryId = ?", [$factionEntry->EntryId]);
+        if($remainingFactionEntries == 0)
+            Database::execute("delete from Entry where Id = ?", [$factionEntry->EntryId]);
     }        
 
     public static function finishEntry($campaignEntry) {

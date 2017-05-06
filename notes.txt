@@ -1,11 +1,5 @@
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
-    - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
-    - when all players are removed from an entry, delete it        
-    - "You must be logged in to use this service" from NewsService GetMoreNews
-    - news scrolling infinitely adding to much!
-    - Make sure read-only entry still read only
-
     
 Future:
     - Login
@@ -20,6 +14,7 @@ Future:
     - put focus on first VP on CreateEntry
     - CreateEntry validation messages are ugly
     - change "Tags" to "Territories" and add "Owned by" column
+    - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
     
         
 Before a general release:

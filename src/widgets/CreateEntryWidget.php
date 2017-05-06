@@ -21,10 +21,10 @@ class CreateEntryWidget {
                         <td data-bind="text: factionName" />
                         <td data-bind="text: username" />
                         <td>
-                            <input type="number" data-bind="textInput: victoryPoints" />
+                            <input type="number" data-bind="textInput: victoryPoints, enable: !$parent.isReadOnly()" />
                         </td>
                         <td data-bind="visible: $parent.isMapCampaign">
-                            <input type="number" data-bind="textInput: territoryBonusSpent" />
+                            <input type="number" data-bind="textInput: territoryBonusSpent, enable: !$parent.isReadOnly()" />
                         </td>
                         <td class="actions">
                             <span data-bind="visible: isAttackingUser, tooltip: '<?php echo Translation::getString("attacker"); ?>'" class="icon-flag"></span>

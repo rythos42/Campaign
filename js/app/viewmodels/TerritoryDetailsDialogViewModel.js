@@ -1,6 +1,6 @@
 /*exported TerritoryDetailsDialogViewModel */
 /*globals ko, toastr, DialogResult, Translation, FactionEntryListItemViewModel */
-var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, attackAnywhere) {
+var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, attackAnywhere, canCurrentUserAttack) {
     var self = this;
     
     self.dialogOpenClose = ko.observable(false);
@@ -8,11 +8,10 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     self.territory = ko.observable();
 
     self.isReachable = ko.observable();
-    self.isCurrentUserAbleToAttack = ko.observable();
     
     var attackedByFactionId = ko.computed(function() {
         var territory = self.territory();
-        return territory ? territory.AttackingFactionId : -1;
+        return territory ? territory.attackingFactionId() : -1;
     });
     
     var territoryEntry = ko.computed(function() {
@@ -21,7 +20,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
             return null;
         
         return $.grep(internalEntryList(), function(entry) {
-            return entry.territoryBeingAttackedIdOnMap() === territory.IdOnMap;
+            return entry.territoryBeingAttackedIdOnMap() === territory.idOnMap();
         })[0];  
     });
     
@@ -35,7 +34,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() === attackedByFactionId();
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere);
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere, self.territory);
             });
     });    
     
@@ -49,25 +48,25 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
                 return factionEntry.faction().id() !== attackedByFactionId();
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere);
+                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere, self.territory);
             });
     });
     
     var isBeingAttacked = ko.computed(function() {
         var territory = self.territory();
-        return territory ? !!territory.AttackingUsername : false;
+        return territory ? !!territory.attackingUsername() : false;
     });
 
     var attackedByUserId = ko.computed(function() {
         var territory = self.territory();
-        return territory ? territory.AttackingUserId : -1;
+        return territory ? territory.attackingUserId() : -1;
     });
 
     self.canBeAttacked = ko.computed(function() {
         var userData = userCampaignData(),
             entry = territoryEntry();
             
-        if(!userData || !self.isReachable() || !self.isCurrentUserAbleToAttack())
+        if(!userData || !self.isReachable() || !canCurrentUserAttack())
             return false;
         
         // Can't attack if you're already in the entry
@@ -77,7 +76,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         if(!isBeingAttacked())
             return true;
         else
-            return self.territory().AttackingFactionId === userData.FactionId && user.id() !== attackedByUserId();
+            return self.territory().attackingFactionId() === userData.FactionId && user.id() !== attackedByUserId();
     });
 
     self.canBeDefended = ko.computed(function() {
@@ -88,7 +87,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
             return false;
         
         // Can't defend unreachable, unless it's your own territory
-        if(!self.isReachable() && self.territory().OwningFactionId !== userData.FactionId)
+        if(!self.isReachable() && self.territory().owningFactionId() !== userData.FactionId)
             return false;
         
         // Can't defend if you're already in the entry
@@ -97,10 +96,10 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
 
         // Can't defend unclaimed territory if you have no attacks
         var territory = self.territory();
-        if(!territory.OwningFactionId && !self.isCurrentUserAbleToAttack())
+        if(!territory.owningFactionId() && !canCurrentUserAttack())
             return false;
 
-        return self.territory().AttackingFactionId !== userData.FactionId;
+        return self.territory().attackingFactionId() !== userData.FactionId;
     });
     
     self.canBePlayed = ko.computed(function() {
@@ -109,12 +108,12 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     
     self.dialogTitle = ko.computed(function() {
         var territory = self.territory();
-        return territory ? Translation.getString('territory') + ' ' + territory.IdOnMap : '';
+        return territory ? Translation.getString('territory') + ' ' + territory.idOnMap() : '';
     });
     
     self.tags = ko.computed(function() {
         var territory = self.territory();
-        return territory ? territory.Tags : '';
+        return territory ? territory.tags() : '';
     });
     
     self.ownedBy = ko.computed(function() {
@@ -124,20 +123,20 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         if(!campaign || !territory)
             return '';
         
-        var faction = campaign.getFactionById(territory.OwningFactionId);
+        var faction = campaign.getFactionById(territory.owningFactionId());
         return faction ? faction.name() : Translation.getString('unowned');
     });
     
     self.defend = function() {  // defend is the same as being a second attacker, from a server perspective
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
-        toastr.info(Translation.getString('youDefended').replace('{0}', self.territory().IdOnMap));
+        toastr.info(Translation.getString('youDefended').replace('{0}', self.territory().idOnMap()));
     };
     
     self.attack = function() {    
         self.dialogOpenClose(false);
         self.dialogResult(DialogResult.Saved);
-        toastr.info(Translation.getString('youAttacked').replace('{0}', self.territory().IdOnMap));
+        toastr.info(Translation.getString('youAttacked').replace('{0}', self.territory().idOnMap()));
     };
     
     self.played = function() {

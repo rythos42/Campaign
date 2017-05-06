@@ -5,6 +5,7 @@ var CampaignReloadEvents = function() {
     
     self.reloadEntryListRequested = ko.observable(false);
     self.reloadSummaryRequested = ko.observable(false);
+    self.reloadMapRequested = ko.observable(false);
     
     self.reloadEntryList = function() {
         self.reloadEntryListRequested.notifySubscribers(true);
@@ -12,5 +13,9 @@ var CampaignReloadEvents = function() {
     
     self.reloadSummary = function() {
         self.reloadSummaryRequested.notifySubscribers(true);
+    };    
+    
+    self.reloadMap = function() {
+        self.reloadMapRequested.notifySubscribers(true);
     };
 };

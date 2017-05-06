@@ -1,5 +1,5 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour */
+/*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour, Territory */
 var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents) {
     var self = this,
         serverTerritories,
@@ -12,16 +12,6 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     self.isLoadingMap = ko.observable(false);
     self.attackAnywhere = ko.observable(false);
 
-    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, self.attackAnywhere);
-
-    self.showMap = ko.computed(function() {
-        var campaign = currentCampaign();
-        if(!campaign)
-            return false;
-        
-        return campaign.isMapCampaign();
-    });
-    
     self.currentUserOutOfAttacks = ko.computed(function() {
         var campaign = currentCampaign();
         if(!campaign)
@@ -43,6 +33,16 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     
     var canCurrentUserAttack = ko.computed(function() {
         return !self.currentUserOutOfAttacks() && !self.currentUserAttackedWithin24Hours();
+    });
+    
+    self.territoryDetailsDialogViewModel = new TerritoryDetailsDialogViewModel(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, self.attackAnywhere, canCurrentUserAttack);
+
+    self.showMap = ko.computed(function() {
+        var campaign = currentCampaign();
+        if(!campaign)
+            return false;
+        
+        return campaign.isMapCampaign();
     });
     
     self.legendFactions = ko.computed(function() {
@@ -102,9 +102,8 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         if(!self.drawingTerritory())
             return;
         
-        self.territoryDetailsDialogViewModel.territory(self.drawingTerritory());
+        self.territoryDetailsDialogViewModel.territory(new Territory(self.drawingTerritory()));
         self.territoryDetailsDialogViewModel.isReachable(!!isDrawingReachable());
-        self.territoryDetailsDialogViewModel.isCurrentUserAbleToAttack(canCurrentUserAttack());
         self.territoryDetailsDialogViewModel.openDialog();
     };
     
@@ -144,7 +143,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
                 data: {
                     action: 'CreateFactionEntry',
                     campaignId: currentCampaign().id(),
-                    territoryBeingAttackedIdOnMap: self.territoryDetailsDialogViewModel.territory().IdOnMap,
+                    territoryBeingAttackedIdOnMap: self.territoryDetailsDialogViewModel.territory().idOnMap(),
                     factionId: userCampaignData().FactionId
                 }
             }).then(function() {
@@ -155,7 +154,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         }
         
         if(dialogResult === DialogResult.Navigate) {
-            var territoryIdOnMap = self.territoryDetailsDialogViewModel.territory().IdOnMap;
+            var territoryIdOnMap = self.territoryDetailsDialogViewModel.territory().idOnMap();
             
             var entry = $.grep(internalEntryList(), function(entry) {
                 return entry.territoryBeingAttackedIdOnMap() === territoryIdOnMap;
@@ -189,5 +188,9 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     
     self.attackAnywhere.subscribe(function(attackAnywhere) {
         reachableTerritories(attackAnywhere ? serverTerritories.All : serverTerritories.Adjacent);
+    });
+    
+    reloadEvents.reloadMapRequested.subscribe(function() {
+        loadMapImage();
     });
 };
