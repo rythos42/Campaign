@@ -123,6 +123,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         if(parameter) {
             navigation.parameters(null);
             currentEntry.copyFrom(parameter);
+            self.factionEntries()[0].victoryPointsHasFocus(true);
         }
         else {
             currentEntry.clear();

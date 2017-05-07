@@ -1,6 +1,6 @@
-/*exported TagListItemViewModel */
+/*exported TerritoryListItemViewModel */
 /*globals ko */
-var TagListItemViewModel = function(territory) {
+var TerritoryListItemViewModel = function(territory) {
     var self = this;
     
     self.isEditing = ko.observable(false);
@@ -8,6 +8,8 @@ var TagListItemViewModel = function(territory) {
     
     self.territoryId = territory.IdOnMap;
     self.tags = ko.observable(territory.Tags);
+    
+    self.ownedBy = ko.observable(territory.AttackingFactionName);
     
     self.editTag = function() {
         self.isEditing(true);

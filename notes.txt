@@ -7,13 +7,9 @@ Future:
         - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
     - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - show "being attacked" on map legend
-    - tooltip on "Played" button
     - countdown to next move.
     - Materials on CreateEntry is for "spending", so should be more clear
     - Clark has to login every time it reloads.
-    - put focus on first VP on CreateEntry
-    - CreateEntry validation messages are ugly
-    - change "Tags" to "Territories" and add "Owned by" column
     - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
         
 Before a general release:

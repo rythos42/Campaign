@@ -165,6 +165,10 @@ td.actions .button-icon {
     padding: 0;
 }
 
+td.validationMessage {
+    display: block;
+}
+
 .inline-icon-button {
     font-size: 0.8em !important;
     padding: 0.3em !important;

@@ -1,6 +1,6 @@
-/*exported TagListViewModel */
-/*globals ko, TagListItemViewModel */
-var TagListViewModel = function(currentCampaign, userCampaignData) {
+/*exported TerritoryListViewModel */
+/*globals ko, TerritoryListItemViewModel */
+var TerritoryListViewModel = function(currentCampaign, userCampaignData) {
     var self = this;
     
     self.territories = ko.computed(function() {
@@ -9,7 +9,7 @@ var TagListViewModel = function(currentCampaign, userCampaignData) {
             return [];
         
         return $.map(campaign.territories(), function(territory) {
-            return new TagListItemViewModel(territory);
+            return new TerritoryListItemViewModel(territory);
         });
     });
     

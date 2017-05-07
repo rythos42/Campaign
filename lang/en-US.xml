@@ -102,6 +102,7 @@
         <editTerritory>Edit Territory</editTerritory>
         <assignFactionsToTerritories>Click to assign factions to territories</assignFactionsToTerritories>
         <tags>Tags</tags>
+        <territories>Territories</territories>
         <tagsExample>woods, 3000pts</tagsExample>
         <ownedBy>Owned by</ownedBy>
         <tagsMaxLengthValidation>You've only got 100 characters.</tagsMaxLengthValidation>
@@ -121,5 +122,6 @@
         <youDefended>Defended #{0}</youDefended>
         <giveOneTerritoryBonusTooltip>Give 1 material to user.</giveOneTerritoryBonusTooltip>
         <attackAnywhere>1 Material to attack anywhere</attackAnywhere>
+        <enterDetailsAfterPlaying>Enter details after playing.</enterDetailsAfterPlaying>
     </strings>
 </translation>

@@ -21,7 +21,7 @@ class CreateEntryWidget {
                         <td data-bind="text: factionName" />
                         <td data-bind="text: username" />
                         <td>
-                            <input type="number" data-bind="textInput: victoryPoints, enable: !$parent.isReadOnly()" />
+                            <input type="number" data-bind="textInput: victoryPoints, enable: !$parent.isReadOnly(), hasFocus: victoryPointsHasFocus" />
                         </td>
                         <td data-bind="visible: $parent.isMapCampaign">
                             <input type="number" data-bind="textInput: territoryBonusSpent, enable: !$parent.isReadOnly()" />

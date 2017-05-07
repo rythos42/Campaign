@@ -62,8 +62,8 @@ return array(
         '//js/app/viewmodels/DropDownListDialogViewModel.js',
         '//js/app/viewmodels/EditTerritoryDialogViewModel.js',
         '//js/app/viewmodels/TerritoryDetailsDialogViewModel.js',
-        '//js/app/viewmodels/TagListViewModel.js',
-        '//js/app/viewmodels/TagListItemViewModel.js',
+        '//js/app/viewmodels/TerritoryListViewModel.js',
+        '//js/app/viewmodels/TerritoryListItemViewModel.js',
         '//js/app/viewmodels/CampaignSummaryStatsViewModel.js',
         '//js/app/viewmodels/RenameFactionDialogViewModel.js'
         ),

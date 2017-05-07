@@ -25,8 +25,9 @@ class MapMapper {
     public static function getAllTerritoriesForCampaign($campaignId) {
         $dbTerritoryListForCampaign = Database::queryArray(
             "select Territory.Id, Territory.IdOnMap, Territory.OwningFactionId, Tags,
-            Entry.AttackingUserId, User.Username, UserCampaignData.FactionId as AttackingFactionId
+            Entry.AttackingUserId, User.Username, UserCampaignData.FactionId as AttackingFactionId, Faction.Name as FactionName
             from Territory
+            left join Faction on Faction.Id = Territory.OwningFactionId
             left join Entry on 
                 Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap 
                 and Entry.CampaignId = Territory.CampaignId
@@ -48,6 +49,7 @@ class MapMapper {
             $returnTerritory["AttackingUserId"] = $dbTerritory["AttackingUserId"];
             $returnTerritory["AttackingUsername"] = $dbTerritory["Username"];
             $returnTerritory["AttackingFactionId"] = $dbTerritory["AttackingFactionId"];
+            $returnTerritory["AttackingFactionName"] = $dbTerritory["FactionName"];
             $returnTerritory["Points"] = Database::queryArray("select X, Y, PointNumber from TerritoryPoint where TerritoryId = ?", [$dbTerritory["Id"]]);
             $returnTerritoryList[] = $returnTerritory;
         }
@@ -58,8 +60,9 @@ class MapMapper {
         // get all polygons adjacent (within -2 to +2 pixels) to the given faction
         return Database::queryArray(
             "select adjacentPolygon.Id, adjacentPolygon.IdOnMap, adjacentPolygon.OwningFactionId, adjacentPolygon.Tags,
-                    Entry.AttackingUserId, User.Username, UserCampaignData.FactionId as AttackingFactionId
+                    Entry.AttackingUserId, User.Username, UserCampaignData.FactionId as AttackingFactionId, Faction.Name as FactionName
                 from Territory ownedPolygon
+                left join Faction on Faction.Id = ownedPolygon.OwningFactionId
                 join TerritoryPoint ownedPoint on ownedPoint.TerritoryId = ownedPolygon.Id
                 join TerritoryPoint adjacentPoint on 
                     (ownedPoint.X < adjacentPoint.X + 2 and ownedPoint.X > adjacentPoint.X - 2)

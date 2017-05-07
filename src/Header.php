@@ -55,7 +55,7 @@ include($installDirOnWebServer . "/src/widgets/TextFieldDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/DropDownListDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/EditTerritoryDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/TerritoryDetailsDialogWidget.php");
-include($installDirOnWebServer . "/src/widgets/TagListWidget.php");
+include($installDirOnWebServer . "/src/widgets/TerritoryListWidget.php");
 include($installDirOnWebServer . "/src/widgets/CampaignSummaryStatsWidget.php");
 include($installDirOnWebServer . "/src/widgets/RenameFactionDialogWidget.php");
 

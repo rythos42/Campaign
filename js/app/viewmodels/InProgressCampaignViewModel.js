@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TagListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel, CampaignReloadEvents */
+/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TerritoryListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel, CampaignReloadEvents */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -14,7 +14,7 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.playerListViewModel = new PlayerListViewModel(user, currentCampaign, reloadEvents);
     self.addNewsDialogViewModel = new TextFieldDialogViewModel();
     self.inProgressCampaignMapViewModel = new InProgressCampaignMapViewModel(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents);
-    self.tagListViewModel = new TagListViewModel(currentCampaign, userCampaignData);
+    self.territoryListViewModel = new TerritoryListViewModel(currentCampaign, userCampaignData);
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     

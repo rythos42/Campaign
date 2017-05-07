@@ -3,6 +3,8 @@
 var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere, territory) {
     var self = this;
     
+    self.victoryPointsHasFocus = ko.observable(false);
+    
     self.factionName = ko.computed(function() {
         var faction = factionEntry.faction();
         return faction ? faction.name() : '';
@@ -34,6 +36,7 @@ var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadE
             message: Translation.getString('cannotSpendMoreThan') 
         }
     });
+
     
     self.isAttackingUser = ko.computed(function() {
         var attackingUser = currentEntry.attackingUser();

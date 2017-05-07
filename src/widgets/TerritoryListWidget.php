@@ -1,17 +1,19 @@
 <?php
-class TagListWidget {
+class TerritoryListWidget {
     public function render() {
         ?>
-        <!-- ko with: tagListViewModel -->
+        <!-- ko with: territoryListViewModel -->
         <table data-bind="stupidtable: {}, visible: hasJoinedCampaign">
             <thead>
-                <th data-sort="int"><?php echo Translation::getString("territory"); ?></th>
+                <th data-sort="int"></th>
+                <th data-sort="string"><?php echo Translation::getString("ownedBy"); ?></th>
                 <th data-sort="string"><?php echo Translation::getString("tags"); ?></th>
                 <th data-bind="visible: isAdmin"></th>
             </thead>
             <tbody data-bind="foreach: territories">
                 <tr>
                     <td data-bind="text: territoryId" />
+                    <td data-bind="text: ownedBy" />
                     <td>
                         <span data-bind="text: tags, visible: !isEditing()"></span>
                         <input type="text" data-bind="value: tags, visible: isEditing, onEnter: saveTag, hasFocus: hasFocus" />
