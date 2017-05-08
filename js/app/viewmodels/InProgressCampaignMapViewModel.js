@@ -17,7 +17,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         if(!campaign)
             return false;
         
-        return user.attacks() > (campaign.mandatoryAttacks() + campaign.optionalAttacks());
+        return user.attacks() >= (campaign.mandatoryAttacks() + campaign.optionalAttacks());
     });
        
     self.currentUserAttackedWithin24Hours = ko.computed(function() {

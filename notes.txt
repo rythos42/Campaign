@@ -1,5 +1,7 @@
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
+    - put width 100% on data-list? Everything is outwardly constrained (except Profile)
+    
     
 Future:
     - Login
