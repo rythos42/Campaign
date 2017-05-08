@@ -13,6 +13,13 @@ Future:
     - Materials on CreateEntry is for "spending", so should be more clear
     - Clark has to login every time it reloads.
     - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
+    - need to note on CreateEntry, which territory it's for. Can't tell otherwise! Also, table update as above.
+    - "Only those without opponent" shouldn't show entries that are Finished
+        - maybe change to "Only unfinished"
+    - put material count on Players list
+    - it didn't update Myles attacks count when he attacked 16
+        or when he attacked and won 18
+    - "just this phase" entry filter
         
 Before a general release:
 - "Contact us"
