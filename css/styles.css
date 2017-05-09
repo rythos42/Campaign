@@ -351,6 +351,10 @@ td.validationMessage {
     font-size: 12px;
 }
 
+.radio-list label {
+    display: block;
+}
+
 .ui-button {
     padding: 0.4em 0.5em;
 }

@@ -4,7 +4,8 @@ var PlayerListItemViewModel = function(user, playerUser, currentCampaign, reload
     var self = this;
     
     self.username = playerUser.username;
-    self.attacks = playerUser.attacks;    
+    self.attacks = playerUser.attacks; 
+    self.territoryBonus = playerUser.territoryBonus;
     self.isPlayerAdmin = playerUser.isAdminForCurrentCampaign;
     self.isUserAdmin = user.isAdminForCurrentCampaign;
     

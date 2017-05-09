@@ -94,7 +94,7 @@ class CampaignMapper {
             $attackingEntryId = Database::getLastInsertedId();
         }
         
-        // Don't increment attacks if defending own factions territory -- otherwise, increment.
+        // Increment if attacking a not-owned territory, or a territory that is owned by a faction other than yours.
         $owningFactionId = Database::queryScalar('select OwningFactionId from Territory where IdOnMap = ? and CampaignId = ?', [$territoryBeingAttackedIdOnMap, $campaignId]);
         if(!(isset($owningFactionId) && $owningFactionId == $factionId))
             Database::execute("update UserCampaignData set Attacks = Attacks + 1 where UserId = ? and CampaignId = ?", [$currentUserId, $campaignId]);

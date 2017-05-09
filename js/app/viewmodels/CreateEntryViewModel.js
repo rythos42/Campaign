@@ -8,6 +8,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
     self.confirmFinishDialogViewModel = new ConfirmationDialogViewModel();
     
     self.narrative = currentEntry.narrative;
+    self.territoryOnMapId = currentEntry.territoryBeingAttackedIdOnMap;
     
     self.showCreateEntry = ko.computed(function() {
         return navigation.showCreateEntry();

@@ -3,15 +3,18 @@ class EntryListWidget {
     public function render() {
         ?>
         <!-- ko with: entryListViewModel -->
-        <label data-bind="visible: hasJoinedCampaign">
-            <input type="checkbox" data-bind="checked: onlyEntriesWithoutOpponent" />
-            <span><?php echo Translation::getString("onlyWithoutOpponent"); ?></span>
-        </label>
+        <span data-bind="visible: hasJoinedCampaign" class="radio-list">
+            <label><input type="radio" data-bind="checked: entryFilter" value="All" /><?php echo Translation::getString("all"); ?></label>
+            <label><input type="radio" data-bind="checked: entryFilter" value="Unfinished" /><?php echo Translation::getString("onlyUnfinished"); ?></label>
+            <label><input type="radio" data-bind="checked: entryFilter" value="Finished" /><?php echo Translation::getString("onlyFinished"); ?></label>
+        </span>
         <table>
             <thead>
                 <tr>
                     <th><?php echo Translation::getString("created"); ?></th>
                     <th><?php echo Translation::getString("by"); ?></th>
+                    <th><?php echo Translation::getString("finished"); ?></th>
+                    <th><?php echo Translation::getString("where"); ?></th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: entries">
@@ -24,7 +27,9 @@ class EntryListWidget {
                         <span data-bind="text: createdOnDate, tooltip: Translation.getString('mustFirstJoinTheCampaign')"></span>
                         <!-- /ko -->
                     </td>
-                    <td><span data-bind="text: createdByUsername"></span></td>
+                    <td data-bind="text: createdByUsername"></td>
+                    <td data-bind="text: finishDate"></td>
+                    <td data-bind="text: territoryBeingAttackedIdOnMap"></td>
                 </tr>
             </tbody>
         </table>

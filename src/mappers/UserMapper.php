@@ -79,5 +79,14 @@ class UserMapper {
         $isAdmin = $isAdminForCurrentCampaign === 'true' ? 1 : 0;
         Database::execute("update UserCampaignData set IsAdmin = ? where UserId = ? and CampaignId = ?", [$isAdmin, $userId, $campaignId]);
     }
+    
+    public static function getUserById($userId) {
+        $user = Database::queryObject("select Username, Email from User where Id = ?", [$userId]);
+        $permissions = Database::queryObjectList(
+            "select Permission.Id, Permission.Name from PermissionGroup join Permission on Permission.Id = PermissionGroup.PermissionId where UserId  = ?", "Permission", [$userId]);
+        $userCampaignData = Database::queryArray("select CampaignId, TerritoryBonus, Attacks from UserCampaignData where UserId = ?", [$userId]);
+           
+        return new User($userId, $user->Username, $user->Email, $permissions, $userCampaignData);
+    }
 }
 ?>

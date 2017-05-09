@@ -1,25 +1,15 @@
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
-    - put width 100% on data-list? Everything is outwardly constrained (except Profile)
-    
     
 Future:
     - Login
         - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
         - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
-    - show TerritoryBeingAttackIdOnMap, Finished, Winner in entries
     - show "being attacked" on map legend
     - countdown to next move.
     - Materials on CreateEntry is for "spending", so should be more clear
-    - Clark has to login every time it reloads.
     - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
-    - need to note on CreateEntry, which territory it's for. Can't tell otherwise! Also, table update as above.
-    - "Only those without opponent" shouldn't show entries that are Finished
-        - maybe change to "Only unfinished"
-    - put material count on Players list
-    - it didn't update Myles attacks count when he attacked 16
-        or when he attacked and won 18
-    - "just this phase" entry filter
+    - doesn't look good at 1920x1080, zoomed by 125%
         
 Before a general release:
 - "Contact us"
@@ -61,6 +51,7 @@ Far Future:
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
+- "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?
 - probably could delete "AttackingUserId", as territories now have multiple attackers. It's also a complete duplicate of CreatedByUserId right now.

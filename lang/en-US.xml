@@ -83,7 +83,8 @@
         <attackerOutOfAttacks>That faction is attacking and the user is out of attacks this phase.</attackerOutOfAttacks>
         <players>Players</players>
         <attacks>Attacks</attacks>
-        <onlyWithoutOpponent>Only those without opponent</onlyWithoutOpponent>
+        <onlyUnfinished>Only unfinished</onlyUnfinished>
+        <onlyFinished>Only finished</onlyFinished>
         <campaigns>Campaigns</campaigns>
         <admin>admin</admin>
         <addNews>Add News</addNews>
@@ -123,5 +124,9 @@
         <giveOneTerritoryBonusTooltip>Give 1 material to user.</giveOneTerritoryBonusTooltip>
         <attackAnywhere>1 Material to attack anywhere</attackAnywhere>
         <enterDetailsAfterPlaying>Enter details after playing.</enterDetailsAfterPlaying>
+        <all>All</all>
+        <attackingTerritory> Attacking territory</attackingTerritory>
+        <finished>Finished</finished>
+        <where>Where</where>
     </strings>
 </translation>

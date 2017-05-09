@@ -6,6 +6,7 @@ class CreateEntryWidget {
         <div data-bind="visible: showCreateEntry" class="grouping ui-widget ui-corners-all ui-widget-content" style="display: none;" >
             <div data-bind="visible: isFinished"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
             <div data-bind="visible: !hasJoinedCampaign()"><?php echo Translation::getString("entryJoinToEdit"); ?></div>
+            <div><?php echo Translation::getString("attackingTerritory"); ?> #<span data-bind="text: territoryOnMapId"></span></div>
             <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">
                 <thead>
                     <tr>

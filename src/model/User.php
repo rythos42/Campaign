@@ -13,7 +13,7 @@ class User implements JsonSerializable {
         $this->permissions = $permissions;
         $this->userCampaignData = $userCampaignData;
     }
-    
+        
     public function getId() {
         return $this->id;
     }
@@ -42,25 +42,30 @@ class User implements JsonSerializable {
     }
     
     public static function setLoggedIn($user) {
-        $_SESSION["isLoggedIn"] = true;
-        $_SESSION["user"] = $user;
+        $expiry = time() + 60*60*24*30;
+        
+        setcookie("loggedInUserId", $user->id, $expiry, "/");
     }
     
     public static function getCurrentUser() {
+        if(!isset($_COOKIE["loggedInUserId"]))
+            return null;
+        
+        $userId = $_COOKIE["loggedInUserId"];
+        
+        if(!isset($_SESSION["user"]))
+            $_SESSION["user"] = UserMapper::getUserById($userId);
+        
         return $_SESSION["user"];
     }
     
     public static function isLoggedIn() {
-        return self::getSession("isLoggedIn");
+        return isset($_COOKIE["loggedInUserId"]) ? true : false;
     }
     
     public static function logout() {
-        $_SESSION["isLoggedIn"] = false;
+        setcookie("loggedInUserId", "", time() - 3600, "/");
         $_SESSION["user"] = null;
-    }
-    
-    private static function getSession($key) {
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
 }
 ?>

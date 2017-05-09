@@ -2,8 +2,14 @@
 /*globals ko, EntryListItemViewModel */
 var EntryListViewModel = function(navigation, currentCampaign, entryList, userCampaignData) {
     var self = this;
+    
+    var FilterType = {
+        All: 'All',
+        Unfinished: 'Unfinished',
+        Finished: 'Finished'
+    };
         
-    self.onlyEntriesWithoutOpponent = ko.observable(false);
+    self.entryFilter = ko.observable();
     
     self.hasJoinedCampaign = ko.computed(function() {
         return !!userCampaignData();
@@ -16,8 +22,11 @@ var EntryListViewModel = function(navigation, currentCampaign, entryList, userCa
             });
         }
         
-        if(self.onlyEntriesWithoutOpponent())
-            return makeList($.grep(entryList(), function(entry) { return entry.factionEntries().length < 2; }));
+        var filter = self.entryFilter();
+        if(filter === FilterType.Unfinished)
+            return makeList($.grep(entryList(), function(entry) { return entry.finishDate() === undefined || entry.finishDate() === null; }));
+        else if(filter === FilterType.Finished) 
+            return makeList($.grep(entryList(), function(entry) { return entry.finishDate() !== undefined && entry.finishDate() !== null; }));
         
         return makeList(entryList());
     });
