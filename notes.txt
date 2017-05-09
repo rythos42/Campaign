@@ -1,5 +1,6 @@
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
+    - not letting you login the first time
     
 Future:
     - Login
@@ -8,8 +9,8 @@ Future:
     - show "being attacked" on map legend
     - countdown to next move.
     - Materials on CreateEntry is for "spending", so should be more clear
-    - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
     - doesn't look good at 1920x1080, zoomed by 125%
+    - could move validations to summary tab
         
 Before a general release:
 - "Contact us"
@@ -51,6 +52,8 @@ Far Future:
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
+- marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
+    - this seems pretty difficult to do, so added Created On date for the dialog instead
 - "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?

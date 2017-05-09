@@ -11,6 +11,9 @@ class TerritoryDetailsDialogWidget {
                 <li class="data-list">
                     <label><?php echo Translation::getString('ownedBy'); ?>:</label> <span data-bind="text: ownedBy"></span>
                 </li>
+                <li class="data-list">
+                    <label><?php echo Translation::getString('created'); ?>:</label> <span data-bind="text: createdOnDate"></span>
+                </li>
                 <!-- ko foreach: attackingPlayers -->
                 <li class="data-list">
                     <label><?php echo Translation::getString('attackedBy'); ?>:</label>

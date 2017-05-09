@@ -1,5 +1,5 @@
 /*exported TerritoryDetailsDialogViewModel */
-/*globals ko, toastr, DialogResult, Translation, FactionEntryListItemViewModel */
+/*globals ko, toastr, DialogResult, Translation, FactionEntryListItemViewModel, DateTimeFormatter */
 var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEntryList, userCampaignData, reloadEvents, attackAnywhere, canCurrentUserAttack) {
     var self = this;
     
@@ -22,6 +22,11 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         return $.grep(internalEntryList(), function(entry) {
             return entry.territoryBeingAttackedIdOnMap() === territory.idOnMap();
         })[0];  
+    });
+    
+    self.createdOnDate = ko.computed(function() {
+        var entry = territoryEntry();
+        return entry ? DateTimeFormatter.formatDate(entry.createdOnDate()) : '';
     });
     
     self.attackingPlayers = ko.computed(function() {
