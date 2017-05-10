@@ -45,6 +45,7 @@ class User implements JsonSerializable {
         $expiry = time() + 60*60*24*30;
         
         setcookie("loggedInUserId", $user->id, $expiry, "/");
+        $_SESSION["isLoggedIn"] = true;
     }
     
     public static function getCurrentUser() {
@@ -60,12 +61,16 @@ class User implements JsonSerializable {
     }
     
     public static function isLoggedIn() {
+        if(isset($_SESSION["isLoggedIn"]))
+            return $_SESSION["isLoggedIn"];
+        
         return isset($_COOKIE["loggedInUserId"]) ? true : false;
     }
     
     public static function logout() {
         setcookie("loggedInUserId", "", time() - 3600, "/");
         $_SESSION["user"] = null;
+        $_SESSION["isLoggedIn"] = false;
     }
 }
 ?>
