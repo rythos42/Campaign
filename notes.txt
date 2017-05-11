@@ -1,13 +1,13 @@
 Next:
     - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
+        https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/display-a-notification
         https://jwt.io/
         https://github.com/web-push-libs/web-push-php
         https://web-push-codelab.appspot.com/
     - "(unowned)" on territory list
     - change button to say "Attack" if unowned
-    - Why was Greg's news lost?
-        Admin finishes their game --> saves news with their ID
-        Admin finished another game --> saves news with...
+    - Admin-only checkbox above news that says "I wrote this"
+    
        
 Future:
     - Login
