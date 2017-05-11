@@ -126,9 +126,6 @@ class CampaignMapper {
             $winningFactionEntry = null;
             $winningVictoryPoints = -1;
             
-            $previousOwningFactionId = Database::queryScalar('select OwningFactionId from Territory where CampaignId = ? and IdOnMap = ?', 
-                [$campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap]);
-
             foreach($campaignEntry->factionEntries as $factionEntry) {
                 // Update any TB spent by this user
                 if(isset($factionEntry->territoryBonusSpent)) {
@@ -145,13 +142,13 @@ class CampaignMapper {
                 }
             }
 
-            // If the winner was attacking, give them the territory
-            if(isset($winningFactionEntry) && $winningFactionEntry->user->id === $campaignEntry->attackingUser->id) {
+            // Winner takes the territory
+            if(isset($winningFactionEntry)) {
                 Database::execute(
                     "UPDATE Territory SET OwningFactionId = ? WHERE CampaignId = ? AND IdOnMap = ?",
                     [$winningFactionEntry->faction->id, $campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap]);
             }
-            
+
             if(isset($winningFactionEntry) && sizeof($campaignEntry->factionEntries) > 1)
                 Database::execute(
                     "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
