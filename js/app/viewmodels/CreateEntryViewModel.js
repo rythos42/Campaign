@@ -9,6 +9,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
     
     self.narrative = currentEntry.narrative;
     self.territoryOnMapId = currentEntry.territoryBeingAttackedIdOnMap;
+    self.currentUserWroteNarrative = ko.observable(false);
     
     self.showCreateEntry = ko.computed(function() {
         return navigation.showCreateEntry();
@@ -54,7 +55,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         return self.isFinished() || !self.hasJoinedCampaign();
     });
     
-    self.showFinishButton = ko.computed(function() {
+    self.showAdminStuff = ko.computed(function() {
         var userData = userCampaignData();
         if(!userData)
             return false;
@@ -84,6 +85,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         var params = {
             action: 'SaveCampaignEntry',
             campaignEntry: ko.toJSON(currentEntry),
+            currentUserWroteNarrative: self.currentUserWroteNarrative(),
             finish: args && args.finish
         };
         
@@ -107,6 +109,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         currentEntry.territoryBeingAttackedIdOnMap(undefined);
         currentEntry.finishDate(undefined);
         currentEntry.narrative(undefined);
+        self.currentUserWroteNarrative(false);
     }
     
     self.confirmFinishDialogViewModel.dialogResult.subscribe(function(dialogResult) {

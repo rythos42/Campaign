@@ -43,7 +43,7 @@ class CampaignMapper {
         return $campaignList;
     }
     
-    public static function saveCampaignEntry($campaignEntry, $finish) {
+    public static function saveCampaignEntry($campaignEntry, $currentUserWroteNarrative) {
         $createdByUserId = User::getCurrentUser()->getId();
         $createdOnDate = date('Y-m-d H:i:s');
                     
@@ -64,7 +64,12 @@ class CampaignMapper {
         }
 
         // Save the narrative
-        if(isset($campaignEntry->narrative) && !$finish) {
+        $userData = UserMapper::getUserDataForCampaign($createdByUserId, $campaignEntry->campaignId);
+        // Only if:
+        //      Narrative is set to something (don't save empty narrative).
+        //      User is not an admin.
+        //      If user is an admin, only save if the admin claims they wrote it.
+        if(isset($campaignEntry->narrative) && (!$userData->IsAdmin || ($userData->IsAdmin && $currentUserWroteNarrative))) {
             $hasNarrative = Database::queryScalar("select count(*) from News where EntryId = ?", [$campaignEntry->id]);
             if($hasNarrative === 0) {
                 Database::execute("insert into News (News, CampaignId, EntryId, CreatedByUserId, CreatedOnDate) values (?, ?, ?, ?, ?)",

@@ -1,5 +1,5 @@
 /*exported TerritoryListItemViewModel */
-/*globals ko */
+/*globals ko, Translation */
 var TerritoryListItemViewModel = function(territory) {
     var self = this;
     
@@ -9,7 +9,11 @@ var TerritoryListItemViewModel = function(territory) {
     self.territoryId = territory.IdOnMap;
     self.tags = ko.observable(territory.Tags);
     
-    self.ownedBy = ko.observable(territory.AttackingFactionName);
+    self.ownedBy = ko.computed(function() {
+        if(territory.AttackingFactionName)
+            return territory.AttackingFactionName;
+        return Translation.getString('unowned');
+    });
     
     self.editTag = function() {
         self.isEditing(true);

@@ -36,13 +36,14 @@ class CreateEntryWidget {
             <div>
                 <label for="EntryNew"><?php echo Translation::getString('narrative'); ?></label>
                 <textarea data-bind="enable: !isReadOnly(), value: narrative"></textarea>
+                <label data-bind="visible: showAdminStuff"><input type="checkbox" data-bind="checked: currentUserWroteNarrative" />I wrote this</label>
             </div>
             <div class="bottom-button-panel">
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
                 <input type="button" data-bind="click: saveCampaignEntry, visible: !isReadOnly()" value="<?php echo Translation::getString("save"); ?>" class="ui-button ui-widget ui-corner-all" />
-                <input type="button" data-bind="click: finish, visible: showFinishButton" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
+                <input type="button" data-bind="click: finish, visible: showAdminStuff" value="<?php echo Translation::getString("finish"); ?>" class="ui-button ui-widget ui-corner-all" />
             </div>
             <!-- ko with: confirmFinishDialogViewModel -->
             <?php

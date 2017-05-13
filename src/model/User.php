@@ -46,6 +46,7 @@ class User implements JsonSerializable {
         
         setcookie("loggedInUserId", $user->id, $expiry, "/");
         $_SESSION["isLoggedIn"] = true;
+        $_SESSION["user"] = $user;
     }
     
     public static function getCurrentUser() {

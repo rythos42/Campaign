@@ -4,12 +4,10 @@ Next:
         https://jwt.io/
         https://github.com/web-push-libs/web-push-php
         https://web-push-codelab.appspot.com/
-    - "(unowned)" on territory list
-    - change button to say "Attack" if unowned
-    - Admin-only checkbox above news that says "I wrote this"
     
        
 Future:
+    - change button to say "Attack" if unowned
     - Login
         - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
         - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
@@ -17,7 +15,7 @@ Future:
     - countdown to next move.
     - Materials on CreateEntry is for "spending", so should be more clear
     - doesn't look good at 1920x1080, zoomed by 125%
-    - could move validations to summary tab
+    - could move map validations to summary tab
         
 Before a general release:
 - "Contact us"
