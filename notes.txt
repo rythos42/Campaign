@@ -4,16 +4,20 @@ Next:
         https://jwt.io/
         https://github.com/web-push-libs/web-push-php
         https://web-push-codelab.appspot.com/
+        https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/how-push-works
+        
+        Had to add a mime type application/json to server
     
+    - userId in session is a bad idea
+        https://github.com/defuse/php-encryption
+        https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence#title.2
        
 Future:
     - change button to say "Attack" if unowned
     - Login
         - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
         - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
-    - show "being attacked" on map legend
     - countdown to next move.
-    - Materials on CreateEntry is for "spending", so should be more clear
     - doesn't look good at 1920x1080, zoomed by 125%
     - could move map validations to summary tab
         
@@ -57,6 +61,10 @@ Far Future:
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
+- can't sort dates in Entry table - stupidtable holds onto table values when it shouldn't
+    - maybe make an issue https://github.com/joequery/Stupid-Table-Plugin/issues/78
+- Materials on CreateEntry is for "spending", so should be more clear
+- show "being attacked" on map legend
 - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
     - this seems pretty difficult to do, so added Created On date for the dialog instead
 - "just this phase" entry filter

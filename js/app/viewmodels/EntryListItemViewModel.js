@@ -6,9 +6,12 @@ var EntryListItemViewModel = function(entry, navigation, userCampaignData) {
     self.createdOnDate = ko.computed(function() {
         return DateTimeFormatter.formatDate(entry.createdOnDate());
     });
-    
+        
     self.finishDate = ko.computed(function() {
-        return DateTimeFormatter.formatDate(entry.finishDate());
+        var finishDate = entry.finishDate();
+        if(finishDate === null)
+            return '';
+        return DateTimeFormatter.formatDate(finishDate);
     });
 
     self.createdByUsername = entry.createdByUsername;
