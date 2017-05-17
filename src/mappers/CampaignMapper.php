@@ -105,16 +105,26 @@ class CampaignMapper {
             Database::execute("update UserCampaignData set Attacks = Attacks + 1 where UserId = ? and CampaignId = ?", [$currentUserId, $campaignId]);
 
         Database::execute("insert into FactionEntry (EntryId, FactionId, UserId) values (?, ?, ?)", [$attackingEntryId, $factionId, $createdByUserId]);
+        
+        if(Settings::hasOneSignalEnabled())
+            PushMapper::notifyFactionEntryCreation($createdByUserId, $attackingEntryId, $territoryBeingAttackedIdOnMap);
     }
     
     public static function deleteFactionEntry($campaignId, $factionEntryId) {
+        $factionEntry = Database::queryObject("select EntryId, FactionId, UserId, TerritoryBeingAttackedIdOnMap 
+            from FactionEntry 
+            join Entry on Entry.Id = FactionEntry.EntryId
+            where FactionEntry.Id = ?", [$factionEntryId]);
+
+        if(Settings::hasOneSignalEnabled())
+            PushMapper::notifyFactionEntryDeletion($factionEntry->UserId, $factionEntry->EntryId, $factionEntry->TerritoryBeingAttackedIdOnMap);
+
         $owningFactionId = Database::queryScalar(
             "select Territory.OwningFactionId 
                 from FactionEntry
                 join Entry on Entry.Id = FactionEntry.EntryId
                 join Territory on Territory.IdOnMap = Entry.TerritoryBeingAttackedIdOnMap and Territory.CampaignId = Entry.CampaignId
                 where FactionEntry.Id = ?", [$factionEntryId]);
-        $factionEntry = Database::queryObject("select EntryId, FactionId, UserId from FactionEntry where Id = ?", [$factionEntryId]);
         if(!(isset($owningFactionId) && $owningFactionId == $factionEntry->FactionId))
             Database::execute("update UserCampaignData set Attacks = Attacks - 1 where UserId = ? and CampaignId = ?", [$factionEntry->UserId, $campaignId]);
 

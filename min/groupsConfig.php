@@ -35,6 +35,7 @@ return array(
         '//js/app/model/CampaignReloadEvents.js',
         '//js/app/model/Territory.js',
         '//js/app/managers/UserManager.js',
+        '//js/app/managers/PushManager.js',
         '//js/app/viewmodels/ApplicationViewModel.js',
         '//js/app/viewmodels/LoginViewModel.js',
         '//js/app/viewmodels/LogoutViewModel.js',

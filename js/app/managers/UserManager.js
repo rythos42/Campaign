@@ -32,5 +32,23 @@ var UserManager = {
             dataType: 'JSON',
             data: { action: 'GetUserDataForCampaign', campaignId: campaignId }
         });
+    },
+    
+    setOneSignalUserId: function(oneSignalUserId) {
+        return $.ajax({
+            url: 'src/webservices/UserService.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: { action: 'SetOneSignalUserId', oneSignalUserId: oneSignalUserId }
+        });
+    },
+    
+    getAllJoinedCampaignIds: function() {
+        return $.ajax({
+            url: 'src/webservices/UserService.php',
+            method: 'GET',
+            dataType: 'JSON',
+            data: { action: 'GetAllJoinedCampaignIds' }
+        });
     }
 };

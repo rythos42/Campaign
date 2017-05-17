@@ -88,5 +88,13 @@ class UserMapper {
            
         return new User($userId, $user->Username, $user->Email, $permissions, $userCampaignData);
     }
+    
+    public static function setOneSignalUserId($userId, $oneSignalUserId) {
+        Database::execute("update User set OneSignalUserId = ? where Id = ?", [$oneSignalUserId, $userId]);
+    }
+    
+    public static function getAllJoinedCampaignIds($userId) {
+        return Database::queryScalarList("select CampaignId from UserCampaignData where UserId = ?", [$userId]);
+    }
 }
 ?>

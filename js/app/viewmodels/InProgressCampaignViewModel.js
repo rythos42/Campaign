@@ -1,5 +1,5 @@
 /*exported InProgressCampaignViewModel */
-/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TerritoryListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel, CampaignReloadEvents */
+/*globals _, ko, toastr, CreateEntryViewModel, EntryListViewModel, DialogResult, Translation, InProgressCampaignMapViewModel, Entry, PlayerListViewModel, TextFieldDialogViewModel, DropDownListDialogViewModel, TerritoryListViewModel, CampaignSummaryStatsViewModel, UserManager, RenameFactionDialogViewModel, CampaignReloadEvents, PushManager */
 var InProgressCampaignViewModel = function(user, navigation) {
     var self = this,
         currentCampaign = ko.observable(null),
@@ -165,18 +165,26 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     self.joinCampaignDialogViewModel.dialogResult.subscribe(function(result) {
         if(result === DialogResult.Saved) {
+            var campaignId = currentCampaign().id();
             $.ajax({
                 url: 'src/webservices/CampaignService.php',
                 method: 'POST',
                 dataType: 'JSON',
                 data: { 
                     action: 'JoinCampaign', 
-                    campaignId: currentCampaign().id(),
+                    campaignId: campaignId,
                     factionId: self.joinCampaignDialogViewModel.selectedValue().id()
                 }
             }).then(function(userDataForCampaign) {
                 setUserDataForCampaign(userDataForCampaign);
                 self.playerListViewModel.reloadPlayerList();
+                
+                if(PushManager.serverHasPushEnabled()) {
+                    PushManager.userHasPushEnabled().then(function(isEnabled) {
+                        if(isEnabled)
+                            PushManager.associateUserWithCampaign(campaignId);
+                    });
+                }
             });
         }
     });

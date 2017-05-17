@@ -128,5 +128,11 @@
         <attackingTerritory> Attacking territory</attackingTerritory>
         <finished>Finished</finished>
         <where>Where</where>
+        <hasChallengedTerritoryNotification>%s is challenging territory #%d in campaign %s.</hasChallengedTerritoryNotification>
+        <hasChallengeRemovedNotification>%s has removed challenge from territory #%d in campaign %s.</hasChallengeRemovedNotification>
+        <subscribeToCampaignChanges>Subscribe to campaign changes</subscribeToCampaignChanges>
+        <youAreSubscribed>You're subscribed to campaign changes</youAreSubscribed>
+        <clickToSubscribe>Click to subscribe to campaign changes</clickToSubscribe>
+        <manageSubscriptions>Manage Campaign Subscriptions</manageSubscriptions>
     </strings>
 </translation>

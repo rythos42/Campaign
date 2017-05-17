@@ -7,5 +7,6 @@ CREATE TABLE User (
     CreatedOnDate datetime NOT NULL,
     LastLoginDate datetime,
     Email VARCHAR(320),
+    OneSignalUserId CHAR(36),
     PRIMARY KEY (Id)
 ); 

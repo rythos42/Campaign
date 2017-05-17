@@ -43,7 +43,8 @@ module.exports = function (grunt) {
                 'db',
                 'img/*.pdn',
                 'composer.json',
-                'vendor'
+                'vendor',
+                'one_signal'
                 ]
             }
         }

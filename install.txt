@@ -34,6 +34,7 @@ Build
     Install minify
         composer install
             
+Upload /one_signal/* files to the *root* of your web directory for web push support.
         
     
 Give user CreateMapCampaign permission:

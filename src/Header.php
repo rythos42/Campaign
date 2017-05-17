@@ -34,6 +34,7 @@ include($installDirOnWebServer . "/src/mappers/UserMapper.php");
 include($installDirOnWebServer . "/src/mappers/CampaignMapper.php");
 include($installDirOnWebServer . "/src/mappers/MapMapper.php");
 include($installDirOnWebServer . "/src/mappers/NewsMapper.php");
+include($installDirOnWebServer . "/src/mappers/PushMapper.php");
 include($installDirOnWebServer . "/src/widgets/MainWidget.php");
 include($installDirOnWebServer . "/src/widgets/HeaderWidget.php");
 include($installDirOnWebServer . "/src/widgets/LoginWidget.php");

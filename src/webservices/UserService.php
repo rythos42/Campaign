@@ -67,6 +67,17 @@ switch($action) {
         $isAdminForCurrentCampaign = $_REQUEST["isAdminForCurrentCampaign"];
         UserMapper::setUserAdminForCampaign($campaignId, $userId, $isAdminForCurrentCampaign);
         break;
+        
+    case "SetOneSignalUserId":
+        $oneSignalUserId = $_REQUEST["oneSignalUserId"] === '' ? null : $_REQUEST["oneSignalUserId"];
+        $userId = User::getCurrentUser()->getId();
+        UserMapper::setOneSignalUserId($userId, $oneSignalUserId);
+        break;
+        
+    case "GetAllJoinedCampaignIds":
+        $userId = User::getCurrentUser()->getId();
+        echo json_encode(UserMapper::getAllJoinedCampaignIds($userId));
+        break;
 }
 
 ?>

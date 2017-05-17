@@ -1,12 +1,10 @@
 Next:
-    - it's bugging me that I have to reload the page every time. Is there a push thing I can do here?
-        https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/display-a-notification
-        https://jwt.io/
-        https://github.com/web-push-libs/web-push-php
-        https://web-push-codelab.appspot.com/
-        https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/how-push-works
-        
-        Had to add a mime type application/json to server
+Run @ home:
+    alter table User add column OneSignalUserId char(36)
+
+    - click notification to reload some stuff on the page
+    - notification for new phase and for finished entry (who won the territory)
+    - can I make the notification listified for multiple notifications coming in
     
     - userId in session is a bad idea
         https://github.com/defuse/php-encryption
