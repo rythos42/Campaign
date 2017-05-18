@@ -3,7 +3,6 @@ Run @ home:
     alter table User add column OneSignalUserId char(36)
 
     - click notification to reload some stuff on the page
-    - notification for new phase and for finished entry (who won the territory)
     - can I make the notification listified for multiple notifications coming in
     
     - userId in session is a bad idea
@@ -18,6 +17,7 @@ Future:
     - countdown to next move.
     - doesn't look good at 1920x1080, zoomed by 125%
     - could move map validations to summary tab
+    - need admin method of bypassing 24 hour entry limit and attack limit
         
 Before a general release:
 - "Contact us"
@@ -50,6 +50,7 @@ Far Future:
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
     - loading UI always shown on Simple campaign, because it never loads the map
+    - push notifications likely sending when they shouldn't for simple
 - Administrator interface:
     - delete campaigns
 - Campaign Administrator interface:

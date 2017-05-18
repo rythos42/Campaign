@@ -170,6 +170,13 @@ class CampaignMapper {
                     [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
         }
         Database::execute("update Entry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
+        
+        if(Settings::hasOneSignalEnabled()) {
+            if(isset($winningFactionEntry))
+                PushMapper::notifyEntryWon($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap, $winningFactionEntry);
+            else
+                PushMapper::notifyEntryDraw($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap);
+        }
     }
     
     public static function getEntriesForCampaign($campaignId) {
@@ -276,6 +283,9 @@ class CampaignMapper {
         }
         
         Database::execute("INSERT INTO Phase (CampaignId, StartDate) VALUES (?, ?)", [$campaignId, date('Y-m-d H:i:s')]);
+        
+        if(Settings::hasOneSignalEnabled())
+            PushMapper::notifyNewPhase($campaignId);
     }
     
     public static function getCampaignIdForFactionId($factionId) {

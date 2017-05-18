@@ -134,5 +134,8 @@
         <youAreSubscribed>You're subscribed to campaign changes</youAreSubscribed>
         <clickToSubscribe>Click to subscribe to campaign changes</clickToSubscribe>
         <manageSubscriptions>Manage Campaign Subscriptions</manageSubscriptions>
+        <aNewPhaseHasBegunIn>A new phase has begun in %s.</aNewPhaseHasBegunIn>
+        <playerHasTakenTerritory>%s has taken territory #%d for %s in campaign %s.</playerHasTakenTerritory>
+        <entryDrawn>Challenge for territory #%d in campaign %s was a draw.</entryDrawn>
     </strings>
 </translation>
