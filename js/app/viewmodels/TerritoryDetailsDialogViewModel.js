@@ -66,8 +66,16 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         var territory = self.territory();
         return territory ? territory.attackingUserId() : -1;
     });
+    
+    var isLocalhost = function() {
+        return location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    };
 
     self.canBeAttacked = ko.computed(function() {
+        // Allow local admin to do whatever they want.
+        if(isLocalhost())
+            return true;
+        
         var userData = userCampaignData(),
             entry = territoryEntry();
             
@@ -85,6 +93,10 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     });
 
     self.canBeDefended = ko.computed(function() {
+        // Allow local admin to do whatever they want.
+        if(isLocalhost())
+            return true;
+
         var userData = userCampaignData(),
             entry = territoryEntry();
             

@@ -38,5 +38,24 @@ var PushManager = {
                 UserManager.setOneSignalUserId(null);
             }
         });});
+    },
+    
+    setOnNotificationClicked: function(reloadEvents) {
+        OneSignal.push(['addListenerForNotificationOpened', function(data) {
+            if(data.data) {
+                var events = data.data;
+                if(events.map)
+                    reloadEvents.reloadMap();
+                if(events.entries)
+                    reloadEvents.reloadEntryList();
+                if(events.summary)
+                    reloadEvents.reloadSummary();
+                if(events.players)
+                    reloadEvents.reloadPlayers();
+            }            
+            
+            // Event is removed after every call.
+            PushManager.setOnNotificationClicked(reloadEvents);
+        }]);
     }
 };

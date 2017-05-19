@@ -128,8 +128,11 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
     
     function loadMapImage() {
         self.isLoadingMap(true);
-        var campaign = currentCampaign(),
-            url = mapHelper.createGetMapServiceCallUrl(campaign.id(), campaign.mapImageWidth(), campaign.mapImageHeight(), campaign.mapImageName());
+        var campaign = currentCampaign();
+        if(!campaign)
+            return;
+        
+        var url = mapHelper.createGetMapServiceCallUrl(campaign.id(), campaign.mapImageWidth(), campaign.mapImageHeight(), campaign.mapImageName());
         if(self.mapImageUrl() === url)
             self.mapImageUrl.notifySubscribers(url);
         else

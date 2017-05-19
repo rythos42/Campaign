@@ -18,6 +18,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     
+    PushManager.setOnNotificationClicked(reloadEvents);
+    
     self.showLoadingImage = ko.computed(function() {
         return currentlyLoadingEntryList() || self.inProgressCampaignMapViewModel.isLoadingMap() || currentlyLoadingUserData();
     });
@@ -236,5 +238,9 @@ var InProgressCampaignViewModel = function(user, navigation) {
     
     reloadEvents.reloadSummaryRequested.subscribe(function() {
         getUserDataForCampaign();
+    });
+    
+    reloadEvents.reloadPlayersRequested.subscribe(function() {
+        self.playerListViewModel.reloadPlayerList();
     });
 };

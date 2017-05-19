@@ -2,22 +2,18 @@ Next:
 Run @ home:
     alter table User add column OneSignalUserId char(36)
 
-    - click notification to reload some stuff on the page
-    - can I make the notification listified for multiple notifications coming in
-    
-    - userId in session is a bad idea
-        https://github.com/defuse/php-encryption
-        https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence#title.2
+    - change button to say "Attack" if unowned
+
        
 Future:
-    - change button to say "Attack" if unowned
     - Login
         - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
         - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
     - countdown to next move.
     - doesn't look good at 1920x1080, zoomed by 125%
-    - could move map validations to summary tab
-    - need admin method of bypassing 24 hour entry limit and attack limit
+    - userId in session is a bad idea
+        https://github.com/defuse/php-encryption
+        https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence#title.2
         
 Before a general release:
 - "Contact us"
@@ -60,6 +56,9 @@ Far Future:
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
+
+    - can I make the notification listified for multiple notifications coming in
+    - on notification display event, can add to a list of notifications. Just don't know if I want to add this to the UI right now.
 - can't sort dates in Entry table - stupidtable holds onto table values when it shouldn't
     - maybe make an issue https://github.com/joequery/Stupid-Table-Plugin/issues/78
 - Materials on CreateEntry is for "spending", so should be more clear

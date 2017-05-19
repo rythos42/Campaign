@@ -16,7 +16,8 @@ class PushMapper {
                 $entryInformation->Username, 
                 $territoryBeingAttackedIdOnMap,
                 $entryInformation->CampaignName)),
-            'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId)
+            'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId),
+            'data' => array('map' => true, 'entries' => true, 'players' => true)
         )); 
     }
     
@@ -36,7 +37,8 @@ class PushMapper {
                 $entryInformation->Username, 
                 $territoryBeingAttackedIdOnMap,
                 $entryInformation->CampaignName)),
-            'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId)
+            'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId),
+            'data' => array('map' => true, 'entries' => true, 'players' => true)
         )); 
     }
     
@@ -48,7 +50,8 @@ class PushMapper {
         PushMapper::notify(array( 
             'app_id' => Settings::getOneSignalAppId(),
             'contents' => array('en' => sprintf(Translation::getString('aNewPhaseHasBegunIn'), $campaignName)),
-            'filters' => PushMapper::getFilterForCampaign($campaignId)
+            'filters' => PushMapper::getFilterForCampaign($campaignId),
+            'data' => array('players' => true, 'summary' => true)
         )); 
     }
     
@@ -71,7 +74,8 @@ class PushMapper {
                 $territoryBeingAttackedIdOnMap,
                 $entryInformation->FactionName,
                 $entryInformation->CampaignName)),
-            'filters' => PushMapper::getFilterForCampaign($campaignId)
+            'filters' => PushMapper::getFilterForCampaign($campaignId),
+            'data' => array('map' => true, 'entries' => true, 'players' => true)
         )); 
     }
     
@@ -83,7 +87,8 @@ class PushMapper {
         PushMapper::notify(array( 
             'app_id' => Settings::getOneSignalAppId(),
             'contents' => array('en' => sprintf(Translation::getString('entryDrawn'), $territoryBeingAttackedIdOnMap, $campaignName)),
-            'filters' => PushMapper::getFilterForCampaign($campaignId)
+            'filters' => PushMapper::getFilterForCampaign($campaignId),
+            'data' => array('map' => true, 'entries' => true)
         )); 
     }
     
