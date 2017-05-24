@@ -45,6 +45,9 @@ var LoginViewModel = function(user, navigation) {
     ]);
     
     self.login = function() {
+        if(self.isSignup())
+            return;
+        
         var params = { 
             action: 'Login',
             username: self.username(),

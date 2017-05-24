@@ -1,14 +1,8 @@
 Next:
 Run @ home:
     alter table User add column OneSignalUserId char(36)
-
-    - change button to say "Attack" if unowned
-
        
 Future:
-    - Login
-        - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
-        - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
     - countdown to next move.
     - doesn't look good at 1920x1080, zoomed by 125%
     - userId in session is a bad idea

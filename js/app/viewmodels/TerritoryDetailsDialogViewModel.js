@@ -9,18 +9,13 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
 
     self.isReachable = ko.observable();
     
-    var attackedByFactionId = ko.computed(function() {
-        var territory = self.territory();
-        return territory ? territory.attackingFactionId() : -1;
-    });
-    
     var territoryEntry = ko.computed(function() {
         var territory = self.territory();
         if(!territory)
             return null;
         
         return $.grep(internalEntryList(), function(entry) {
-            return entry.territoryBeingAttackedIdOnMap() === territory.idOnMap();
+            return entry.territoryBeingAttackedIdOnMap() === territory.idOnMap() && !entry.finishDate();
         })[0];  
     });
     
@@ -30,41 +25,46 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     });
     
     self.attackingPlayers = ko.computed(function() {
-        var theTerritoryEntry = territoryEntry();
-        if(!theTerritoryEntry || theTerritoryEntry.finishDate())
+        var entry = territoryEntry();
+        if(!entry)
             return null;
         
+        var owningFactionId = self.territory() && self.territory().owningFactionId();
         return $.map(
-            $.grep(theTerritoryEntry.factionEntries(), function(factionEntry) {
-                return factionEntry.faction().id() === attackedByFactionId();
+            $.grep(entry.factionEntries(), function(factionEntry) {
+                // If no owner, everyone is an attacker.
+                if(!owningFactionId)
+                    return true;
+                
+                // Otherwise, attackers are everyone it isn't owned by 
+                return factionEntry.faction().id() !== owningFactionId;
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere, self.territory);
+                return new FactionEntryListItemViewModel(entry, factionEntry, reloadEvents, attackAnywhere, self.territory);
             });
     });    
     
     self.defendingPlayers = ko.computed(function() {
-        var theTerritoryEntry = territoryEntry();
-        if(!theTerritoryEntry || theTerritoryEntry.finishDate())
+        var entry = territoryEntry(),
+            owningFactionId = self.territory() && self.territory().owningFactionId();
+                
+        // If no entry, or it is not owned, there are no defending players
+        if(!entry || !owningFactionId)
             return null;
         
+        // Otherwise, defenders are everyone in the faction that owns it.
         return $.map(
-            $.grep(theTerritoryEntry.factionEntries(), function(factionEntry) {
-                return factionEntry.faction().id() !== attackedByFactionId();
+            $.grep(entry.factionEntries(), function(factionEntry) {
+                return factionEntry.faction().id() === owningFactionId;
             }),
             function(factionEntry) {
-                return new FactionEntryListItemViewModel(theTerritoryEntry, factionEntry, reloadEvents, attackAnywhere, self.territory);
+                return new FactionEntryListItemViewModel(entry, factionEntry, reloadEvents, attackAnywhere, self.territory);
             });
     });
     
     var isBeingAttacked = ko.computed(function() {
         var territory = self.territory();
         return territory ? !!territory.attackingUsername() : false;
-    });
-
-    var attackedByUserId = ko.computed(function() {
-        var territory = self.territory();
-        return territory ? territory.attackingUserId() : -1;
     });
     
     var isLocalhost = function() {
@@ -79,6 +79,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         var userData = userCampaignData(),
             entry = territoryEntry();
             
+        // We have user data loaded, it's reachable and the user doesn't have validation issues (24 hours since attack, out of attacks)
         if(!userData || !self.isReachable() || !canCurrentUserAttack())
             return false;
         
@@ -86,10 +87,9 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
         if(entry && entry.hasUser(user.id()))
             return false;
 
-        if(!isBeingAttacked())
-            return true;
-        else
-            return self.territory().attackingFactionId() === userData.FactionId && user.id() !== attackedByUserId();
+        // Can attack if it is unowned, or not owned by your faction.
+        var owningFactionId = self.territory().owningFactionId();
+        return !owningFactionId || owningFactionId !== userData.FactionId;
     });
 
     self.canBeDefended = ko.computed(function() {
@@ -99,24 +99,18 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
 
         var userData = userCampaignData(),
             entry = territoryEntry();
-            
-        if(!userData || !entry || !isBeingAttacked())
-            return false;
         
-        // Can't defend unreachable, unless it's your own territory
-        if(!self.isReachable() && self.territory().owningFactionId() !== userData.FactionId)
+        // If no user data, no entry or it isn't being attacked, you can't defend.
+        if(!userData || !entry || !isBeingAttacked())
             return false;
         
         // Can't defend if you're already in the entry
         if(entry.hasUser(user.id()))
             return false;
-
-        // Can't defend unclaimed territory if you have no attacks
-        var territory = self.territory();
-        if(!territory.owningFactionId() && !canCurrentUserAttack())
-            return false;
-
-        return self.territory().attackingFactionId() !== userData.FactionId;
+        
+        // Can only defend your own territory
+        var owningFactionId = self.territory().owningFactionId();
+        return owningFactionId && owningFactionId === userData.FactionId;
     });
     
     self.canBePlayed = ko.computed(function() {
