@@ -31,7 +31,7 @@ Build
         npm install grunt-ftp-deploy --save-dev
         
     Install Composer (https://getcomposer.org/doc/00-intro.md)
-    Install minify
+    Install minify and random_compat
         composer install
             
 Upload /one_signal/* files to the *root* of your web directory for web push support.

@@ -89,6 +89,35 @@ class UserMapper {
         return new User($userId, $user->Username, $user->Email, $permissions, $userCampaignData);
     }
     
+    public static function getUserByCookie($cookie) {
+        $pieces = explode(":", $cookie);
+        $authTokenId = $pieces[0];
+        
+        $token = Database::queryObject("select HashedToken, UserId, Expires from AuthorizationToken where Id = ?", [$authTokenId]);
+        if(!$token)
+            return null;
+
+        $hashedToken = hash('sha256', $pieces[1]);
+        if($token->HashedToken !== $hashedToken)
+            return null;
+        
+        if($token->Expires > time())
+            return null;
+
+        return UserMapper::getUserById($token->UserId);
+    }
+    
+    public static function createAuthorizationTokenCookie($user) {
+        $expiry = date('Y-m-d H:i:s', time() + User::$TokenExpirySeconds);
+        $token = bin2hex(random_bytes(64));
+        $hashedToken = hash('sha256', $token);
+        
+        Database::execute("insert into AuthorizationToken (HashedToken, UserId, Expires) values (?, ?, ?)", [$hashedToken, $user->getId(), $expiry]);
+        
+        $authTokenId = Database::getLastInsertedId();
+        return $authTokenId . ':' . $token;
+    }
+    
     public static function setOneSignalUserId($userId, $oneSignalUserId) {
         Database::execute("update User set OneSignalUserId = ? where Id = ?", [$oneSignalUserId, $userId]);
     }

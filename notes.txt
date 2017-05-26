@@ -1,22 +1,35 @@
 Next:
 Run @ home:
     alter table User add column OneSignalUserId char(36)
-       
+    create table AuthorizationToken (
+        Id int not null AUTO_INCREMENT,
+        HashedToken char(64) not null,
+        UserId int not null,
+        Expires datetime not null,
+        primary key (Id),
+        foreign key AuthorizationToken_User (UserId) references User(Id)
+    ) 
+    
 Future:
     - countdown to next move.
     - doesn't look good at 1920x1080, zoomed by 125%
-    - userId in session is a bad idea
-        https://github.com/defuse/php-encryption
-        https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence#title.2
         
 Before a general release:
 - "Contact us"
 - Account recovery, since we mention it on the e-mail thing.
+    - after doing account recovery, update password storing scheme and reset all passwords in the system
+    - make sure all users have e-mails set up    
+        $stored = password_hash(base64_encode(hash('sha256', $_POST['password'], true)), PASSWORD_DEFAULT);
+        if (password_verify(base64_encode(hash('sha256', $_POST['password'], true)), $stored)) { // Success :D } else { // Failure :( }
+        "Won't truncate at 72 characters and is fully binary-safe, so early null bytes will not lead to security weaknesses."
+    - or use https://github.com/paragonie/password_lock which appears to do the above.
 - for buying: group buy, or individual buy? 
     Roll20: group buy, $5/month or $50/year.
 - Facebook OpenGraph image
 - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
+- Password changing
+    - invalidate all tokens for user when changing password
             
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.

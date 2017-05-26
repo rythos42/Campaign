@@ -14,10 +14,11 @@ if($_SERVER["HTTPS"] != "on") {
     exit();
 }
 
-
 include("settings.php");
 // Use Server.php instead to get this value. Can't get it here because we can't load Server without it.
 $installDirOnWebServer = $_SERVER['DOCUMENT_ROOT'] . '/' . $settings['installDirOnWebServer'];
+
+require $installDirOnWebServer . "/vendor/autoload.php";
 
 include($installDirOnWebServer . "/src/infrastructure/Settings.php");
 include($installDirOnWebServer . "/src/infrastructure/ExceptionCodes.php");
@@ -59,6 +60,8 @@ include($installDirOnWebServer . "/src/widgets/TerritoryDetailsDialogWidget.php"
 include($installDirOnWebServer . "/src/widgets/TerritoryListWidget.php");
 include($installDirOnWebServer . "/src/widgets/CampaignSummaryStatsWidget.php");
 include($installDirOnWebServer . "/src/widgets/RenameFactionDialogWidget.php");
+
+User::clearOldLoginData();  // clear data from before userid tokens
 
 session_start();
 Database::connect();

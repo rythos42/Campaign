@@ -17,10 +17,11 @@ switch($action) {
         // fall through to login
         
     case "Login":
-        try {
+        try { 
             $user = UserMapper::validateLogin($_REQUEST['username'], $_REQUEST['password']);
             if($user) {
-                User::setLoggedIn($user);
+                $cookie = UserMapper::createAuthorizationTokenCookie($user);
+                User::setLoggedIn($cookie);
                 
                 header("Content-Type: text/json");
                 echo json_encode($user);

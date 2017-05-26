@@ -6,6 +6,9 @@ class User implements JsonSerializable {
     private $userCampaignData;
     private $email;
     
+    public static $TokenExpirySeconds = 60*60*24*30;
+    private static $loggedInThisExecution = false;
+    
     function __construct($id, $name, $email = null, $permissions = null, $userCampaignData = null) {
         $this->id = $id;
         $this->name = $name;
@@ -41,37 +44,39 @@ class User implements JsonSerializable {
         $this->email = $email;
     }
     
-    public static function setLoggedIn($user) {
-        $expiry = time() + 60*60*24*30;
+    public static function setLoggedIn($cookie) {
+        $expiry = time() + User::$TokenExpirySeconds;
         
-        setcookie("loggedInUserId", $user->id, $expiry, "/");
-        $_SESSION["isLoggedIn"] = true;
-        $_SESSION["user"] = $user;
+        setcookie("loggedInUserCookie", $cookie, $expiry, "/");
+        self::$loggedInThisExecution = true;
     }
     
     public static function getCurrentUser() {
-        if(!isset($_COOKIE["loggedInUserId"]))
+        if(!isset($_COOKIE["loggedInUserCookie"]))
             return null;
         
-        $userId = $_COOKIE["loggedInUserId"];
-        
-        if(!isset($_SESSION["user"]))
-            $_SESSION["user"] = UserMapper::getUserById($userId);
-        
-        return $_SESSION["user"];
+        return UserMapper::getUserByCookie($_COOKIE["loggedInUserCookie"]);
     }
     
     public static function isLoggedIn() {
-        if(isset($_SESSION["isLoggedIn"]))
-            return $_SESSION["isLoggedIn"];
+        if(self::$loggedInThisExecution)
+            return true;
         
-        return isset($_COOKIE["loggedInUserId"]) ? true : false;
+        return isset($_COOKIE["loggedInUserCookie"]) ? true : false;
     }
     
     public static function logout() {
-        setcookie("loggedInUserId", "", time() - 3600, "/");
-        $_SESSION["user"] = null;
-        $_SESSION["isLoggedIn"] = false;
+        setcookie("loggedInUserCookie", "", time() - 3600, "/");
+    }
+    
+    public static function clearOldLoginData() {    
+        // Originally I used UserIds as cookie values, which was a bad idea. This is here to force old users to login again using the new scheme.
+        // After all users have logged in since May 26, 2017, this function and it's call in Header.php can be removed.
+        if(isset($_COOKIE["loggedInUserId"])) {
+            setcookie("loggedInUserId", "", time() - 3600, "/");
+            $_SESSION["user"] = null;
+            $_SESSION["isLoggedIn"] = false;
+        }
     }
 }
 ?>
