@@ -21,7 +21,7 @@ var TerritoryDetailsDialogViewModel = function(user, currentCampaign, internalEn
     
     self.createdOnDate = ko.computed(function() {
         var entry = territoryEntry();
-        return entry ? DateTimeFormatter.formatDate(entry.createdOnDate()) : '';
+        return entry ? DateTimeFormatter.formatDateTime(entry.createdOnDate()) : '';
     });
     
     self.attackingPlayers = ko.computed(function() {

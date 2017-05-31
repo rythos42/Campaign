@@ -1,4 +1,23 @@
+Fixed tab issue when zoomed in on browser. Possibly better looking in lower resolutions too.
+Showing next time to attack when validation message displayed.
+Added time to Created On date in territory dialog.
+
 Next:
+- switch factions for a player  - drop down list in the PlayerListWidget
+- check how other sites do lists of information - my data lists are bugging me
+    - Change to top-aligned labels on: 
+        - Summary
+        - Territory dialog
+        - Give Materials To dialog
+        - Rename faction dialog
+        - Profile
+        - Edit Territory dialog (Create Campaign)
+        - Login
+- Create Campaign is left aligned weirdly
+- Create Campaign Map bigger than necessary
+- clear the map when moving between campaigns - looks weird to have the old map still up
+
+
 Run @ home:
     alter table User add column OneSignalUserId char(36)
     create table AuthorizationToken (
@@ -11,8 +30,6 @@ Run @ home:
     ) 
     
 Future:
-    - countdown to next move.
-    - doesn't look good at 1920x1080, zoomed by 125%
         
 Before a general release:
 - "Contact us"
@@ -23,10 +40,7 @@ Before a general release:
         if (password_verify(base64_encode(hash('sha256', $_POST['password'], true)), $stored)) { // Success :D } else { // Failure :( }
         "Won't truncate at 72 characters and is fully binary-safe, so early null bytes will not lead to security weaknesses."
     - or use https://github.com/paragonie/password_lock which appears to do the above.
-- for buying: group buy, or individual buy? 
-    Roll20: group buy, $5/month or $50/year.
 - Facebook OpenGraph image
-- some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
 - Password changing
     - invalidate all tokens for user when changing password
@@ -46,8 +60,6 @@ Credit:
     
 
 Far Future:
-- Multiple Campaigns:
-    - clear the map when moving between campaigns - looks weird to have the old map still up
 - Simple defects:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
@@ -56,16 +68,16 @@ Far Future:
     - push notifications likely sending when they shouldn't for simple
 - Administrator interface:
     - delete campaigns
-- Campaign Administrator interface:
-    - switch factions for a player  - drop down list in the PlayerListWidget
 - Purchase buys:
     - create campaign customization: set height, width, number of sectors on map, pick background image
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
-
-    - can I make the notification listified for multiple notifications coming in
+    - for buying: group buy, or individual buy? Roll20: group buy, $5/month or $50/year.
+- some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
+- can I make the notification listified for multiple notifications coming in
     - on notification display event, can add to a list of notifications. Just don't know if I want to add this to the UI right now.
+- consider helping user with good passwords: https://github.com/dropbox/zxcvbn
 - can't sort dates in Entry table - stupidtable holds onto table values when it shouldn't
     - maybe make an issue https://github.com/joequery/Stupid-Table-Plugin/issues/78
 - Materials on CreateEntry is for "spending", so should be more clear
@@ -76,7 +88,6 @@ Far Future:
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?
 - probably could delete "AttackingUserId", as territories now have multiple attackers. It's also a complete duplicate of CreatedByUserId right now.
-- might be able to get rid of TerritoryDetailsDialog
 - star on territory with tag when creating campaign
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple

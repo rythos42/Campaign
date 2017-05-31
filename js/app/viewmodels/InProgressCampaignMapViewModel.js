@@ -1,5 +1,5 @@
 /*exported InProgressCampaignMapViewModel */
-/*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour, Territory */
+/*globals _, ko, MapHelper, MapLegendViewModel, TerritoryDetailsDialogViewModel, DialogResult, Colour, Territory, Translation, DateTimeFormatter */
 var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign, internalEntryList, userCampaignData, reloadEvents) {
     var self = this,
         serverTerritories,
@@ -29,6 +29,17 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         lastCreatedDate.setDate(lastCreatedDate.getDate() + 1);
                 
         return lastCreatedDate > new Date();        
+    });
+    
+    self.nextEntryCreationTimeMessage = ko.computed(function() {
+        var userData = userCampaignData();
+        if(!userData)
+            return '';
+        
+        var lastCreatedDate = new Date(userData.LastCreatedEntryDate);
+        lastCreatedDate.setDate(lastCreatedDate.getDate() + 1);
+        
+        return Translation.getString('nextTimeToAttackIs').replace('{0}', DateTimeFormatter.formatDateTime(lastCreatedDate));
     });
     
     var canCurrentUserAttack = ko.computed(function() {

@@ -51,14 +51,14 @@ class InProgressCampaignViewModel {
                 ?>
             </div>
             <div class="row">
-                <div class="column">
+                <div class="column map-column">
                     <?php
                         $inProgressCampaignMapWidget = new InProgressCampaignMapWidget();
                         $inProgressCampaignMapWidget->render();
                     ?>
                 </div>
                 
-                <div data-bind="tab: {}" class="column ui-widget ui-corners-all ui-widget-content">
+                <div data-bind="tab: {}" class="tab-column column ui-widget ui-corners-all ui-widget-content">
                     <ul>
                         <li><a href="#SummaryTab">Summary</a></li>
                         <li><a href="#EntriesTab"><?php echo Translation::getString("entries"); ?></a></li>

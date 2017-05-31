@@ -27,11 +27,14 @@
 #InProgressCampaign .column {
     flex: 1;
     height: 768px;
-    width: 100%;
 }
 
-#InProgressCampaign .ui-tabs {
-    width: 346px;
+#InProgressCampaign .map-column {
+    width: 70%;
+}
+
+#InProgressCampaign .tab-column {
+    width: 30%;
     overflow: auto;
     margin-left: 5px;
 }
@@ -285,7 +288,6 @@ td.validationMessage {
     margin-top: 5px;
     border: 3px ridge grey;
     position: relative;
-    width: 1024px;
 }
 
 .loading-image {

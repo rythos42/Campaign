@@ -6,7 +6,7 @@ class InProgressCampaignMapWidget {
         <div data-bind="visible: showMap" class="ui-widget">
             <div class="map-data">
                 <span class="validationMessage" data-bind="visible: currentUserOutOfAttacks"><?php echo Translation::getString("youAreOutOfAttacks"); ?></span>
-                <span class="validationMessage" data-bind="visible: currentUserAttackedWithin24Hours"><?php echo Translation::getString("youCannotAttackOrDefendTwiceIn24Hours"); ?></span>
+                <span class="validationMessage" data-bind="visible: currentUserAttackedWithin24Hours, text: nextEntryCreationTimeMessage"></span>
                 <label><input type="checkbox" data-bind="checked: attackAnywhere, enable: hasAtLeastOneTerritoryBonus" /><?php echo Translation::getString("attackAnywhere"); ?></label>
                 <ul class="map-legend" data-bind="foreach: legendFactions">
                     <li class="ui-corner-all" data-bind="style: { 'background-color': colour }">
