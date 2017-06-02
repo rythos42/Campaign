@@ -1,22 +1,17 @@
-Fixed tab issue when zoomed in on browser. Possibly better looking in lower resolutions too.
-Showing next time to attack when validation message displayed.
-Added time to Created On date in territory dialog.
-
 Next:
+- TB needs big re-work
+    - Team pool
+    
+- if there are no FactionEntries when Finishing, it sets the OwningFactionId to empty. Should leave owner as-is.
+- Map stripe colour based on AttackingUserId -- if they person leaves the attack the colouring stays the same
+- If the attacking player leaves an attack, the defender is left hanging (in controlled scenario). 
+- Possible race-timing issue with loading/user OneSignal inside "setPushUserIdOnSubscriptionChange", OneSignal not defined
+  
+    
 - switch factions for a player  - drop down list in the PlayerListWidget
-- check how other sites do lists of information - my data lists are bugging me
-    - Change to top-aligned labels on: 
-        - Summary
-        - Territory dialog
-        - Give Materials To dialog
-        - Rename faction dialog
-        - Profile
-        - Edit Territory dialog (Create Campaign)
-        - Login
 - Create Campaign is left aligned weirdly
 - Create Campaign Map bigger than necessary
 - clear the map when moving between campaigns - looks weird to have the old map still up
-
 
 Run @ home:
     alter table User add column OneSignalUserId char(36)
@@ -42,8 +37,18 @@ Before a general release:
     - or use https://github.com/paragonie/password_lock which appears to do the above.
 - Facebook OpenGraph image
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
+    - each faction will need an "Admin"
+    - First admin is the person who made the campaign. They become admin after joining it.
 - Password changing
     - invalidate all tokens for user when changing password
+- More security:
+    - Limit number of attempts to login before locking.
+    - Consider dummy users in database
+- I am an MMO:
+    - the server is the sole source of truth in the world, client can be hacked. Or even timing issues.
+    - more verification on the server
+    - at the very least, need to check for timing issues and report back when something isn't as expected.
+    
             
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.

@@ -40,7 +40,7 @@
 }
 
 input[type="text"], input[type="password"], input[type="number"], select {
-    width: 140px;
+    width: 80%;
 }
 
 body {
@@ -71,7 +71,7 @@ li.entry-field,
 li.data-list,
 li.button-panel {
     width: 280px;
-    text-align: right;
+    text-align: left;
     vertical-align: top;
 }
 
@@ -82,20 +82,22 @@ li.button-panel {
 
 li.entry-field label,
 li.data-list label {
-    text-align: right;
-    vertical-align: top;
-    display: inline-block;
-    margin-bottom: 5px;
-    width: 130px;
-    font-size: 0.8em;
+    text-align: left;
+    display: block;
+    margin-top: 10px;
+    font-size: 0.7em;
+    font-weight: bold;
 }
 
 li.entry-field > span,
 li.data-list > span
 {
-    font-weight: bold;
-    width: 140px;
+    margin-left: 1em;
     display: inline-block;
+}
+
+#UserProfile li.data-list > span {
+    margin-left: 0;
 }
 
 li.entry-field > span.validationMessage {
@@ -109,18 +111,13 @@ li.entry-field > span.validationMessage {
     width: 260px;
 }
 
-.ui-dialog li.entry-field label,
-.ui-dialog li.data-list label {
-     width: 91px;
-}
-
 .ui-dialog li.entry-field input,
 .ui-dialog li.entry-field select {
-    width: 163px;
+    width: 260px;
 }
 
-.ui-dialog li.data-list > span {
-    width: 163px;
+.ui-tabs li.data-list {
+    width: 315px;
 }
 
 table {
@@ -276,8 +273,7 @@ td.validationMessage {
 .title {
     font-weight: bold;
     font-size: 18px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 15px;
 }
 
 .conditional {
@@ -370,14 +366,6 @@ td.validationMessage {
     padding: 0px; 
     background: none; 
     border: 0 !important;
-}
-
-.ui-tabs li.data-list {
-    width: 315px;
-}
-
-.ui-tabs li.data-list label {
-    width: 165px;
 }
 
 .ui-tabs .ui-tabs-nav { 
