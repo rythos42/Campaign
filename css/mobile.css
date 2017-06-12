@@ -21,6 +21,10 @@
         height: auto;
     }
     
+    #InProgressCampaign .map-column {
+        width: 100%;
+    }
+    
     #InProgressCampaign .ui-tabs {
         overflow: visible;
         width: 100%;
