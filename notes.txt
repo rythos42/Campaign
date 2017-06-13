@@ -6,7 +6,6 @@ Next:
 - Map stripe colour based on AttackingUserId -- if they person leaves the attack the colouring stays the same
 - If the attacking player leaves an attack, the defender is left hanging (in controlled scenario). 
 - Possible race-timing issue with loading/user OneSignal inside "setPushUserIdOnSubscriptionChange", OneSignal not defined
-- notifications directing to root of website, which is bad in production
     
 - switch factions for a player  - drop down list in the PlayerListWidget
 - Create Campaign is left aligned weirdly
@@ -25,6 +24,7 @@ Run @ home:
     ) 
     
 Future:
+- consider map library for maps http://leafletjs.com/
         
 Before a general release:
 - "Contact us"

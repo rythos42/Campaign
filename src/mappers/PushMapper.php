@@ -17,7 +17,8 @@ class PushMapper {
                 $territoryBeingAttackedIdOnMap,
                 $entryInformation->CampaignName)),
             'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId),
-            'data' => array('map' => true, 'entries' => true, 'players' => true)
+            'data' => array('map' => true, 'entries' => true, 'players' => true),
+            'url' => Server::getSiteUrl()
         )); 
     }
     
@@ -38,7 +39,8 @@ class PushMapper {
                 $territoryBeingAttackedIdOnMap,
                 $entryInformation->CampaignName)),
             'filters' => PushMapper::getFilterForCampaign($entryInformation->CampaignId),
-            'data' => array('map' => true, 'entries' => true, 'players' => true)
+            'data' => array('map' => true, 'entries' => true, 'players' => true),
+            'url' => Server::getSiteUrl()
         )); 
     }
     
@@ -51,7 +53,8 @@ class PushMapper {
             'app_id' => Settings::getOneSignalAppId(),
             'contents' => array('en' => sprintf(Translation::getString('aNewPhaseHasBegunIn'), $campaignName)),
             'filters' => PushMapper::getFilterForCampaign($campaignId),
-            'data' => array('players' => true, 'summary' => true)
+            'data' => array('players' => true, 'summary' => true),
+            'url' => Server::getSiteUrl()
         )); 
     }
     
@@ -75,7 +78,8 @@ class PushMapper {
                 $entryInformation->FactionName,
                 $entryInformation->CampaignName)),
             'filters' => PushMapper::getFilterForCampaign($campaignId),
-            'data' => array('map' => true, 'entries' => true, 'players' => true)
+            'data' => array('map' => true, 'entries' => true, 'players' => true),
+            'url' => Server::getSiteUrl()
         )); 
     }
     
@@ -88,7 +92,8 @@ class PushMapper {
             'app_id' => Settings::getOneSignalAppId(),
             'contents' => array('en' => sprintf(Translation::getString('entryDrawn'), $territoryBeingAttackedIdOnMap, $campaignName)),
             'filters' => PushMapper::getFilterForCampaign($campaignId),
-            'data' => array('map' => true, 'entries' => true)
+            'data' => array('map' => true, 'entries' => true),
+            'url' => Server::getSiteUrl()
         )); 
     }
     
