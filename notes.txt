@@ -5,12 +5,13 @@ Next:
 - if there are no FactionEntries when Finishing, it sets the OwningFactionId to empty. Should leave owner as-is.
 - Map stripe colour based on AttackingUserId -- if they person leaves the attack the colouring stays the same
 - If the attacking player leaves an attack, the defender is left hanging (in controlled scenario). 
-- Possible race-timing issue with loading/user OneSignal inside "setPushUserIdOnSubscriptionChange", OneSignal not defined
     
 - switch factions for a player  - drop down list in the PlayerListWidget
 - Create Campaign is left aligned weirdly
 - Create Campaign Map bigger than necessary
 - clear the map when moving between campaigns - looks weird to have the old map still up
+
+- should we restrict users to only one outstanding attacking at a time?
 
 Run @ home:
     alter table User add column OneSignalUserId char(36)

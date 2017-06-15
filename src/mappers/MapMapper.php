@@ -137,7 +137,12 @@ class MapMapper {
         }
 
         $dbAttackedTerritoryList = Database::queryArray(
-            "select IdOnMap, Faction.Colour, TerritoryPoint.X, TerritoryPoint.Y,
+            "select IdOnMap, TerritoryPoint.X, TerritoryPoint.Y,
+                (select Faction.Colour
+                    from FactionEntry
+                    join Faction on Faction.Id = FactionEntry.FactionId
+                    where FactionEntry.EntryId = Entry.Id
+                    limit 1) as Colour, -- don't care which faction colour, as when there are multiple it uses red, regardless
                 (select case count(*) when 0 then 0 else 1 end
                     from FactionEntry fe1 
                     join FactionEntry fe2 on fe2.EntryId = fe1.EntryId and fe2.FactionId != fe1.FactionId 
@@ -145,9 +150,6 @@ class MapMapper {
                 from Territory
                 join TerritoryPoint on TerritoryPoint.TerritoryId = Territory.Id
                 join Entry on Entry.TerritoryBeingAttackedIdOnMap = Territory.IdOnMap and Entry.CampaignId = Territory.CampaignId and Entry.FinishDate is null
-                left join User on User.Id = Entry.AttackingUserId
-                left join UserCampaignData on UserCampaignData.UserId = User.Id and UserCampaignData.CampaignId = Territory.CampaignId
-                left join Faction on Faction.Id = UserCampaignData.FactionId
                 where Territory.CampaignId = ?
                 order by TerritoryPoint.TerritoryId, TerritoryPoint.PointNumber",
                 [$campaignId]);
