@@ -2,10 +2,6 @@ Next:
 - TB needs big re-work
     - Team pool
     
-- if there are no FactionEntries when Finishing, it sets the OwningFactionId to empty. Should leave owner as-is.
-- Map stripe colour based on AttackingUserId -- if they person leaves the attack the colouring stays the same
-- If the attacking player leaves an attack, the defender is left hanging (in controlled scenario). 
-    
 - switch factions for a player  - drop down list in the PlayerListWidget
 - Create Campaign is left aligned weirdly
 - Create Campaign Map bigger than necessary

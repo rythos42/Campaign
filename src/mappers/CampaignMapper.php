@@ -168,15 +168,15 @@ class CampaignMapper {
                 Database::execute(
                     "UPDATE UserCampaignData SET TerritoryBonus = TerritoryBonus + 1 WHERE UserId = ? AND CampaignId = ?", 
                     [$winningFactionEntry->user->id, $campaignEntry->campaignId]);
+
+            if(Settings::hasOneSignalEnabled()) {
+                if(isset($winningFactionEntry))
+                    PushMapper::notifyEntryWon($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap, $winningFactionEntry);
+                else
+                    PushMapper::notifyEntryDraw($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap);
+            }
         }
         Database::execute("update Entry set FinishDate = ? where Id = ?", [date('Y-m-d H:i:s'), $campaignEntry->id]);
-        
-        if(Settings::hasOneSignalEnabled()) {
-            if(isset($winningFactionEntry))
-                PushMapper::notifyEntryWon($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap, $winningFactionEntry);
-            else
-                PushMapper::notifyEntryDraw($campaignEntry->campaignId, $campaignEntry->territoryBeingAttackedIdOnMap);
-        }
     }
     
     public static function getEntriesForCampaign($campaignId) {
