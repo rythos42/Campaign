@@ -190,6 +190,7 @@ var InProgressCampaignMapViewModel = function(navigation, user, currentCampaign,
         if(!campaign)
             return;
         
+        self.clearMap();
         loadMapImage(); // load when we set the current campaign
     });
     
