@@ -1,5 +1,5 @@
 /*exported CampaignSummaryStatsViewModel */
-/*globals ko, DateTimeFormatter, GiveTerritoryBonusToUserDialogViewModel, DialogResult, UserManager, FactionEntrySummaryViewModel */
+/*globals ko, DateTimeFormatter, GiveTerritoryBonusToUserDialogViewModel, DialogResult, UserManager */
 var CampaignSummaryStatsViewModel = function(user, currentCampaign, entryList, userCampaignData) {
     var self = this;
     
@@ -22,7 +22,7 @@ var CampaignSummaryStatsViewModel = function(user, currentCampaign, entryList, u
         return DateTimeFormatter.formatDate(userData.PhaseStartDate);
     });
     
-        self.availableTerritoryBonus = ko.computed(function() {
+    self.availableTerritoryBonus = ko.computed(function() {
         var userData = userCampaignData();
         return userData ? userData.TerritoryBonus : 0;
     });
@@ -52,23 +52,6 @@ var CampaignSummaryStatsViewModel = function(user, currentCampaign, entryList, u
         return (attacks > mandatoryAttacks)
             ? ((attacks - mandatoryAttacks) + '/' + optionalAttacks)
             : '0/' + optionalAttacks;
-    });
-                    
-    self.factionEntrySummaries = ko.computed(function() {
-        var factionEntrySummaries = {};
-        $.each(entryList(), function(i, entry) {
-            $.each(entry.factionEntries(), function(j, factionEntry) {
-                var factionId = factionEntry.faction().id();
-                if(!factionEntrySummaries[factionId])
-                    factionEntrySummaries[factionId] = new FactionEntrySummaryViewModel(factionEntry);
-                
-                var factionSummary = factionEntrySummaries[factionId];
-                factionSummary.addVictoryPoints(factionEntry.victoryPoints());
-            });
-        });
-        return $.map(factionEntrySummaries, function(factionEntrySummary) {
-            return factionEntrySummary;
-        });
     });
         
     self.showGiveTerritoryBonusDialog = function() {

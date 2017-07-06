@@ -70,6 +70,7 @@
         <removeFactionFromTerritory>Remove faction from territory.</removeFactionFromTerritory>
         <everyFactionMustHaveATerritory>Every faction must have a territory.</everyFactionMustHaveATerritory>
         <vps>VPs</vps>
+        <wld>W/L/D</wld>
         <whatTerritoryIsBeingAttacked>Where to attack?</whatTerritoryIsBeingAttacked>
         <finishEntryTitle>Finish Entry?</finishEntryTitle>
         <youWillBeUnableToEditAfterFinishing>You will be unable to edit this entry after you finish it.</youWillBeUnableToEditAfterFinishing>
@@ -137,5 +138,10 @@
         <aNewPhaseHasBegunIn>A new phase has begun in %s.</aNewPhaseHasBegunIn>
         <playerHasTakenTerritory>%s has taken territory #%d for %s in campaign %s.</playerHasTakenTerritory>
         <entryDrawn>Challenge for territory #%d in campaign %s was a draw.</entryDrawn>
+        <victoryType>Victory type</victoryType>
+        <w>W</w> <!-- Short form for "Win" on create entry page-->
+        <l>L</l> <!-- Short form for "Loss" on create entry page-->
+        <d>D</d> <!-- Short form for "Draw" on create entry page-->
+        <wldEntryRequiredValidation>Enter a result.</wldEntryRequiredValidation>
     </strings>
 </translation>

@@ -7,6 +7,7 @@ CREATE TABLE FactionEntry (
     UserId INT NOT NULL,
     VictoryPointsScored int,
     TerritoryBonusSpent int,
+    Wld varchar(1),
     PRIMARY KEY (Id),
     FOREIGN KEY FactionEntry_Entry (EntryId) REFERENCES Entry(Id),
     FOREIGN KEY FactionEntry_Faction (FactionId) REFERENCES Faction(Id),

@@ -48,7 +48,6 @@ return array(
         '//js/app/viewmodels/EntryListViewModel.js',
         '//js/app/viewmodels/InProgressCampaignViewModel.js',
         '//js/app/viewmodels/FactionEntryListItemViewModel.js',
-        '//js/app/viewmodels/FactionEntrySummaryViewModel.js',
         '//js/app/viewmodels/InProgressCampaignMapViewModel.js',
         '//js/app/viewmodels/MapLegendViewModel.js',
         '//js/app/viewmodels/CreateCampaignMapViewModel.js',

@@ -1,6 +1,7 @@
 Next:
-- TB needs big re-work
-    - Team pool
+- interface to allow faction admin to give away extra materials for their team
+    - notification somewhere that the faction admin has to do this
+- need to assign a Faction Admin for each Faction. 
     
 - switch factions for a player  - drop down list in the PlayerListWidget
 - Create Campaign is left aligned weirdly
@@ -17,7 +18,8 @@ Run @ home:
         Expires datetime not null,
         primary key (Id),
         foreign key AuthorizationToken_User (UserId) references User(Id)
-    ) 
+    )    
+    alter table FactionEntry add column Wld varchar(1)
     
 Future:
 - consider map library for maps http://leafletjs.com/

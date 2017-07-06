@@ -10,6 +10,7 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
     self.narrative = currentEntry.narrative;
     self.territoryOnMapId = currentEntry.territoryBeingAttackedIdOnMap;
     self.currentUserWroteNarrative = ko.observable(false);
+    self.victoryType = ko.observable('VPs');
     
     self.showCreateEntry = ko.computed(function() {
         return navigation.showCreateEntry();
@@ -17,19 +18,23 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
        
     self.factionEntries = ko.computed(function() {
         return $.map(currentEntry.factionEntries(), function(factionEntry) {
-            return new FactionEntryListItemViewModel(currentEntry, factionEntry, null, attackingAnywhere);
+            return new FactionEntryListItemViewModel(currentEntry, factionEntry, null, attackingAnywhere, null, self.victoryType);
         });
     });
         
     var isFactionEntryValid = ko.computed(function() {
         return _.reduce(self.factionEntries(), function(isValid, factionEntry) {
-            return isValid && factionEntry.victoryPoints.isValid() && factionEntry.territoryBonusSpent.isValid();
+            var hasVictoryEntry = factionEntry.victoryPoints.isValid() || factionEntry.wld.isValid();
+            return isValid && hasVictoryEntry && factionEntry.territoryBonusSpent.isValid();
         }, true);
     });
     
     var showTableValidationErrors = function() {
         _.each(self.factionEntries(), function(factionEntry) { 
-            factionEntry.victoryPoints.isModified(true);
+            if(factionEntry.isVPs())
+                factionEntry.victoryPoints.isModified(true);
+            else if(factionEntry.isWLD())
+                factionEntry.wld.isModified(true);
             factionEntry.territoryBonusSpent.isModified(true);
         });
     };
@@ -61,6 +66,14 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
             return false;
         
         return !self.isReadOnly() && userData.IsAdmin;
+    });
+    
+    self.isVPs = ko.computed(function() {
+        return self.victoryType() === 'VPs';
+    });
+    
+    self.isWLD = ko.computed(function() {
+        return self.victoryType() === 'WLD';
     });
     
     self.finish = function() {
@@ -127,7 +140,12 @@ var CreateEntryViewModel = function(user, navigation, currentCampaign, userCampa
         if(parameter) {
             navigation.parameters(null);
             currentEntry.copyFrom(parameter);
-            self.factionEntries()[0].victoryPointsHasFocus(true);
+            
+            var firstFactionEntry = self.factionEntries()[0],
+                isWld = firstFactionEntry.wld();
+            
+            self.victoryType(isWld ? 'WLD' : 'VPs');
+            firstFactionEntry[isWld ? 'wldHasFocus' : 'victoryPointsHasFocus'](true);
         }
         else {
             currentEntry.clear();

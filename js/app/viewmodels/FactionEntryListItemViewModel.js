@@ -1,9 +1,14 @@
 /*exported FactionEntryListItemViewModel */
 /*globals ko, Translation */
-var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere, territory) {
+var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadEvents, attackingAnywhere, territory, victoryType) {
     var self = this;
     
     self.victoryPointsHasFocus = ko.observable(false);
+    self.wldHasFocus = ko.observable(false);
+
+    self.wld = factionEntry.wld.extend({
+        required: { message: Translation.getString('wldEntryRequiredValidation') }
+    });
     
     self.factionName = ko.computed(function() {
         var faction = factionEntry.faction();
@@ -22,7 +27,7 @@ var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadE
     self.victoryPoints = factionEntry.victoryPoints.extend({
         required: { message: Translation.getString('victoryPointsEntryRequiredValidation') }
     });
-    
+       
     self.territoryBonusSpent = factionEntry.territoryBonusSpent.extend({
         min: { 
             params: ko.computed(function() { return attackingAnywhere() ? 1 : 0; }), 
@@ -41,6 +46,14 @@ var FactionEntryListItemViewModel = function(currentEntry, factionEntry, reloadE
     self.isAttackingUser = ko.computed(function() {
         var attackingUser = currentEntry.attackingUser();
         return attackingUser ? currentEntry.attackingUser().id() === factionEntry.user().id() : false;
+    });
+    
+    self.isVPs = ko.computed(function() {
+        return victoryType && victoryType() === 'VPs';
+    });
+    
+    self.isWLD = ko.computed(function() {
+        return victoryType && victoryType() === 'WLD';
     });
     
     self.removeFactionEntry = function() {

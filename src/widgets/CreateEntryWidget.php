@@ -7,12 +7,24 @@ class CreateEntryWidget {
             <div data-bind="visible: isFinished"><?php echo Translation::getString("entryFinishedTooltip"); ?></div>
             <div data-bind="visible: !hasJoinedCampaign()"><?php echo Translation::getString("entryJoinToEdit"); ?></div>
             <div><?php echo Translation::getString("attackingTerritory"); ?> #<span data-bind="text: territoryOnMapId"></span></div>
+            <div data-bind="visible: !isReadOnly()">
+                <label><?php echo Translation::getString("victoryType"); ?>: </label>
+                <label><input type="radio" name="InputType" value="VPs" data-bind="checked: victoryType"><?php echo Translation::getString("vps"); ?></label>
+                <label><input type="radio" name="InputType" value="WLD" data-bind="checked: victoryType"><?php echo Translation::getString("wld"); ?></label>
+            </div>
             <table data-bind="visible: hasFactionEntries" class="ui-widget ui-corners-all ui-widget-content">
                 <thead>
                     <tr>
                         <th><?php echo Translation::getString("faction"); ?></th>
                         <th><?php echo Translation::getString("user"); ?></th>
-                        <th><?php echo Translation::getString("vps"); ?></th>
+                        <th>
+                            <!-- ko if: isVPs -->
+                            <?php echo Translation::getString("vps"); ?>
+                            <!-- /ko-->
+                            <!-- ko if: isWLD -->
+                            <?php echo Translation::getString("wld"); ?>
+                            <!-- /ko-->
+                        </th>
                         <th data-bind="visible: isMapCampaign"><?php echo Translation::getString("bonus"); ?></th>
                         <th></th>
                     </tr>
@@ -22,7 +34,17 @@ class CreateEntryWidget {
                         <td data-bind="text: factionName" />
                         <td data-bind="text: username" />
                         <td>
+                            <!-- ko if: isVPs -->
                             <input type="number" data-bind="textInput: victoryPoints, enable: !$parent.isReadOnly(), hasFocus: victoryPointsHasFocus" />
+                            <!-- /ko-->
+                            <!-- ko if: isWLD -->
+                            <div data-bind="validationOptions: { insertMessages: false }">
+                                <label><input type="radio" value="W" data-bind="checked: wld, attr: { name: 'WinLossDraw-' + $index() }, enable: !$parent.isReadOnly(), hasFocus: wldHasFocus"><?php echo Translation::getString("w"); ?></label>
+                                <label><input type="radio" value="L" data-bind="checked: wld, attr: { name: 'WinLossDraw-' + $index() }, enable: !$parent.isReadOnly()"><?php echo Translation::getString("l"); ?></label>
+                                <label><input type="radio" value="D" data-bind="checked: wld, attr: { name: 'WinLossDraw-' + $index() }, enable: !$parent.isReadOnly()"><?php echo Translation::getString("d"); ?></label>
+                                <span data-bind="validationMessage: wld" class="validationMessage"></span>
+                            </div>
+                            <!-- /ko-->
                         </td>
                         <td data-bind="visible: $parent.isMapCampaign">
                             <input type="number" data-bind="textInput: territoryBonusSpent, enable: !$parent.isReadOnly()" />

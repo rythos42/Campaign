@@ -6,6 +6,7 @@ var FactionEntry = function(faction, user, serverFactionEntry) {
     self.faction = ko.observable(faction ? faction : undefined);
     self.user = ko.observable(user ? user : undefined);
     self.victoryPoints = ko.observable(serverFactionEntry ? serverFactionEntry.VictoryPointsScored : undefined);
+    self.wld = ko.observable(serverFactionEntry ? serverFactionEntry.Wld : undefined);
     self.territoryBonusSpent = ko.observable(serverFactionEntry ? serverFactionEntry.TerritoryBonusSpent : undefined);
     
     self.clone = function() {

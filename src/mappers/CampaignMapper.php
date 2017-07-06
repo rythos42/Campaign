@@ -53,12 +53,12 @@ class CampaignMapper {
             
             if(isset($factionEntry->id)) {
                 Database::execute(
-                    "update FactionEntry set FactionId = ?, UserId = ?, VictoryPointsScored = ?, TerritoryBonusSpent = ? where Id = ?",
-                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpent, $factionEntry->id]);
+                    "update FactionEntry set FactionId = ?, UserId = ?, VictoryPointsScored = ?, Wld = ?, TerritoryBonusSpent = ? where Id = ?",
+                    [$factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->wld, $territoryBonusSpent, $factionEntry->id]);
             } else {
                 Database::execute(
                     "insert into FactionEntry (EntryId, FactionId, UserId, VictoryPointsScored, TerritoryBonusSpent) values (?, ?, ?, ?, ?)", 
-                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $territoryBonusSpent]);
+                    [$campaignEntryId, $factionEntry->faction->id, $factionEntry->user->id, $factionEntry->victoryPoints, $factionEntry->wld, $territoryBonusSpent]);
                 $factionEntry->id = Database::getLastInsertedId();
             }
         }
@@ -149,10 +149,10 @@ class CampaignMapper {
                 }
                     
                 // Determine who won
-                if($factionEntry->victoryPoints > $winningVictoryPoints) {
+                if((isset($factionEntry->victoryPoints) && $factionEntry->victoryPoints > $winningVictoryPoints) || (isset($factionEntry->wld) && $factionEntry->wld === 'W')) {
                     $winningFactionEntry = $factionEntry;
                     $winningVictoryPoints = $factionEntry->victoryPoints;
-                } else if($factionEntry->victoryPoints == $winningVictoryPoints) {
+                } else if((isset($factionEntry->victoryPoints) && $factionEntry->victoryPoints == $winningVictoryPoints) || (isset($factionEntry->wld) && $factionEntry->wld === 'D')) {
                     $winningFactionEntry = null; // draw, no one is winning
                 }
             }
