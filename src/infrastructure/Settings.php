@@ -33,5 +33,10 @@ class Settings {
     public static function hasOneSignalEnabled() {
         return Settings::getOneSignalAppId() && Settings::getOneSignalRestApiKey();
     }
+    
+    public static function getOpenGraphImageUrl() {
+        global $settings;
+        return $settings['openGraphImageUrl'];
+    }
 }
 ?>

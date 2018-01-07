@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rythos42/Campaign.git"
+  },
+  "dependencies": {
+    "grunt-cli": "^1.2.0"
   }
 }

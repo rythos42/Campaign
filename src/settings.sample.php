@@ -8,4 +8,5 @@ $settings['installDirOnWebServer'] = '';
 $settings['siteSubDir'] = '';
 $settings['oneSignalAppId'] = null;
 $settings['oneSignalRestApiKey'] = null;
+$settings['openGraphImageUrl'] = null;
 ?>
