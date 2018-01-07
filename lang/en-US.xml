@@ -145,6 +145,6 @@
         <wldEntryRequiredValidation>Enter a result.</wldEntryRequiredValidation>
         <help>Help</help>
         <contactUs>Contact Us</contactUs>
-        <contactUsDialogText>&lt;i&gt;Campaign&lt;/i&gt; designed and developed primarily by &lt;a href="mailto:rythos42@gmail.com"&gt;Craig Fleming&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Feel free to contact me about issues or ideas you have!&lt;br /&gt;&lt;br /&gt;Pull requests graciously discussed and accepted on &lt;a href="https://github.com/rythos42/Campaign"&gt;GitHub!&lt;/a&gt;</contactUsDialogText>
+        <contactUsDialogText>&lt;i&gt;Campaign&lt;/i&gt; designed and developed primarily by &lt;a href="mailto:rythos42@gmail.com"&gt;Craig Fleming&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Feel free to contact me about issues or ideas you have!&lt;br /&gt;&lt;br /&gt;Pull requests graciously discussed and accepted on &lt;a href="https://github.com/rythos42/Campaign" target="_blank"&gt;GitHub!&lt;/a&gt;</contactUsDialogText>
     </strings>
 </translation>
