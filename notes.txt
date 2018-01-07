@@ -1,12 +1,12 @@
 Next:
-- "Contact us"
 - Account recovery, since we mention it on the e-mail thing.
 - for buying: group buy, or individual buy? 
     Roll20: group buy, $5/month or $50/year.
     - some kind of trial to get people hooked
     - $5/month to have a non-Simple campaign?
-- Facebook OpenGraph image
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
+- add a Help to the ?
+- add a Credits to the ?
     
        
 Future:
@@ -37,7 +37,7 @@ Credit:
 - Background: https://www.wallpapersafari.com/w/2u7eq0
 - Background: http://www.wallpapersxl.com/wallpaper/1024x768/red-stars-full-hd-space-blue-635630.html
 - RealFaviconGenerator: http://realfavicongenerator.net/
-    
+- OpenGraph image http://maxpixel.freegreatpicture.com/Space-Globe-Earth-Moon-Solar-System-Orbit-Planet-581239
 
 Far Future:
 - if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used
