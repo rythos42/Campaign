@@ -10,9 +10,6 @@
 .icon-user-tie:before {
   content: "\e976";
 }
-.icon-cog:before {
-  content: "\e994";
-}
 .icon-bin:before {
   content: "\e9ac";
 }
@@ -21,6 +18,9 @@
 }
 .icon-star-full:before {
   content: "\e9d9";
+}
+.icon-question:before {
+  content: "\ea09";
 }
 .icon-plus:before {
   content: "\ea0a";
@@ -37,7 +37,6 @@
 .icon-exit:before {
   content: "\ea14";
 }
-.icon-arrow-left2:before {
-  content: "\ea40";
+.icon-arrow-left:before {
+  content: "\ea38";
 }
-

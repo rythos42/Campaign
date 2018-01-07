@@ -65,7 +65,9 @@ return array(
         '//js/app/viewmodels/TerritoryListViewModel.js',
         '//js/app/viewmodels/TerritoryListItemViewModel.js',
         '//js/app/viewmodels/CampaignSummaryStatsViewModel.js',
-        '//js/app/viewmodels/RenameFactionDialogViewModel.js'
+        '//js/app/viewmodels/RenameFactionDialogViewModel.js',
+        '//js/app/viewmodels/HelpViewModel.js',
+        '//js/app/viewmodels/SimpleTextDialogWidget.js'
         ),
     'lib' => array(
         '//js/lib/knockout-jqAutocomplete.min.js',

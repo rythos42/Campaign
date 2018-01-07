@@ -30,6 +30,27 @@ class HeaderWidget {
                 <span class="icon-exit"></span>
             </button>
             <!-- /ko -->
+            <!-- ko with: helpViewModel -->
+            <button data-jq-dropdown="#HelpMenu" class="ui-button ui-widget ui-corner-all button-icon" data-bind="tooltip: '<?php echo Translation::getString("help"); ?>'">
+                <span class="icon-question"></span>
+            </button>
+            <div id="HelpMenu" data-bind="hideTooltipOnShow: {}" class="ui-widget jq-dropdown jq-dropdown-tip jq-dropdown-relative" style="display: none;">
+                <ul class="jq-dropdown-menu">
+                    <li><input type="button" data-bind="click: showContactUs" value="<?php echo Translation::getString("contactUs"); ?>" /></li>
+                </ul>
+            </div>
+                <!-- ko with: contactUsViewModel -->
+                <?php
+                    $contactUsDialogWidget = new SimpleTextDialogWidget();
+                    $contactUsDialogWidget->render(
+                        Translation::getString("contactUs"),
+                        Translation::getString("contactUsDialogText"),
+                        Translation::getString("ok"),
+                        600
+                    );
+                ?>
+                <!-- /ko -->
+            <!-- /ko -->
         </div>
         <?php
     }

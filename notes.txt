@@ -1,59 +1,36 @@
 Next:
-- interface to allow faction admin to give away extra materials for their team
-    - notification somewhere that the faction admin has to do this
-- need to assign a Faction Admin for each Faction. 
-    
-- switch factions for a player  - drop down list in the PlayerListWidget
-- Create Campaign is left aligned weirdly
-- Create Campaign Map bigger than necessary
-
-- should we restrict users to only one outstanding attacking at a time?
-
-Run @ home:
-    alter table User add column OneSignalUserId char(36)
-    create table AuthorizationToken (
-        Id int not null AUTO_INCREMENT,
-        HashedToken char(64) not null,
-        UserId int not null,
-        Expires datetime not null,
-        primary key (Id),
-        foreign key AuthorizationToken_User (UserId) references User(Id)
-    )    
-    alter table FactionEntry add column Wld varchar(1)
-    
-Future:
-- consider map library for maps http://leafletjs.com/
-        
-Before a general release:
 - "Contact us"
 - Account recovery, since we mention it on the e-mail thing.
-    - after doing account recovery, update password storing scheme and reset all passwords in the system
-    - make sure all users have e-mails set up    
-        $stored = password_hash(base64_encode(hash('sha256', $_POST['password'], true)), PASSWORD_DEFAULT);
-        if (password_verify(base64_encode(hash('sha256', $_POST['password'], true)), $stored)) { // Success :D } else { // Failure :( }
-        "Won't truncate at 72 characters and is fully binary-safe, so early null bytes will not lead to security weaknesses."
-    - or use https://github.com/paragonie/password_lock which appears to do the above.
+- for buying: group buy, or individual buy? 
+    Roll20: group buy, $5/month or $50/year.
+    - some kind of trial to get people hooked
+    - $5/month to have a non-Simple campaign?
 - Facebook OpenGraph image
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
-    - each faction will need an "Admin"
-    - First admin is the person who made the campaign. They become admin after joining it.
-- Password changing
-    - invalidate all tokens for user when changing password
-- More security:
-    - Limit number of attempts to login before locking.
-    - Consider dummy users in database
-- I am an MMO:
-    - the server is the sole source of truth in the world, client can be hacked. Or even timing issues.
-    - more verification on the server
-    - at the very least, need to check for timing issues and report back when something isn't as expected.
     
-            
+       
+Future:
+    - Changed map interface:
+        - map is full screen (ensure looks good at different browser sizes)
+        - interface is hovered overlay over map, and goes visible/transparent when you hover/don't hover over it
+    - change button to say "Attack" if unowned
+    - Login
+        - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
+        - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
+    - show "being attacked" on map legend
+    - countdown to next move.
+    - Materials on CreateEntry is for "spending", so should be more clear
+    - doesn't look good at 1920x1080, zoomed by 125%
+    - could move map validations to summary tab
+    - groupsConfig.php is dumb
+                  
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.
     - An Entry is associated with a Campaign - Campaigns will have many Entries. An Entry contains many FactionEntries, which are the standings of each Faction in the Entry.
     - TerritoryBonus is a generic term for "materials" in the current UI. I didn't want to update all of the code to say "materials", in case we theme this for another settings in the future.
     - Tags can be used for any kind of information on territories - bonus', required points values, suggested terrain.
     - To insert administrative news: insert into News (News) VALUES ('Mores news');
+    - When Admin wants to save news as part of a game they are playing, they need to check "I wrote this", which is only visible to admin.
 
 Credit: 
 - Random map algorithm: https://github.com/sroze/PHP-Voronoi-algorithm
@@ -63,34 +40,31 @@ Credit:
     
 
 Far Future:
+- if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used
+- some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
+- Multiple Campaigns:
+    - clear the map when moving between campaigns - looks weird to have the old map still up
 - Simple defects:
     - hide Attack button for Simple until joined
     - hide map area for Simple, entirely
     - put Simple Attack button just on its own?
     - loading UI always shown on Simple campaign, because it never loads the map
-    - push notifications likely sending when they shouldn't for simple
 - Administrator interface:
     - delete campaigns
+- Campaign Administrator interface:
+    - switch factions for a player  - drop down list in the PlayerListWidget
 - Purchase buys:
     - create campaign customization: set height, width, number of sectors on map, pick background image
     - choose colours for faction
     - interface themes for you and your fellow gamers
     - allow campaign creator to try different map images and select one as the default for the campaign
-    - for buying: group buy, or individual buy? Roll20: group buy, $5/month or $50/year.
-- some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
-- can I make the notification listified for multiple notifications coming in
-    - on notification display event, can add to a list of notifications. Just don't know if I want to add this to the UI right now.
-- consider helping user with good passwords: https://github.com/dropbox/zxcvbn
-- can't sort dates in Entry table - stupidtable holds onto table values when it shouldn't
-    - maybe make an issue https://github.com/joequery/Stupid-Table-Plugin/issues/78
-- Materials on CreateEntry is for "spending", so should be more clear
-- show "being attacked" on map legend
 - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
     - this seems pretty difficult to do, so added Created On date for the dialog instead
 - "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?
 - probably could delete "AttackingUserId", as territories now have multiple attackers. It's also a complete duplicate of CreatedByUserId right now.
+- might be able to get rid of TerritoryDetailsDialog
 - star on territory with tag when creating campaign
 - is there a way I can allow in-faction fighting? Since you have to click a territory to attack it doesn't super work?
 - icon noting which campaigns are map and which are simple
