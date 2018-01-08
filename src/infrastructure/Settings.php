@@ -38,5 +38,15 @@ class Settings {
         global $settings;
         return $settings['openGraphImageUrl'];
     }
+    
+    public static function getOpenGraphImageWidth() {
+        global $settings;
+        return $settings['openGraphImageWidth'];
+    }
+    
+    public static function getOpenGraphImageHeight() {
+        global $settings;
+        return $settings['openGraphImageHeight'];
+    }
 }
 ?>

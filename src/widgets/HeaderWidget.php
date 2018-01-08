@@ -45,8 +45,7 @@ class HeaderWidget {
                     $contactUsDialogWidget->render(
                         Translation::getString("contactUs"),
                         Translation::getString("contactUsDialogText"),
-                        Translation::getString("ok"),
-                        600
+                        Translation::getString("ok")
                     );
                 ?>
                 <!-- /ko -->

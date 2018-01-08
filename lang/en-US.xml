@@ -146,5 +146,7 @@
         <help>Help</help>
         <contactUs>Contact Us</contactUs>
         <contactUsDialogText>&lt;i&gt;Campaign&lt;/i&gt; designed and developed primarily by &lt;a href="mailto:rythos42@gmail.com"&gt;Craig Fleming&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Feel free to contact me about issues or ideas you have!&lt;br /&gt;&lt;br /&gt;Pull requests graciously discussed and accepted on &lt;a href="https://github.com/rythos42/Campaign" target="_blank"&gt;GitHub!&lt;/a&gt;</contactUsDialogText>
+        <siteTitle>Campaign</siteTitle>
+        <siteDescription>Campaign is a web app that provides a map and a game-like structure to play a map-based campaign in any tabletop wargame game. Play your games in real life, and log them in Campaign, and watch as your faction claims territory for your own as you destroy your opponent!</siteDescription>
     </strings>
 </translation>

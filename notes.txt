@@ -4,9 +4,11 @@ Next:
     Roll20: group buy, $5/month or $50/year.
     - some kind of trial to get people hooked
     - $5/month to have a non-Simple campaign?
+    - AdSense -- https://www.google.com/adsense/start/#/?modal_active=none
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
 - add a Help to the ?
 - add a Credits to the ?
+- make campaign.geeksong.com work
     
        
 Future:

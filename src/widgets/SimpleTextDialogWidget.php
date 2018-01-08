@@ -1,8 +1,8 @@
 <?php
 class SimpleTextDialogWidget {
-    public function render($title, $text, $hideDialogText, $width) {
+    public function render($title, $text, $hideDialogText) {
         ?>
-        <div data-bind="dialog: { title: '<?php echo $title; ?>', width: <?php echo $width; ?>}, dialogOpenClose: dialogOpenClose" style="display: none;">
+        <div data-bind="dialog: { title: '<?php echo $title; ?>'}, dialogOpenClose: dialogOpenClose" style="display: none;">
             <ul>
                 <li>
                     <div><?php echo $text; ?></div>

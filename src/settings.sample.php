@@ -9,4 +9,6 @@ $settings['siteSubDir'] = '';
 $settings['oneSignalAppId'] = null;
 $settings['oneSignalRestApiKey'] = null;
 $settings['openGraphImageUrl'] = null;
+$settings['openGraphImageWidth'] = 640;
+$settings['openGraphImageHeight'] = 360;
 ?>
