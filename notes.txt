@@ -7,9 +7,7 @@ Next:
     - AdSense -- https://www.google.com/adsense/start/#/?modal_active=none
 - In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
 - add a Help to the ?
-- add a Credits to the ?
 - make campaign.geeksong.com work
-    
        
 Future:
     - Changed map interface:
@@ -33,13 +31,6 @@ Terms and Admin Help:
     - Tags can be used for any kind of information on territories - bonus', required points values, suggested terrain.
     - To insert administrative news: insert into News (News) VALUES ('Mores news');
     - When Admin wants to save news as part of a game they are playing, they need to check "I wrote this", which is only visible to admin.
-
-Credit: 
-- Random map algorithm: https://github.com/sroze/PHP-Voronoi-algorithm
-- Background: https://www.wallpapersafari.com/w/2u7eq0
-- Background: http://www.wallpapersxl.com/wallpaper/1024x768/red-stars-full-hd-space-blue-635630.html
-- RealFaviconGenerator: http://realfavicongenerator.net/
-- OpenGraph image http://maxpixel.freegreatpicture.com/Space-Globe-Earth-Moon-Solar-System-Orbit-Planet-581239
 
 Far Future:
 - if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used

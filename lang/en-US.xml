@@ -145,8 +145,29 @@
         <wldEntryRequiredValidation>Enter a result.</wldEntryRequiredValidation>
         <help>Help</help>
         <contactUs>Contact Us</contactUs>
-        <contactUsDialogText>&lt;i&gt;Campaign&lt;/i&gt; designed and developed primarily by &lt;a href="mailto:rythos42@gmail.com"&gt;Craig Fleming&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Feel free to contact me about issues or ideas you have!&lt;br /&gt;&lt;br /&gt;Pull requests graciously discussed and accepted on &lt;a href="https://github.com/rythos42/Campaign" target="_blank"&gt;GitHub!&lt;/a&gt;</contactUsDialogText>
+        <contactUsDialogText>
+            <![CDATA[
+                <p>
+                    <i>Campaign</i> designed and developed primarily by <a href="mailto:rythos42@gmail.com">Craig Fleming</a>. Feel free to contact me about issues or ideas you have!
+                </p>
+                <p>               
+                    Pull requests graciously discussed and accepted on <a href="https://github.com/rythos42/Campaign" target="_blank">GitHub!</a>
+                </p>
+            ]]>
+         </contactUsDialogText>
         <siteTitle>Campaign</siteTitle>
         <siteDescription>Campaign is a web app that provides a map and a game-like structure to play a map-based campaign in any tabletop wargame game. Play your games in real life, and log them in Campaign, and watch as your faction claims territory for your own as you destroy your opponent!</siteDescription>
+        <credits>Credits</credits>
+        <creditsDialogText>
+            <![CDATA[
+                <ul>
+                    <li><a href="https://github.com/sroze/PHP-Voronoi-algorithm" target="_blank">Random Map Algorithm</a></li>
+                    <li><a href="https://www.wallpapersafari.com/w/2u7eq0" target="_blank">Map</a></li>
+                    <li><strikethrough><a href="http://www.wallpapersxl.com/wallpaper/1024x768/red-stars-full-hd-space-blue-635630.html" target="_blank">Map</a></strikethrough> - no longer available</li>
+                    <li><a href="http://realfavicongenerator.net" target="_blank">RealFaviconGenerator</a></li>
+                    <li><a href="http://maxpixel.freegreatpicture.com/Space-Globe-Earth-Moon-Solar-System-Orbit-Planet-581239" target="_blank">OpenGraph Image</a></li>
+                </ul>
+            ]]>
+        </creditsDialogText>
     </strings>
 </translation>
