@@ -142,7 +142,7 @@ class UserMapper {
         Translation::loadTranslationFiles(Server::getFullPath() . "/lang");
         $to = $email;
         $subject = Translation::getString("resetPasswordEmailSubject");
-        $message = sprintf(Translation::getString("resetPasswordEmailBody", $randomPassword);
+        $message = sprintf(Translation::getString("resetPasswordEmailBody"), $randomPassword);
         $from = Settings::getSystemFromEmailAddress();
         $headers = "From: $from\r\nReply-To: $from\r\nX-Mailer: PHP/" . phpversion();
         mail($to, $subject, $message, $headers);

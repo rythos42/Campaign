@@ -41,8 +41,8 @@ switch($action) {
         
     case "ForgotPassword":
         $username = $_REQUEST["username"];
-        return UserMapper::forgotPassword($username);
-        break;
+        echo UserMapper::forgotPassword($username);
+        return;
 }
 
 if(!User::isLoggedIn())
