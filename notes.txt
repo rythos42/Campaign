@@ -1,5 +1,4 @@
 Next:
-- back button missing on Profile
 - no way to change password
 - news doesn't always load on first load
 Help
