@@ -1,14 +1,18 @@
 Next:
-- Account recovery, since we mention it on the e-mail thing.
-- for buying: group buy, or individual buy? 
-    Roll20: group buy, $5/month or $50/year.
-    - some kind of trial to get people hooked
-    - $5/month to have a non-Simple campaign?
+- back button missing on Profile
+- no way to change password
+- news doesn't always load on first load
+Help
+    - seperate "our rules" from "Campaign rules"
+    - figure out how to seperate "Campaign rules" into a linkable document
+    - link from Campaign
+Remuneration:
+    - in-app video ads between certain actions
+    - $1/month to remove
+    - $5/month to remove ads and to provide system benefits
     - AdSense -- https://www.google.com/adsense/start/#/?modal_active=none
-- In the rules document, create a new document that outlines what is "in the system" and what isn't, so admins can make their own rules.
-- add a Help to the ?
-- make campaign.geeksong.com work
-       
+
+    
 Future:
     - Changed map interface:
         - map is full screen (ensure looks good at different browser sizes)
@@ -23,6 +27,8 @@ Future:
     - doesn't look good at 1920x1080, zoomed by 125%
     - could move map validations to summary tab
     - groupsConfig.php is dumb
+    - combine "installDirOnWebServer" and "siteSubDir", since they seem to be the same?
+    - make campaign.geeksong.com work
                   
 Terms and Admin Help:
     - A Campaign is something created to be played in. A Campaign contains Factions.

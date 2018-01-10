@@ -11,4 +11,5 @@ $settings['oneSignalRestApiKey'] = null;
 $settings['openGraphImageUrl'] = null;
 $settings['openGraphImageWidth'] = 640;
 $settings['openGraphImageHeight'] = 360;
+$settings['systemFromEmailAddress'] = 'sample@hotmail.com';
 ?>

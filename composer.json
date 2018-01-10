@@ -1,6 +1,7 @@
 {
     "require": {
         "mrclay/minify": "~3.0.0",
-        "paragonie/random_compat": "^2.0"
+        "paragonie/random_compat": "^2.0",
+        "ircmaxell/random-lib": "^1.2"
     }
 }

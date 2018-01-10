@@ -48,5 +48,10 @@ class Settings {
         global $settings;
         return $settings['openGraphImageHeight'];
     }
+    
+    public static function getSystemFromEmailAddress() {
+        global $settings;
+        return $settings['systemFromEmailAddress'];
+    }
 }
 ?>

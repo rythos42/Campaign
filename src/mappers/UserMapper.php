@@ -125,5 +125,29 @@ class UserMapper {
     public static function getAllJoinedCampaignIds($userId) {
         return Database::queryScalarList("select CampaignId from UserCampaignData where UserId = ?", [$userId]);
     }
+    
+    public static function forgotPassword($username) {
+        $email = Database::queryScalar("select Email from User where Username = ?", [$username]);
+        if(!$email)
+            return false;
+        
+        // generate a cryptographically secure random password and update the users password to be it
+        $factory = new RandomLib\Factory;
+        $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
+        $randomPassword = $generator->generateString(8);    // password length
+        $passwordHash = password_hash($randomPassword, PASSWORD_DEFAULT);
+        Database::execute("update User set PasswordHash = ? where Username = ?", [$passwordHash, $username]);
+        
+        // send the e-mail
+        Translation::loadTranslationFiles(Server::getFullPath() . "/lang");
+        $to = $email;
+        $subject = Translation::getString("resetPasswordEmailSubject");
+        $message = sprintf(Translation::getString("resetPasswordEmailBody", $randomPassword);
+        $from = Settings::getSystemFromEmailAddress();
+        $headers = "From: $from\r\nReply-To: $from\r\nX-Mailer: PHP/" . phpversion();
+        mail($to, $subject, $message, $headers);
+        
+        return true;
+    }
 }
 ?>

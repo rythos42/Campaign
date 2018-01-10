@@ -3,7 +3,7 @@
 include("../Header.php");
 $action = $_REQUEST['action'];
         
-// these two actions don't need to be logged in to occur
+// these actions don't need to be logged in to occur
 switch($action) {
     case "RegisterAndLogin":
         try {
@@ -29,11 +29,19 @@ switch($action) {
             else {
                 http_response_code(401);
                 echo ExceptionCodes::LoginFailure;
+                return;
             }
         } catch(Exception $e) {
             http_response_code(401);
             echo ExceptionCodes::LoginFailure;
+            error_log($e);
+            return;
         }
+        break;
+        
+    case "ForgotPassword":
+        $username = $_REQUEST["username"];
+        return UserMapper::forgotPassword($username);
         break;
 }
 
