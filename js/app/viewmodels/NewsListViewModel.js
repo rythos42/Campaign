@@ -3,15 +3,20 @@
 var NewsListViewModel = function(user, navigation) {
     var self = this,
         internalNewsItems = ko.observableArray(),
-        today = new Date(),
-        month = today.getMonth(),
-        date = today.getDate();
+        lastLoadedDate;
 
-    month = month + 1 < 10 ? '0' + (month + 1) : month + 1;
-    date = date < 10 ? '0' + date : date;
-    var lastLoadedDate = today.getFullYear() + '-' + month + '-' + date + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-        
     self.reachedEndOfNews = ko.observable(false);
+
+    function resetLastLoadedDate() {
+        var today = new Date(),
+            month = today.getMonth(),
+            date = today.getDate();
+            
+        month = month + 1 < 10 ? '0' + (month + 1) : month + 1;
+        date = date < 10 ? '0' + date : date;
+        lastLoadedDate = today.getFullYear() + '-' + month + '-' + date + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    }
+    resetLastLoadedDate();
     
     self.showNews = ko.computed(function() {
         return navigation.showMain();
@@ -49,7 +54,9 @@ var NewsListViewModel = function(user, navigation) {
     
     user.isLoggedIn.subscribe(function(isLoggedIn) {
         if(!isLoggedIn) {
+            resetLastLoadedDate();
             internalNewsItems.removeAll();
+            self.reachedEndOfNews(false);
             return;
         }
         
