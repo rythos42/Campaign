@@ -87,6 +87,12 @@ switch($action) {
         $userId = User::getCurrentUser()->getId();
         echo json_encode(UserMapper::getAllJoinedCampaignIds($userId));
         break;
+        
+    case "ChangePassword":
+        $userId = User::getCurrentUser()->getId();
+        $password = $_REQUEST["password"];
+        UserMapper::changePassword($userId, $password);
+        break;
 }
 
 ?>

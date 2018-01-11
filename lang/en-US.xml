@@ -174,5 +174,7 @@
         <forgotPasswordSuccess>An e-mail was sent to the address listed for that username. Use the new password in that e-mail to login, and be sure to change your password!</forgotPasswordSuccess>
         <resetPasswordEmailSubject>Your password on Campaign has been reset.</resetPasswordEmailSubject>
         <resetPasswordEmailBody>Your password has been reset to %s.</resetPasswordEmailBody>
+        <changePassword>Change Password</changePassword>
+        <passwordSuccessfullyChanged>Password has been changed.</passwordSuccessfullyChanged>
     </strings>
 </translation>

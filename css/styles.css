@@ -96,13 +96,22 @@ li.data-list > span
     display: inline-block;
 }
 
+.ui-widget .entry-field {
+    width: auto;
+}
+
 #UserProfile li.data-list > span {
     margin-left: 0;
+}
+
+#UserProfile .ui-widget {
+    margin-top: 1em;
 }
 
 li.entry-field > span.validationMessage {
     width: auto;
     font-size: 0.9em;
+    margin-left: 0;
 }
 
 .ui-dialog li.entry-field,

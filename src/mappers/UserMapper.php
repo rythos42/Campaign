@@ -149,5 +149,10 @@ class UserMapper {
         
         return true;
     }
+    
+    public static function changePassword($userId, $newPassword) {
+        $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+        Database::execute("update User set PasswordHash = ? where Id = ?", [$passwordHash, $userId]);
+    }
 }
 ?>

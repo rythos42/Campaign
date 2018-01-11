@@ -20,6 +20,26 @@ class UserProfileWidget {
                     </button>
                     <button data-bind="click: save" class="ui-button ui-widget ui-corner-all"><?php echo Translation::getString("save"); ?></button>
                 </li>
+                <li class="data-list">
+                    <div class="ui-widget ui-widget-content ui-corner-all paragraph">
+                        <ul>
+                            <li class="entry-field">
+                                <label><?php echo Translation::getString('password'); ?>:</label>
+                                <input type="password" data-bind="value: password" />
+                            </li>
+                            <li class="entry-field">
+                                <label><?php echo Translation::getString('verifyPassword'); ?>:</label>
+                                <input type="password" data-bind="value: verifyPassword" />
+                            </li>
+                            <li class="button-panel">
+                                <button data-bind="click: changePassword" class="ui-button ui-widget ui-corner-all"><?php echo Translation::getString("changePassword"); ?></button>
+                            </li>
+                            <li class="data-list" data-bind="visible: passwordSuccessfullyChanged">
+                                <span><?php echo Translation::getString("passwordSuccessfullyChanged"); ?></span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
         <!-- /ko -->

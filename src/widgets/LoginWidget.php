@@ -21,10 +21,10 @@ class LoginWidget {
                     <input type="password" id="VerifyPassword" name="VerifyPassword" data-bind="textInput: verifyPassword, onEnter: register" />
                 </li>
                 <li class="data-list validationMessage" data-bind="visible: showForgotPasswordIncorrect">
-                    <?php echo Translation::getString("forgotPasswordError"); ?>
+                    <span><?php echo Translation::getString("forgotPasswordError"); ?></span>
                 </li>
                 <li class="data-list" data-bind="visible: isForgotPasswordSuccess">
-                    <?php echo Translation::getString("forgotPasswordSuccess"); ?>
+                    <span><?php echo Translation::getString("forgotPasswordSuccess"); ?></span>
                 </li>
                 <li class="button-panel">
                     <input type="button" value="<?php echo Translation::getString("forgotPassword"); ?>" data-bind="click: forgotPassword, visible: isForgotPassword" class="ui-button ui-widget ui-corner-all" />

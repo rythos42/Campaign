@@ -1,5 +1,4 @@
 Next:
-- no way to change password
 - news doesn't always load on first load
 Help
     - seperate "our rules" from "Campaign rules"
