@@ -176,5 +176,68 @@
         <resetPasswordEmailBody>Your password has been reset to %s.</resetPasswordEmailBody>
         <changePassword>Change Password</changePassword>
         <passwordSuccessfullyChanged>Password has been changed.</passwordSuccessfullyChanged>
+        <help>Help</help>
+        <helpText>
+            <![CDATA[
+            <h1>Basics</h1>
+            <ul class="bullet-list">
+                <li>Players are organized into factions -- these can be teams.</li>
+                <li>There is a map of 30 territories.</li>
+                <li>Each faction starts with one territory, given by the campaign admin.</li>
+                <li>Players gain Materials to be spent on things.</li>
+                <li>Players make attacks against territories to claim them.</li>
+                <li>Each phase, every player must resolve 1 attack on a territory.</li>
+                <li>Players also have two optional attacks, which are not carried over to subsequent phases.</li>
+                <li>Players may give materials to other players in their faction.</li>
+            </ul>
+
+            <h1>Attacks</h1>
+            <ul class="bullet-list">
+                <li>Attacks are declared against territories adjacent to a territory their faction controls.</li>
+                <li>If the territory is controlled by another faction, the controlling faction selects a player to defend.</li>
+                <li>If the territory is uncontrolled, and the opposing faction is adjacent to the territory, they may select a player to defend. That player uses an attack to try and claim the territory for their faction.</li>
+                <li>After an attack is resolved, the winning faction gains control of the territory. If a combat was fought between players the winner is awarded 1 Material.</li>
+                <li>In the event of a draw, no Materials are given. If it was controlled, defending faction retains control. If it was uncontrolled it remains that way.</li>
+            </ul>
+
+            <h1>End of Phase</h1>
+            <ul class="bullet-list">
+                <li>Materials are allocated equal to the number of territories a faction controls.</li>
+                <li>The percentage of the total materials a player will get equals the percentage of games that person played that phase out of all of the games your (most recent) faction played.</li>
+                <li>Uncontested attacks on territories will be given to the attacker.</li>
+                <li>Contested attacks on uncontrolled territories will be reset and given to no players.</li>
+            </ul>
+
+            <h1>Materials</h1>
+            <ul class="bullet-list">
+                <li>1 material can be spent to attack non-adjacent territories.</li>
+                <li>Your campaign administrator may add other things!
+            </ul>
+
+            <h1>Tags</h1>
+            <ul class="bullet-list">
+                <li>Territories can be marked with “tags”, noting something about the territory.</li>
+            </ul>
+
+            <h1>Joining, Switching or Leaving</h1>
+            <ul class="bullet-list">
+                <li>Players may join or leave the campaign at any time.</li>
+                <li>Players may request their campaign admin to switch factions at any time. When you switch, any games you played that phase for your old faction do not count towards games played for the purposes of gaining materials at the end of the next phase.</li>
+            </ul>
+
+            <h1>Example of Campaign</h1>
+            <div>
+                <p>The above only tells you the rules of the game as enforced by Campaign. There's a lot left to be filled in by the campaign admin! Including:</p>
+                <ul class="bullet-list">
+                    <li>Size of each faction</li>
+                    <li>How Materials can be spent</li>
+                    <li>How long a Phase is</li>
+                    <li>How many Phases are in a campaign</li>
+                    <li>What Tags to put on each territory, and what the tags mean</li>
+                </ul>
+                <p><a href=""https://docs.google.com/document/d/1b87pPz1IY13Q482XHLyguOiqbedoEGf_ZJofOHnnoJ4/edit?usp=sharing">Here is an example campaign document</a> which we used in the Alpha testing of Campaign! Feel free to use it however you like!</p>
+            </div>
+            ]]>
+        </helpText>
     </strings>
 </translation>

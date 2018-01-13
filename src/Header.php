@@ -60,6 +60,7 @@ include($installDirOnWebServer . "/src/widgets/TerritoryListWidget.php");
 include($installDirOnWebServer . "/src/widgets/CampaignSummaryStatsWidget.php");
 include($installDirOnWebServer . "/src/widgets/RenameFactionDialogWidget.php");
 include($installDirOnWebServer . "/src/widgets/SimpleTextDialogWidget.php");
+include($installDirOnWebServer . "/src/widgets/HelpWidget.php");
 
 User::clearOldLoginData();  // clear data from before userid tokens
 

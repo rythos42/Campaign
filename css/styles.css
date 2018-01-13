@@ -395,3 +395,11 @@ td.validationMessage {
     border-width: 0px 1px 1px 1px; 
     padding: 10px 3px;
 }
+
+ul.bullet-list {
+    margin-left: 2em;
+}
+
+ul.bullet-list li {
+    list-style: square;    
+}

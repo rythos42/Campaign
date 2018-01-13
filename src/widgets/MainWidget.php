@@ -25,6 +25,9 @@ class MainWidget {
         
         $inProgressCampaignViewModel = new InProgressCampaignViewModel();
         $inProgressCampaignViewModel->render();
+        
+        $helpWidget = new HelpWidget();
+        $helpWidget->render();
                
         ?>
         </div>

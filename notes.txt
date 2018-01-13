@@ -1,9 +1,4 @@
 Next:
-- news doesn't always load on first load
-Help
-    - seperate "our rules" from "Campaign rules"
-    - figure out how to seperate "Campaign rules" into a linkable document
-    - link from Campaign
 Remuneration:
     - in-app video ads between certain actions
     - $1/month to remove

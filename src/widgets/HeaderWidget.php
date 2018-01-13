@@ -38,6 +38,7 @@ class HeaderWidget {
                     <ul class="jq-dropdown-menu">
                         <li><input type="button" data-bind="click: showContactUs" value="<?php echo Translation::getString("contactUs"); ?>" /></li>
                         <li><input type="button" data-bind="click: showCredits" value="<?php echo Translation::getString("credits"); ?>" /></li>
+                        <li><input type="button" data-bind="click: showHelp" value="<?php echo Translation::getString("help"); ?>" /></li>
                     </ul>
                 </div>
                 <!-- ko with: contactUsViewModel -->

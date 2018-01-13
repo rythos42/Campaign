@@ -12,6 +12,7 @@ var Navigation = function(user) {
     self.showRegister = ko.observable(false);
     self.showUserProfile = ko.observable(false);
     self.showCreateEntry = ko.observable(false);
+    self.showHelp = ko.observable(false);
     self.isSideBarOpen = ko.observable(false);
     
     var appPages = [
@@ -41,6 +42,7 @@ var Navigation = function(user) {
     self.showMain.subscribe(function(show) { showHideAllExcept(show, [self.showMain]); });
     self.showUserProfile.subscribe(function(show) { showHideAllExcept(show, [self.showUserProfile]); });
     self.showCreateEntry.subscribe(function(show) { showHideAllExcept(show, [self.showCreateEntry]); });
+    self.showHelp.subscribe(function(show) { showHideAllExcept(show, [self.showHelp]); });
     
     function showLoginOrMainPage() {
         var loggedIn = user.isLoggedIn();
