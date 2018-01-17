@@ -1,33 +1,27 @@
 <?php
 class Settings {
     public static function getDatabaseServer() {
-        global $settings;
-        return $settings['databaseServer'];
+        return Settings::getSetting('databaseServer');
     }
     
     public static function getDatabaseUsername() {
-        global $settings;
-        return $settings['databaseUsername'];
+        return Settings::getSetting('databaseUsername');
     }
     
     public static function getDatabasePassword() {
-        global $settings;
-        return $settings['databasePassword'];
+        return Settings::getSetting('databasePassword');
     }
     
     public static function getDatabaseName() {
-        global $settings;
-        return $settings['databaseName'];
+        return Settings::getSetting('databaseName');
     }  
     
     public static function getOneSignalAppId() {
-        global $settings;
-        return $settings['oneSignalAppId'];
+        return Settings::getSetting('oneSignalAppId');
     }  
     
     public static function getOneSignalRestApiKey() {
-        global $settings;
-        return $settings['oneSignalRestApiKey'];
+        return Settings::getSetting('oneSignalRestApiKey');
     }
     
     public static function hasOneSignalEnabled() {
@@ -35,23 +29,24 @@ class Settings {
     }
     
     public static function getOpenGraphImageUrl() {
-        global $settings;
-        return $settings['openGraphImageUrl'];
+        return Settings::getSetting('openGraphImageUrl');
     }
     
     public static function getOpenGraphImageWidth() {
-        global $settings;
-        return $settings['openGraphImageWidth'];
+        return Settings::getSetting('openGraphImageWidth');
     }
     
     public static function getOpenGraphImageHeight() {
-        global $settings;
-        return $settings['openGraphImageHeight'];
+        return Settings::getSetting('openGraphImageHeight');
     }
     
     public static function getSystemFromEmailAddress() {
+        return Settings::getSetting('systemFromEmailAddress');
+    }
+    
+    private static function getSetting($name) {
         global $settings;
-        return $settings['systemFromEmailAddress'];
+        return (isset($settings[$name]) ? $settings[$name] : null);
     }
 }
 ?>

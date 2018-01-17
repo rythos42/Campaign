@@ -5,19 +5,30 @@ var PushManager = {
     
     userHasPushEnabled: function() {
         var deferred = $.Deferred();
-        OneSignal.push(function() {
-            OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-                deferred.resolve(isEnabled);
+        
+        if(PushManager.serverHasPushEnabled()) {
+            OneSignal.push(function() {
+                OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+                    deferred.resolve(isEnabled);
+                });
             });
-        });
+        } else {
+            deferred.resolve(false);
+        }
         return deferred;
     },
     
     associateUserWithCampaign: function(campaignId) {
+        if(!PushManager.serverHasPushEnabled())
+            return;
+        
         OneSignal.push(['sendTag', campaignId, true]);
     },
     
     setPushUserIdOnSubscriptionChange: function() {
+        if(!PushManager.serverHasPushEnabled())
+            return;
+        
         OneSignal.push(function() { OneSignal.on('subscriptionChange', function (isSubscribed) {
             if(isSubscribed) {
                 OneSignal.push(function() { OneSignal.getUserId(function(userId) {
@@ -41,6 +52,9 @@ var PushManager = {
     },
     
     setOnNotificationClicked: function(reloadEvents) {
+        if(!PushManager.serverHasPushEnabled())
+            return;
+
         OneSignal.push(['addListenerForNotificationOpened', function(data) {
             if(data.data) {
                 var events = data.data;

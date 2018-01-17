@@ -1,6 +1,8 @@
 Next:
 - need permission to join a campaign
-- if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used
+    - "Join" sets a flag saying you asked to join
+    - sends a notification to the campaign admin
+    - "yes" button on Players tab in campaign
 - "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?
@@ -36,6 +38,7 @@ Terms and Admin Help:
     - When Admin wants to save news as part of a game they are playing, they need to check "I wrote this", which is only visible to admin.
 
 Far Future:
+- "Actions" -- a summary list of things that have happened in the campaign recently?
 - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
 - Multiple Campaigns:
     - clear the map when moving between campaigns - looks weird to have the old map still up
