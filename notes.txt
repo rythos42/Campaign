@@ -1,4 +1,11 @@
 Next:
+- need permission to join a campaign
+- if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used
+- "just this phase" entry filter
+- don't let people attack if they have an outstanding attack
+    - or, ask them are you sure?
+
+        
 Remuneration:
     - in-app video ads between certain actions
     - $1/month to remove
@@ -11,9 +18,6 @@ Future:
         - map is full screen (ensure looks good at different browser sizes)
         - interface is hovered overlay over map, and goes visible/transparent when you hover/don't hover over it
     - change button to say "Attack" if unowned
-    - Login
-        - if you press "enter" on Username/password while on registration page, it says "Username/password not correct"
-        - if you enter a password, then delete it, it says "you'll need a password", which is weird since it's not for registering.
     - show "being attacked" on map legend
     - countdown to next move.
     - Materials on CreateEntry is for "spending", so should be more clear
@@ -32,7 +36,6 @@ Terms and Admin Help:
     - When Admin wants to save news as part of a game they are playing, they need to check "I wrote this", which is only visible to admin.
 
 Far Future:
-- if installation doesn't have OneSignal installed (checked in index.php), PushManager throws exception when it's used
 - some weirdness with timing - Dan attacked 8, and it was uncontested at the time. I took 5 which made it contested.
 - Multiple Campaigns:
     - clear the map when moving between campaigns - looks weird to have the old map still up
@@ -52,9 +55,6 @@ Far Future:
     - allow campaign creator to try different map images and select one as the default for the campaign
 - marker for uncontrolled, non-adjacent territories that haven't been contested within 24 hours
     - this seems pretty difficult to do, so added Created On date for the dialog instead
-- "just this phase" entry filter
-- don't let people attack if they have an outstanding attack
-    - or, ask them are you sure?
 - probably could delete "AttackingUserId", as territories now have multiple attackers. It's also a complete duplicate of CreatedByUserId right now.
 - might be able to get rid of TerritoryDetailsDialog
 - star on territory with tag when creating campaign

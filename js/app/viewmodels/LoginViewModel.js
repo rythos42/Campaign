@@ -16,12 +16,17 @@ var LoginViewModel = function(user, navigation) {
     self.currentLoginUiType = ko.observable(LoginUiType.Login);
     self.showForgotPasswordIncorrect = ko.observable(false);
     
+    self.isLogin = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.Login; });
+    self.isSignup = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.Signup; });
+    self.isForgotPassword = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.ForgotPassword; });
+    self.isForgotPasswordSuccess = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.ForgotPasswordSuccess; });
+
     self.username = ko.observable('').extend({
         required: { message: Translation.getString('usernameRequiredValidator') }
     });
     
     self.password = ko.observable('').extend({
-        required: { message: Translation.getString('passwordRequiredValidator') }
+        required: { message: Translation.getString('passwordRequiredValidator'), onlyIf: function() { return self.isSignup(); } }
     });
     
     self.verifyPassword = ko.observable('').extend({
@@ -31,12 +36,7 @@ var LoginViewModel = function(user, navigation) {
     self.showLogin = ko.computed(function() {
         return navigation.showLogin();
     });
-    
-    self.isLogin = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.Login; });
-    self.isSignup = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.Signup; });
-    self.isForgotPassword = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.ForgotPassword; });
-    self.isForgotPasswordSuccess = ko.computed(function() { return self.currentLoginUiType() === LoginUiType.ForgotPasswordSuccess; });
-    
+        
     function clearErrorMessages() {
         self.showUsernamePasswordIncorrect(false);
         self.showUsernameAlreadyTaken(false);
