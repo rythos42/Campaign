@@ -1,4 +1,5 @@
 Next:
+- test joining notifications in geeksong, test that user gets campaignId associated in onesignal
 - "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?

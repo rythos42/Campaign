@@ -49,7 +49,7 @@ var PlayerListViewModel = function(user, currentCampaign, reloadEvents) {
             self.requestingPlayers($.map(requestingPlayers, function(playerUser) {
                 return new PlayerListItemViewModel(user, new User(playerUser), currentCampaign, reloadEvents);
             }));
-        });;
+        });
     };
     
     currentCampaign.subscribe(function() {

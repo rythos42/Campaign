@@ -227,10 +227,14 @@ var InProgressCampaignViewModel = function(user, navigation) {
         // when the campaign is changed, update the entry list
         getEntryList();
         
+        var campaign = currentCampaign();
+        if(!campaign)
+            return;
+        
         if(PushManager.serverHasPushEnabled()) {
             PushManager.userHasPushEnabled().then(function(isEnabled) {
                 if(isEnabled)
-                    PushManager.associateUserWithCampaign(campaignId);
+                    PushManager.associateUserWithCampaign(campaign.id());
             });
         }
     });
