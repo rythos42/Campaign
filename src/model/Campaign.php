@@ -5,5 +5,6 @@ class Campaign {
     public $CampaignType;
     public $CreatedByUserId;
     public $CreatedOnDate;
+    public $LastPhaseStartDate;
 }
 ?>

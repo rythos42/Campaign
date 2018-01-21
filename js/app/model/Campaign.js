@@ -7,6 +7,7 @@ var Campaign = function(serverCampaign) {
     self.name = ko.observable(serverCampaign ? serverCampaign.Name : '');
     self.campaignType = ko.observable(serverCampaign ? serverCampaign.CampaignType : undefined);
     self.createdByUserId = ko.observable(serverCampaign ? serverCampaign.CreatedByUserId : undefined);
+    self.lastPhaseStartDate = ko.observable(serverCampaign ? serverCampaign.LastPhaseStartDate : undefined);
     self.factions = ko.observableArray();
     self.mandatoryAttacks = ko.observable();
     self.optionalAttacks = ko.observable();

@@ -21,12 +21,13 @@ class CampaignMapper {
         $campaignList = array();
         
         $dbCampaignList = Database::queryObjectList(
-            "select *, 
+            "select 
+                Campaign.*, 
                 (select exists 
                     (select * 
                         from UserCampaignData 
-                        where UserCampaignData.CampaignId = Campaign.Id and UserCampaignData.UserId = ?)) 
-                as CurrentUserJoinedCampaign
+                        where UserCampaignData.CampaignId = Campaign.Id and UserCampaignData.UserId = ?)) as CurrentUserJoinedCampaign,
+                (select max(StartDate) from Phase where CampaignId = Campaign.Id) as LastPhaseStartDate
                 from Campaign",
                 "Campaign", [User::getCurrentUser()->getId()]);
                 

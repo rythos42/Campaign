@@ -1,5 +1,4 @@
 Next:
-- "just this phase" entry filter
 - don't let people attack if they have an outstanding attack
     - or, ask them are you sure?
         
