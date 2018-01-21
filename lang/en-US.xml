@@ -138,6 +138,7 @@
         <aNewPhaseHasBegunIn>A new phase has begun in %s.</aNewPhaseHasBegunIn>
         <playerHasTakenTerritory>%s has taken territory #%d for %s in campaign %s.</playerHasTakenTerritory>
         <entryDrawn>Challenge for territory #%d in campaign %s was a draw.</entryDrawn>
+        <joinCampaignRequest>%s has requested to join %s in your campaign.</joinCampaignRequest>
         <victoryType>Victory type</victoryType>
         <w>W</w> <!-- Short form for "Win" on create entry page-->
         <l>L</l> <!-- Short form for "Loss" on create entry page-->
@@ -239,5 +240,9 @@
             </div>
             ]]>
         </helpText>
+        <alreadyRequestedToJoin>You have already requested to join this campaign.</alreadyRequestedToJoin>
+        <awaitingApproval>Awaiting Approval</awaitingApproval>
+        <approve>Approve</approve>
+        <inGame>In Game</inGame>
     </strings>
 </translation>

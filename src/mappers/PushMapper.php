@@ -1,5 +1,20 @@
 <?php
 class PushMapper {
+    public static function notifyJoinCampaignRequest($userId, $factionId, $campaignId) {
+        Translation::loadTranslationFiles(Server::getFullPath() . "/lang");
+        
+        $factionName = Database::queryScalar("select Faction.Name as FactionName from Faction where Faction.Id = ? and Faction.CampaignId = ?", [$factionId, $campaignId]);
+        $userName = Database::queryScalar("select Username from User where User.Id", [$userId]);
+        
+        PushMapper::notify(array( 
+            'app_id' => Settings::getOneSignalAppId(),
+            'contents' => array('en' => sprintf(Translation::getString('joinCampaignRequest'), $userName, $factionName)),
+            'filters' => PushMapper::getFilterForCampaign($campaignId),
+            'data' => array('players' => true),
+            'url' => Server::getSiteUrl()
+        ));
+    }
+    
     public static function notifyFactionEntryCreation($creatingUserId, $entryId, $territoryBeingAttackedIdOnMap) {
         Translation::loadTranslationFiles(Server::getFullPath() . "/lang");
         

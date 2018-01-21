@@ -49,4 +49,20 @@ var PlayerListItemViewModel = function(user, playerUser, currentCampaign, reload
             }
         });
     });
+    
+    self.approveJoinRequest  = function() {
+        var playerUserId = playerUser.id(),
+            campaignId = currentCampaign().id();
+        
+        $.ajax({
+            url: 'src/webservices/UserService.php',
+            data: {
+                action: 'ApproveJoinRequest',
+                campaignId: campaignId,
+                userId: playerUserId
+            }
+        }).then(function() {
+            reloadEvents.reloadPlayers();
+        });
+    };
 };

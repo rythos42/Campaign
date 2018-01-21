@@ -11,10 +11,12 @@ class InProgressCampaignViewModel {
                 <button data-bind="click: back, tooltip: '<?php echo Translation::getString("back"); ?>'" class="ui-button ui-widget ui-corner-all button-icon">
                     <span class="icon-arrow-left2"></span>
                 </button>
-                <button data-bind="click: joinCampaign, visible: !hasJoinedCampaign()" class="ui-button ui-widget ui-corner-all">
-                    <span><?php echo Translation::getString("join"); ?></span>
-                    <span class="button-icon-warning-overlay"></span>
-                </button>
+                <span data-bind="tooltip: joinButtonToolTip">
+                    <button data-bind="click: joinCampaign, visible: !hasJoinedCampaign(), enable: joinButtonEnabled, css: { 'ui-state-disabled': !joinButtonEnabled() }" class="ui-button ui-widget ui-corner-all">
+                        <span><?php echo Translation::getString("join"); ?></span>
+                        <span class="button-icon-warning-overlay"></span>
+                    </button>
+                </span>
                 <!-- ko with: joinCampaignDialogViewModel -->
                 <?php
                     $joinCampaignDialogWidget = new DropDownListDialogWidget();

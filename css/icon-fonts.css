@@ -10,6 +10,9 @@
 .icon-user-tie:before {
   content: "\e976";
 }
+.icon-cog:before {
+  content: "\e994";
+}
 .icon-bin:before {
   content: "\e9ac";
 }

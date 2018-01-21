@@ -48,9 +48,20 @@ class UserMapper {
             ['%' . $term . '%', $campaignId]);
     }
     
+    public static function getRequestingUsersForCampaign($campaignId) {
+        return Database::queryArray(
+            "select User.Id, User.Username, JoinCampaignRequest.FactionId
+            from JoinCampaignRequest
+            join User on User.Id = JoinCampaignRequest.UserId
+            where JoinCampaignRequest.CampaignId = ?", [$campaignId]);
+    }
+    
     public static function getUserDataForCampaign($userId, $campaignId) {
+        if(Database::exists("select 1 from JoinCampaignRequest where UserId = ? and CampaignId = ?", [$userId, $campaignId]))
+            return array("WaitingToJoin" => 1);
+        
         return Database::queryObject(
-            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate, FactionId, IsAdmin, LastEntry.CreatedOnDate as LastCreatedEntryDate
+            "select TerritoryBonus, Attacks, MandatoryAttacks, OptionalAttacks, StartDate as PhaseStartDate, UserCampaignData.FactionId, IsAdmin, LastEntry.CreatedOnDate as LastCreatedEntryDate, 0 as WaitingToJoin               
             from UserCampaignData 
             join Campaign on Campaign.Id = UserCampaignData.CampaignId 
             left outer join Phase on Phase.CampaignId = Campaign.Id
@@ -58,7 +69,7 @@ class UserMapper {
                     select max(CreatedOnDate) as CreatedOnDate, CreatedByUserId  
                     from Entry where CreatedByUserId = ? and CampaignId = ?
                 ) LastEntry on LastEntry.CreatedByUserId = UserCampaignData.UserId
-            where UserId = ? and UserCampaignData.CampaignId = ?", 
+            where UserCampaignData.UserId = ? and UserCampaignData.CampaignId = ?", 
             [$userId, $campaignId, $userId, $campaignId]);
     }
     
@@ -153,6 +164,15 @@ class UserMapper {
     public static function changePassword($userId, $newPassword) {
         $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
         Database::execute("update User set PasswordHash = ? where Id = ?", [$passwordHash, $userId]);
+    }
+    
+    public static function approveJoinRequest($userId, $campaignId) {
+        // add to campaign
+        $factionId = Database::queryScalar("select FactionId from JoinCampaignRequest where UserId = ? and CampaignId = ?", [$userId, $campaignId]);
+        Database::execute("insert into UserCampaignData (UserId, CampaignId, FactionId, IsAdmin) values (?, ?, ?, 0)", [$userId, $campaignId, $factionId]);
+        
+        // remove from list of requesting users
+        Database::execute("delete from JoinCampaignRequest where UserId = ? and CampaignId = ?", [$userId, $campaignId]);
     }
 }
 ?>

@@ -18,6 +18,8 @@ var InProgressCampaignViewModel = function(user, navigation) {
     self.campaignSummaryStatsViewModel = new CampaignSummaryStatsViewModel(user, currentCampaign, internalEntryList, userCampaignData);
     self.renameFactionDialogViewModel = new RenameFactionDialogViewModel(currentCampaign);
     
+    self.joinButtonEnabled = ko.observable(true);
+    
     PushManager.setOnNotificationClicked(reloadEvents);
     
     self.showLoadingImage = ko.computed(function() {
@@ -58,6 +60,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
             return null;
         
         return currentCampaign();
+    });
+        
+    self.joinButtonToolTip = ko.computed(function() {
+        if(self.joinButtonEnabled())
+            return '';
+        else
+            return Translation.getString('alreadyRequestedToJoin');
     });
         
     self.back = function() {
@@ -106,7 +115,11 @@ var InProgressCampaignViewModel = function(user, navigation) {
         currentlyLoadingUserData(true);
         UserManager.refreshUserDataForCampaign(currentCampaign().id()).then(function(userDataForCampaign) {
             currentlyLoadingUserData(false);
-            setUserDataForCampaign(userDataForCampaign);
+            
+            if(userDataForCampaign.WaitingToJoin)
+                self.joinButtonEnabled(false);
+            else
+                setUserDataForCampaign(userDataForCampaign);
         });
     }
     
@@ -170,23 +183,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
             var campaignId = currentCampaign().id();
             $.ajax({
                 url: 'src/webservices/CampaignService.php',
-                method: 'POST',
-                dataType: 'JSON',
                 data: { 
                     action: 'JoinCampaign', 
                     campaignId: campaignId,
                     factionId: self.joinCampaignDialogViewModel.selectedValue().id()
                 }
-            }).then(function(userDataForCampaign) {
-                setUserDataForCampaign(userDataForCampaign);
-                self.playerListViewModel.reloadPlayerList();
-                
-                if(PushManager.serverHasPushEnabled()) {
-                    PushManager.userHasPushEnabled().then(function(isEnabled) {
-                        if(isEnabled)
-                            PushManager.associateUserWithCampaign(campaignId);
-                    });
-                }
+            }).then(function() {
+                self.joinButtonEnabled(false);
             });
         }
     });
@@ -223,6 +226,13 @@ var InProgressCampaignViewModel = function(user, navigation) {
     currentCampaign.subscribe(function() {
         // when the campaign is changed, update the entry list
         getEntryList();
+        
+        if(PushManager.serverHasPushEnabled()) {
+            PushManager.userHasPushEnabled().then(function(isEnabled) {
+                if(isEnabled)
+                    PushManager.associateUserWithCampaign(campaignId);
+            });
+        }
     });
     
     navigation.showInProgressCampaign.subscribe(function(show) {

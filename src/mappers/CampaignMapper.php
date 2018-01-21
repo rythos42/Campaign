@@ -209,11 +209,18 @@ class CampaignMapper {
         return $entryList;
     }
             
-    public static function joinCampaign($userId, $campaignId, $factionId) {
+    public static function requestJoinCampaign($userId, $campaignId, $factionId) {
         $campaignCreatedByUserId = Database::queryScalar("select CreatedByUserId from Campaign where Id = ?", [$campaignId]);
         $isAdmin = ($campaignCreatedByUserId == $userId) ? 1 : 0;
 
-        Database::execute("insert into UserCampaignData (UserId, CampaignId, FactionId, IsAdmin) values (?, ?, ?, ?)", [$userId, $campaignId, $factionId, $isAdmin]);
+        if($isAdmin) {
+            // if user is the createdByUser, just add them to the campaign
+            Database::execute("insert into UserCampaignData (UserId, CampaignId, FactionId, IsAdmin) values (?, ?, ?, ?)", [$userId, $campaignId, $factionId, $isAdmin]);
+        } else {
+            // otherwise, add them to the JoinCampaignRequest table and send a notification to the campaign admin
+            Database::execute("insert into JoinCampaignRequest (UserId, FactionId, CampaignId) values (?, ?, ?)", [$userId, $factionId, $campaignId]);
+            PushMapper::notifyJoinCampaignRequest($userId, $factionId, $campaignId);
+        }      
     }
     
     public static function renameFaction($factionId, $newFactionName) {

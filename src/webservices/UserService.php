@@ -93,6 +93,17 @@ switch($action) {
         $password = $_REQUEST["password"];
         UserMapper::changePassword($userId, $password);
         break;
+        
+    case "GetRequestingUsersForCampaign":
+        $campaignId = $_REQUEST["campaignId"];
+        echo json_encode(UserMapper::getRequestingUsersForCampaign($campaignId));
+        break;
+        
+    case "ApproveJoinRequest":
+        $campaignId = $_REQUEST["campaignId"];
+        $userId = $_REQUEST["userId"];
+        UserMapper::approveJoinRequest($userId, $campaignId);
+        break;
 }
 
 ?>
