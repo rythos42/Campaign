@@ -4,7 +4,7 @@ class PushMapper {
         Translation::loadTranslationFiles(Server::getFullPath() . "/lang");
         
         $factionName = Database::queryScalar("select Faction.Name as FactionName from Faction where Faction.Id = ? and Faction.CampaignId = ?", [$factionId, $campaignId]);
-        $userName = Database::queryScalar("select Username from User where User.Id", [$userId]);
+        $userName = Database::queryScalar("select Username from User where User.Id = ?", [$userId]);
         
         PushMapper::notify(array( 
             'app_id' => Settings::getOneSignalAppId(),
